@@ -1,20 +1,17 @@
 
-import Fotter from './Components/Foteer'
-import Haeder from './Components/Haeder'
+import { Route, Routes } from 'react-router-dom'
 import Home from './Components/Home'
-import NavBar from './Components/NavBar'
+import Signup from './Components/Signup'
 
 function App() {
   
 
   return (
     <>
-    <div className="container-fluid position-relative p-0">
-      <NavBar/>
-      <Haeder />
-      </div>
-      <Home/>
-      <Fotter/>
+    <Routes>
+    <Route path='/' index element={<Signup />} />
+    <Route path='/home' element={<Home />} />
+      </Routes>
     </>
   )
 }

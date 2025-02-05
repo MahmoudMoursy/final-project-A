@@ -2,58 +2,22 @@ import React from 'react';
 import aswulogo2 from '../assets/aswulogo2.png';
 import ColoredLogo from '../assets/ColoredLogo.svg';
 import user from '../assets/user.jpg';
-
-
+import NavBar from './NavBar';
+import Haeder from './Haeder';
+import Fotter from './Foteer'
 function Home() {
   return (
     <div>
+      <div className="container-fluid position-relative p-0">
+      <NavBar/>
+      <Haeder/>
+            </div>
       <div className="container-fluid py-5 wow fadeInUp" id="products" data-wow-delay="0.1s" dir="ltr">
         <div className="container py-5">
           <div className="section-title text-center position-relative pb-3 mb-4 mx-auto" style={{ maxWidth: '600px' }}>
             <h1 className="mb-0">Our Main Services</h1>
           </div>
-          <div className="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.6s">
-            <div className="testimonial-item bg-light my-4">
-              <div className="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
-                <div className="ps-4 text-center m-auto">
-                  <h4 className="text-prim mb-1 text-center">توفير السكن</h4>
-                </div>
-              </div>
-              <div className="pt-4 pb-5 px-5 text-end">
-                نحن نوفر لك افضل اماكن السكن في مختلف المحافظه بسرع مناسب
-              </div>
-            </div>
-            <div className="testimonial-item bg-light my-4">
-              <div className="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
-                <div className="ps-4 text-center m-auto">
-                  <h4 className="text-prim mb-1 text-center">ارشادات</h4>
-                </div>
-              </div>
-              <div className="pt-4 pb-5 px-5 text-end">
-                ارشادات لكل الاماكن السياحيه والماكن التي تحتاحها
-              </div>
-            </div>
-            <div className="testimonial-item bg-light my-4">
-              <div className="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
-                <div className="ps-4 text-center m-auto">
-                  <h4 className="text-prim mb-1 text-center">الاسئله</h4>
-                </div>
-              </div>
-              <div className="pt-4 pb-5 px-5 text-end">
-                نحن نوفر لك ما تحتاج معرفه عن المحاظه
-              </div>
-            </div>
-            <div className="testimonial-item bg-light my-4">
-              <div className="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
-                <div className="ps-4 text-center m-auto">
-                  <h4 className="text-prim mb-1 text-center">اماكن</h4>
-                </div>
-              </div>
-              <div className="pt-4 pb-5 px-5 text-end">
-                نحن نعمل علي توفير جميع المطاعم والكافيهات الموجوده في المحافظه
-              </div>
-            </div>
-          </div>
+   {/* ---------------------------------- */}
         </div>
       </div>
 
@@ -212,6 +176,7 @@ function Home() {
           </form>
         </div>
       </section>
+      <Fotter/>
     </div>
   );
 }

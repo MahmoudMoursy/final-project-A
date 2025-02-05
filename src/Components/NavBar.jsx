@@ -1,6 +1,5 @@
 import React from 'react';
-
-
+import './NavBar.css'
 function NavBar() {
   return (
     <div>
@@ -8,7 +7,7 @@ function NavBar() {
           <div>
             <a className="navbar-brand" href="#">Aswan Services</a>
           </div>
-          <div className="collapse navbar-collapse" id="navbarNav" style={{ marginLeft: '30%' }}>
+          <div className="nav collapse navbar-collapse" id="navbarNav" >
             <ul className="navbar-nav d-flex gap-5">
               <li className="nav-item"><a className="nav-link text-white" href="">Home</a></li>
               <li className="nav-item"><a className="nav-link text-white" href="service.html">Services</a></li>
@@ -29,14 +28,15 @@ function NavBar() {
               }}>M</span>
               <strong className="d-none d-xl-block text-white" id="name">Moursy</strong>
             </a>
-            <ul className="dropdown-menu text-small fw-bold shadow rounded-3 p-2 text-center" style={{
-              width: '220px',  borderRadius: '50%', position: 'absolute', right: '0', top: '50px'
+            <ul className="menu dropdown-menu text-small fw-bold shadow rounded-3 p-2 text-center" style={{
+              width: '220px',  borderRadius: '50%', position: 'absolute', left: '84%', top: '54px'
+              
             }}>
               <li>
-                <div className="d-flex justify-content-around align-items-center">
+                <div className="d-flex justify-content-around align-items-center ">
                   <img src="https://fastly.picsum.photos/id/64/4326/2884.jpg?hmac=9_SzX666YRpR_fOyYStXpfSiJ_edO3ghlSRnH2w09Kg" alt="" width="32" height="32" className="rounded-circle me-2" />
                   <strong>Moursy</strong>
-                  <span> <i className="fa fa-xmark" id="x"></i></span>
+                  <span className="close">X</span>
                 </div>
               </li>
               <li><hr className="dropdown-divider" /></li>

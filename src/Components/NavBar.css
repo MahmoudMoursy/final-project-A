@@ -1,0 +1,30 @@
+.nav {
+    margin-left: 25%;
+}
+
+.close {
+    width: 15%;
+    border-radius: 10px;
+}
+.close:hover {
+    background-color: red;
+}
+
+@media (max-width: 576px) {
+    .nav {
+        margin-left: 0%;
+    }
+
+    .navbar-toggler {
+        order: 1;
+        margin-right: 10px;
+    }
+
+    .link-body-emphasis {
+        order: 2;
+    }
+
+    .menu {
+        margin-left: -26%;
+    }
+}
