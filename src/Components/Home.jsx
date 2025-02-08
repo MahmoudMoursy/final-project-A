@@ -5,6 +5,8 @@ import aswulogo2 from '../assets/aswulogo2.png';
 import ColoredLogo from '../assets/ColoredLogo.svg';
 import user from '../assets/user.jpg';
 import CardSlider from './CardSlider';
+import Footer from './Footer';
+
 function Home() {
   return (
     <div>
@@ -104,6 +106,8 @@ function Home() {
         </div>
       </section>
 
+
+      <Footer/>
       
     </div>
   );

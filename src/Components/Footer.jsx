@@ -1,7 +1,7 @@
 import React from 'react';
 import aswulogo2 from '../assets/aswulogo2.png';
 
-function Fotter() {
+function Footer() {
   return (
     <div>
       <div className="container-fluid text-light mt-5" style={{ overflow: 'hidden', backgroundColor: '#091e3d' }}>
@@ -66,4 +66,4 @@ function Fotter() {
   );
 }
 
-export default Fotter;
+export default Footer;

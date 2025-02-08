@@ -1,6 +1,7 @@
 import React from 'react';
 import './NavBar.css'
 import { NavLink } from 'react-router-dom';
+
 function NavBar() {
   return (
     <div>
@@ -16,6 +17,7 @@ function NavBar() {
               <li className="nav-item"><NavLink className="nav-link text-white" to="">Housing</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link text-white" to="">About Us</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link text-white" to="">Voluntary</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link text-white" to="/Donation">Donation</NavLink></li>
             </ul>
           </div>
           <div className="d-flex align-items-center justify-content-atod">
