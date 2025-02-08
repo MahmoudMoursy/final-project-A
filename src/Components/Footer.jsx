@@ -33,12 +33,13 @@ function Footer() {
                     <h3 className="text-light mb-0">روابط سريعة</h3>
                   </div>
                   <div className="link-animated d-flex flex-column justify-content-start">
-                    <a className="text-light mb-2" href=""><i className="fa-solid fa-arrow-right text-primary mx-2"></i>Home</a>
-                    <a className="text-light mb-2" href=""><i className="fa-solid fa-arrow-right text-primary mx-2"></i>Voluntary</a>
-                    <a className="text-light mb-2" href=""><i className="fa-solid fa-arrow-right text-primary mx-2"></i>About Us</a>
-                    <a className="text-light mb-2" href=""><i className="fa-solid fa-arrow-right text-primary mx-2"></i>Housing</a>
-                    <a className="text-light" href=""><i className="fa-solid fa-arrow-right text-primary mx-2"></i> Tourist places</a>
-                    <a className="text-light" href=""><i className="fa-solid fa-arrow-right text-primary mx-2"></i> Services</a>
+                    <a className="text-light mb-2" href="/Home"><i className="fa-solid fa-arrow-right text-primary mx-2"></i>Home</a>
+                    <a className="text-light mb-2" href="./"><i className="fa-solid fa-arrow-right text-primary mx-2"></i>About Us</a>
+                    <a className="text-light mb-2" href="./"><i className="fa-solid fa-arrow-right text-primary mx-2"></i>Housing</a>
+                    <a className="text-light mb-2" href="./"><i className="fa-solid fa-arrow-right text-primary mx-2"></i>Voluntary</a>
+                    <a className="text-light mb-2" href="./Donation"><i className="fa-solid fa-arrow-right text-primary mx-2"></i>Donation</a>
+                    <a className="text-light mb-2" href="./"><i className="fa-solid fa-arrow-right text-primary mx-2"></i> Tourist places</a>
+                    <a className="text-light mb-2" href="./"><i className="fa-solid fa-arrow-right text-primary mx-2"></i> Services</a>
                   </div>
                 </div>
 
