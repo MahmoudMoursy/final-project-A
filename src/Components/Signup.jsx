@@ -75,7 +75,7 @@ function Signup() {
                             <small style={{ color: 'red' }} >{errors.confirmpass?.message}</small>
                             <button type="submit" className="btn btn-primary w-100 rounded mt-3">Sign Up</button>
                             <p className="text-black text-center fw-bold mt-4">
-                                I have an account <a href="#" onClick={(e) => { e.preventDefault(); nav('/'); }}>Login</a>
+                                I have an account <a className='text-blue' style={{textDecoration:'none'}}  onClick={(e) => { e.preventDefault(); nav('/'); }}>Login</a>
                             </p>
                         </form>
                     </div>

@@ -55,7 +55,7 @@ function Login() {
                         </div>
                         <button type="submit" className="btn btn-primary w-100 rounded mt-3">Login</button>
                         <p className="text-black text-center fw-bold mt-4">
-                            Don’t have an account? <a href="#" onClick={(e) => { e.preventDefault(); nav('/Signup'); }}>Sign Up</a>
+                            Don’t have an account? <a className='text-blue' style={{textDecoration:'none'}} onClick={(e) => { e.preventDefault(); nav('/Signup'); }}>Sign Up</a>
                         </p>
                     </form>
                 </div>

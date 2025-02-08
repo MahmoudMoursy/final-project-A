@@ -1,5 +1,6 @@
 import React from 'react';
 import './NavBar.css'
+import { NavLink } from 'react-router-dom';
 function NavBar() {
   return (
     <div>
@@ -9,15 +10,15 @@ function NavBar() {
           </div>
           <div className="nav collapse navbar-collapse" id="navbarNav" >
             <ul className="navbar-nav d-flex gap-5">
-              <li className="nav-item"><a className="nav-link text-white" href="">Home</a></li>
-              <li className="nav-item"><a className="nav-link text-white" href="service.html">Services</a></li>
-              <li className="nav-item"><a className="nav-link text-white" href="tour.html">Tourist places</a></li>
-              <li className="nav-item"><a className="nav-link text-white" href="">Housing</a></li>
-              <li className="nav-item"><a className="nav-link text-white" href="">About Us</a></li>
-              <li className="nav-item"><a className="nav-link text-white" href="">Voluntary</a></li>
+              <li className="nav-item"><NavLink className="nav-link text-white" to="/Home">Home</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link text-white" to="">Services</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link text-white" to="">Tourist places</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link text-white" to="">Housing</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link text-white" to="">About Us</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link text-white" to="">Voluntary</NavLink></li>
             </ul>
           </div>
-          <div className="d-flex align-items-center justify-content-around">
+          <div className="d-flex align-items-center justify-content-atod">
             <button className="navbar-toggler" style={{ marginRight: '15%' }} type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
