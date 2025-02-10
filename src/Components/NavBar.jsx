@@ -43,7 +43,7 @@ function NavBar() {
                 </div>
               </li>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item fw-bold" href="profil.html">Account Setting</a></li>
+              <li><NavLink className="dropdown-item fw-bold" to="/Profile" >Account Setting</NavLink></li>
               <li><a className="dropdown-item bg-danger fw-bold mt-2 px-5 w-25 justify-content-center m-auto d-flex rounded text-white" href="#">Sign out</a></li>
             </ul>
           </div>

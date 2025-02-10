@@ -3,6 +3,7 @@ import Home from './Components/Home'
 import Signup from './Components/Signup'
 import Login from './Components/Login'
 import Donation from './Components/Donation';
+import Profile from './Components/Profile';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <Route path='/Signup' index element={<Signup />} />
     <Route path='/home' element={<Home />} />
     <Route path="/Donation" element={<Donation />} />
+    <Route path="/Profile" element={<Profile />} />
 
       </Routes>
     </>
