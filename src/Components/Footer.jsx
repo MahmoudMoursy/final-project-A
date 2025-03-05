@@ -1,13 +1,13 @@
 import React from 'react';
 import aswulogo2 from '../assets/aswulogo2.png';
-
+// 
 function Footer() {
   return (
     <div>
       <div className="container-fluid text-light mt-5" style={{ overflow: 'hidden', backgroundColor: '#091e3d' }}>
         <div className="container">
           <div className="row gx-5">
-            
+
             <div className="col-lg-4 col-md-6 footer-about">
               <div className="d-flex flex-column align-items-center justify-content-center text-center p-4">
                 <a href="index.html" className="navbar-brand text-center m-auto">
@@ -18,7 +18,7 @@ function Footer() {
 
             <div className="col-lg-8 col-md-6">
               <div className="row gx-5">
-                
+
                 <div className="col-lg-4 col-md-12 pt-5 mb-5">
                   <div className="section-title section-title-sm position-relative pb-3 mb-4">
                     <h3 className="text-light mb-0">معلومات الموقع</h3>
