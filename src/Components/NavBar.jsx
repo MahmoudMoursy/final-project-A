@@ -12,10 +12,11 @@ function NavBar() {
           <div className="nav collapse navbar-collapse" id="navbarNav" >
             <ul className="navbar-nav d-flex gap-5">
               <li className="nav-item"><NavLink className="nav-link text-white" to="/Home">Home</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link text-white" to="">Services</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link text-white" to="/Services">Services</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link text-white" to="">Tourist places</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link text-white" to="">Housing</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link text-white" to="">About Us</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link text-white" to="/AboutUs">About Us</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link text-white" to="/Community">Community</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link text-white" to="">Voluntary</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link text-white" to="/Donation">Donation</NavLink></li>
             </ul>

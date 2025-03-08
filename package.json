@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@hookform/resolvers": "^3.10.0",
+    "@mui/material": "^6.4.7",
     "axios": "^1.7.9",
     "lucide-react": "^0.475.0",
+    "framer-motion": "^12.4.10",
     "owl.carousel": "^2.3.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
