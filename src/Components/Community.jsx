@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from "./NavBar"
-import Foteer from "./Foteer"
+import Footer from "./Footer"
 import './Community.css'
 import communityimage from '../assets/communityimage.png'
 
@@ -72,7 +72,7 @@ function Community() {
       </div>
     </div>
   </div>
-   <Foteer/>
+   <Footer/>
    </>
   )
 }

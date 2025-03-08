@@ -3,7 +3,7 @@ import { Container, Typography, Box, Paper, Avatar } from "@mui/material";
 import { motion } from "framer-motion";
 import { keyframes } from "@emotion/react";
 import NavBar from "./NavBar";
-import Foteer from "./Foteer";
+import Footer from "./Footer";
 const moveAnimation = keyframes`
   0% { transform: translate(-50%, -50%) translateX(0px); }
   50% { transform: translate(-50%, -50%) translateX(50px); }
@@ -174,7 +174,7 @@ const AboutUs = () => {
       <HowItBegan />
       <HowItBega />
       <TeamSection />
-         <Foteer/>
+         <Footer/>
     </Container>
   );
 };

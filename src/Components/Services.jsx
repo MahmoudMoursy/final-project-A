@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from "./NavBar"
-import Foteer from "./Foteer"
+import Footer from "./Footer"
 import './Services.css'
 
 function Services() {
@@ -116,7 +116,7 @@ function Services() {
         </div>
       </div>
     </section>
-    <Foteer/>
+    <Footer/>
   </div>
   )
 }
