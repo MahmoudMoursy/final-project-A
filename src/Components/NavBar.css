@@ -1,30 +1,121 @@
 .nav {
     margin-left: 25%;
-}
-
-.close {
+  }
+  
+  .close {
     width: 15%;
     border-radius: 10px;
-}
-.close:hover {
+  }
+  .close:hover {
     background-color: red;
-}
-
-@media (max-width: 576px) {
+  }
+  
+  @media (max-width: 576px) {
     .nav {
-        margin-left: 0%;
+      margin-left: 0%;
     }
-
+  
     .navbar-toggler {
-        order: 1;
-        margin-right: 10px;
+      order: 1;
+      margin-right: 10px;
     }
-
+  
     .link-body-emphasis {
-        order: 2;
+      order: 2;
     }
-
+  
     .menu {
-        margin-left: -26%;
+      margin-left: -26%;
     }
-}
+  }
+  
+  .navbar {
+    background-color: #8B0000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    color: #fff !important;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-brand:hover {
+    color: #FFD700 !important;
+  }
+  
+  .nav-link {
+    color: #fff !important;
+    font-size: 1.1rem;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #FFD700 !important;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #FFD700;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  .profile-container {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .profile-container:hover {
+    transform: scale(1.1);
+  }
+  
+  .profile-icon {
+    background-color: #FFD700;
+    color: #8B0000;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .navbar-toggler {
+    border-color: #fff;
+  }
+  
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
+  
+  .dropdown-toggle::after {
+    display: none;
+  }
+  
+  .dropdown-menu {
+    background-color: #8B0000;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown-item {
+    color: #fff !important;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #FFD700;
+    color: #8B0000 !important;
+  }
