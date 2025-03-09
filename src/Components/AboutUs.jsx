@@ -147,17 +147,17 @@ const TeamSection = () => {
             <Avatar alt="Team Member 3" src="https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid" sx={{ width: 100, height: 100 }} />
             <Typography variant="h6">محمود مرسي 
             </Typography>
-            <Typography variant="body2">مطوره واجهات أمامية</Typography>
+            <Typography variant="body2">مطور واجهات أمامية</Typography>
           </Box>
           <Box textAlign="center" m={2}>
             <Avatar alt="Team Member 3" src="https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid" sx={{ width: 100, height: 100 }} />
             <Typography variant="h6">عبدالله احمد</Typography>
-            <Typography variant="body2">مطوره واجهات أمامية</Typography>
+            <Typography variant="body2">مطور واجهات أمامية</Typography>
           </Box>
           <Box textAlign="center" m={2}>
             <Avatar alt="Team Member 3" src="https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid" sx={{ width: 100, height: 100 }} />
             <Typography variant="h6">مصطفي جابر</Typography>
-            <Typography variant="body2">مطوره واجهات أمامية</Typography>
+            <Typography variant="body2">مطور واجهات أمامية</Typography>
           </Box>
         </Box>
       </Paper>
