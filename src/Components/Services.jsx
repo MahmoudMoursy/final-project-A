@@ -1,6 +1,9 @@
 import React from 'react';
 import { Box, Typography, Button, Grid, IconButton } from '@mui/material';
-import { Email, Phone, Facebook, Twitter } from '@mui/icons-material'; 
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 const Services = () => {
   return (
@@ -43,12 +46,7 @@ const Services = () => {
 
       {/* Call to Action (CTA) Section */}
       <Box sx={{ mb: 3 }}>
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          sx={{ py: 1.5 }}
-        >
+        <Button variant="contained" color="primary" fullWidth sx={{ py: 1.5 }}>
           Get Started
         </Button>
       </Box>
@@ -56,16 +54,16 @@ const Services = () => {
       {/* Footer Section */}
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
         <IconButton color="primary" aria-label="email">
-          <Email />
+          <EmailIcon />
         </IconButton>
         <IconButton color="primary" aria-label="phone">
-          <Phone />
+          <PhoneIcon />
         </IconButton>
         <IconButton color="primary" aria-label="facebook">
-          <Facebook />
+          <FacebookIcon />
         </IconButton>
         <IconButton color="primary" aria-label="twitter">
-          <Twitter />
+          <TwitterIcon />
         </IconButton>
       </Box>
     </Box>
