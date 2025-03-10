@@ -1,72 +1,48 @@
-import React from 'react';
-import { Box, Typography, Button, Grid, IconButton } from '@mui/material';
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import React from "react";
+import NavBar from "./NavBar"
+import Footer from "./Footer"
+import { AppBar, Toolbar, Typography, Card, CardContent, Grid, Container } from "@mui/material";
+
+const restaurants = [
+  { name: "Mature", cuisine: "Sandwiches, Seafood, D..." },
+  { name: "Koolant Beit Goha", cuisine: "Koolany" },
+  { name: "THE BURGER GUY", cuisine: "Sandwiches, Burgers, F..." },
+  { name: "Fetter Begal", cuisine: "Pizza, Pasta, Crepes, Sa..." },
+  { name: "Roasters Coffee Bay", cuisine: "International, Beverage..." },
+  { name: "SHELLES", cuisine: "Sabis" },
+  { name: "Shelley's", cuisine: "Burgers, Fast Food, San..." },
+  { name: "Bahareer Aziz", cuisine: "Sandwiches, Deserts, E..." },
+  { name: "AL SALEM", cuisine: "Grills, Crepes, Sandwic..." },
+  { name: "El Khodary", cuisine: "Grocery, Fruits & Vege..." },
+];
 
 const Services = () => {
   return (
-    <Box
-      sx={{
-        border: '1px solid #ddd',
-        borderRadius: 2,
-        padding: 3,
-        maxWidth: 400,
-        textAlign: 'center',
-        backgroundColor: '#f9f9f9',
-        boxShadow: 3,
-      }}
-    >
-      {/* Header Section */}
-      <Box sx={{ mb: 3 }}>
-        <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
-          Premium Support
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Always here to help you!
-        </Typography>
-      </Box>
+    <>
+    <NavBar/>
 
-      {/* Features/Benefits Section */}
-      <Grid container spacing={2} sx={{ mb: 3 }}>
-        <Grid item xs={6}>
-          <Typography variant="body1">🚀 Fast Response</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="body1">🛠️ Expert Assistance</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="body1">📞 24/7 Support</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="body1">💼 Professional Service</Typography>
-        </Grid>
+    <Container>
+   
+      {/* Restaurant List */}
+      <Grid container spacing={3} sx={{ marginTop: 3 }}>
+        {restaurants.map((restaurant, index) => (
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <Card sx={{ boxShadow: 3, borderRadius: 2 }}>
+              <CardContent>
+                <Typography variant="h6" fontWeight="bold">
+                  {restaurant.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {restaurant.cuisine}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
-
-      {/* Call to Action (CTA) Section */}
-      <Box sx={{ mb: 3 }}>
-        <Button variant="contained" color="primary" fullWidth sx={{ py: 1.5 }}>
-          Get Started
-        </Button>
-      </Box>
-
-      {/* Footer Section */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-        <IconButton color="primary" aria-label="email">
-          <EmailIcon />
-        </IconButton>
-        <IconButton color="primary" aria-label="phone">
-          <PhoneIcon />
-        </IconButton>
-        <IconButton color="primary" aria-label="facebook">
-          <FacebookIcon />
-        </IconButton>
-        <IconButton color="primary" aria-label="twitter">
-          <TwitterIcon />
-        </IconButton>
-      </Box>
-    </Box>
+    </Container>
+     <Footer/>
+     </>
   );
 };
 
