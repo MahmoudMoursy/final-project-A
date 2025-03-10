@@ -1,5 +1,5 @@
 import React from 'react';
-import './NavBar.css'
+import './NavBar.css';
 import { NavLink } from 'react-router-dom';
 
 function NavBar() {
@@ -7,18 +7,18 @@ function NavBar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around px-4">
         <div>
-          <a className="navbar-brand" href="#">Aswan Services</a>
+          <a className="navbar-brand" href="#">Aswan</a>
         </div>
-        <div className="nav collapse navbar-collapse" id="navbarNav" >
+        <div className="nav collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav d-flex gap-5">
-            <li className="nav-item"><NavLink className="nav-link text-white" to="/Home">Home</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link text-white" to="/Services">Services</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link text-white" to="">Tourist places</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link text-white" to="">Housing</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link text-white" to="/AboutUs">About Us</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link text-white" to="/Community">Community</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link text-white" to="">Voluntary</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link text-white" to="/Donation">Donation</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/Home">Home</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/Services">Services</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="">Tourist places</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="">Housing</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/AboutUs">About Us</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/Community">Community</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="">Voluntary</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/Donation">Donation</NavLink></li>
           </ul>
         </div>
         <div className="d-flex align-items-center justify-content-atod">
@@ -34,23 +34,21 @@ function NavBar() {
           </a>
           <ul className="menu dropdown-menu text-small fw-bold shadow rounded-3 p-2 text-center" style={{
             width: '220px', borderRadius: '50%', position: 'absolute', left: '84%', top: '54px'
-
           }}>
             <li>
-              <div className="d-flex justify-content-around align-items-center ">
+              <div className="d-flex justify-content-around align-items-center">
                 <img src="https://fastly.picsum.photos/id/64/4326/2884.jpg?hmac=9_SzX666YRpR_fOyYStXpfSiJ_edO3ghlSRnH2w09Kg" alt="" width="32" height="32" className="rounded-circle me-2" />
                 <strong>Moursy</strong>
                 <span className="close">X</span>
               </div>
             </li>
             <li><hr className="dropdown-divider" /></li>
-            <li><NavLink className="dropdown-item fw-bold" to="/Profile" >Account Setting</NavLink></li>
+            <li><NavLink className="dropdown-item" to="/Profile">Account Setting</NavLink></li>
             <li><a className="dropdown-item bg-danger fw-bold mt-2 px-5 w-25 justify-content-center m-auto d-flex rounded text-white" href="#">Sign out</a></li>
           </ul>
         </div>
       </nav>
     </div>
-
   );
 }
 
