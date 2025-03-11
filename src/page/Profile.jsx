@@ -1,5 +1,5 @@
-import NavBar from './NavBar';
-import Footer from './Footer';
+import NavBar from '../Components/NavBar';
+import Footer from '../Components/Footer';
 import user from "../assets/user.jpg";
 import"./profile.css"
  

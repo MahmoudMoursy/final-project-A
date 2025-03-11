@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Heart, DollarSign, CreditCard, CheckCircle } from "lucide-react";
-import Footer from "./Footer";
-import NavBar from "./NavBar";
+import Footer from "../Components/Footer";
+import NavBar from "../Components/NavBar";
 
 function Donation() {
   const [amount, setAmount] = useState("");

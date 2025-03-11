@@ -1,40 +1,58 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import logo from '../assets/Logo.png';
+import { useAuth } from '../authstorre';
+import { useState } from 'react';
 
 function Signup() {
+    const authStore = useAuth();
     const nav = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [signupError, setSignupError] = useState(""); 
 
     const schema = z.object({
         name: z.string().min(7, "Name must be more than 7 characters").max(15, 'Name must be less than 15 characters'),
-        email: z.string().email(),
-        pass: z.string().min(10, "password must be more than 10 number & characters").max(20, 'password must be less than 20 number & characters'),
-        confirmpass:z.string()
-    })
-    .refine((dataa) => dataa.pass === dataa.confirmpass, {
+        email: z.string().email("Invalid email address"),
+        pass: z.string().min(10, "Password must be more than 10 characters").max(20, 'Password must be less than 20 characters'),
+        confirmpass: z.string()
+    }).refine((data) => data.pass === data.confirmpass, {
         message: "Password and confirm password don't match",
         path: ["confirmpass"],
     });
 
-    const { register, handleSubmit, formState: { errors }, } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(schema)
     });
 
-    function save(data) {
-        console.log(data);
-        nav('/Login', { replace: true, state: { data: "hi from signup" } });
+    async function save(data) {
+        setLoading(true);
+        setSignupError(""); 
+
+        try {
+            await authStore.signUp({
+                name: data.name,
+                email: data.email,
+                password: data.pass
+            });
+
+            nav('/', { replace: true, state: { data: "hi from signup" } });
+
+        } catch (error) {
+            console.error("Signup error:", error);
+            setSignupError("Failed to sign up. Please try again.");
+        }
+
+        setLoading(false);
     }
 
     return (
         <div>
             <div className="container">
                 <div className="row justify-content-around mt-md-0 m-lg-5">
-                    <div className="col-md-6 col-lg-4 mt-md-0 m-lg-5 ">
-                        <img
-                            src={logo} alt="logo" className="w-50 mb-5 mt-5 mx-auto d-block" />
+                    <div className="col-md-6 col-lg-4 mt-md-0 m-lg-5">
+                        <img src={logo} alt="logo" className="w-50 mb-5 mt-5 mx-auto d-block" />
                         <h2 className="text-center text-black fw-bolder">
                             Expatriate Services: Making your life easier away from home
                         </h2>
@@ -56,33 +74,39 @@ function Signup() {
                             <div className="mb-1">
                                 <label htmlFor="name" className="text-black fw-bold">Your Name</label>
                                 <input {...register('name')} type="text" placeholder="Enter your name" id="name" className="form-control mt-2 border border-light" />
+                                <small style={{ color: 'red' }}>{errors.name?.message}</small>
                             </div>
-                            <small style={{ color: 'red' }} >{errors.name?.message}</small>
                             <div className="mb-1">
-                                <label htmlFor="name" className="text-black fw-bold">Email</label>
+                                <label htmlFor="email" className="text-black fw-bold">Email</label>
                                 <input {...register('email')} type="email" placeholder="Enter your email" id="email" className="form-control mt-2 border border-light" />
+                                <small style={{ color: 'red' }}>{errors.email?.message}</small>
                             </div>
-                            <small style={{ color: 'red' }} >{errors.email?.message}</small>
                             <div className="mb-1">
                                 <label htmlFor="password" className="text-black fw-bold">Password</label>
-                                <input {...register('pass')}  type="password" id="password" className="form-control mt-2 border border-light" />
+                                <input {...register('pass')} type="password" id="password" className="form-control mt-2 border border-light" />
+                                <small style={{ color: 'red' }}>{errors.pass?.message}</small>
                             </div>
-                            <small style={{ color: 'red' }} >{errors.pass?.message}</small>
                             <div className="mb-3">
-                                <label  htmlFor="Confirm" className="text-black fw-bold">Confirm Password</label>
+                                <label htmlFor="Confirm" className="text-black fw-bold">Confirm Password</label>
                                 <input {...register('confirmpass')} type="password" id="Confirm" className="form-control mt-2 border border-light" />
+                                <small style={{ color: 'red' }}>{errors.confirmpass?.message}</small>
                             </div>
-                            <small style={{ color: 'red' }} >{errors.confirmpass?.message}</small>
-                            <button type="submit" className="btn btn-primary w-100 rounded mt-3">Sign Up</button>
+
+                            {signupError && <p className="text-danger text-center fw-bold">{signupError}</p>}
+
+                            <button type="submit" className="btn btn-primary w-100 rounded mt-3" disabled={loading}>
+                                {loading ? "Signing Up..." : "Sign Up"}
+                            </button>
+
                             <p className="text-black text-center fw-bold mt-4">
-                                I have an account <a className='text-blue' style={{textDecoration:'none'}}  onClick={(e) => { e.preventDefault(); nav('/'); }}>Login</a>
+                                I have an account <a className='text-blue' style={{ textDecoration: 'none' }} onClick={(e) => { e.preventDefault(); nav('/'); }}>Login</a>
                             </p>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Signup;

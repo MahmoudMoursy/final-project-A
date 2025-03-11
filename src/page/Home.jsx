@@ -1,11 +1,11 @@
 
-import NavBar from './NavBar';
-import Haeder from './Haeder';
+import NavBar from '../Components/NavBar';
+import Haeder from '../Components/Haeder';
 import aswulogo2 from '../assets/aswulogo2.png';
 import ColoredLogo from '../assets/ColoredLogo.svg';
 import user from '../assets/user.jpg';
-import CardSlider from './CardSlider';
-import Footer from './Footer';
+import CardSlider from '../Components/CardSlider';
+import Footer from '../Components/Footer';
 
 function Home() {
   return (
