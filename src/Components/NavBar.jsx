@@ -13,8 +13,8 @@ function NavBar() {
           <ul className="navbar-nav d-flex gap-5">
             <li className="nav-item"><NavLink className="nav-link" to="/Home">Home</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/Services">Services</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link" to="">Tourist places</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link" to="">Housing</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/tour">Tourist places</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/housing">Housing</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/AboutUs">About Us</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/Community">Community</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="">Voluntary</NavLink></li>

@@ -1,11 +1,11 @@
 import React from 'react'
-import NavBar from './NavBar'
-import A222 from '../assets/A222.webp'
-import A1111 from '../assets/A1111.webp'
-import A333 from '../assets/A333.webp'
-import A444 from '../assets/A444.webp'
-import AA from '../assets/AA.webp'
-import Footer from './Footer'
+import NavBar from '../Components/NavBar'
+import A222 from '../assets/housing/A222.webp'
+import A1111 from '../assets/housing/A1111.webp'
+import A333 from '../assets/housing/A333.webp'
+import A444 from '../assets/housing/A444.webp'
+import AA from '../assets/housing/AA.webp'
+import Footer from '../Components/Footer'
 function Housing() {
   
   return (
