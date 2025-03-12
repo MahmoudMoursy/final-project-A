@@ -98,7 +98,7 @@ function Home() {
               <input type="email" className="form-control" id="email" placeholder="Your Email" />
             </div>
             <div className="mb-3">
-              <label htmlFor="message" className="form-label">Messagee</label>
+              <label htmlFor="message" className="form-label">Message</label>
               <textarea className="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
             </div>
             <button type="submit" className="btn btn-primary">Send</button>
