@@ -1,0 +1,77 @@
+body {
+    background-color: rgb(245, 243, 211);
+    color: rgb(18, 18, 18);
+    font-family: Arial, sans-serif;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 15px;
+    padding: 20px;
+    margin: 50px;
+}
+.grid-item {
+    background: #7d8997;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s;
+}
+.grid-item:hover {
+    transform: scale(1.05);
+}
+.grid-item.large {
+    grid-column: span 2;
+}
+.card {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+.card img {
+    border-radius: 20px 20px 0 0;
+}
+.price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #222;
+}
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+    .grid-item.large {
+        grid-column: span 1;
+    }
+}
+.about-section {
+    text-align: center;
+    max-width: 800px;
+    margin: 50px auto;
+    color: #333;
+}
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 30px;
+}
+.stat-item {
+    text-align: center;
+}
+.stat-item h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.stat-item p {
+    font-size: 1rem;
+    color: #666;
+}

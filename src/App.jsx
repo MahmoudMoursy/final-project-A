@@ -7,6 +7,8 @@ import Profile from './page/Profile';
 import AboutUs from './page/AboutUs';
 import Community from './page/Community';
 import Services from './page/Services';
+import Housing from './page/housing';
+import Tour from './page/Tour';
 
 
 
@@ -23,7 +25,8 @@ function App() {
     <Route path="/Profile" element={<Profile />} />
     <Route path='/AboutUs' element={<AboutUs />} />
     <Route path='/Services' element={<Services />} />
-    <Route path='/Community' element={<Community />} />
+    <Route path='/housing' element={<Housing/>} />
+    <Route path='/tour' element={<Tour/>} />
       </Routes>
     </>
   )
