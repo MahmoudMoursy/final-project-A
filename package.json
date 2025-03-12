@@ -16,12 +16,9 @@
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.7",
     "axios": "^1.7.9",
-<<<<<<< HEAD
-    "firebase": "^11.4.0",
-=======
     "bootstrap": "^5.3.3",
+    "firebase": "^11.4.0",
     "framer-motion": "^12.4.10",
->>>>>>> dced17f8ced4a1a37ee66b9313229477d3d76f6f
     "lucide-react": "^0.475.0",
     "owl.carousel": "^2.3.4",
     "react": "^18.3.1",

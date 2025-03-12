@@ -1,15 +1,8 @@
-<<<<<<< HEAD:src/page/Profile.jsx
+
 import NavBar from '../Components/NavBar';
 import Footer from '../Components/Footer';
-import user from "../assets/user.jpg";
 import"./profile.css"
  
-=======
-import React from 'react';
-import NavBar from './NavBar';
-import Footer from './Footer';
-import "./profile.css"; // استيراد CSS عادي
->>>>>>> dced17f8ced4a1a37ee66b9313229477d3d76f6f:src/Components/Profile.jsx
 
 const Profile = () => {
   return (

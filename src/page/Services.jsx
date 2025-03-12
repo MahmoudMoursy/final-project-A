@@ -1,6 +1,6 @@
 import React from "react";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import NavBar from "../Components/NavBar";
+import Footer from "../Components/Footer";
 import { Card, CardContent, CardMedia, Grid, Container, Typography } from "@mui/material";
 
 const المطاعم = [

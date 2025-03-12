@@ -2,8 +2,8 @@ import React from "react";
 import { Container, Typography, Box, Paper, Avatar } from "@mui/material";
 import { motion } from "framer-motion";
 import { keyframes } from "@emotion/react";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import NavBar from "../Components/NavBar";
+import Footer from "../Components/Footer";
 const moveAnimation = keyframes`
   0% { transform: translate(-50%, -50%) translateX(0px); }
   50% { transform: translate(-50%, -50%) translateX(50px); }
