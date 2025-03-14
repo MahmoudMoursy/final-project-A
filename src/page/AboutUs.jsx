@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography, Box, Paper, Avatar } from "@mui/material";
+import { Container, Grid, Typography, Box, Paper, Avatar } from "@mui/material";
 import { motion } from "framer-motion";
 import { keyframes } from "@emotion/react";
 import NavBar from "../Components/NavBar";
@@ -44,13 +44,14 @@ const ZilliqaStory = () => {
         <Box
           sx={{
             position: "absolute",
-            top: "20%",
+            top: "6%",
             left: "5%",
             zIndex: 2,
             backgroundColor: "rgba(255, 255, 255, 0.7)",
             padding: "15px",
             borderRadius: "10px",
             boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.2)",
+
           }}
         >
           <Typography variant="h3" fontWeight="bold" style={{ padding: 0, direction: "rtl" }} gutterBottom>
@@ -77,39 +78,78 @@ const ZilliqaStory = () => {
 
 const ScalingFaster = () => {
   return (
-    <Paper elevation={3} style={{ padding: '50px', margin: '20px 40px 100px 40px', direction: "rtl", textAlign: "center" }}>
-      <Typography variant="h4" gutterBottom>
-        رؤيتنا
-      </Typography>
-      <Typography variant="body1" paragraph>
-        نحن منصة متكاملة تهدف إلى تسهيل حياة المغتربين من خلال تقديم خدمات متنوعة تلبي احتياجاتهم اليومية، سواء في السكن، التوظيف، الخدمات القانونية، أو الدعم الاجتماعي.
-      </Typography>
+    <Paper elevation={3} style={{ padding: "50px", margin: "20px 40px 100px 40px", direction: "rtl" }}>
+      <Grid container spacing={3} alignItems="center">
+        {/* الصورة على اليمين */}
+        <Grid item xs={12} md={6}>
+          <img 
+            src="https://img.freepik.com/premium-photo/close-up-view-colorful-faluca-traditional-boat-sailing-river-sorrounded-by-vegetation_1048944-11883581.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_authors_boost" 
+            alt="رؤيتنا" 
+            style={{ width: "100%", borderRadius: "10px" }} 
+          />
+        </Grid>
+        {/* النص على اليسار */}
+        <Grid item xs={12} md={6} textAlign="center">
+          <Typography variant="h4" gutterBottom>
+            رؤيتنا
+          </Typography>
+          <Typography variant="body1">
+            نحن منصة متكاملة تهدف إلى تسهيل حياة المغتربين من خلال تقديم خدمات متنوعة تلبي احتياجاتهم اليومية، سواء في السكن، التوظيف، الخدمات القانونية، أو الدعم الاجتماعي.
+          </Typography>
+        </Grid>
+      </Grid>
     </Paper>
   );
 };
 
 const HowItBegan = () => {
   return (
-    <Paper elevation={3} style={{ padding: '50px', margin: '30px 40px 40px 40px', direction: "rtl", textAlign: "center" }}>
-      <Typography variant="h4" gutterBottom>
-        مهمتنا
-      </Typography>
-      <Typography variant="h6" gutterBottom>
-        نعمل على بناء مجتمع داعم للمغتربين عبر تقديم حلول مبتكرة تجعل انتقالهم واستقرارهم في بلد جديد تجربة سلسة وآمنة. نحن نؤمن بأن لكل مغترب الحق في الوصول إلى معلومات وخدمات موثوقة تساعده في تحقيق أهدافه.
-      </Typography>
+    <Paper elevation={3} style={{ padding: "50px", margin: "30px 40px", direction: "rtl" }}>
+      <Grid container spacing={3} alignItems="center">
+        {/* النص على اليمين */}
+        <Grid item xs={12} md={6} textAlign="center">
+          <Typography variant="h4" gutterBottom>
+            مهمتنا
+          </Typography>
+          <Typography variant="h6">
+            نعمل على بناء مجتمع داعم للمغتربين عبر تقديم حلول مبتكرة تجعل انتقالهم واستقرارهم في بلد جديد تجربة سلسة وآمنة.
+          </Typography>
+        </Grid>
+        {/* الصورة على اليسار */}
+        <Grid item xs={12} md={6}>
+          <img 
+            src="https://img.freepik.com/premium-photo/sailboats-by-entrance-botanical-garden-aswan-egypt_219958-1139.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_authors_boost" 
+            alt="مهمتنا" 
+            style={{ width: "100%", borderRadius: "10px" }} 
+          />
+        </Grid>
+      </Grid>
     </Paper>
   );
 };
 
 const HowItBega = () => {
   return (
-    <Paper elevation={3} style={{ padding: '50px', margin: '30px 40px 40px 40px', direction: "rtl", textAlign: "center" }}>
-      <Typography variant="h4" gutterBottom>
-        قيمنا
-      </Typography>
-      <Typography variant="h6" gutterBottom>
-        الشفافية، المصداقية، والابتكار هي الركائز الأساسية التي نرتكز عليها لضمان تقديم أفضل الخدمات لعملائنا.
-      </Typography>
+    <Paper elevation={3} style={{ padding: "50px", margin: "30px 40px", direction: "rtl" }}>
+      <Grid container spacing={3} alignItems="center">
+        {/* الصورة على اليمين */}
+        <Grid item xs={12} md={6}>
+          <img 
+            src="https://img.freepik.com/premium-photo/nile-traditional-african-village-near-aswan-egypt_400112-2293.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_authors_boost" 
+            alt="قيمنا" 
+            style={{ width: "100%", borderRadius: "10px" }} 
+          />
+        </Grid>
+        {/* النص على اليسار */}
+        <Grid item xs={12} md={6} textAlign="center">
+          <Typography variant="h4" gutterBottom>
+            قيمنا
+          </Typography>
+          <Typography variant="h6">
+            الشفافية، المصداقية، والابتكار هي الركائز الأساسية التي نرتكز عليها لضمان تقديم أفضل الخدمات لعملائنا.
+          </Typography>
+        </Grid>
+      </Grid>
     </Paper>
   );
 };
