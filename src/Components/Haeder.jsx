@@ -9,7 +9,7 @@ function Haeder() {
             <div className="carousel-item active">
               <img src={img6} alt="React logo" className="w-100" />
               <div className="carousel-caption d-flex flex-column align-items-center justify-content-center text-center">
-                <div style={{ maxWidth: '900px' }}>
+                <div style={{ maxWidth: '900px'}} >
                   <h5 className="text-white text-uppercase mb-3 animated slideInDown fw-bold fs-2">Welcome to Aswan Services</h5>
                   <h5 className="display-1 text-white mb-md-4 animated zoomIn">We help you know everything about Aswan</h5>
                   <a href="#contact" className="btn btn-primary py-md-3 px-md-5 ms-3 animated slideInLeft">Contact Us</a>

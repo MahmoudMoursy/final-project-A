@@ -9,8 +9,8 @@ function NavBar() {
         <div>
           <a className="navbar-brand" href="#">Aswan</a>
         </div>
-        <div className="nav collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav d-flex gap-5">
+        <div className="nav collapse navbar-collapse" id="navbarNav" style={{marginLeft:350}}>
+          <ul className="navbar-nav d-flex gap-4">
             <li className="nav-item"><NavLink className="nav-link" to="/Home">Home</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/Services">Services</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/tour">Tourist places</NavLink></li>
@@ -19,6 +19,7 @@ function NavBar() {
             <li className="nav-item"><NavLink className="nav-link" to="/Community">Community</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="">Voluntary</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/Donation">Donation</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/Profileform">Profile</NavLink></li>
           </ul>
         </div>
         <div className="d-flex align-items-center justify-content-atod">

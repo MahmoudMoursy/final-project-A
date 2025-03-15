@@ -9,6 +9,7 @@ import Community from './page/Community';
 import Services from './page/Services';
 import Housing from './page/housing';
 import Tour from './page/Tour';
+import Profileform from './page/Profileform';
 
 
 
@@ -27,6 +28,8 @@ function App() {
     <Route path='/Services' element={<Services />} />
     <Route path='/housing' element={<Housing/>} />
     <Route path='/tour' element={<Tour/>} />
+    <Route path='/Community' element={<Community/>} />
+    <Route path='/Profileform' element={<Profileform/>} />
       </Routes>
     </>
   )

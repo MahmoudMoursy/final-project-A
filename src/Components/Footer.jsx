@@ -3,150 +3,96 @@ import { Box, Typography, Grid, Link, TextField, Button } from '@mui/material';
 
 const Footer = () => {
   return (
-    <Box
-      sx={{
-        backgroundColor: '#5C7285', // تغيير لون الخلفية
-        color: 'white', // تغيير لون النص ليكون أكثر وضوحًا
-        padding: { xs: 3, sm: 4 },
-        borderTop: '1px solid #ddd',
-        direction: 'rtl', // يجعل النصوص من اليمين إلى اليسار
-      }}
-    >
-      <Grid container spacing={4} justifyContent="center">
-        {/* قسم الذكاء الاصطناعي */}
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography variant="h6" gutterBottom>
-            أدوات الذكاء الاصطناعي
-          </Typography>
-          {[
-            'مولد الصور بالذكاء الاصطناعي',
-            'مولد الفيديو بالذكاء الاصطناعي',
-            'تحسين جودة الصور',
-            'إزالة الخلفية',
-            'محرر الصور',
-            'مولد الصوت بالذكاء الاصطناعي',
-            'جميع أدوات Freepik',
-          ].map((item, index) => (
-            <Link
-              key={index}
-              href="#"
-              color="inherit"
-              display="block"
-              sx={{ transition: '0.3s', '&:hover': { color: '#FFD700' } }}
-            >
-              {item}
-            </Link>
-          ))}
-        </Grid>
+    <div
+  className="container-fluid  text-light mt-5"
+  style={{ overflow: "hidden", backgroundColor: "#091e3d" }}
+>
+  <div className="container">
+    <div className="row gx-5">
+      <div className="col-lg-4 col-md-6 footer-about">
+        <div className="d-flex flex-column align-items-center justify-content-center text-center p-4">
+          <a href="index.html" className="navbar-brand text-center m-auto">
+            <img src="assets/aswulogo2.png" width="220px" alt="Logo" />
+          </a>
+        </div>
+      </div>
+      <div className="col-lg-8 col-md-6">
+        <div className="row gx-5">
+          <div className="col-lg-4 col-md-12 pt-5 mb-5">
+            <div className="section-title section-title-sm position-relative pb-3 mb-4">
+              <h3 className="text-light mb-0">معلومات الموقع</h3>
+            </div>
+            <p className="mt-3 mb-4">
+              منصه لمساعده المغتربين في الحصول علي الخدمات بسهوله في كل انحاء المحافظه
+            </p>
+          </div>
+          <div className="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
+            <div className="section-title section-title-sm position-relative pb-3 mb-4">
+              <h3 className="text-light mb-0">روابط سريعة</h3>
+            </div>
+            <div className="link-animated d-flex flex-column justify-content-start">
+              <a className="text-light mb-2" href="">
+                <i className="fa-solid fa-arrow-right text-primary mx-2" />
+                Home
+              </a>
+              <a className="text-light mb-2" href="">
+                <i className="fa-solid fa-arrow-right text-primary mx-2" />
+                Voluntary{" "}
+              </a>
+              <a className="text-light mb-2" href="">
+                <i className="fa-solid fa-arrow-right text-primary mx-2" />
+                About Us
+              </a>
+              <a className="text-light mb-2" href="">
+                <i className="fa-solid fa-arrow-right text-primary mx-2" />
+                Housing{" "}
+              </a>
+              <a className="text-light" href="">
+                <i className="fa-solid fa-arrow-right text-primary mx-2" />{" "}
+                Tourist places
+              </a>
+              <a className="text-light" href="">
+                <i className="fa-solid fa-arrow-right text-primary mx-2" />{" "}
+                Services
+              </a>
+            </div>
+          </div>
+          {/* تابعنا */}
+          <div className="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
+            <div className="section-title section-title-sm position-relative pb-3 mb-4">
+              <h3 className="text-light mb-0">تابعنا</h3>
+            </div>
+            <div className="d-flex mt-4">
+              <i
+                className="fa-brands fa-facebook mx-2"
+                style={{ fontSize: 30 }}
+              />
+              <i
+                className="fa-brands fa-twitter mx-2"
+                style={{ fontSize: 30 }}
+              />
+              <i
+                className="fa-brands fa-instagram mx-2"
+                style={{ fontSize: 30 }}
+              />
+            </div>
+            <div className="d-flex align-items-center justify-content-center mt-4">
+              <p className="mb-0">
+                ©{" "}
+                <a className="text-white border-bottom" href="#">
+                  {" "}
+                  خدمات المغتربين
+                </a>
+                . جميع الحقوق محفوظة.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-        {/* قسم المعلومات */}
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography variant="h6" gutterBottom>
-            المعلومات
-          </Typography>
-          {[
-            'الأسعار',
-            'من نحن',
-            'واجهة API',
-            'الوظائف',
-            'محتوى مخصص',
-            'إرشادات العلامة التجارية',
-            'الأحداث',
-            'اتجاهات البحث',
-            'المدونة',
-          ].map((item, index) => (
-            <Link
-              key={index}
-              href="#"
-              color="inherit"
-              display="block"
-              sx={{ transition: '0.3s', '&:hover': { color: '#FFD700' } }}
-            >
-              {item}
-            </Link>
-          ))}
-        </Grid>
-
-        {/* قسم الشروط والسياسات */}
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography variant="h6" gutterBottom>
-            الشروط والسياسات
-          </Typography>
-          {[
-            'شروط الاستخدام',
-            'اتفاقية الترخيص',
-            'سياسة الخصوصية',
-            'حقوق النشر',
-            'سياسة الكوكيز',
-            'إعدادات الكوكيز',
-          ].map((item, index) => (
-            <Link
-              key={index}
-              href="#"
-              color="inherit"
-              display="block"
-              sx={{ transition: '0.3s', '&:hover': { color: '#FFD700' } }}
-            >
-              {item}
-            </Link>
-          ))}
-        </Grid>
-
-        {/* قسم الدعم */}
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography variant="h6" gutterBottom>
-            الدعم
-          </Typography>
-          {['الأسئلة الشائعة', 'اتصل بنا'].map((item, index) => (
-            <Link
-              key={index}
-              href="#"
-              color="inherit"
-              display="block"
-              sx={{ transition: '0.3s', '&:hover': { color: '#FFD700' } }}
-            >
-              {item}
-            </Link>
-          ))}
-        </Grid>
-      </Grid>
-
-      {/* قسم الاشتراك في البريد الإلكتروني */}
-      <Box sx={{ mt: 4, textAlign: 'center' }}>
-        <Typography variant="h6" gutterBottom>
-          وسائل التواصل الاجتماعي
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          احصل على أحدث التحديثات والعروض مباشرة إلى بريدك الإلكتروني
-        </Typography>
-        <Box
-          component="form"
-          sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}
-        >
-          <TextField
-            variant="outlined"
-            placeholder="أدخل بريدك الإلكتروني"
-            size="small"
-            sx={{
-              width: { xs: '100%', sm: 'auto' },
-              textAlign: 'right',
-              backgroundColor: 'white',
-              borderRadius: 1,
-            }}
-          />
-          <Button variant="contained" sx={{ backgroundColor: '#FFD700', color: '#5C7285' }}>
-            اشترك
-          </Button>
-        </Box>
-      </Box>
-
-      {/* قسم حقوق النشر */}
-      <Box sx={{ mt: 4, textAlign: 'center' }}>
-        <Typography variant="body2" color="inherit">
-          حقوق النشر © 2010-2025 Freepik. جميع الحقوق محفوظة.
-        </Typography>
-      </Box>
-    </Box>
   );
 };
 
