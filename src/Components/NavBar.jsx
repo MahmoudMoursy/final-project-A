@@ -1,15 +1,18 @@
 import React from 'react';
 import './NavBar.css';
 import { NavLink } from 'react-router-dom';
+import wasetLogo from '../assets/waset.png';
 
 function NavBar() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around px-4">
         <div>
-          <a className="navbar-brand" href="#">Aswan</a>
+          <a className="navbar-brand" href="#">
+            <img src={wasetLogo} alt="Waset Logo" style={{ height: '50px', width: 'auto' }} />
+          </a>
         </div>
-        <div className="nav collapse navbar-collapse" id="navbarNav" style={{marginLeft:350}}>
+        <div className="nav collapse navbar-collapse" id="navbarNav" style={{ marginLeft: 350 }}>
           <ul className="navbar-nav d-flex gap-4">
             <li className="nav-item"><NavLink className="nav-link" to="/Home">Home</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/Services">Services</NavLink></li>
