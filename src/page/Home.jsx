@@ -9,6 +9,8 @@ import Footer from '../Components/Footer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './Home.css';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
 function Home() {
   useEffect(() => {
@@ -16,6 +18,28 @@ function Home() {
       duration: 1000,
       once: true
     });
+
+    // Initialize map
+    const map = L.map('map').setView([24.0889, 32.8998], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add markers for key locations in Aswan
+    const locations = [
+      // { name: 'Aswan High Dam', coords: [23.9702, 32.8800], desc: 'Historic dam on the Nile River' },
+      // { name: 'Philae Temple', coords: [24.0134, 32.8832], desc: 'Ancient Egyptian temple complex' },
+      // { name: 'Elephantine Island', coords: [24.0847, 32.8850], desc: 'Archaeological site and museum' },
+      // { name: 'Nubian Museum', coords: [24.0741, 32.8877], desc: 'Museum showcasing Nubian culture' }
+    ];
+
+    locations.forEach(loc => {
+      L.marker(loc.coords)
+        .bindPopup(`<b>${loc.name}</b><br>${loc.desc}`)
+        .addTo(map);
+    });
+
+    return () => map.remove();
   }, []);
 
   return (
@@ -95,6 +119,13 @@ function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-5 rounded map-section" data-aos="fade-up">
+        <div className="container">
+          <h2 className="text-center mb-4 map-title">Explore Aswan</h2>
+          <div id="map" style={{ height: '400px', borderRadius: '10px', marginBottom: '2rem' }}></div>
         </div>
       </section>
 
