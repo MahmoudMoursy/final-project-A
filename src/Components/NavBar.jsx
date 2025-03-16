@@ -8,9 +8,9 @@ function NavBar() {
     <div style={{ direction: "rtl" }}>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around px-4">
         <div>
-          <a className="navbar-brand" href="#">
-            <img src={wasetLogo} alt="Waset Logo" style={{ height: '50px', width: 'auto' }} />
-          </a>
+          <NavLink className="nav-link" to="/Home">
+          <img src={wasetLogo} alt="Waset Logo" style={{ height: '50px', width: 'auto' }} />
+          </NavLink>
         </div>
         <div className="nav collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav d-flex gap-4">

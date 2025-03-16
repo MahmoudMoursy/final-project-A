@@ -1,12 +1,13 @@
 import NavBar from '../Components/NavBar';
 import Footer from '../Components/Footer';
-import"./profile.css"
+import "./profile.css";
 import React, { useEffect, useState } from "react";
 import db, { auth } from "../firebaseconfig";
-import { collection, query, where, getDocs } from "firebase/firestore"
- 
+import { collection, query, where, getDocs } from "firebase/firestore";
+
 const Profile = () => {
   const [userData, setUserData] = useState(null);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -14,19 +15,22 @@ const Profile = () => {
         const q = query(collection(db, "user"), where("email", "==", auth.currentUser.email));
         const querySnapshot = await getDocs(q);
 
+        console.log(auth.currentUser); 
+
         if (!querySnapshot.empty) {
           setUserData(querySnapshot.docs[0].data());
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
-       
+        return <p>Error fetching user data. Please try again later.</p>;
       }
     };
-    
+
     fetchUserData();
   }, []);
-  // if (!userData) return <p>Loading...</p>;
-  
+
+  if (!userData) return <p>abdala..</p>;
+
   return (
     <>
       <NavBar />
@@ -34,13 +38,13 @@ const Profile = () => {
         <div className="profileCard">
           <div className="profileHeader">
             <div className="avatar">س</div>
-            <h2 className="userName">{userData.username}</h2>
-            <p className="userId">الجامعه : <span>{userData.university}</span></p>
+            <h2 className="userName">{userData.username || "اسم المستخدم غير متوفر"}</h2>
+            <p className="userId">الجامعه : <span>{userData.university || "الجامعة غير متوفرة"}</span></p>
           </div>
 
           <div className="infoSection">
             <h3 className="sectionTitle">المعلومات الشخصية</h3>
-            <div >
+            <div>
               <div className="infoItem">
                 <span className="infoLabel">البريد الإلكتروني:</span>
                 {userData.email}
@@ -54,16 +58,17 @@ const Profile = () => {
               <div className="infoItem">
                 <span className="infoLabel">المدينة:</span>
                 {userData.city}
-                </div>
+              </div>
               <br />
               <div className="infoItem">
                 <span className="infoLabel">العنوان:</span>
-                {userData.address}              </div>
-                <div className="infoItem">
+                {userData.address}
+              </div>
+              <div className="infoItem">
                 <span className="infoLabel">الحاله:</span>
-                {userData.status}              </div>
+                {userData.status}
+              </div>
             </div>
-            
           </div>
 
           <div className="infoSection">
@@ -140,4 +145,3 @@ const Profile = () => {
 };
 
 export default Profile;
-

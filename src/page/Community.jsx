@@ -1,12 +1,8 @@
 import React from "react";
 import { Card, CardContent, Typography, Avatar, Grid, Button, Container, Box } from "@mui/material";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
-import React from 'react'
 import NavBar from "../Components/NavBar"
-import Footer from "../Components/Footer"
-import './Community.css'
-import communityimage from '../assets/communityimage.png'
+import Footer from "../Components/Footer";
+
 
 
 const posts = [
@@ -107,15 +103,16 @@ const Community = () => {
                 <Typography variant="body2" sx={{ color: "gray" }}>{post.email}</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="caption" sx={{ color: "gray" }}>
-                  {formatDate(post.timestamp)}
-                </Typography>
+                
               </Grid>
             </Grid>
 
             <Box sx={{ mt: 2, p: 2, bgcolor: "#f9f9f9", borderRadius: 2 }}>
               <Typography variant="body1">{post.text}</Typography>
             </Box>
+            <Typography variant="caption" sx={{ color: "gray" }}>
+                  {formatDate(post.timestamp)}
+                </Typography>
           </CardContent>
         </Card>
       ))}
