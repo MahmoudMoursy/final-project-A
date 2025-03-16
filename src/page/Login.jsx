@@ -21,9 +21,9 @@ function Login() {
                     setError("Please verify your email before logging in.");
                     return; 
                 }
-                nav('/home', { state: { data: "hi from login" } });
+             
             } else {
-                setError("Invalid email or password. Please try again.");
+                nav('/home', { state: { data: "hi from login" } });
             }
         } catch (err) {
             setError("Invalid email or password. Please try again.");
