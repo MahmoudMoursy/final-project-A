@@ -10,7 +10,7 @@ import Services from './page/Services';
 import Housing from './page/housing';
 import Tour from './page/Tour';
 import Profileform from './page/Profileform';
-import { AuthProvider } from './context/Authcontext';
+// import { AuthProvider } from './context/Authcontext';
 
 
 
@@ -19,7 +19,7 @@ function App() {
 
   return (
     <>
-    <AuthProvider>
+    {/* <AuthProvider> */}
     <Routes>
     <Route path='/' element={<Login/>} />
     <Route path='/Signup' index element={<Signup />} />
@@ -33,7 +33,7 @@ function App() {
     <Route path='/Community' element={<Community/>} />
     <Route path='/Profileform' element={<Profileform/>} />
       </Routes>
-      </AuthProvider>
+      {/* </AuthProvider> */}
     </>
   )
 }
