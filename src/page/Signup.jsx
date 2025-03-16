@@ -13,7 +13,7 @@ function Signup() {
     const [signupError, setSignupError] = useState(""); 
 
     const schema = z.object({
-        name: z.string().min(7, "Name must be more than 7 characters").max(15, 'Name must be less than 15 characters'),
+        name: z.string().min(7, "Name must be more than 7 characters").max(20, 'Name must be less than 15 characters'),
         email: z.string().email("Invalid email address"),
         pass: z.string().min(10, "Password must be more than 10 characters").max(20, 'Password must be less than 20 characters'),
         confirmpass: z.string()
