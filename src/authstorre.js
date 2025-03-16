@@ -6,7 +6,7 @@ export const useAuth = create((set) => ({
     token: "",
     user: null,
     loading: false,
-
+   
     login: async (data) => {
         set({ loading: true });
         try {

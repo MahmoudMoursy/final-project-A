@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import logo from '../assets/Logo.png';
 import { useAuth } from '../authstorre';
 import { useState } from 'react';
+import wasetLogo from '../assets/waset.png';
 
 function Signup() {
     const authStore = useAuth();
@@ -52,14 +52,14 @@ function Signup() {
             <div className="container">
                 <div className="row justify-content-around mt-md-0 m-lg-5">
                     <div className="col-md-6 col-lg-4 mt-md-0 m-lg-5">
-                        <img src={logo} alt="logo" className="w-50 mb-5 mt-5 mx-auto d-block" />
+                        <img src={wasetLogo} alt="logo" className="w-50 mb-5 mt-5 mx-auto d-block" />
                         <h2 className="text-center text-black fw-bolder">
                             Expatriate Services: Making your life easier away from home
                         </h2>
                     </div>
                     <div className="col-md-6 col-lg-4">
                         <form onSubmit={handleSubmit(save)} className="border border-1 border-black bg-white rounded-5 p-3">
-                            <img src={logo} alt="img" className="w-25 mx-auto d-block mb-4" />
+                            <img src={wasetLogo} alt="img" className="w-25 mx-auto d-block mb-4" />
                             <p className="text-black text-center mb-4 fw-bold">
                                 Please Sign Up To Continue To App
                             </p>

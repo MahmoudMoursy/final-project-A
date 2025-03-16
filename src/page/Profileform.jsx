@@ -2,11 +2,7 @@ import React from 'react'
 import db, { auth } from '../firebaseconfig'
 import {collection,addDoc, getFirestore} from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
-function Profileform() {
-   
-    
-    const database = db;
-    
+function Profileform() {    
     function save (){ 
             addDoc(collection(db,"user"),{
                 username:document.getElementById("name").value,
@@ -17,20 +13,10 @@ function Profileform() {
                 bio:document.getElementById("bio").value,
                 university:document.getElementById("university").value,
                 status:document.querySelector('input[name="GFG"]:checked').value
-
-                // status:
-                // userId:userId
             })
    
         }
-
-        
-            
-            
-
         return (
-            
-            
     <div>
         <div>
             <h2 className="text-black text-center  fw-bold p-5"style={{backgroundColor:"#689CA5FF"}}>

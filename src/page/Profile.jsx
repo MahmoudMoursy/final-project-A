@@ -1,10 +1,32 @@
-
 import NavBar from '../Components/NavBar';
 import Footer from '../Components/Footer';
 import"./profile.css"
+import React, { useEffect, useState } from "react";
+import db, { auth } from "../firebaseconfig";
+import { collection, query, where, getDocs } from "firebase/firestore"
  
-
 const Profile = () => {
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (!auth.currentUser) return;
+        const q = query(collection(db, "user"), where("email", "==", auth.currentUser.email));
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          setUserData(querySnapshot.docs[0].data());
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+       
+      }
+    };
+    
+    fetchUserData();
+  }, []);
+  // if (!userData) return <p>Loading...</p>;
+  
   return (
     <>
       <NavBar />
@@ -12,39 +34,41 @@ const Profile = () => {
         <div className="profileCard">
           <div className="profileHeader">
             <div className="avatar">س</div>
-            <h2 className="userName">ساره حمدى</h2>
-            <p className="userId">رقم العضوية: 123456</p>
+            <h2 className="userName">{userData.username}</h2>
+            <p className="userId">الجامعه : <span>{userData.university}</span></p>
           </div>
 
           <div className="infoSection">
             <h3 className="sectionTitle">المعلومات الشخصية</h3>
-            <div className="infoGrid">
+            <div >
               <div className="infoItem">
                 <span className="infoLabel">البريد الإلكتروني:</span>
-                sarah@example.com
+                {userData.email}
               </div>
+              <br />
               <div className="infoItem">
                 <span className="infoLabel">رقم الجوال:</span>
-                +966 50 123 4567
+                {userData.phonenumber}
               </div>
+              <br />
               <div className="infoItem">
                 <span className="infoLabel">المدينة:</span>
-                اسوان
-              </div>
+                {userData.city}
+                </div>
+              <br />
               <div className="infoItem">
                 <span className="infoLabel">العنوان:</span>
-                اسوان
-              </div>
+                {userData.address}              </div>
+                <div className="infoItem">
+                <span className="infoLabel">الحاله:</span>
+                {userData.status}              </div>
             </div>
+            
           </div>
 
           <div className="infoSection">
-            <h3 className="sectionTitle">الخدمات المستخدمة</h3>
-            <ul className="servicesList">
-              <li className="serviceItem">خدمة تأجير شقة</li>
-              <li className="serviceItem">خدمة تأجير غرفة</li>
-              <li className="serviceItem">خدمة تأجير شقة</li>
-            </ul>
+            <h3 className="sectionTitle">النبذه الشخصيه</h3>
+            <p>{userData.bio}</p>
           </div>
 
           <div className="infoSection">

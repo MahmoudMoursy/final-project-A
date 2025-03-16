@@ -129,20 +129,20 @@ function Home() {
         </div>
       </section>
 
-      <section id="contact" className="bg-light py-5 contact-section" data-aos="fade-up">
+      <section id="contact" className="py-5 " data-aos="fade-up" style={{backgroundColor:"#6F6F6F1F"}}>
         <div className="container">
-          <h2 className="text-center mb-4 contact-title">Contact Us</h2>
+          <h2 className="text-center mb-4 text-black contact-title">Contact Us</h2>
           <form className="contact-form">
             <div className="mb-3 form-group">
-              <label htmlFor="name" className="form-label">Name</label>
+              <label htmlFor="name" className="form-label text-black">Name</label>
               <input type="text" className="form-control custom-input" id="name" placeholder="Your Name" />
             </div>
             <div className="mb-3 form-group">
-              <label htmlFor="email" className="form-label">Email</label>
+              <label htmlFor="email" className="form-label text-black">Email</label>
               <input type="email" className="form-control custom-input" id="email" placeholder="Your Email" />
             </div>
             <div className="mb-3 form-group">
-              <label htmlFor="message" className="form-label">Message</label>
+              <label htmlFor="message" className="form-label text-black">Message</label>
               <textarea className="form-control custom-input" id="message" rows="4" placeholder="Your Message"></textarea>
             </div>
             <button type="submit" className="btn btn-primary submit-btn">Send</button>

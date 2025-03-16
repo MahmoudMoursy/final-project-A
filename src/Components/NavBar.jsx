@@ -12,7 +12,7 @@ function NavBar() {
             <img src={wasetLogo} alt="Waset Logo" style={{ height: '50px', width: 'auto' }} />
           </a>
         </div>
-        <div className="nav collapse navbar-collapse" id="navbarNav" style={{ marginLeft: 350 }}>
+        <div className="nav collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav d-flex gap-4">
             <li className="nav-item"><NavLink className="nav-link" to="/Home">Home</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/Services">Services</NavLink></li>
@@ -29,13 +29,16 @@ function NavBar() {
           <button className="navbar-toggler" style={{ marginRight: '15%' }} type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
+          <i class="fa-regular fa-bell text-white fs-3 mx-4"></i>
           <a href="#" className="d-flex align-items-center link-body-emphasis text-decoration-none ms-2" data-bs-toggle="dropdown" aria-expanded="false">
-            <span className="border p-1 me-2 border-success text-black-50" style={{
+            <span className="border p-1 me-2 border-success text-black-50 mx-2" style={{
               borderRadius: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#ddf9db',
               width: '30px', height: '30px'
             }}>M</span>
             <strong className="d-none d-xl-block text-white" id="name">Moursy</strong>
           </a>
+          
+          
           <ul className="menu dropdown-menu text-small fw-bold shadow rounded-3 p-2 text-center" style={{
             width: '220px', borderRadius: '50%', position: 'absolute', left: '84%', top: '54px'
           }}>
