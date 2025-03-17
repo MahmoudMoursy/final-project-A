@@ -25,7 +25,7 @@ const PostDetails = () => {
             id: comments.length + 1,
             user: "مستخدم جديد", // يمكن جلبه من `Auth`
             text: newComment,
-            avatar: "https://via.placeholder.com/50",
+            avatar: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
         };
 
         setComments([...comments, newCommentObj]); // تحديث التعليقات
