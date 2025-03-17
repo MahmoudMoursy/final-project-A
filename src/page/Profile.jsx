@@ -3,19 +3,22 @@ import Footer from '../Components/Footer';
 import "./profile.css";
 import React, { useEffect, useState } from "react";
 import db, { auth } from "../firebaseconfig";
+import { useAuth } from "../authstorre";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
+  const { user } = useAuth();
+  console.log(user);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (!auth.currentUser) return;
-        const q = query(collection(db, "user"), where("email", "==", auth.currentUser.email));
+        if (!user) return;
+        const q = query(collection(db, "user"), where("email", "==", user));
         const querySnapshot = await getDocs(q);
 
-        console.log(auth.currentUser); 
+        console.log(user);
 
         if (!querySnapshot.empty) {
           setUserData(querySnapshot.docs[0].data());
