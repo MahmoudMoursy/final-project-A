@@ -169,7 +169,10 @@ const TeamSection = () => {
       transition={{ duration: 0.8 }}
     >
       <Paper elevation={3} style={{ padding: '50px', margin: '30px 40px 40px 40px', direction: "rtl", textAlign: "center" }}>
-        <Typography variant="h4" style={{ width: "80px", backgroundColor: "#5C7285", padding: "10px", textAlign: "center", color: "#000", borderRadius: "5px" }} gutterBottom>
+        <Typography variant="h4" style={{    backgroundColor: "#091e3d",
+            padding: "8px 15px",
+            color: "#fff",
+            borderRadius: "100px 70px 100px 70px ", textAlign: "center", }} gutterBottom>
           فريقنا
         </Typography>
         <Box display="flex" justifyContent="space-around" flexWrap="wrap">
