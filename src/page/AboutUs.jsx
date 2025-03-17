@@ -14,7 +14,14 @@ const ZilliqaStory = () => {
   return (
     <Container maxWidth="xl" style={{ textAlign: "center", marginTop: "50px", position: "relative", padding: 0, direction: "rtl" }}>
       <Typography variant="h3" fontWeight="bold" gutterBottom>
-        مرحبًا بكم في <span style={{ backgroundColor: "#5C7285", padding: "10px", color: "#000", borderRadius: "5px" }}>في وسيط </span>
+        مرحبًا بكم في <span style={{
+            backgroundColor: "#091e3d",
+            padding: "8px 15px",
+            color: "#fff",
+            borderRadius: "1200px 7000px ",
+            fontWeight: "bold",
+            display: "inline-block"
+          }}>في وسيط </span>
       </Typography>
       <Box
         sx={{

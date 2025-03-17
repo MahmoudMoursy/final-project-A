@@ -1,75 +1,12 @@
 import React from "react";
-import { Card, CardContent, Typography, Avatar, Grid, Button, Container, Box } from "@mui/material";
-import NavBar from "../Components/NavBar"
+import { Card, CardContent, Typography, Avatar, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
 
-
-
 const posts = [
-  {
-    id: 1,
-    user: "حمزه",
-    email: "john.doe@email.com",
-    text: "اريد مكان اقدر اجر فيه عجل؟",
-    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid", // استبدلها بصورة المستخدم
-    timestamp: new Date(),
-  },
-  {
-    id: 2,
-    user: "نجمه",
-    email: "jane.smith@email.com",
-    text: "عايزه سوبر ماركت يكون فيه كل احتياجاتي مره واحده؟",
-    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid",
-    timestamp: new Date(),
-  },
-  {
-    id: 3,
-    user: "مليكه",
-    email: "john.doe@email.com",
-    text: "اريد اكل بيتي؟",
-    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid",
-    timestamp: new Date(),
-  },
-  {
-    id: 4,
-    user: "داليدا",
-    email: "jane.smith@email.com",
-    text: "اريد سكن مواصفات خاصه وسعر كويس؟",
-    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid",
-    timestamp: new Date(),
-  },
-  {
-    id: 5,
-    user: "يقين",
-    email: "john.doe@email.com",
-    text: "اريد مكان اقدر اذاكر فيه؟",
-    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid",
-    timestamp: new Date(),
-  },
-  {
-    id: 6,
-    user: "ضحي",
-    email: "jane.smith@email.com",
-    text: "اريد اماكن اقدر اخرج فيها؟",
-    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid",
-    timestamp: new Date(),
-  },
-  {
-    id: 7,
-    user: "إيليا",
-    email: "john.doe@email.com",
-    text: "اريداماكن للسباحه؟",
-    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid",
-    timestamp: new Date(),
-  },
-  {
-    id: 8,
-    user: "سيليا",
-    email: "jane.smith@email.com",
-    text: "اريد جيم يكون فيه مدربين محترفين؟",
-    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid",
-    timestamp: new Date(),
-  },
+  { id: 1, user: "حمزه", email: "john.doe@email.com", text: "اريد مكان اقدر اجر فيه عجل؟", image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg", timestamp: new Date() },
+  { id: 2, user: "نجمه", email: "jane.smith@email.com", text: "عايزه سوبر ماركت يكون فيه كل احتياجاتي مره واحده؟", image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg", timestamp: new Date() },
 ];
 
 const formatDate = (date) => {
@@ -83,42 +20,64 @@ const formatDate = (date) => {
 };
 
 const Community = () => {
+  const navigate = useNavigate();
+
   return (
     <>
-     <NavBar/>
-  <Container maxWidth="xl" style={{ marginTop: "50px", padding: "20px", direction: "rtl" }}>
-       <Typography variant="h3" fontWeight="bold" gutterBottom>
-        مجتمع <span style={{ backgroundColor: "#5C7285", padding: "10px 10px 10px 10px", color: "#000", borderRadius: "5px" }}>وسيط </span>
-            </Typography>
+      <NavBar />
+      <Box sx={{ marginTop: "30px", padding: "20px", direction: "rtl", width: "100vw" }}>
+        {/* عنوان الصفحة */}
+        <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: "rtl" }}>
+          مجتمع <span style={{
+            backgroundColor: "#091e3d",
+            padding: "8px 15px",
+            color: "#fff",
+            borderRadius: "110px 4000px ",
+            fontWeight: "bold",
+            display: "inline-block"
+          }}>وسيط</span>
+        </Typography>
 
-      {posts.map((post) => (
-        <Card key={post.id} sx={{ mb: 2, borderRadius: 3, boxShadow: 3, p: 3 }}>
-          <CardContent>
-            <Grid container alignItems="center" spacing={2}>
-              <Grid item>
-                <Avatar src={post.image} sx={{ width: 70, height: 70 }} />
-              </Grid>
-              <Grid item xs>
-                <Typography variant="h6" sx={{ fontWeight: "bold" }}>{post.user}</Typography>
-                <Typography variant="body2" sx={{ color: "gray" }}>{post.email}</Typography>
-              </Grid>
-              <Grid item>
-                
-              </Grid>
-            </Grid>
 
-            <Box sx={{ mt: 2, p: 2, bgcolor: "#f9f9f9", borderRadius: 2 }}>
-              <Typography variant="body1">{post.text}</Typography>
-            </Box>
-            <Typography variant="caption" sx={{ color: "gray" }}>
-                  {formatDate(post.timestamp)}
+        {posts.map((post) => (
+          <Card
+            key={post.id}
+            sx={{
+              mb: 2,
+              borderRadius: 2,
+              boxShadow: 1,
+              margin: 2,
+              cursor: "pointer",
+              transition: "box-shadow 0.2s ease",
+              width: "98%", 
+              height: "80px", 
+              display: "flex",
+              alignItems: "center",
+              "&:hover": {
+                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // تأثير هوفر خفيف
+              },
+            }}
+            onClick={() => navigate(`/post/${post.id}`, { state: { post } })}
+          >
+            <CardContent sx={{ display: "flex", alignItems: "center", width: "100%", p: 1 }}>
+              <Avatar src={post.image} sx={{ width: 40, height: 40, ml: 2 }} />
+              <Box sx={{ flex: 1, overflow: "hidden" }}>
+                <Typography variant="body1" sx={{ fontWeight: "bold", fontSize: "14px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  {post.user}
                 </Typography>
-          </CardContent>
-        </Card>
-      ))}
-    </Container>
-     <Footer/>
-      </>
+                <Typography variant="body2" sx={{ color: "gray", fontSize: "12px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  {post.text}
+                </Typography>
+              </Box>
+              <Typography variant="caption" sx={{ color: "gray", fontSize: "11px", ml: 2 }}>
+                {formatDate(post.timestamp)}
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </Box>
+      <Footer />
+    </>
   );
 };
 
