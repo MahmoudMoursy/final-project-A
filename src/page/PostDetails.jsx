@@ -94,7 +94,7 @@ const PostDetails = () => {
                         </Card>
                     </Grid>
 
-                    {/* الشريط الجانبي */}
+                   
                     <Grid item xs={12} md={3}>
                         <Card sx={{ borderRadius: 3, boxShadow: 3, p: 3 }}>
                             <Typography variant="h6" fontWeight="bold">عن الموضوع</Typography>
