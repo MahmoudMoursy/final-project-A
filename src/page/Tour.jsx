@@ -15,8 +15,11 @@ import {
   Paper,
   Dialog,
   DialogContent,
+  TextField,
+  InputAdornment,
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import SearchIcon from "@mui/icons-material/Search";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -175,6 +178,7 @@ const categories = ["جولات", "طبيعة وأنشطة خارجية", "مت�
 const Tour = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleFilterChange = (category) => {
     setSelectedCategories((prev) =>
@@ -185,6 +189,10 @@ const Tour = () => {
   const handleOpenDetails = (place) => setSelectedPlace(place);
   const handleCloseDetails = () => setSelectedPlace(null);
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   const settings = {
     dots: true,
     infinite: true,
@@ -194,82 +202,143 @@ const Tour = () => {
     autoplay: true,
   };
 
-  // Filter places based on selected categories
-  const filteredPlaces = selectedCategories.length > 0
-    ? places.filter((place) => selectedCategories.includes(place.category))
-    : places;
+  // Filter places based on selected categories and search query (title only)
+  const filteredPlaces = places.filter((place) => {
+    const matchesCategory =
+      selectedCategories.length === 0 || selectedCategories.includes(place.category);
+    const matchesSearch = place.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
-    <> 
-    <NavBar/>
-    <Container maxWidth="lg" sx={{ mt: 4, direction: "rtl", display: "flex", gap: 3 }}>
-      <Paper sx={{ p: 3, width: 300, borderRadius: 3, boxShadow: 3 }}>
-        <Typography variant="h6" fontWeight="bold" gutterBottom>
-          التصنيف حسب:
-        </Typography>
-        <FormGroup>
-          {categories.map((category) => (
-            <FormControlLabel
-              key={category}
-              control={
-                <Checkbox
-                  checked={selectedCategories.includes(category)}
-                  onChange={() => handleFilterChange(category)}
-                />
-              }
-              label={category}
-            />
-          ))}
-        </FormGroup>
-      </Paper>
+    <>
+      <NavBar />
+      <Container maxWidth="lg" sx={{ mt: 4, direction: "rtl", display: "flex", gap: 3 }}>
+        {/* Sidebar for Filters */}
+        <Paper sx={{ p: 3, width: 300, borderRadius: 3, boxShadow: 3 }}>
+          <Typography variant="h6" fontWeight="bold" gutterBottom>
+            التصنيف حسب:
+          </Typography>
+          <FormGroup>
+            {categories.map((category) => (
+              <FormControlLabel
+                key={category}
+                control={
+                  <Checkbox
+                    checked={selectedCategories.includes(category)}
+                    onChange={() => handleFilterChange(category)}
+                  />
+                }
+                label={category}
+              />
+            ))}
+          </FormGroup>
+        </Paper>
 
-      <Grid container spacing={3} sx={{ flex: 1 }}>
-        {filteredPlaces.map((place) => (
-          <Grid item xs={12} key={place.id}>
-            <Card sx={{ display: "flex", borderRadius: 3, boxShadow: 3, p: 2 }}>
-              <CardMedia component="img" sx={{ width: 200, borderRadius: 2 }} image={place.images[0]} alt={place.title} />
-              <CardContent sx={{ flex: 1 }}>
-                <Typography variant="h6" fontWeight="bold">{place.title}</Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1, mb: 2 }}>{place.shortDescription}</Typography>
-                <Box display="flex" alignItems="center" gap={1}>
-                  <Chip label={place.price} color="primary" sx={{ fontSize: "14px", fontWeight: "bold" }} />
-                  <Box display="flex" alignItems="center">
-                    <StarIcon sx={{ color: "#FFD700" }} />
-                    <Typography variant="body2" fontWeight="bold" sx={{ ml: 0.5 }}>
-                      {place.rating} ({place.reviews} تقييم)
-                    </Typography>
-                  </Box>
-                </Box>
-                <Button variant="contained" sx={{ mt: 2 }} onClick={() => handleOpenDetails(place)}>
-                  عرض التفاصيل
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+        {/* Main Content */}
+        <Box sx={{ flex: 1 }}>
+          {/* Search Bar */}
+          <TextField
+            fullWidth
+            variant="outlined"
+            placeholder="ابحث عن وجهة..."
+            value={searchQuery}
+            onChange={handleSearchChange}
+            sx={{ mb: 3, borderRadius: 3, boxShadow: 3 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+              style: { borderRadius: 12 },
+            }}
+          />
 
+          {/* Places Grid */}
+          {filteredPlaces.length > 0 ? (
+            <Grid container spacing={3}>
+              {filteredPlaces.map((place) => (
+                <Grid item xs={12} key={place.id}>
+                  <Card sx={{ display: "flex", borderRadius: 3, boxShadow: 3, p: 2 }}>
+                    <CardMedia
+                      component="img"
+                      sx={{ width: 200, borderRadius: 2 }}
+                      image={place.images[0]}
+                      alt={place.title}
+                    />
+                    <CardContent sx={{ flex: 1 }}>
+                      <Typography variant="h6" fontWeight="bold">
+                        {place.title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary" sx={{ mt: 1, mb: 2 }}>
+                        {place.shortDescription}
+                      </Typography>
+                      <Box display="flex" alignItems="center" gap={1}>
+                        <Chip
+                          label={place.price}
+                          color="primary"
+                          sx={{ fontSize: "14px", fontWeight: "bold", backgroundColor: "#091e3d" }}
+                        />
+                        <Box display="flex" alignItems="center">
+                          <StarIcon sx={{ color: "#FFD700" }} />
+                          <Typography variant="body2" fontWeight="bold" sx={{ ml: 0.5 }}>
+                            {place.rating} ({place.reviews} تقييم)
+                          </Typography>
+                        </Box>
+                      </Box>
+                      <Button variant="contained" sx={{ mt: 2, backgroundColor: "#091e3d" }} onClick={() => handleOpenDetails(place)}>
+                        عرض التفاصيل
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          ) : (
+            <Typography variant="h6" textAlign="center" sx={{ mt: 4 }}>
+              لا توجد نتائج مطابقة لبحثك.
+            </Typography>
+          )}
+        </Box>
+      </Container>
+
+      {/* Dialog for Place Details */}
       {selectedPlace && (
         <Dialog open={selectedPlace} onClose={handleCloseDetails} fullWidth>
           <DialogContent sx={{ textAlign: "center" }}>
             <Slider {...settings}>
               {selectedPlace.images.map((img, index) => (
-                <Box key={index} component="img" src={img} sx={{ width: "100%", height: 200, objectFit: "cover" }} />
+                <Box
+                  key={index}
+                  component="img"
+                  src={img}
+                  sx={{ width: "100%", height: 200, objectFit: "cover" }}
+                />
               ))}
             </Slider>
-            <Typography variant="h6" fontWeight="bold" sx={{ mt: 2 }}>{selectedPlace.title}</Typography>
-            <Typography variant="body2" sx={{ mt: 1 }}>{selectedPlace.fullDescription}</Typography>
-            <Typography variant="h6" color="primary" sx={{ mt: 1 }}>{selectedPlace.price}</Typography>
-            <Typography variant="h6" color="text.secondary" sx={{ mt: 1 }}>📞 {selectedPlace.phone}</Typography>
-            <Button variant="contained" sx={{ mt: 2 }} onClick={handleCloseDetails}>إغلاق</Button>
+            <Typography variant="h6" fontWeight="bold" sx={{ mt: 2 }}>
+              {selectedPlace.title}
+            </Typography>
+            <Typography variant="body2" sx={{ mt: 1 }}>
+              {selectedPlace.fullDescription}
+            </Typography>
+            <Typography variant="h6" color="primary" sx={{ mt: 1 }}>
+              {selectedPlace.price}
+            </Typography>
+            <Typography variant="h6" color="text.secondary" sx={{ mt: 1 }}>
+              📞 {selectedPlace.phone}
+            </Typography>
+            <Button variant="contained" sx={{ mt: 2 }} onClick={handleCloseDetails}>
+              إغلاق
+            </Button>
           </DialogContent>
         </Dialog>
       )}
-    </Container>
- <Footer/>
- </>
 
-);
+      <Footer />
+    </>
+  );
 };
 
 export default Tour;

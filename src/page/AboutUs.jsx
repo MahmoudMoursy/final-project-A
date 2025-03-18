@@ -1,14 +1,8 @@
 import React from "react";
 import { Container, Grid, Typography, Box, Paper, Avatar } from "@mui/material";
 import { motion } from "framer-motion";
-import { keyframes } from "@emotion/react";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
-const moveAnimation = keyframes`
-  0% { transform: translate(-50%, -50%) translateX(0px); }
-  50% { transform: translate(-50%, -50%) translateX(50px); }
-  100% { transform: translate(-50%, -50%) translateX(0px); }
-`;
 
 const ZilliqaStory = () => {
   return (
@@ -57,8 +51,6 @@ const ZilliqaStory = () => {
             backgroundColor: "rgba(255, 255, 255, 0.7)",
             padding: "15px",
             borderRadius: "10px",
-            boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.2)",
-
           }}
         >
           <Typography variant="h3" fontWeight="bold" style={{ padding: 0, direction: "rtl" }} gutterBottom>
@@ -85,9 +77,8 @@ const ZilliqaStory = () => {
 
 const ScalingFaster = () => {
   return (
-    <Paper elevation={3} style={{ padding: "50px", margin: "20px 40px 100px 40px", direction: "rtl" }}>
+    <Paper elevation={0} style={{ padding: "50px", margin: "20px 40px 100px 40px", direction: "rtl", boxShadow: "none" }}>
       <Grid container spacing={3} alignItems="center">
-        {/* الصورة على اليمين */}
         <Grid item xs={12} md={6}>
           <img 
             src="https://img.freepik.com/premium-photo/close-up-view-colorful-faluca-traditional-boat-sailing-river-sorrounded-by-vegetation_1048944-11883581.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_authors_boost" 
@@ -95,14 +86,19 @@ const ScalingFaster = () => {
             style={{ width: "100%", borderRadius: "10px" }} 
           />
         </Grid>
-        {/* النص على اليسار */}
         <Grid item xs={12} md={6} textAlign="center">
-          <Typography variant="h4" gutterBottom>
-            رؤيتنا
-          </Typography>
-          <Typography variant="body1">
-            نحن منصة متكاملة تهدف إلى تسهيل حياة المغتربين من خلال تقديم خدمات متنوعة تلبي احتياجاتهم اليومية، سواء في السكن، التوظيف، الخدمات القانونية، أو الدعم الاجتماعي.
-          </Typography>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Typography variant="h4" gutterBottom>
+              رؤيتنا
+            </Typography>
+            <Typography variant="body1">
+              نحن منصة متكاملة تهدف إلى تسهيل حياة المغتربين من خلال تقديم خدمات متنوعة تلبي احتياجاتهم اليومية، سواء في السكن، التوظيف، الخدمات القانونية، أو الدعم الاجتماعي. نؤمن بأن التكنولوجيا يمكنها أن تجعل الحياة أسهل وأكثر كفاءة، ونسعى جاهدين لتقديم أفضل الحلول التي تعزز تجربة المغتربين في أسوان.
+            </Typography>
+          </motion.div>
         </Grid>
       </Grid>
     </Paper>
@@ -111,18 +107,22 @@ const ScalingFaster = () => {
 
 const HowItBegan = () => {
   return (
-    <Paper elevation={3} style={{ padding: "50px", margin: "30px 40px", direction: "rtl" }}>
+    <Paper elevation={0} style={{ padding: "50px", margin: "30px 40px", direction: "rtl", boxShadow: "none" }}>
       <Grid container spacing={3} alignItems="center">
-        {/* النص على اليمين */}
         <Grid item xs={12} md={6} textAlign="center">
-          <Typography variant="h4" gutterBottom>
-            مهمتنا
-          </Typography>
-          <Typography variant="h6">
-            نعمل على بناء مجتمع داعم للمغتربين عبر تقديم حلول مبتكرة تجعل انتقالهم واستقرارهم في بلد جديد تجربة سلسة وآمنة.
-          </Typography>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Typography variant="h4" gutterBottom>
+              مهمتنا
+            </Typography>
+            <Typography variant="h6">
+              نعمل على بناء مجتمع داعم للمغتربين عبر تقديم حلول مبتكرة تجعل انتقالهم واستقرارهم في بلد جديد تجربة سلسة وآمنة. نهدف إلى توفير بيئة داعمة تساعد المغتربين على التكيف بسرعة مع الحياة الجديدة، مع تقديم الدعم اللازم في جميع الجوانب الحياتية.
+            </Typography>
+          </motion.div>
         </Grid>
-        {/* الصورة على اليسار */}
         <Grid item xs={12} md={6}>
           <img 
             src="https://img.freepik.com/premium-photo/sailboats-by-entrance-botanical-garden-aswan-egypt_219958-1139.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_authors_boost" 
@@ -137,9 +137,8 @@ const HowItBegan = () => {
 
 const HowItBega = () => {
   return (
-    <Paper elevation={3} style={{ padding: "50px", margin: "30px 40px", direction: "rtl" }}>
+    <Paper elevation={0} style={{ padding: "50px", margin: "30px 40px", direction: "rtl", boxShadow: "none" }}>
       <Grid container spacing={3} alignItems="center">
-        {/* الصورة على اليمين */}
         <Grid item xs={12} md={6}>
           <img 
             src="https://img.freepik.com/premium-photo/nile-traditional-african-village-near-aswan-egypt_400112-2293.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_authors_boost" 
@@ -147,14 +146,19 @@ const HowItBega = () => {
             style={{ width: "100%", borderRadius: "10px" }} 
           />
         </Grid>
-        {/* النص على اليسار */}
         <Grid item xs={12} md={6} textAlign="center">
-          <Typography variant="h4" gutterBottom>
-            قيمنا
-          </Typography>
-          <Typography variant="h6">
-            الشفافية، المصداقية، والابتكار هي الركائز الأساسية التي نرتكز عليها لضمان تقديم أفضل الخدمات لعملائنا.
-          </Typography>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Typography variant="h4" gutterBottom>
+              قيمنا
+            </Typography>
+            <Typography variant="h6">
+              الشفافية، المصداقية، والابتكار هي الركائز الأساسية التي نرتكز عليها لضمان تقديم أفضل الخدمات لعملائنا. نؤمن بأن النزاهة والشفافية هي أساس الثقة بيننا وبين عملائنا، ونحرص على أن تكون جميع خدماتنا مبتكرة ومواكبة لأحدث التطورات التكنولوجية.
+            </Typography>
+          </motion.div>
         </Grid>
       </Grid>
     </Paper>
@@ -168,7 +172,7 @@ const TeamSection = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <Paper elevation={3} style={{ padding: '50px', margin: '30px 40px 40px 40px', direction: "rtl", textAlign: "center" }}>
+      <Paper elevation={0} style={{ padding: '50px', margin: '30px 40px 40px 40px', direction: "rtl", textAlign: "center", boxShadow: "none" }}>
         <Typography variant="h4" style={{    backgroundColor: "#091e3d",
             padding: "8px 15px",
             color: "#fff",
