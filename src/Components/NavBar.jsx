@@ -6,10 +6,10 @@ import wasetLogo from '../assets/waset.png';
 function NavBar() {
   return (
     <div style={{ direction: "rtl" }}>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around px-4">
+      <nav className="navbar navbar-expand-lg navbar-dark d-flex justify-content-around px-4">
         <div>
           <NavLink className="nav-link" to="/Home">
-          <img src={wasetLogo} alt="Waset Logo" style={{ height: '50px', width: 'auto' }} />
+            <img src={wasetLogo} alt="Waset Logo" style={{ height: '50px', width: 'auto' }} />
           </NavLink>
         </div>
         <div className="nav collapse navbar-collapse" id="navbarNav">
@@ -29,7 +29,7 @@ function NavBar() {
           <button className="navbar-toggler" style={{ marginRight: '15%' }} type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <i class="fa-regular fa-bell text-white fs-3 mx-4"></i>
+          <i className="fa-regular fa-bell text-white fs-3 mx-4"></i>
           <a href="#" className="d-flex align-items-center link-body-emphasis text-decoration-none ms-2" data-bs-toggle="dropdown" aria-expanded="false">
             <span className="border p-1 me-2 border-success text-black-50 mx-2" style={{
               borderRadius: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#ddf9db',
@@ -37,8 +37,8 @@ function NavBar() {
             }}>M</span>
             <strong className="d-none d-xl-block text-white" id="name">Moursy</strong>
           </a>
-          
-          
+
+
           <ul className="menu dropdown-menu text-small fw-bold shadow rounded-3 p-2 text-center" style={{
             width: '220px', borderRadius: '50%', position: 'absolute', left: '84%', top: '54px'
           }}>
