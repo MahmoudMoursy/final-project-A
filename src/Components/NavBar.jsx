@@ -14,7 +14,7 @@ function NavBar() {
         </div>
         <div className="nav collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav d-flex gap-4">
-            <li className="nav-item"><NavLink className="nav-link" to="/Home">Home</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/Home">Home Page</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/Services">Services</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/tour">Tourist places</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/housing">Housing</NavLink></li>
@@ -50,7 +50,7 @@ function NavBar() {
               </div>
             </li>
             <li><hr className="dropdown-divider" /></li>
-            <li><NavLink className="dropdown-item" to="/Profile">Account Setting</NavLink></li>
+            <li><NavLink className="dropdown-item improved-account-setting" to="/Profile">Account Setting</NavLink></li>
             <li><a className="dropdown-item bg-danger fw-bold mt-2 px-5 w-25 justify-content-center m-auto d-flex rounded text-white" href="#">Sign out</a></li>
           </ul>
         </div>

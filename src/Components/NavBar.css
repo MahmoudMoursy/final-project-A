@@ -25,6 +25,7 @@
     font-weight: 500;
     position: relative;
     transition: color 0.3s ease;
+    font-size: 1.2rem; /* Increase font size for better visibility */
   }
   
   .nav-link:hover {
@@ -44,6 +45,19 @@
   
   .nav-link:hover::after {
     width: 100%; /* توسيع الخط عند الـ hover */
+  }
+  
+  .improved-account-setting {
+    background-color: #1abc9c !important;
+    color: #2c3e50 !important;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .improved-account-setting:hover {
+    background-color: #16a085 !important;
+    color: #ecf0f1 !important;
   }
   
   .dropdown-menu {
