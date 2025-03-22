@@ -50,14 +50,12 @@ const Community = () => {
   const [open, setOpen] = useState(false);
   const [newPostText, setNewPostText] = useState("");
 
-  // فتح وإغلاق النافذة
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
     setNewPostText("");
   };
 
-  // إضافة المنشور الجديد
   const handleAddPost = () => {
     if (newPostText.trim() === "") return;
 
@@ -77,8 +75,7 @@ const Community = () => {
     <>
       <NavBar />
       <Box sx={{ marginTop: "30px", padding: "20px", direction: "rtl", width: "100vw" }}>
-        {/* عنوان الصفحة */}
-        <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: "rtl" }}>
+        <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: "rtl", marginRight: 3 }}>
           مجتمع{" "}
           <span
             style={{
@@ -94,27 +91,25 @@ const Community = () => {
           </span>
         </Typography>
 
-        {/* زر إضافة منشور جديد */}
         <Button
-  variant="contained"
-  color="success"
-  onClick={handleOpen}
-  sx={{
-    backgroundColor: "#091e3d",
-    position: "absolute",
-    top: "110px", 
-    left: "20px", 
-    fontSize: "14px",
-    fontWeight: "bold",
-    display: "flex",
-    alignItems: "center",
-    gap: "5px",
-  }}
->
+          variant="contained"
+          color="success"
+          onClick={handleOpen}
+          sx={{
+            backgroundColor: "#091e3d",
+            position: "absolute",
+            top: "110px",
+            left: "20px",
+            fontSize: "14px",
+            fontWeight: "bold",
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
+          }}
+        >
           <AddIcon /> موضوع جديد
         </Button>
 
-        {/* نافذة إضافة منشور */}
         <Dialog open={open} onClose={handleClose} fullWidth>
           <DialogTitle>إنشاء منشور</DialogTitle>
           <DialogContent>
@@ -131,16 +126,15 @@ const Community = () => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="secondary">
+            <Button onClick={handleClose} style={{ color: "red" }}>
               إلغاء
             </Button>
-            <Button onClick={handleAddPost} color="primary" variant="contained">
+            <Button onClick={handleAddPost} color="primary" variant="contained" className="fw-bold">
               نشر
             </Button>
           </DialogActions>
         </Dialog>
 
-        {/* عرض المنشورات */}
         {posts.map((post) => (
           <Card
             key={post.id}
@@ -151,25 +145,31 @@ const Community = () => {
               margin: 2,
               cursor: "pointer",
               transition: "box-shadow 0.2s ease",
-              width: "98%",
-              height: "80px",
+              width: "100%",
+              height: "100%",
               display: "flex",
               alignItems: "center",
               "&:hover": { boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)" },
             }}
-            onClick={() => navigate(`/post/${post.id}`, { state: { post } })}
+           
           >
-            <CardContent sx={{ display: "flex", alignItems: "center", width: "100%", p: 1 }}>
-              <Avatar src={post.image} sx={{ width: 40, height: 40, ml: 2 }} />
+            <CardContent sx={{ display: "flex", alignItems: "center", width: "100%", p: 2 }}>
+              <Avatar src={post.image} sx={{ width: 80, height: 70, ml: 1, marginTop: 2 }} />
               <Box sx={{ flex: 1, overflow: "hidden" }}>
-                <Typography variant="body1" sx={{ fontWeight: "bold", fontSize: "14px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                <Typography variant="body1" sx={{ fontWeight: "bold", fontSize: "20px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                   {post.user}
                 </Typography>
-                <Typography variant="body2" sx={{ color: "gray", fontSize: "12px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                <Typography variant="body2" sx={{ color: "gray", fontSize: "18px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                   {post.text}
                 </Typography>
+                <hr />
+                <Typography className="d-flex gap-4">
+                  <p className="fw-bold fs-5"><i className="fa-regular fa-thumbs-up fs-3 mx-2"></i> أعجبني</p>
+                  <p className="fw-bold fs-5"  onClick={() => navigate(`/post/${post.id}`, { state: { post } })}><i className="fa-regular fa-comment fs-3 mx-2"></i> تعليق  </p>
+                </Typography>
+
               </Box>
-              <Typography variant="caption" sx={{ color: "gray", fontSize: "11px", ml: 2 }}>
+              <Typography variant="caption" sx={{ color: "gray", fontSize: "13px", ml: 2 }}>
                 {formatDate(post.timestamp)}
               </Typography>
             </CardContent>
