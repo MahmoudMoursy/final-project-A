@@ -6,7 +6,7 @@ import wasetLogo from '../assets/waset.png';
 function NavBar() {
   return (
     <div style={{ direction: "rtl" }}>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around px-4">
+      <nav className="navbar navbar-expand-lg navbar-dark  d-flex justify-content-around px-4">
         <div>
           <NavLink className="nav-link" to="/Home">
           <img src={wasetLogo} alt="Waset Logo" style={{ height: '50px', width: 'auto' }} />
