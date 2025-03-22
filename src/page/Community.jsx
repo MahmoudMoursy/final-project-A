@@ -23,25 +23,34 @@ const initialPosts = [
     user: "حمزه",
     text: "اريد مكان اقدر اجر فيه عجل؟",
     image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
-    timestamp: new Date(),
+    timestamp: new Date("2023-10-20T10:00:00"),
   },
   {
     id: 2,
     user: "نجمه",
     text: "عايزه سوبر ماركت يكون فيه كل احتياجاتي مره واحده؟",
     image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
-    timestamp: new Date(),
+    timestamp: new Date("2023-10-21T14:30:00"),
   },
 ];
 
-const formatDate = (date) => {
-  return date.toLocaleString("ar-EG", {
-    hour: "2-digit",
-    minute: "2-digit",
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+// دالة لحساب الوقت المنقضي
+const calculateTimeElapsed = (timestamp) => {
+  const now = new Date();
+  const diffInSeconds = Math.floor((now - timestamp) / 1000);
+
+  if (diffInSeconds < 60) {
+    return `منذ ${diffInSeconds} ثانية`;
+  } else if (diffInSeconds < 3600) {
+    const minutes = Math.floor(diffInSeconds / 60);
+    return `منذ ${minutes} دقيقة`;
+  } else if (diffInSeconds < 86400) {
+    const hours = Math.floor(diffInSeconds / 3600);
+    return `منذ ${hours} ساعة`;
+  } else {
+    const days = Math.floor(diffInSeconds / 86400);
+    return `منذ ${days} يوم`;
+  }
 };
 
 const Community = () => {
@@ -148,30 +157,43 @@ const Community = () => {
               width: "100%",
               height: "100%",
               display: "flex",
-              alignItems: "center",
+              flexDirection: "column", // تغيير الاتجاه إلى عمودي
               "&:hover": { boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)" },
             }}
-           
           >
-            <CardContent sx={{ display: "flex", alignItems: "center", width: "100%", p: 2 }}>
-              <Avatar src={post.image} sx={{ width: 80, height: 70, ml: 1, marginTop: 2 }} />
-              <Box sx={{ flex: 1, overflow: "hidden" }}>
-                <Typography variant="body1" sx={{ fontWeight: "bold", fontSize: "20px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                  {post.user}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "gray", fontSize: "18px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+            <CardContent sx={{ display: "flex", flexDirection: "column", width: "100%", p: 2 }}>
+              {/* الصورة والاسم والوقت في الأعلى */}
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
+                <Avatar src={post.image} sx={{ width: 60, height: 60 }} />
+                <Box>
+                  <Typography variant="body1" sx={{ fontWeight: "bold", fontSize: "20px" }}>
+                    {post.user}
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: "gray", fontSize: "13px" }}>
+                    {calculateTimeElapsed(post.timestamp)}
+                  </Typography>
+                </Box>
+              </Box>
+
+              {/* نص المنشور والأزرار في الأسفل */}
+              <Box sx={{ flex: 1 }}>
+                <Typography variant="body2" sx={{ color: "gray", fontSize: "18px", mb: 2 }}>
                   {post.text}
                 </Typography>
                 <hr />
-                <Typography className="d-flex gap-4">
-                  <p className="fw-bold fs-5"><i className="fa-regular fa-thumbs-up fs-3 mx-2"></i> أعجبني</p>
-                  <p className="fw-bold fs-5"  onClick={() => navigate(`/post/${post.id}`, { state: { post } })}><i className="fa-regular fa-comment fs-3 mx-2"></i> تعليق  </p>
-                </Typography>
-
+                <Box sx={{ display: "flex", gap: 2, mt: 2, Color: "#091e3d" }}>
+                  <Button variant="text" startIcon={<i className="fa-regular fa-thumbs-up fs-3 mx-2"></i>}>
+                    أعجبني
+                  </Button>
+                  <Button
+                    variant="text"
+                    startIcon={<i className="fa-regular fa-comment fs-3 mx-2"></i>}
+                    onClick={() => navigate(`/post/${post.id}`, { state: { post } })}
+                  >
+                    تعليق
+                  </Button>
+                </Box>
               </Box>
-              <Typography variant="caption" sx={{ color: "gray", fontSize: "13px", ml: 2 }}>
-                {formatDate(post.timestamp)}
-              </Typography>
             </CardContent>
           </Card>
         ))}
