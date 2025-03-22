@@ -1,12 +1,37 @@
-import React from "react";
-import { Card, CardContent, Typography, Avatar, Box } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Avatar,
+  Box,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
 
-const posts = [
-  { id: 1, user: "حمزه", email: "john.doe@email.com", text: "اريد مكان اقدر اجر فيه عجل؟", image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg", timestamp: new Date() },
-  { id: 2, user: "نجمه", email: "jane.smith@email.com", text: "عايزه سوبر ماركت يكون فيه كل احتياجاتي مره واحده؟", image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg", timestamp: new Date() },
+const initialPosts = [
+  {
+    id: 1,
+    user: "حمزه",
+    text: "اريد مكان اقدر اجر فيه عجل؟",
+    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
+    timestamp: new Date(),
+  },
+  {
+    id: 2,
+    user: "نجمه",
+    text: "عايزه سوبر ماركت يكون فيه كل احتياجاتي مره واحده؟",
+    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
+    timestamp: new Date(),
+  },
 ];
 
 const formatDate = (date) => {
@@ -21,6 +46,32 @@ const formatDate = (date) => {
 
 const Community = () => {
   const navigate = useNavigate();
+  const [posts, setPosts] = useState(initialPosts);
+  const [open, setOpen] = useState(false);
+  const [newPostText, setNewPostText] = useState("");
+
+  // فتح وإغلاق النافذة
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    setNewPostText("");
+  };
+
+  // إضافة المنشور الجديد
+  const handleAddPost = () => {
+    if (newPostText.trim() === "") return;
+
+    const newPost = {
+      id: posts.length + 1,
+      user: "مستخدم جديد",
+      text: newPostText,
+      image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
+      timestamp: new Date(),
+    };
+
+    setPosts([newPost, ...posts]);
+    handleClose();
+  };
 
   return (
     <>
@@ -28,17 +79,68 @@ const Community = () => {
       <Box sx={{ marginTop: "30px", padding: "20px", direction: "rtl", width: "100vw" }}>
         {/* عنوان الصفحة */}
         <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: "rtl" }}>
-          مجتمع <span style={{
-            backgroundColor: "#091e3d",
-            padding: "8px 15px",
-            color: "#fff",
-            borderRadius: "110px 4000px ",
-            fontWeight: "bold",
-            display: "inline-block"
-          }}>وسيط</span>
+          مجتمع{" "}
+          <span
+            style={{
+              backgroundColor: "#091e3d",
+              padding: "8px 15px",
+              color: "#fff",
+              borderRadius: "110px 4000px",
+              fontWeight: "bold",
+              display: "inline-block",
+            }}
+          >
+            وسيط
+          </span>
         </Typography>
 
+        {/* زر إضافة منشور جديد */}
+        <Button
+  variant="contained"
+  color="success"
+  onClick={handleOpen}
+  sx={{
+    backgroundColor: "#091e3d",
+    position: "absolute",
+    top: "110px", 
+    left: "20px", 
+    fontSize: "14px",
+    fontWeight: "bold",
+    display: "flex",
+    alignItems: "center",
+    gap: "5px",
+  }}
+>
+          <AddIcon /> موضوع جديد
+        </Button>
 
+        {/* نافذة إضافة منشور */}
+        <Dialog open={open} onClose={handleClose} fullWidth>
+          <DialogTitle>إنشاء منشور</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              label="ماذا يدور في بالك؟"
+              fullWidth
+              multiline
+              rows={3}
+              variant="outlined"
+              value={newPostText}
+              onChange={(e) => setNewPostText(e.target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="secondary">
+              إلغاء
+            </Button>
+            <Button onClick={handleAddPost} color="primary" variant="contained">
+              نشر
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* عرض المنشورات */}
         {posts.map((post) => (
           <Card
             key={post.id}
@@ -49,13 +151,11 @@ const Community = () => {
               margin: 2,
               cursor: "pointer",
               transition: "box-shadow 0.2s ease",
-              width: "98%", 
-              height: "80px", 
+              width: "98%",
+              height: "80px",
               display: "flex",
               alignItems: "center",
-              "&:hover": {
-                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // تأثير هوفر خفيف
-              },
+              "&:hover": { boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)" },
             }}
             onClick={() => navigate(`/post/${post.id}`, { state: { post } })}
           >
