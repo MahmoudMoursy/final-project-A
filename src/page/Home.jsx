@@ -129,7 +129,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="contact" className="py-5 " data-aos="fade-up" style={{backgroundColor:"#6F6F6F1F"}}>
+      <section id="contact" className="py-5 " data-aos="fade-up" style={{ backgroundColor: "#6F6F6F1F" }}>
         <div className="container">
           <h2 className="text-center mb-4 text-black contact-title">Contact Us</h2>
           <form className="contact-form">
