@@ -25,7 +25,7 @@ function NavBar() {
             <li className="nav-item"><NavLink className="nav-link" to="/Profileform">Profile</NavLink></li>
           </ul>
         </div>
-        <div className="d-flex align-items-center justify-content-atod">
+        <div className="d-flex align-items-cente r justify-content-atod">
           <button className="navbar-toggler" style={{ marginRight: '15%' }} type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
