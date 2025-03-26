@@ -31,6 +31,22 @@ function Login() {
         setUser(prev => ({ ...prev, [name]: value }));
     }
 
+
+
+    const auth = getAuth();
+            onAuthStateChanged(auth, (user) => {
+              if (user) {
+                // User is signed in.
+               const userId = user.uid;
+               
+              } else {
+                // No user is signed in.
+                console.log("user is not signed in")
+              }
+            })
+
+
+
     return (
         <div style={{ background: "linear-gradient(97deg, rgba(9,30,61,1) 70%, rgba(255,255,255,1) 95%)" }}>
             <div className="row justify-content-around pt-5" style={{ paddingBottom: 67 }}>

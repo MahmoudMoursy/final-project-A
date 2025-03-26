@@ -32,9 +32,7 @@ function SignUp() {
         setTimeout(() => setSubmitted(false), 3000);
       };
   return (
-    <div className="dashboard-container">
-    <SideBar/>
-       <div className="dashboard-main d-flex justify-content-center align-items-center min-vh-100 bg-light p-4">
+    
       <div className="card shadow-lg w-100" style={{ maxWidth: "400px" }}>
         <div className="card-header text-center bg-dark  text-white">
           <h5 className="card-title">Add Member</h5>
@@ -80,11 +78,9 @@ function SignUp() {
           </form>
         </div>
       </div>
-    </div>
                                 
 
 
-    </div>
   )
 }
 

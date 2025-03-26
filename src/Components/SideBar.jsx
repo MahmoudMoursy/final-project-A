@@ -36,7 +36,7 @@ function SideBar() {
             </a>
           </li>
           <li className="nav-item">
-            <Link to="/dashboard/signup">
+            <Link to="/AdminManagment">
               <span className="icon">👨🏻‍💼</span>
               <span className="nav-text">Admin Management</span>
             </Link>

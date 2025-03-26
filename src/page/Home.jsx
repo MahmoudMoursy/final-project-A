@@ -11,13 +11,15 @@ import 'aos/dist/aos.css';
 import './Home.css';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-
 function Home() {
+  
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true
     });
+    const { count, inc } = useStore()
 
     // Initialize map
     const map = L.map('map').setView([24.0889, 32.8998], 13);

@@ -1,8 +1,14 @@
 import React from 'react'
 import db, { auth } from '../firebaseconfig'
 import {collection,addDoc, getFirestore} from 'firebase/firestore'
-import { getAuth } from 'firebase/auth'
+import { getAuth ,onAuthStateChanged } from 'firebase/auth'
+
 function Profileform() {    
+
+
+
+
+
     function save (){ 
             addDoc(collection(db,"user"),{
                 username:document.getElementById("name").value,
@@ -12,7 +18,8 @@ function Profileform() {
                 phonenumber:document.getElementById("phone").value,
                 bio:document.getElementById("bio").value,
                 university:document.getElementById("university").value,
-                status:document.querySelector('input[name="GFG"]:checked').value
+                status:document.querySelector('input[name="GFG"]:checked').value,
+                UserId:userId,
             })
    
         }
