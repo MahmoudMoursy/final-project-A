@@ -278,6 +278,11 @@ function Housing() {
           </div>
 
           <div className="col-md-9 order-md-2">
+            <div style={{ justifyContent: "space-around", display: "flex", marginBottom: 20 }}>
+              <button type="button" className="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#addHousingModal">
+                اضف سكن
+              </button>
+            </div>
             <div className="row g-4">
               {filteredHousingList.map((house, index) => (
                 <div key={house.id} className="col-md-6">
@@ -408,6 +413,123 @@ function Housing() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal fade"
+        id="addHousingModal"
+        tabIndex={-1}
+        aria-labelledby="addHousingModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="addHousingModalLabel">
+                إضافة سكن جديد
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="إغلاق"
+              />
+            </div>
+            <div className="modal-body">
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label className="form-label">السعر</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="price"
+                    value={housingData.price}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">العنوان</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="address"
+                    value={housingData.address}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">الوصف</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="description"
+                    value={housingData.description}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">عدد السراير</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="numbed"
+                    value={housingData.numbed}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">عدد الحمامات</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="numteu"
+                    value={housingData.numteu}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">رقم الواتس</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="whats"
+                    value={housingData.whats}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">رقم الهاتف</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="phone"
+                    value={housingData.phone}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary w-25"
+                    data-bs-dismiss="modal"
+                  >
+                    إغلاق
+                  </button>
+                  <button type="submit" className="btn btn-primary w-50">
+                    حفظ التغييرات
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
