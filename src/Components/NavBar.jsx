@@ -15,16 +15,16 @@ function NavBar() {
         </div>
 
         <div className="nav collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav d-flex gap-4">
+          <ul className="navbar-nav d-flex gap-1 w-75" style={{paddingRight:100}}>
             <li className="nav-item"><NavLink className="nav-link" to="/Home">Home Page</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/Services">Services</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link" to="/tour">Tourist places</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/tour">Tourist </NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/housing">Housing</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/AboutUs">About Us</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/Community">Community</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link" to="">Voluntary</NavLink></li>
+            {/* <li className="nav-item"><NavLink className="nav-link" to="">Voluntary</NavLink></li> */}
             <li className="nav-item"><NavLink className="nav-link" to="/Donation">Donation</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link" to="/Profileform">Profile</NavLink></li>
+            {/* <li className="nav-item"><NavLink className="nav-link" to="/Profileform">Profile</NavLink></li> */}
           </ul>
         </div>
         <div className="d-flex align-items-center justify-content-atod">
@@ -36,7 +36,7 @@ function NavBar() {
 
           <a href="#" className="d-flex align-items-center link-body-emphasis text-decoration-none ms-2">
             <span className="border p-1 me-2 border-success text-black-50 mx-2" 
-              style={{ borderRadius: '100%', backgroundColor: '#3498db', width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              style={{ borderRadius: '100%', backgroundColor: '#FFFFFFFF', width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               M
             </span>
             <strong className="d-none d-xl-block text-white" id="name">Moursy</strong>

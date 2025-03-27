@@ -1,61 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Card,
-  CardContent,
-  Typography,
-  Avatar,
-  Box,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
+  Card, CardContent, Typography, Avatar, Box, Button, Dialog,
+  DialogTitle, DialogContent, DialogActions, TextField
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
-
-const initialPosts = [
-  {
-    id: 1,
-    user: "حمزه",
-    text: "اريد مكان اقدر اجر فيه عجل؟",
-    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
-    timestamp: new Date("2023-10-20T10:00:00"),
-  },
-  {
-    id: 2,
-    user: "نجمه",
-    text: "عايزه سوبر ماركت يكون فيه كل احتياجاتي مره واحده؟",
-    image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
-    timestamp: new Date("2023-10-21T14:30:00"),
-  },
-];
-
-// دالة لحساب الوقت المنقضي
-const calculateTimeElapsed = (timestamp) => {
-  const now = new Date();
-  const diffInSeconds = Math.floor((now - timestamp) / 1000);
-
-  if (diffInSeconds < 60) {
-    return `منذ ${diffInSeconds} ثانية`;
-  } else if (diffInSeconds < 3600) {
-    const minutes = Math.floor(diffInSeconds / 60);
-    return `منذ ${minutes} دقيقة`;
-  } else if (diffInSeconds < 86400) {
-    const hours = Math.floor(diffInSeconds / 3600);
-    return `منذ ${hours} ساعة`;
-  } else {
-    const days = Math.floor(diffInSeconds / 86400);
-    return `منذ ${days} يوم`;
-  }
-};
+import db from "../firebaseconfig";
+import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
 
 const Community = () => {
   const navigate = useNavigate();
-  const [posts, setPosts] = useState(initialPosts);
+  const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
   const [newPostText, setNewPostText] = useState("");
 
@@ -65,19 +22,38 @@ const Community = () => {
     setNewPostText("");
   };
 
-  const handleAddPost = () => {
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const querySnapshot = await getDocs(collection(db, "post"));
+      const fetchedPosts = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+        timestamp: doc.data().timestamp?.toDate() || new Date() 
+      }));
+      setPosts(fetchedPosts.reverse());   
+    };
+
+    fetchPosts();
+  }, []);
+
+  const handleAddPost = async () => {
     if (newPostText.trim() === "") return;
 
     const newPost = {
-      id: posts.length + 1,
       user: "مستخدم جديد",
       text: newPostText,
       image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
-      timestamp: new Date(),
+      timestamp: Timestamp.now()
     };
 
-    setPosts([newPost, ...posts]);
-    handleClose();
+    try {
+      const docRef = await addDoc(collection(db, "post"), newPost);
+      setPosts([{ id: docRef.id, ...newPost, timestamp: new Date() }, ...posts]); 
+      handleClose();
+    } catch (error) {
+      console.error("خطأ في إضافة المنشور:", error);
+    }
   };
 
   return (
@@ -86,16 +62,14 @@ const Community = () => {
       <Box sx={{ marginTop: "30px", padding: "20px", direction: "rtl", width: "100vw" }}>
         <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: "rtl", marginRight: 3 }}>
           مجتمع{" "}
-          <span
-            style={{
-              backgroundColor: "#091e3d",
-              padding: "8px 15px",
-              color: "#fff",
-              borderRadius: "110px 4000px",
-              fontWeight: "bold",
-              display: "inline-block",
-            }}
-          >
+          <span style={{
+            backgroundColor: "#091e3d",
+            padding: "8px 15px",
+            color: "#fff",
+            borderRadius: "110px 4000px",
+            fontWeight: "bold",
+            display: "inline-block",
+          }}>
             وسيط
           </span>
         </Typography>
@@ -135,12 +109,8 @@ const Community = () => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} style={{ color: "red" }}>
-              إلغاء
-            </Button>
-            <Button onClick={handleAddPost} color="primary" variant="contained" className="fw-bold">
-              نشر
-            </Button>
+            <Button onClick={handleClose} style={{ color: "red" }}>إلغاء</Button>
+            <Button onClick={handleAddPost} color="primary" variant="contained">نشر</Button>
           </DialogActions>
         </Dialog>
 
@@ -148,21 +118,12 @@ const Community = () => {
           <Card
             key={post.id}
             sx={{
-              mb: 2,
-              borderRadius: 2,
-              boxShadow: 1,
-              margin: 2,
-              cursor: "pointer",
-              transition: "box-shadow 0.2s ease",
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              flexDirection: "column", // تغيير الاتجاه إلى عمودي
+              mb: 2, borderRadius: 2, boxShadow: 1, margin: 2, cursor: "pointer",
+              transition: "box-shadow 0.2s ease", width: "100%",
               "&:hover": { boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)" },
             }}
           >
             <CardContent sx={{ display: "flex", flexDirection: "column", width: "100%", p: 2 }}>
-              {/* الصورة والاسم والوقت في الأعلى */}
               <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
                 <Avatar src={post.image} sx={{ width: 60, height: 60 }} />
                 <Box>
@@ -170,18 +131,17 @@ const Community = () => {
                     {post.user}
                   </Typography>
                   <Typography variant="caption" sx={{ color: "gray", fontSize: "13px" }}>
-                    {calculateTimeElapsed(post.timestamp)}
+                    {post.timestamp ? new Date(post.timestamp).toLocaleString("ar-EG") : "توقيت غير متاح"}
                   </Typography>
                 </Box>
               </Box>
 
-              {/* نص المنشور والأزرار في الأسفل */}
               <Box sx={{ flex: 1 }}>
                 <Typography variant="body2" sx={{ color: "gray", fontSize: "18px", mb: 2 }}>
                   {post.text}
                 </Typography>
                 <hr />
-                <Box sx={{ display: "flex", gap: 2, mt: 2, Color: "#091e3d" }}>
+                <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
                   <Button variant="text" startIcon={<i className="fa-regular fa-thumbs-up fs-3 mx-2"></i>}>
                     أعجبني
                   </Button>

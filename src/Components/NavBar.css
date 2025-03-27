@@ -1,5 +1,4 @@
-/* NavBar.css */
-.navbar {
+navbar {
     background-color: #091e3d !important; 
     padding: 1rem 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
@@ -12,10 +11,10 @@
     transition: color 0.3s ease;
   }
   
-  .navbar-brand:hover {
+   .navbar-brand:hover {
     color: #3498db !important; 
-  }
-  
+  } 
+   
   .navbar-nav {
     gap: 1.5rem;
   }
@@ -37,7 +36,7 @@
     position: absolute;
     width: 0;
     height: 2px;
-    background: #3498db; /* الخط الأزرق تحت العنصر */
+    background: #3498db; 
     bottom: -5px;
     left: 0;
     transition: width 0.3s ease;
@@ -49,9 +48,9 @@
   
   
   .dropdown-menu {
-    background-color: #2c3e50; /* لون مشابه للفوتر */
+    background-color: #2c3e50; 
     border: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* إضافة ظل */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     left: 10px !important;
     right: auto !important;
   }
