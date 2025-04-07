@@ -24,7 +24,7 @@ function Housing() {
   });
 
   const [bookingData, setBookingData] = useState({
-    userId: "", // To be filled with actual user ID
+    userId: "", 
     houseId: "",
     checkIn: "",
     checkOut: "",
@@ -62,7 +62,6 @@ function Housing() {
       };
       await addDoc(collection(db, "bookings"), bookingWithTimestamp);
       alert("تم إرسال طلب الحجز بنجاح!");
-      // Close modal and reset form
       document.getElementById('bookingModal').classList.remove('show');
       setBookingData({
         userId: "",
