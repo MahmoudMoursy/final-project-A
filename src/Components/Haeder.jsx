@@ -2,6 +2,13 @@
 import './Haeder.css';
 
 function Haeder() {
+  // Function to scroll down 100vh when arrow is clicked
+  const scrollToNextSection = () => {
+    window.scrollTo({
+      top: window.innerHeight, // Scroll down by 100vh (full viewport height)
+      behavior: 'smooth' // Smooth scrolling animation
+    });
+  };
   return (
     <div id="hero" className="hero-section">
       <video 
@@ -27,9 +34,9 @@ function Haeder() {
             </div>
             <button onClick={() => window.location.href = '/register'} className="primary-btn" tabIndex="0">احجز خدمتك دلوقتي</button>
           </div>
-          <a>
+          <a onClick={scrollToNextSection} style={{ cursor: 'pointer' }}>
             <svg className="arrows">
-              <path href="#" d="M0 0 L30 32 L60 0" className="a1"></path>
+              <path d="M0 0 L30 32 L60 0" className="a1"></path>
               <path d="M0 20 L30 52 L60 20" className="a2"></path>
               <path d="M0 40 L30 72 L60 40" className="a3"></path>
             </svg>
