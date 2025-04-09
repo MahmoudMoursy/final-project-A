@@ -57,8 +57,13 @@ function Login() {
     }
 
     return (
-        <div style={{ background: "linear-gradient(97deg, rgba(9,30,61,1) 70%, rgba(255,255,255,1) 95%)" }}>
-            <div className="row justify-content-around pt-5" style={{ paddingBottom: 67 }}>
+        <div style={{ 
+            background: "linear-gradient(97deg, rgba(9,30,61,1) 70%, rgba(255,255,255,1) 95%)",
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center"
+        }}>
+            <div className="row justify-content-around w-100">
                 <div className="col-md-6 col-lg-4 mt-5">
                     <img src={wasetLogo} alt="logo" className="w-75 mb-5 mt-5 mx-auto d-block" />
                     <h2 className="text-center text-white fw-bolder">
