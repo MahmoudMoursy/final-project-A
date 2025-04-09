@@ -1,7 +1,19 @@
-navbar {
-    background-color: #091e3d !important; 
+/* أنماط الشريط الأساسية */
+.navbar {
     padding: 1rem 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+  
+  /* شريط التنقل الشفاف (في الأعلى) */
+  .navbar.transparent {
+    background-color: transparent !important;
+    box-shadow: none;
+  }
+  
+  /* شريط التنقل بعد التمرير */
+  .navbar.scrolled {
+    background-color: #091e3d !important;
   }
   
   .navbar-brand {
@@ -22,35 +34,31 @@ navbar {
   .nav-link {
     color: #ecf0f1 !important;
     font-weight: 500;
-    position: relative;
     transition: color 0.3s ease;
     font-size: 1.2rem; /* Increase font size for better visibility */
+    background-color: transparent !important;
+    text-decoration: none !important;
   }
   
   .nav-link:hover {
     color: #3498db !important;
+    background-color: transparent !important;
+    text-decoration: none !important;
   }
   
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background: #3498db; 
-    bottom: -5px;
-    left: 0;
-    transition: width 0.3s ease;
+  /* إزالة المربع الأزرق عند تحديد الرابط النشط */
+  .nav-link.active {
+    background-color: transparent !important;
+    color: #3498db !important;
+    text-decoration: none !important;
   }
   
-  .nav-link:hover::after {
-    width: 100%; /* توسيع الخط عند الـ hover */
-  }
+  /* إلغاء الخط تحت العناصر */
   
   
   .dropdown-menu {
     background-color: #2c3e50; 
     border: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     left: 10px !important;
     right: auto !important;
   }
@@ -83,7 +91,7 @@ navbar {
   }
   
   .navbar-toggler:focus {
-    box-shadow: none;
+    outline: none;
   }
   
   .navbar-toggler-icon {

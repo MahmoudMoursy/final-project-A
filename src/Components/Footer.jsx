@@ -1,5 +1,4 @@
-import React from 'react';
-import { Box, Typography, Grid, Link, TextField, Button } from '@mui/material';
+// استيراد الصورة فقط
 import wasetLogo from '../assets/waset.png';
 
 const Footer = () => {
@@ -34,27 +33,27 @@ const Footer = () => {
                 <div className="link-animated d-flex flex-column justify-content-start">
                   <a className="text-light mb-2" href="">
                     <i className="fa-solid fa-arrow-right text-primary mx-2" />
-                    Home
+                    الرئيسية
                   </a>
                   <a className="text-light mb-2" href="">
                     <i className="fa-solid fa-arrow-right text-primary mx-2" />
-                    Voluntary{" "}
+                    التطوع
                   </a>
                   <a className="text-light mb-2" href="">
                     <i className="fa-solid fa-arrow-right text-primary mx-2" />
-                    About Us
+                    من نحن
                   </a>
                   <a className="text-light mb-2" href="">
                     <i className="fa-solid fa-arrow-right text-primary mx-2" />
-                    Housing{" "}
+                    السكن
                   </a>
                   <a className="text-light" href="">
-                    <i className="fa-solid fa-arrow-right text-primary mx-2" />{" "}
-                    Tourist places
+                    <i className="fa-solid fa-arrow-right text-primary mx-2" />
+                    الأماكن السياحية
                   </a>
                   <a className="text-light" href="">
-                    <i className="fa-solid fa-arrow-right text-primary mx-2" />{" "}
-                    Services
+                    <i className="fa-solid fa-arrow-right text-primary mx-2" />
+                    الخدمات
                   </a>
                 </div>
               </div>

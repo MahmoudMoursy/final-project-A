@@ -1,43 +1,43 @@
-import React from 'react'
-import imag2 from '../assets/img2.jpeg';
-import img6 from '../assets/img6.jpeg';
+
+import './Haeder.css';
+
 function Haeder() {
   return (
-    <div>
-        <div id="header-carousel" className="carousel slide carousel-fade" data-bs-ride="carousel">
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img src={img6} alt="React logo" className="w-100" />
-              <div className="carousel-caption d-flex flex-column align-items-center justify-content-center text-center">
-                <div style={{ maxWidth: '900px'}} >
-                  <h5 className="text-white text-uppercase mb-3 animated slideInDown fw-bold fs-2">Welcome to Aswan Services</h5>
-                  <h5 className="display-1 text-white mb-md-4 animated zoomIn">We help you know everything about Aswan</h5>
-                  <a href="#contact" className="btn btn-primary py-md-3 px-md-5 ms-3 animated slideInLeft">Contact Us</a>
-                </div>
-              </div>
+    <div id="hero" className="hero-section">
+      <video 
+        preload="" 
+        playsInline 
+        loop 
+        muted 
+        autoPlay 
+        onCanPlay={(e) => e.target.play()} 
+        onLoadedMetadata={(e) => e.target.muted = true} 
+        id="background-video"
+      >
+        <source src="/video/trailer.mp4" type="video/mp4" />
+      </video>
+      <div className="upper">
+        <div className="container">
+          <h1 className="main-title text-white">أسوان بين إيديك</h1>
+          <p className="text-white header-desc">من أول السكن لحد الأكل والفسح، أطلب وسيب الباقي علينا</p>
+          <p className="text-white header-desc">من بيتك وبضغطة زر</p>
+          <div className="d-flex justify-content-end gap-3 mt-5">
+            <div className="log d-flex align-items-center">
+              <span className="text-white"> هل لديك حساب بالفعل ؟ <a href="/login" className="text-primary text-decoration-none">سجل دخولك</a></span>
             </div>
-            <div className="carousel-item">
-              <img src={imag2} alt="React logo" className="w-100" />
-              <div className="carousel-caption d-flex flex-column align-items-center justify-content-center text-center">
-                <div style={{ maxWidth: '900px' }}>
-                  <h5 className="text-white text-uppercase mb-3 animated slideInDown fw-bold fs-2">Trust us</h5>
-                  <h1 className="display-1 text-white mb-md-4 animated zoomIn">We will help you find all possible solutions.</h1>
-                  <a href="#contact" className="btn btn-primary py-md-3 px-md-5 ms-3 animated slideInLeft">Contact Us</a>
-                </div>
-              </div>
-            </div>
+            <button onClick={() => window.location.href = '/register'} className="primary-btn" tabIndex="0">احجز خدمتك دلوقتي</button>
           </div>
-          <button className="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Next</span>
-          </button>
+          <a>
+            <svg className="arrows">
+              <path href="#" d="M0 0 L30 32 L60 0" className="a1"></path>
+              <path d="M0 20 L30 52 L60 20" className="a2"></path>
+              <path d="M0 40 L30 72 L60 40" className="a3"></path>
+            </svg>
+          </a>
         </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Haeder
+export default Haeder;

@@ -11,7 +11,7 @@ import Housing from './page/Housing';
 import Tour from './page/Tour';
 import Profileform from './page/Profileform';
 import PostDetails from "./page/PostDetails"
-import  Dashboard  from './Components/Dashboard';
+import Dashboard from './Components/Dashboard';
 import SignUp from './page/pagesDashboard/SignUp';
 import AdminManagment from './page/pagesDashboard/AdminManagment';
 
@@ -20,26 +20,26 @@ import AdminManagment from './page/pagesDashboard/AdminManagment';
 
 
 function App() {
-  
+
 
   return (
     <>
-    {/* <AuthProvider> */}
-    <Routes>
-    <Route path='/' element={<Login/>} />
-    <Route path='/Signup' index element={<Signup />} />
-    <Route path='/home' element={<Home />} />
-    <Route path="/Donation" element={<Donation />} />
-    <Route path="/Profile" element={<Profile />} />
-    <Route path='/AboutUs' element={<AboutUs />} />
-    <Route path='/Services' element={<Services />} />
-    <Route path='/housing' element={<Housing/>} />
-    <Route path='/tour' element={<Tour/>} />
-    <Route path='/Community' element={<Community/>} />
-    <Route path='/Profileform' element={<Profileform/>} />
-    <Route path="/post/:id" element={<PostDetails />} />
-    <Route path="/dashboard" element={<Dashboard />} />
-    <Route path="/AdminManagment" element={ <AdminManagment />} />
+      {/* <AuthProvider> */}
+      <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path='/Signup' index element={<Signup />} />
+        <Route path='/home' element={<Home />} />
+        <Route path="/Donation" element={<Donation />} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path='/AboutUs' element={<AboutUs />} />
+        <Route path='/Services' element={<Services />} />
+        <Route path='/housing' element={<Housing />} />
+        <Route path='/tour' element={<Tour />} />
+        <Route path='/Community' element={<Community />} />
+        <Route path='/Profileform' element={<Profileform />} />
+        <Route path="/post/:id" element={<PostDetails />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/AdminManagment" element={<AdminManagment />} />
       </Routes>
       {/* </AuthProvider> */}
     </>
