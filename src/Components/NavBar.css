@@ -5,6 +5,49 @@
     z-index: 1000;
   }
   
+  /* تعديلات للقائمة في الشاشات الصغيرة */
+  @media (max-width: 991.98px) {
+    .navbar-collapse {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      background-color: #091e3d;
+      padding: 1rem;
+      z-index: 999;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .navbar-collapse.show {
+      display: block;
+      max-height: 500px;
+    }
+    
+    .navbar-nav {
+      padding-right: 0 !important;
+      width: 100% !important;
+      text-align: center;
+    }
+    
+    .nav-item {
+      margin: 0.8rem 0;
+    }
+    
+    .nav-link {
+      font-size: 1.4rem !important;
+      padding: 0.5rem 1rem !important;
+      display: block;
+      border-radius: 5px;
+    }
+    
+    .nav-link:hover, .nav-link:active {
+      background-color: rgba(52, 152, 219, 0.2) !important;
+    }
+  }
+  
   /* شريط التنقل الشفاف (في الأعلى) */
   .navbar.transparent {
     background-color: transparent !important;
@@ -88,12 +131,38 @@
   
   .navbar-toggler {
     border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
   }
   
   .navbar-toggler:focus {
     outline: none;
+    box-shadow: none;
   }
   
   .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ecf0f1' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    transition: all 0.3s ease;
+  }
+  
+  /* تحريك المحتوى لأسفل عند فتح القائمة */
+  body.menu-open {
+    padding-top: 320px;
+    transition: padding-top 0.4s ease;
+  }
+  
+  /* تحسين شكل القائمة في الهواتف الصغيرة */
+  @media (max-width: 576px) {
+    .navbar-collapse {
+      padding: 1.5rem 1rem;
+    }
+    
+    body.menu-open {
+      padding-top: 350px;
+    }
+    
+    .nav-link {
+      font-size: 1.3rem !important;
+      padding: 0.7rem 1rem !important;
+    }
   }

@@ -1,4 +1,5 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import Home from './page/Home'
 import Signup from './page/Signup'
 import Login from './page/Login'
@@ -12,19 +13,31 @@ import Tour from './page/Tour';
 import Profileform from './page/Profileform';
 import PostDetails from "./page/PostDetails"
 import Dashboard from './Components/Dashboard';
-import SignUp from './page/pagesDashboard/SignUp';
 import AdminManagment from './page/pagesDashboard/AdminManagment';
+import { LoadingProvider } from './context/LoadingContext';
+import LoadingBar from './Components/LoadingBar';
 
 // import { AuthProvider } from './context/Authcontext';
 
 
 
 function App() {
-
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  
+  // Show loading bar on route changes
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 800); // Simulate loading time
+    
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
 
   return (
-    <>
-      {/* <AuthProvider> */}
+    <LoadingProvider>
+      <LoadingBar isLoading={loading} />
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/Signup' index element={<Signup />} />
@@ -41,8 +54,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/AdminManagment" element={<AdminManagment />} />
       </Routes>
-      {/* </AuthProvider> */}
-    </>
+    </LoadingProvider>
   )
 }
 

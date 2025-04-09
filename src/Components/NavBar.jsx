@@ -1,14 +1,29 @@
 import { useState, useEffect } from 'react';
 import './NavBar.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import wasetLogo from '../assets/waset.png';
 
 function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
+    // تحقق مما إذا كانت الصفحة الحالية هي الصفحة الرئيسية
+    const isHomePage = location.pathname === '/Home' || location.pathname === '/home';
+    
+    // إذا لم تكن الصفحة الرئيسية، اجعل شريط التنقل دائمًا بلون ثابت
+    if (!isHomePage) {
+      setIsScrolled(true);
+      return;
+    }
+    
+    // Make sure menu is closed when changing pages
+    setIsMenuOpen(false);
+    document.body.classList.remove('menu-open');
+    
     const handleScroll = () => {
-      // تغيير الحالة عندما يتجاوز التمرير 100 بكسل
+      // تغيير الحالة عندما يتجاوز التمرير 100 بكسل (فقط في الصفحة الرئيسية)
       if (window.scrollY > 100) {
         setIsScrolled(true);
       } else {
@@ -16,18 +31,40 @@ function NavBar() {
       }
     };
 
-    // إضافة مستمع الحدث للتمرير
+    // إضافة مستمع الحدث للتمرير فقط في الصفحة الرئيسية
     window.addEventListener('scroll', handleScroll);
+    
+    // تنفيذ فحص أولي للتمرير
+    handleScroll();
 
     // إزالة مستمع الحدث عند تفكيك المكون
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
+  }, [location.pathname]);
+  
+  // Clean up the body class when component unmounts
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove('menu-open');
+    };
   }, []);
+
+  const toggleMenu = () => {
+    const newMenuState = !isMenuOpen;
+    setIsMenuOpen(newMenuState);
+    
+    // Add or remove the menu-open class from the body
+    if (newMenuState) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
+  };
 
   return (
     <div style={{ direction: "rtl" }}>
-      <nav className={`navbar navbar-expand-lg navbar-dark d-flex justify-content-around px-4 fixed-top ${isScrolled ? 'scrolled' : 'transparent'}`}>
+      <nav className={`navbar navbar-expand-lg navbar-dark d-flex justify-content-around px-4 fixed-top ${isScrolled || isMenuOpen ? 'scrolled' : 'transparent'}`}>
 
         <div>
           <NavLink className="nav-link" to="/Home">
@@ -35,7 +72,7 @@ function NavBar() {
           </NavLink>
         </div>
 
-        <div className="nav collapse navbar-collapse" id="navbarNav">
+        <div className={`nav navbar-collapse ${isMenuOpen ? 'show' : 'collapse'}`} id="navbarNav">
           <ul className="navbar-nav d-flex gap-1 w-75" style={{paddingRight:100}}>
             <li className="nav-item"><NavLink className={({isActive}) => isActive ? "nav-link" : "nav-link"} to="/Home">الرئيسية</NavLink></li>
             <li className="nav-item"><NavLink className={({isActive}) => isActive ? "nav-link" : "nav-link"} to="/Services">الخدمات</NavLink></li>
@@ -49,7 +86,7 @@ function NavBar() {
           </ul>
         </div>
         <div className="d-flex align-items-center justify-content-atod">
-          <button className="navbar-toggler" style={{ marginRight: '15%' }} type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <button className="navbar-toggler" style={{ marginRight: '15%' }} type="button" onClick={toggleMenu} aria-controls="navbarNav" aria-expanded={isMenuOpen ? "true" : "false"} aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
 
