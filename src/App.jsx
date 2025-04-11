@@ -16,6 +16,7 @@ import Dashboard from './Components/Dashboard';
 import AdminManagment from './page/pagesDashboard/AdminManagment';
 import { LoadingProvider } from './context/LoadingContext';
 import LoadingBar from './Components/LoadingBar';
+import RestaurantsPage from './page/RestaurantsPage';
 
 // import { AuthProvider } from './context/Authcontext';
 
@@ -53,6 +54,7 @@ function App() {
         <Route path="/post/:id" element={<PostDetails />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/AdminManagment" element={<AdminManagment />} />
+        <Route path="/RestaurantsPage" element={<RestaurantsPage />} />
       </Routes>
     </LoadingProvider>
   )

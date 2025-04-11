@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-multi-carousel';
@@ -7,6 +6,7 @@ import { FaStar, FaPhone, FaMapMarkerAlt, FaWhatsapp, FaFacebook } from 'react-i
 import './Services.css';
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
+import { NavLink } from 'react-router-dom';
 
 import esmo1 from '../assets/service_imgs/مطاعم/اسمه ايه/esmo1.jpeg';
 import esmo2 from '../assets/service_imgs/مطاعم/اسمه ايه/esmo2.jpeg';
@@ -492,7 +492,7 @@ const Services = () => {
       <NavBar />
       <div className="services-container" dir="rtl">
         <section className="service-section mb-5">
-          <h2 className="section-title" >المطاعم والكافيهات</h2>
+          <h2 className="section-title"><NavLink to="/RestaurantsPage" style={{ textDecoration: 'none', color: 'inherit' }}>المطاعم والكافيهات</NavLink></h2>
           <Carousel
             responsive={responsive}
             infinite={true}
