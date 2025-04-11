@@ -80,7 +80,7 @@ const Community = () => {
   return (
     <>
       <NavBar />
-      <Box sx={{ marginTop: "30px", padding: "20px", direction: "rtl", width: "100vw" }}>
+      <Box sx={{ marginTop: "80px", paddingTop: "20px", padding: "20px", direction: "rtl", width: "100vw" }}>
         <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: "rtl", marginRight: 3 }}>
           مجتمع <span style={{
             backgroundColor: "#091e3d", padding: "8px 15px",

@@ -24,7 +24,7 @@ function Donation() {
   return (
     <>
       <NavBar />
-      <div className="container-fluid bg-gradient min-vh-100" style={{ background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)" }}>
+      <div className="container-fluid bg-gradient min-vh-100" style={{ background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)", marginTop: "80px", paddingTop: "20px" }}>
       
         <motion.div
           initial={{ opacity: 0, y: 20 }}

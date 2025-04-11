@@ -141,7 +141,7 @@ function Housing() {
   return (
     <>
       <NavBar />
-      <div className="search-container bg-white shadow-sm py-4" dir="rtl">
+      <div className="search-container bg-white shadow-sm py-4 mt-5 pt-5" dir="rtl">
         <div className="container">
           <div className="row g-3 align-items-center justify-content-end">
             <div className="col-md-4">
