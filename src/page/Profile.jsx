@@ -40,7 +40,7 @@ const Profile = () => {
     <>
       <NavBar />
       <div className="profileContainer">
-        <div className="profileCard">
+        <div className="profileCard" style={{ marginTop: "7vh" }}>
           <div className="profileHeader">
             <div className="avatar">س</div>
             <h2 className="userName">{userData.username || "اسم المستخدم غير متوفر"}</h2>
