@@ -4,36 +4,84 @@ import "./profile.css";
 import React, { useEffect, useState } from "react";
 import db, { auth } from "../firebaseconfig";
 import { useAuth } from "../authstorre";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { useDispatch } from 'react-redux';
+import { Table } from 'lucide-react';
+import { Button } from 'react-bootstrap';
 
 const Profile = () => {
   // const [userData, setUserData] = useState(null);
   // const { user } = useAuth();
+  
+    // console.log(user);
+  
+    // useEffect(() => {
+    //   const fetchUserData = async () => {
+    //     try {
+    //       if (!user) return;
+    //       const q = query(collection(db, "user"), where("email", "==", user));
+    //       const querySnapshot = await getDocs(q);
+  
+    //       // console.log(user);
+  
+    //       if (!querySnapshot.empty) {
+    //         setUserData(querySnapshot.docs[0].data());
+    //       }
+    //     } catch (error) {
+    //       console.error("Error fetching user data:", error);
+    //       return <p>Error fetching user data. Please try again later.</p>;
+    //     }
+    //   };
+  
+    //   fetchUserData();
+    // }, []);
   const userData = JSON.parse(localStorage.getItem("currentUser"));
+  const [posts, editPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // console.log(user);
+  if(userData.status=="publisher"){
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const q = query(
+          collection(db, "housing"),
+          where("Id", "==", userData.UserId)
+        );
+        const querySnapshot = await getDocs(q);
+        const Posts = [];
+    
+        querySnapshot.forEach((doc) => {
+          Posts.push({ id: doc.id, ...doc.data() });
+        });
+    
+        editPosts(Posts);
+        console.log(Posts);
+    
+      } catch (error) {
+        console.error("Error fetching posts: ", error);
+      }
+      setLoading(false);
+    };
+    useEffect(() => {
+           fetchPosts();
+    }, []);
 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       if (!user) return;
-  //       const q = query(collection(db, "user"), where("email", "==", user));
-  //       const querySnapshot = await getDocs(q);
-
-  //       // console.log(user);
-
-  //       if (!querySnapshot.empty) {
-  //         setUserData(querySnapshot.docs[0].data());
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //       return <p>Error fetching user data. Please try again later.</p>;
-  //     }
-  //   };
-
-  //   fetchUserData();
-  // }, []);
-
+  }
+  const deletePost = async (id) => {
+    if (confirm('Are you sure you want to save this thing into the database?')) {
+        try {
+            await deleteDoc(doc(db, "housing", id));
+            editPosts(posts.filter(post => post.id !== id));
+            console.log("Post deleted successfully!");    
+          } catch (error) {
+            console.error("Error deleting user: ", error);
+          }
+      } else {
+        console.log('Thing was not saved to the database.');
+      }
+  
+  };
+        
   if (!userData) return <p>abdala..</p>;
 
   return (
@@ -80,6 +128,55 @@ const Profile = () => {
             <h3 className="sectionTitle">النبذه الشخصيه</h3>
             <p>{userData.bio}</p>
           </div>
+
+          {userData?.status === "publisher" && (
+            <div className="infoSection">
+              <h3 className="sectionTitle">المساكن المنشورة</h3>
+
+              {loading && <p>Loading...</p>}
+
+              <div className="table-responsive">
+                <table className="table table-striped table-bordered table-hover" style={{ direction: 'ltr' }}>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Username</th>
+                      <th>Address</th>
+                      <th>description</th>
+                      <th>numbed</th>
+                      <th>numteu</th>
+                      <th>phone</th>
+                      <th>whats</th>
+                      <th>price</th>
+                      <th>delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {posts.map((post, index) => (
+                      <tr key={post.id}>
+                        <td>{index + 1}</td>
+                        <td>{post.username}</td>
+                        <td>{post.address}</td>
+                        <td>{post.description}</td>
+                        <td>{post.numbed}</td>
+                        <td>{post.numteu}</td>
+                        <td>{post.phone}</td>
+                        <td>{post.whats}</td>
+                        <td>{post.price}</td>
+                        { userData?.status=="publisher" && <td>
+                            <Button variant="danger" onClick={() => deletePost(post.id)}>
+                            Delete
+                            </Button>
+                        </td>}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+
 
           <div className="infoSection">
             <h3 className="sectionTitle">المعاملات الأخيرة</h3>
