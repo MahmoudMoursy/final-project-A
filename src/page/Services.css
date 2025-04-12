@@ -1,5 +1,6 @@
 .services-container {
     padding: 20px;
+    padding-top: 100px; /* Added padding-top to prevent navbar overlap */
     font-family: 'Cairo', sans-serif;
   }
   
