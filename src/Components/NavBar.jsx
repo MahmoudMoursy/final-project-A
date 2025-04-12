@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import wasetLogo from '../assets/waset.png';
 
 function NavBar() {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
   return (
     <div style={{ direction: "rtl" }}>
       <nav className="navbar navbar-expand-lg navbar-dark d-flex justify-content-around px-4" style={{ backgroundColor: '#091e3d' }}>
@@ -37,9 +38,9 @@ function NavBar() {
           <a href="#" className="d-flex align-items-center link-body-emphasis text-decoration-none ms-2">
             <span className="border p-1 me-2 border-success text-black-50 mx-2" 
               style={{ borderRadius: '100%', backgroundColor: '#3498db', width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              M
+              {user.username[0]}
             </span>
-            <strong className="d-none d-xl-block text-white" id="name">Moursy</strong>
+            <strong className="d-none d-xl-block text-white" id="name">{user.username}</strong>
           </a>
 
           <ul className="menu dropdown-menu text-small fw-bold shadow rounded-3 p-2 text-center"

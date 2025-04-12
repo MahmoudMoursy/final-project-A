@@ -3,28 +3,70 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../authstorre';
 import wasetLogo from '../assets/waset.png';
 import google from '../assets/google.png';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentUser } from '../Redux/CurrentUser';
+import { collection, getDocs } from 'firebase/firestore';
+import db from '../firebaseconfig';
 
-function Login() {
+function Login() {    
+    
+
+
     const nav = useNavigate();
     const AuthStore = useAuth();
     const [user, setUser] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-
+    const dispatch = useDispatch();
+    let flag = false;
+    //نتأكد ان اليوزر اللي بيسجل الدخول انه متسجل ف الUSERS
+   
+    
     async function save(event) {
         event.preventDefault();
         setLoading(true);
         setError("");
 
         try {
-            await AuthStore.login(user);
-            nav('/Home', { state: { data: "hi from login" } });
+            const useree =  await AuthStore.login(user);
+            // dispatch(setCurrentUser(useree.uid));
+            // localStorage.setItem("currentUser", JSON.stringify(useree.uid));
+            fetchUsers(useree.uid);
+            
         } catch (err) {
-            setError("Invalid    email or password. Please try again.");
+            setError("Invalid email or password. Please try again.");
+            setLoading(false);
         }
 
-        setLoading(false);
+        
     }
+
+
+    const fetchUsers = async (useree) => {
+        try {
+          const querySnapshot = await getDocs(collection(db, "user"));
+          querySnapshot.forEach((doc) => {
+            if(doc.id==useree){
+                flag = true;     
+                dispatch(setCurrentUser(doc.data()));
+                localStorage.setItem("currentUser", JSON.stringify(doc.data()));
+                console.log("wait");
+                console.log(doc);
+                setLoading(false);
+            }
+          });
+
+        } catch (error) {
+          console.error("Error fetching users: ", error);
+        }
+        if(flag){
+            nav('/home');
+        }
+        else{
+            nav('/Profileform');
+        }
+    };
 
     function handleInputChange(event) {
         const { name, value } = event.target;

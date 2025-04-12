@@ -12,9 +12,9 @@ function SignUp() {
         console.log(db);
 
         addDoc(collection(db,"AdminManagment"),{
-            userName:document.getElementById("userName").value,
+            email:document.getElementById("userName").value,
             password:document.getElementById("password").value,
-            role:document.querySelector('input[name="GFG"]:checked').value
+            status:document.querySelector('input[name="GFG"]:checked').value
         })
 
     }

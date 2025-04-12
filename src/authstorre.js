@@ -10,7 +10,7 @@ export const useAuth = create((set) => ({
     login: async (data) => {
         set({ loading: true });
         try {
-            const res = await signInWithEmailAndPassword(auth, data.email, data.password);
+            const res = await signInWithEmailAndPassword(auth, data.email, data.password) ;
             const token = await res.user.getIdToken();
             set({ user: res.user, token, loading: false });
             return res.user; 

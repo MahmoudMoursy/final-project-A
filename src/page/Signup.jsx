@@ -36,8 +36,10 @@ function Signup() {
                 email: data.email,
                 password: data.pass
             });
-
+            console.log(authStore);
+            console.log("sssss");
             nav('/', { replace: true, state: { data: "hi from signup" } });
+
 
         } catch (error) {
             console.error("Signup error:", error);

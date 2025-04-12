@@ -11,15 +11,34 @@ import 'aos/dist/aos.css';
 import './Home.css';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-function Home() {
-  
+import { useStore } from 'zustand';
+//abdalla 
+import { useSelector,useDispatch } from 'react-redux';
+import { setCurrentUser } from '../Redux/CurrentUser';
+import { getAuth } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
+
+function Home() {
+  const nav = useNavigate()
+  const user= JSON.parse(localStorage.getItem("currentUser"));
+  const dispatch = useDispatch()
+  dispatch(setCurrentUser(user));
+  
+  
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true
     });
-    const { count, inc } = useStore()
+    
+      //abdalla 
+    if(!user){
+      nav("/Profileform")
+    }
+    
+
+
 
     // Initialize map
     const map = L.map('map').setView([24.0889, 32.8998], 13);
@@ -31,7 +50,7 @@ function Home() {
     const locations = [
       // { name: 'Aswan High Dam', coords: [23.9702, 32.8800], desc: 'Historic dam on the Nile River' },
       // { name: 'Philae Temple', coords: [24.0134, 32.8832], desc: 'Ancient Egyptian temple complex' },
-      // { name: 'Elephantine Island', coords: [24.0847, 32.8850], desc: 'Archaeological site and museum' },
+      // { name: 'Elephantine Island', coords: [24.08q47, 32.8850], desc: 'Archaeological site and museum' },
       // { name: 'Nubian Museum', coords: [24.0741, 32.8877], desc: 'Museum showcasing Nubian culture' }
     ];
 
@@ -43,6 +62,10 @@ function Home() {
 
     return () => map.remove();
   }, []);
+//  const cUser = useSelector(state => state.currentUser.value) 
+//  console.log(cUser);  
+
+
 
   return (
     <div className="home-page">
