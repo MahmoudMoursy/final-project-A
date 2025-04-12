@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../authstorre';
 import wasetLogo from '../assets/waset.png';
 import google from '../assets/google.png';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentUser } from '../Redux/CurrentUser';
 import { collection, getDocs } from 'firebase/firestore';
@@ -76,22 +77,34 @@ function Login() {
 
 
     const auth = getAuth();
-            onAuthStateChanged(auth, (user) => {
-              if (user) {
-                // User is signed in.
-               const userId = user.uid;
-               
-              } else {
-                // No user is signed in.
-                console.log("user is not signed in")
-              }
-            })
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const userId = user.uid;
 
+        } else {
+            console.log("user is not signed in")
+        }
+    })
 
+    async function handleGoogleLogin() {
+        try {
+            const provider = new GoogleAuthProvider();
+            const auth = getAuth();
+            await signInWithPopup(auth, provider);
+            nav('/Home');
+        } catch (error) {
+            setError("Google login failed. Please try again.");
+        }
+    }
 
     return (
-        <div style={{ background: "linear-gradient(97deg, rgba(9,30,61,1) 70%, rgba(255,255,255,1) 95%)" }}>
-            <div className="row justify-content-around pt-5" style={{ paddingBottom: 67 }}>
+        <div style={{ 
+            background: "linear-gradient(97deg, rgba(9,30,61,1) 70%, rgba(255,255,255,1) 95%)",
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center"
+        }}>
+            <div className="row justify-content-around w-100">
                 <div className="col-md-6 col-lg-4 mt-5">
                     <img src={wasetLogo} alt="logo" className="w-75 mb-5 mt-5 mx-auto d-block" />
                     <h2 className="text-center text-white fw-bolder">
@@ -150,8 +163,9 @@ function Login() {
 
 
                         {error && <p className="text-danger text-center fw-bold mt-2">{error}</p>}
-                        <button className='btn btn-primary px-5 py-1 w-100 rounded mt-2' >
-                            <img src={google} alt="gmail" style={{width:40}} /> <span className='text-white ms-3'>Continue With Google</span>
+                        <button className='btn btn-primary px-5 py-1 w-100 rounded mt-2' onClick={handleGoogleLogin}>
+                            <img src={google} alt="gmail" style={{ width: 40 }} />
+                            <span className='text-white ms-3'>Continue With Google</span>
                         </button>
                         <button type="submit" className="btn btn-primary w-100 rounded mt-3" disabled={loading}>
                             {loading ? "Logging in..." : "Login"}

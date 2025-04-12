@@ -223,7 +223,7 @@ const AboutUs = () => {
   return (
     <div style={{ direction: "ltr" }}>
       <NavBar />
-      <Container maxWidth={false} style={{ padding: 0 }}>
+      <Container maxWidth={false} style={{ padding: 0, marginTop: "80px", paddingTop: "20px" }}>
         <ZilliqaStory />
         <ScalingFaster />
         <HowItBegan />

@@ -213,7 +213,7 @@ const Tour = () => {
   return (
     <>
       <NavBar />
-      <Container maxWidth="lg" sx={{ mt: 4, direction: "rtl", display: "flex", gap: 3 }}>
+      <Container maxWidth="lg" sx={{ mt: 8, pt: 4, direction: "rtl", display: "flex", gap: 3 }}>
         {/* Sidebar for Filters */}
         <Paper sx={{ p: 3, width: 300, borderRadius: 3, boxShadow: 3 }}>
           <Typography variant="h6" fontWeight="bold" gutterBottom>

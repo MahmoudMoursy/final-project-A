@@ -11,6 +11,7 @@ import 'aos/dist/aos.css';
 import './Home.css';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+// import { useStore } from '../store';
 import { useStore } from 'zustand';
 //abdalla 
 import { useSelector,useDispatch } from 'react-redux';
@@ -31,6 +32,7 @@ function Home() {
       duration: 1000,
       once: true
     });
+    // const { count, inc } = useStore()
     
       //abdalla 
     if(!user){
@@ -40,13 +42,11 @@ function Home() {
 
 
 
-    // Initialize map
     const map = L.map('map').setView([24.0889, 32.8998], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Add markers for key locations in Aswan
     const locations = [
       // { name: 'Aswan High Dam', coords: [23.9702, 32.8800], desc: 'Historic dam on the Nile River' },
       // { name: 'Philae Temple', coords: [24.0134, 32.8832], desc: 'Ancient Egyptian temple complex' },
@@ -71,17 +71,19 @@ function Home() {
     <div className="home-page">
       <NavBar />
       <Haeder />
-      <div className="container-fluid py-5" id="products" data-aos="fade-up">
-        <div className="container py-5">
-          <div className="section-title text-center position-relative pb-3 mb-4 mx-auto" style={{ maxWidth: '600px' }}>
-            <h1 className="mb-0 main-title">Our Main Services</h1>
+      
+      {/* Main Content Container - 80% width */}
+      <div className="main-content-wrapper">
+        <div className="main-content-container" id="products" data-aos="fade-up">
+          <div className="py-5">
+            <div className="section-title text-center position-relative pb-3 mb-4 mx-auto" style={{ maxWidth: '600px' }}>
+              <h1 className="mb-0 main-title">Our Main Services</h1>
+            </div>
           </div>
+          <CardSlider />
         </div>
-        <CardSlider />
-      </div>
 
-      <section className="py-5 bg-light rounded text-center service-section" data-aos="fade-up">
-        <div className="container">
+        <section className="py-5 bg-light rounded text-center service-section" data-aos="fade-up">
           <h2 className="fw-bold mb-3 service-title">خدمة توفير السكن</h2>
           <p className="mb-4 text-muted fw-bold fs-2 service-description">
             نوفر لك السكن الطلابي المثالي بالقرب من جامعتك، مع بيئة مريحة وآمنة تساعدك على التركيز في دراستك.
@@ -89,21 +91,17 @@ function Home() {
             استمتع بخدمات متكاملة تشمل الإنترنت، الصيانة، والأمان على مدار الساعة.
           </p>
           <a href="#contact" className="btn btn-primary py-md-3 px-md-5 ms-3 custom-btn">ابحث</a>
-        </div>
-      </section>
+        </section>
 
-      <section className="py-5 rounded text-center partners-section" data-aos="fade-up">
-        <div className="container">
+        <section className="py-5 rounded text-center partners-section" data-aos="fade-up">
           <h2 className="fw-bold mb-3 partners-title">شركاؤنا</h2>
           <div className="d-flex justify-content-center gap-5">
             <img src={ColoredLogo} alt="Colored Logo" className="mx-5 partner-logo" />
             <img src={aswulogo2} alt="ASWU Logo" className="w-25 mx-5 partner-logo" />
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="faq" className="py-5 faq-section" data-aos="fade-up">
-        <div className="container">
+        <section id="faq" className="py-5 faq-section" data-aos="fade-up">
           <h2 className="text-center mb-4 faq-title">Frequently Asked Questions</h2>
           <div className="accordion custom-accordion" id="faqAccordion">
             {[
@@ -124,11 +122,9 @@ function Home() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="py-5 rounded text-center testimonials-section" data-aos="fade-up">
-        <div className="container">
+        <section className="py-5 rounded text-center testimonials-section" data-aos="fade-up">
           <h2 className="fw-bold mb-3 testimonials-title">أراء المستخدمين</h2>
           <div className="testimonial-carousel">
             {[1, 2, 3].map((index) => (
@@ -144,18 +140,14 @@ function Home() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="py-5 rounded map-section" data-aos="fade-up">
-        <div className="container">
+        <section className="py-5 rounded map-section" data-aos="fade-up">
           <h2 className="text-center mb-4 map-title">Explore Aswan</h2>
           <div id="map" style={{ height: '400px', borderRadius: '10px', marginBottom: '2rem' }}></div>
-        </div>
-      </section>
+        </section>
 
-      <section id="contact" className="py-5 " data-aos="fade-up" style={{ backgroundColor: "#6F6F6F1F" }}>
-        <div className="container">
+        <section id="contact" className="py-5" data-aos="fade-up" style={{ backgroundColor: "#6F6F6F1F" }}>
           <h2 className="text-center mb-4 text-black contact-title">Contact Us</h2>
           <form className="contact-form">
             <div className="mb-3 form-group">
@@ -172,8 +164,8 @@ function Home() {
             </div>
             <button type="submit" className="btn btn-primary submit-btn">Send</button>
           </form>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <Footer />
     </div>

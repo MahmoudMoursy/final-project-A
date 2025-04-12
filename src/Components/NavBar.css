@@ -1,8 +1,62 @@
-/* NavBar.css */
+/* أنماط الشريط الأساسية */
 .navbar {
-    background-color: #091e3d !important; 
     padding: 1rem 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+  
+  /* تعديلات للقائمة في الشاشات الصغيرة */
+  @media (max-width: 991.98px) {
+    .navbar-collapse {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      background-color: #091e3d;
+      padding: 1rem;
+      z-index: 999;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .navbar-collapse.show {
+      display: block;
+      max-height: 500px;
+    }
+    
+    .navbar-nav {
+      padding-right: 0 !important;
+      width: 100% !important;
+      text-align: center;
+    }
+    
+    .nav-item {
+      margin: 0.8rem 0;
+    }
+    
+    .nav-link {
+      font-size: 1.4rem !important;
+      padding: 0.5rem 1rem !important;
+      display: block;
+      border-radius: 5px;
+    }
+    
+    .nav-link:hover, .nav-link:active {
+      background-color: rgba(52, 152, 219, 0.2) !important;
+    }
+  }
+  
+  /* شريط التنقل الشفاف (في الأعلى) */
+  .navbar.transparent {
+    background-color: transparent !important;
+    box-shadow: none;
+  }
+  
+  /* شريط التنقل بعد التمرير */
+  .navbar.scrolled {
+    background-color: #091e3d !important;
   }
   
   .navbar-brand {
@@ -12,10 +66,10 @@
     transition: color 0.3s ease;
   }
   
-  .navbar-brand:hover {
+   .navbar-brand:hover {
     color: #3498db !important; 
-  }
-  
+  } 
+   
   .navbar-nav {
     gap: 1.5rem;
   }
@@ -23,35 +77,31 @@
   .nav-link {
     color: #ecf0f1 !important;
     font-weight: 500;
-    position: relative;
     transition: color 0.3s ease;
     font-size: 1.2rem; /* Increase font size for better visibility */
+    background-color: transparent !important;
+    text-decoration: none !important;
   }
   
   .nav-link:hover {
     color: #3498db !important;
+    background-color: transparent !important;
+    text-decoration: none !important;
   }
   
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background: #3498db; /* الخط الأزرق تحت العنصر */
-    bottom: -5px;
-    left: 0;
-    transition: width 0.3s ease;
+  /* إزالة المربع الأزرق عند تحديد الرابط النشط */
+  .nav-link.active {
+    background-color: transparent !important;
+    color: #3498db !important;
+    text-decoration: none !important;
   }
   
-  .nav-link:hover::after {
-    width: 100%; /* توسيع الخط عند الـ hover */
-  }
+  /* إلغاء الخط تحت العناصر */
   
   
   .dropdown-menu {
-    background-color: #2c3e50; /* لون مشابه للفوتر */
+    background-color: #2c3e50; 
     border: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* إضافة ظل */
     left: 10px !important;
     right: auto !important;
   }
@@ -81,12 +131,38 @@
   
   .navbar-toggler {
     border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
   }
   
   .navbar-toggler:focus {
+    outline: none;
     box-shadow: none;
   }
   
   .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ecf0f1' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    transition: all 0.3s ease;
+  }
+  
+  /* تحريك المحتوى لأسفل عند فتح القائمة */
+  body.menu-open {
+    padding-top: 320px;
+    transition: padding-top 0.4s ease;
+  }
+  
+  /* تحسين شكل القائمة في الهواتف الصغيرة */
+  @media (max-width: 576px) {
+    .navbar-collapse {
+      padding: 1.5rem 1rem;
+    }
+    
+    body.menu-open {
+      padding-top: 350px;
+    }
+    
+    .nav-link {
+      font-size: 1.3rem !important;
+      padding: 0.7rem 1rem !important;
+    }
   }

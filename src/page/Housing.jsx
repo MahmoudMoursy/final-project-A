@@ -24,7 +24,7 @@ function Housing() {
   });
 
   const [bookingData, setBookingData] = useState({
-    userId: "", // To be filled with actual user ID
+    userId: "", 
     houseId: "",
     checkIn: "",
     checkOut: "",
@@ -62,7 +62,6 @@ function Housing() {
       };
       await addDoc(collection(db, "bookings"), bookingWithTimestamp);
       alert("تم إرسال طلب الحجز بنجاح!");
-      // Close modal and reset form
       document.getElementById('bookingModal').classList.remove('show');
       setBookingData({
         userId: "",
@@ -142,7 +141,7 @@ function Housing() {
   return (
     <>
       <NavBar />
-      <div className="search-container bg-white shadow-sm py-4" dir="rtl">
+      <div className="search-container bg-white shadow-sm py-4 mt-5 pt-5" dir="rtl">
         <div className="container">
           <div className="row g-3 align-items-center justify-content-end">
             <div className="col-md-4">

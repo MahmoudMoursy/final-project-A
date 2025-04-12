@@ -50,9 +50,14 @@ function Signup() {
     }
 
     return (
-        <div  style={{ background: "linear-gradient(97deg, rgba(9,30,61,1) 70%, rgba(255,255,255,1) 95%)" }}>
-            <div >
-                <div className="row justify-content-around pt-4 pb-5">
+        <div style={{ 
+            background: "linear-gradient(97deg, rgba(9,30,61,1) 70%, rgba(255,255,255,1) 95%)",
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center"
+        }}>
+            <div className="container-fluid">
+                <div className="row justify-content-around">
                     <div className="col-md-6 col-lg-4 mt-md-0 mt-lg-5">
                         <img src={wasetLogo} alt="logo" className="w-50 mb-5 mt-5 mx-auto d-block" />
                         <h2 className="text-center text-white fw-bolder">
