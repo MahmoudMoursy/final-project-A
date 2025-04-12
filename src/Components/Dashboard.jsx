@@ -62,11 +62,13 @@ function Dashboard() {
        
        <div className="dashboard-content">
          <div className="stats-grid">
-           <div className="stat-card">
-             <h3>Total Users</h3>
-             <p className="stat-number">{numOfAdmi+numOfUsers}</p>
-             <p className="stat-number">{numOfAdmi} of admin & supervisor</p>
-           </div>
+         <Link to="/AdminManagment" style={{ textDecoration: 'none' }}>
+            <div className="stat-card">
+              <h3>Total Users</h3>
+              <p className="stat-number">{numOfAdmi+numOfUsers}</p>
+              <p className="stat-number">{numOfAdmi} of admin & supervisor</p>
+            </div>
+           </Link>
            <div className="stat-card">
              <h3>Revenue</h3>
              <p className="stat-number">$0</p>
@@ -76,11 +78,8 @@ function Dashboard() {
              <h3>Posts</h3>
              <p className="stat-number">{posts}</p>
            </div>
-           </Link>
-           <div className="stat-card">
-             <h3>Tasks</h3>
-             <p className="stat-number">0</p>
-           </div>
+          </Link>
+           
          </div>
 
          <div className="dashboard-widgets">

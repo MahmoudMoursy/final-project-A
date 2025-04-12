@@ -4,38 +4,41 @@ import "./profile.css";
 import React, { useEffect, useState } from "react";
 import db, { auth } from "../firebaseconfig";
 import { useAuth } from "../authstorre";
-import { collection, query, where, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { collection, query, where, getDocs, deleteDoc,updateDoc, doc } from "firebase/firestore";
 import { useDispatch } from 'react-redux';
 import { Table } from 'lucide-react';
 import { Button } from 'react-bootstrap';
 
 const Profile = () => {
-  // const [userData, setUserData] = useState(null);
-  // const { user } = useAuth();
-  
-    // console.log(user);
-  
-    // useEffect(() => {
-    //   const fetchUserData = async () => {
-    //     try {
-    //       if (!user) return;
-    //       const q = query(collection(db, "user"), where("email", "==", user));
-    //       const querySnapshot = await getDocs(q);
-  
-    //       // console.log(user);
-  
-    //       if (!querySnapshot.empty) {
-    //         setUserData(querySnapshot.docs[0].data());
-    //       }
-    //     } catch (error) {
-    //       console.error("Error fetching user data:", error);
-    //       return <p>Error fetching user data. Please try again later.</p>;
-    //     }
-    //   };
-  
-    //   fetchUserData();
-    // }, []);
   const userData = JSON.parse(localStorage.getItem("currentUser"));
+
+  const [editingField, setEditingField] = useState(null);
+  const [fieldValues, setFieldValues] = useState({
+    email: userData.email || "",
+    phonenumber: userData.phonenumber || "",
+    city: userData.city || "",
+    address: userData.address || "",
+    status: userData?.status || ""
+
+  });
+  const handleInputChange = (field, value) => {
+    setFieldValues({ ...fieldValues, [field]: value });
+  };
+  const handleSave = async (field) => {
+    try {
+      const q = query(collection(db, "user"), where("UserId", "==", userData.UserId));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const userDocRef = doc(db, "user", querySnapshot.docs[0].id);
+        await updateDoc(userDocRef, { [field]: fieldValues[field] });
+        userData[field] = fieldValues[field]; // تحديث الـ local userData
+        localStorage.setItem("currentUser", JSON.stringify(userData)); // تحديث الـ localStorage
+        setEditingField(null);
+      }
+    } catch (error) {
+      console.error("Error updating field:", error);
+    }
+  };  
   const [posts, editPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -92,49 +95,66 @@ const Profile = () => {
           <div className="profileHeader">
             <div className="avatar">س</div>
             <h2 className="userName">{userData.username || "اسم المستخدم غير متوفر"}</h2>
-            <p className="userId">الجامعه : <span>{userData.university || "الجامعة غير متوفرة"}</span></p>
+            <p className="userId">الجامعة: <span>{userData.university || "الجامعة غير متوفرة"}</span></p>
+            
           </div>
 
           <div className="infoSection">
             <h3 className="sectionTitle">المعلومات الشخصية</h3>
-            <div>
-              <div className="infoItem">
-                <span className="infoLabel">البريد الإلكتروني:</span>
-                {userData.email}
+            { ["email", "phonenumber", "city", "address", "status"].map((fieldKey) => (
+              <div className="infoItem" key={fieldKey}>
+                <span className="infoLabel">
+                  {fieldKey === "email" ? "البريد الإلكتروني:" :
+                  fieldKey === "phonenumber" ? "رقم الجوال:" :
+                  fieldKey === "city" ? "المدينة:" :
+                  fieldKey === "address" ? "العنوان:" :
+                  "الحالة:"}
+                </span>
+                {editingField === fieldKey ? (
+                  <>
+                    {fieldKey === "status" ? (
+                      <select
+                        value={fieldValues[fieldKey]}
+                        onChange={(e) => handleInputChange(fieldKey, e.target.value)}
+                      >
+                        <option value="publisher">publisher</option>
+                        <option value="veiwer">veiwer</option>
+                      </select>
+                    ) : (
+                      <input
+                        type="text"
+                        value={fieldValues[fieldKey]}
+                        onChange={(e) => handleInputChange(fieldKey, e.target.value)}
+                      />
+                    )}
+                    <Button variant="success" size="sm" onClick={() => handleSave(fieldKey)}>حفظ</Button>
+                  </>
+                ) : (
+                  <>
+                    {fieldValues[fieldKey]}
+                    <Button
+                      variant="outline-primary"
+                      size="sm"
+                      className="ms-2"
+                      onClick={() => setEditingField(fieldKey)}
+                    >
+                      تعديل
+                    </Button>
+                  </>
+                )}
               </div>
-              <br />
-              <div className="infoItem">
-                <span className="infoLabel">رقم الجوال:</span>
-                {userData.phonenumber}
-              </div>
-              <br />
-              <div className="infoItem">
-                <span className="infoLabel">المدينة:</span>
-                {userData.city}
-              </div>
-              <br />
-              <div className="infoItem">
-                <span className="infoLabel">العنوان:</span>
-                {userData.address}
-              </div>
-              <div className="infoItem">
-                <span className="infoLabel">الحاله:</span>
-                {userData.status}
-              </div>
-            </div>
+            )) }
           </div>
 
           <div className="infoSection">
-            <h3 className="sectionTitle">النبذه الشخصيه</h3>
+            <h3 className="sectionTitle">النبذة الشخصية</h3>
             <p>{userData.bio}</p>
           </div>
 
           {userData?.status === "publisher" && (
             <div className="infoSection">
               <h3 className="sectionTitle">المساكن المنشورة</h3>
-
               {loading && <p>Loading...</p>}
-
               <div className="table-responsive">
                 <table className="table table-striped table-bordered table-hover" style={{ direction: 'ltr' }}>
                   <thead>
@@ -142,13 +162,13 @@ const Profile = () => {
                       <th>#</th>
                       <th>Username</th>
                       <th>Address</th>
-                      <th>description</th>
-                      <th>numbed</th>
-                      <th>numteu</th>
-                      <th>phone</th>
-                      <th>whats</th>
-                      <th>price</th>
-                      <th>delete</th>
+                      <th>Description</th>
+                      <th>Numbed</th>
+                      <th>Numteu</th>
+                      <th>Phone</th>
+                      <th>Whats</th>
+                      <th>Price</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -163,11 +183,9 @@ const Profile = () => {
                         <td>{post.phone}</td>
                         <td>{post.whats}</td>
                         <td>{post.price}</td>
-                        { userData?.status=="publisher" && <td>
-                            <Button variant="danger" onClick={() => deletePost(post.id)}>
-                            Delete
-                            </Button>
-                        </td>}
+                        <td>
+                          <Button variant="danger" onClick={() => deletePost(post.id)}>Delete</Button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -175,6 +193,9 @@ const Profile = () => {
               </div>
             </div>
           )}
+        </div>
+      
+
 
 
 
@@ -239,11 +260,14 @@ const Profile = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        
+          </div>
       <Footer />
     </>
   );
 };
 
 export default Profile;
+
+      
+ 
