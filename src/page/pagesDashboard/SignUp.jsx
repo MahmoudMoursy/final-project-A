@@ -11,11 +11,7 @@ function SignUp() {
     function save (){ 
         console.log(db);
 
-        addDoc(collection(db,"AdminManagment"),{
-            email:document.getElementById("userName").value,
-            password:document.getElementById("password").value,
-            status:document.querySelector('input[name="GFG"]:checked').value
-        })
+        
 
     }
     const {
@@ -30,6 +26,11 @@ function SignUp() {
         console.log("Form Data:", data);
         setSubmitted(true);
         setTimeout(() => setSubmitted(false), 3000);
+        addDoc(collection(db,"AdminManagment"),{
+          email:document.getElementById("userName").value,
+          password:document.getElementById("password").value,
+          status:document.querySelector('input[name="GFG"]:checked').value
+      })
       };
   return (
     
@@ -46,8 +47,8 @@ function SignUp() {
           <form onSubmit={handleSubmit(onSubmit)}>
 
             <div className="mb-3">
-              <label htmlFor="userName" className="form-label">User Name</label>
-              <input id="userName" type="text" className="form-control" placeholder="Enter userName" {...register("userName", { required: "userName is required" })} />
+              <label htmlFor="userName" className="form-label">Email</label>
+              <input id="userName" type="email" className="form-control" placeholder="Enter Email" {...register("userName", { required: "userName is required" })} />
               {errors.userName && <div className="text-danger small">{errors.userName.message}</div>}
             </div>
 
@@ -74,7 +75,7 @@ function SignUp() {
                 </div>
 
 
-            <button onClick={save} className="btn btn-dark w-100">Submit</button>
+            <button type='submit' className="btn btn-dark w-100">Submit</button>
           </form>
         </div>
       </div>

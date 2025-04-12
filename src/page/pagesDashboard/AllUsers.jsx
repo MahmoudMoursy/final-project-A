@@ -12,7 +12,6 @@ function AllUsers() {
     try {
       const querySnapshot = await getDocs(collection(db, "AdminManagment"));
       const usersData = [];
-      console.log(querySnapshot);
       
       querySnapshot.forEach((doc) => {
         usersData.push({ id: doc.id, ...doc.data() });

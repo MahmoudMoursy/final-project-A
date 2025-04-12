@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import './NavBar.css';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import wasetLogo from '../assets/waset.png';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from '../Redux/CurrentUser';
 
 function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -63,6 +65,8 @@ function NavBar() {
   };
 
   const user = JSON.parse(localStorage.getItem("currentUser"));
+  const dispatch = useDispatch();
+  dispatch(setCurrentUser(user));
   return (
     <div style={{ direction: "rtl" }}>
       <nav className={`navbar navbar-expand-lg navbar-dark d-flex justify-content-around px-4 fixed-top ${isScrolled || isMenuOpen ? 'scrolled' : 'transparent'}`}>
@@ -93,16 +97,14 @@ function NavBar() {
 
           <i className="fa-regular fa-bell text-white fs-3 mx-4"></i>
 
-          <a href="#" className="d-flex align-items-center link-body-emphasis text-decoration-none ms-2">
+          <Link to="/Profile" className="d-flex align-items-center link-body-emphasis text-decoration-none ms-2">
             <span className="border p-1 me-2 border-success text-black-50 mx-2" 
               style={{ borderRadius: '100%', backgroundColor: '#FFFFFFFF', width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              M
-              {/* style={{ borderRadius: '100%', backgroundColor: '#3498db', width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              {user.username[0]} */}
+              {user.username[0]} 
+              
             </span>
-            <strong className="d-none d-xl-block text-white" id="name">مرسي</strong>
-            {/* <strong className="d-none d-xl-block text-white" id="name">{user.username}</strong> */}
-          </a>
+            <strong className="d-none d-xl-block text-white" id="name">{user.username}</strong>
+          </Link>
 
           <ul className="menu dropdown-menu text-small fw-bold shadow rounded-3 p-2 text-center"
             style={{ width: '220px', position: 'absolute', left: '84%', top: '54px' }}>

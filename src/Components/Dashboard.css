@@ -8,6 +8,15 @@
   flex: 1;
   padding: 20px;
 }
+.stat-card {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+}
 
 .dashboard-header {
   display: flex;

@@ -11,8 +11,10 @@ import db from "../firebaseconfig";
 import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
 
 function Housing() {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  
   const [housingData, setHousingData] = useState({
-    address: "", description: "", numbed: "", numteu: "", phone: "", whats: "", price: "",
+    address: "", description: "", numbed: "", numteu: "", phone: "", whats: "", price: "",Id:user.UserId,username:user.username
   });
   const [housingList, setHousingList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -122,6 +124,8 @@ function Housing() {
         phone: "",
         whats: "",
         price: "",
+        Id:user.UserId,
+        username:user.username
       });
     } catch (error) {
       console.error("خطأ أثناء الحفظ: ", error);

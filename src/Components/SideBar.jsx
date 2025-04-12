@@ -22,28 +22,22 @@ function SideBar() {
         <ul>
           <li className="nav-item ">
             <Link to="/dashboard">
-              <span className="icon">🏠</span>
-              <span className="nav-text">Dashboard</span>
+              <span className="icon">📊</span>
+              <span className="nav-text">Analytics</span>
             </Link>
           </li>
           <li className="nav-item">
-            <a href="/analytics">
-              <span className="icon">📊</span>
-              <span className="nav-text">Analytics</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="/projects">
+            <Link to="/Posts">
               <span className="icon">📁</span>
               <span className="nav-text">Posts</span>
-            </a>
+            </Link>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a href="/tasks">
               <span className="icon">✓</span>
               <span className="nav-text">Tasks</span>
             </a>
-          </li>
+          </li> */}
         { UserDashboard?.status=="admin" && <li className="nav-item">
             <Link to="/AdminManagment">
               <span className="icon">👨🏻‍💼</span>

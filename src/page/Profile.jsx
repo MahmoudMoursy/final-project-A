@@ -7,30 +7,32 @@ import { useAuth } from "../authstorre";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 const Profile = () => {
-  const [userData, setUserData] = useState(null);
-  const { user } = useAuth();
-  console.log(user);
+  // const [userData, setUserData] = useState(null);
+  // const { user } = useAuth();
+  const userData = JSON.parse(localStorage.getItem("currentUser"));
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        if (!user) return;
-        const q = query(collection(db, "user"), where("email", "==", user));
-        const querySnapshot = await getDocs(q);
+  // console.log(user);
 
-        console.log(user);
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       if (!user) return;
+  //       const q = query(collection(db, "user"), where("email", "==", user));
+  //       const querySnapshot = await getDocs(q);
 
-        if (!querySnapshot.empty) {
-          setUserData(querySnapshot.docs[0].data());
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        return <p>Error fetching user data. Please try again later.</p>;
-      }
-    };
+  //       // console.log(user);
 
-    fetchUserData();
-  }, []);
+  //       if (!querySnapshot.empty) {
+  //         setUserData(querySnapshot.docs[0].data());
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //       return <p>Error fetching user data. Please try again later.</p>;
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, []);
 
   if (!userData) return <p>abdala..</p>;
 

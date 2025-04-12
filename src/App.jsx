@@ -21,7 +21,7 @@ import SigninDashboard from './Components/SigninDashboard';
 import { useDispatch, useSelector } from 'react-redux';
 import PrivateRoute from './PrivateDashboard';
 import { setCurrentUser } from './Redux/CurrentUser';
-import { useEffect } from 'react';
+import Posts from './page/pagesDashboard/posts'
 
 // import { AuthProvider } from './context/Authcontext';
 
@@ -68,8 +68,10 @@ function App() {
         <Route path='/Community' element={<Community />} />
         <Route path='/Profileform' element={<Profileform />} />
         <Route path="/post/:id" element={<PostDetails />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/AdminManagment" element={<AdminManagment />} />
+        <Route path="/dashboard"  element={<PrivateRoute element={<Dashboard />} isAuthenticated={userDashboard} />}/>
+      <Route path="/AdminManagment"  element={<PrivateRoute element={<AdminManagment />} isAuthenticated={userDashboard} />}/>
+      <Route path="/Posts"  element={<PrivateRoute element={<Posts />} isAuthenticated={userDashboard} />}/>
+      <Route path="/SigninDashboard" element={ <SigninDashboard />} />
         <Route path="/RestaurantsPage" element={<RestaurantsPage />} />
       </Routes>
     </LoadingProvider>

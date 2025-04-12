@@ -6,6 +6,7 @@ import SigninDashboard from './SigninDashboard';
 import { useSelector } from 'react-redux';
 import { collection, getDocs } from 'firebase/firestore';
 import db from '../firebaseconfig';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
   const [numOfAdmi, setNumOfAdm ] = useState(0);
@@ -32,7 +33,7 @@ function Dashboard() {
         };
       const fetchPosts = async () => {
           try {
-            const querySnapshot = await getDocs(collection(db, "post"));
+            const querySnapshot = await getDocs(collection(db, "housing"));
             setPosts(querySnapshot.docs.length);
           } catch (error) {
             console.error("Error fetching posts: ", error);
@@ -70,10 +71,12 @@ function Dashboard() {
              <h3>Revenue</h3>
              <p className="stat-number">$0</p>
            </div>
-           <div className="stat-card">
+          <Link to="/Posts" style={{ textDecoration: 'none' }}>
+           <div className="stat-card" style={{width: '100%', height: '100%',}}>
              <h3>Posts</h3>
              <p className="stat-number">{posts}</p>
            </div>
+           </Link>
            <div className="stat-card">
              <h3>Tasks</h3>
              <p className="stat-number">0</p>
