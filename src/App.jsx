@@ -22,6 +22,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import PrivateRoute from './PrivateDashboard';
 import { setCurrentUser } from './Redux/CurrentUser';
 import Posts from './page/pagesDashboard/posts'
+import PharmaciesPage from './page/PharmaciesPage';
+import DoctorsPage from './page/DoctorsPage';
+import SupermarketsPage from './page/SupermarketsPage';
 
 // import { AuthProvider } from './context/Authcontext';
 
@@ -73,6 +76,9 @@ function App() {
       <Route path="/Posts"  element={<PrivateRoute element={<Posts />} isAuthenticated={userDashboard} />}/>
       <Route path="/SigninDashboard" element={ <SigninDashboard />} />
         <Route path="/RestaurantsPage" element={<RestaurantsPage />} />
+        <Route path="/PharmaciesPage" element={<PharmaciesPage />} />
+        <Route path="/DoctorsPage" element={<DoctorsPage />} />
+        <Route path="/SupermarketsPage" element={<SupermarketsPage />} />
       </Routes>
     </LoadingProvider>
     
