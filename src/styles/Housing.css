@@ -1,0 +1,96 @@
+[dir="rtl"] .form-select {
+  padding-right: 0.75rem;
+  padding-left: 2rem;
+  background-position: left 0.75rem center;
+}
+
+[dir="rtl"] .modal-header .btn-close {
+  padding: calc(var(--bs-modal-header-padding-y) * .5) calc(var(--bs-modal-header-padding-x) * .5);
+  margin: calc(-.5 * var(--bs-modal-header-padding-y)) auto calc(-.5 * var(--bs-modal-header-padding-y)) calc(-.25 * var(--bs-modal-header-padding-x));
+}
+
+.hover-shadow {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+.features span {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Button Styles */
+.btn {
+  min-width: fit-content;
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5c636a;
+  border-color: #565e64;
+}
+
+/* Fix button widths in specific locations */
+.modal-footer .btn {
+  min-width: 120px;
+}
+
+.search-button {
+  width: auto !important;
+  min-width: 120px;
+}
+
+.card .btn {
+  min-width: 100px;
+}
+
+/* Adjust card actions */
+.card-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* RTL specific button adjustments */
+[dir="rtl"] .btn i {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* Contact buttons specific styles */
+.contact-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.contact-buttons .btn {
+  flex: 1;
+  min-width: 120px;
+}
