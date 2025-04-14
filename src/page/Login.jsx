@@ -87,7 +87,7 @@ function Login() {
     }
 
     return (
-        <div className="min-vh-100 bg-gradient-custom d-flex align-items-center justify-content-center p-4">
+        <div className="min-vh-100 bg-gradient-custom-dark d-flex align-items-center justify-content-center p-4">
             <div className="card auth-card" style={{ maxWidth: '72rem' }}>
                 <div className="row g-0">
                     {/* Content Side */}

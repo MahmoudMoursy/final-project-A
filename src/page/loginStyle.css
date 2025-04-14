@@ -74,7 +74,10 @@
   
   /* Custom background gradient */
   .bg-gradient-custom {
-    background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+    background: linear-gradient(135deg, #1a1a2e 0%, #6610f2 100%);
+  }
+  .bg-gradient-custom-dark {
+    background: #1a1a2e;  /* Dark blue/navy background */
   }
   
   /* Custom styles for the circles */
