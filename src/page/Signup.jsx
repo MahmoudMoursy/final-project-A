@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '../authstorre';
 import wasetLogo from '../assets/waset.png';
+import icon from '../../public/favicon.svg';
 import { LogIn, UserPlus, ArrowRight, Building2, Github } from 'lucide-react';
 import './loginStyle.css';
 
@@ -73,12 +74,12 @@ function Signup() {
                                 </h2>
                                 <div className="d-flex align-items-center gap-4 animate-bounce-subtle mt-4">
                                     <img
-                                        src={wasetLogo}
+                                        src={icon}
                                         alt="Waset Logo"
                                         className="rounded-circle object-fit-cover"
-                                        style={{ width: '5rem', height: '5rem', border: '4px solid rgba(255, 255, 255, 0.3)' }}
+                                        style={{ width: '3rem', height: '3rem', border: '4px solid rgba(255, 255, 255, 0.3)' }}
                                     />
-                                    <p className="fs-5 opacity-75">
+                                    <p className="fs-5 ">
                                         Create an account and discover the possibilities!
                                     </p>
                                 </div>
