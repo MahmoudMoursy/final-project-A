@@ -9,7 +9,6 @@ import { setCurrentUser } from '../Redux/CurrentUser';
 import { collection, getDocs } from 'firebase/firestore';
 import db from '../firebaseconfig';
 import './loginStyle.css';
-import Nav from 'react-bootstrap/Nav';
 
 
 
@@ -101,11 +100,11 @@ function Login() {
                         
                         <div className="h-100 d-flex flex-column justify-content-center gap-4 animate-fade-in position-relative" style={{ zIndex: 10 }}>
                             <div className="d-flex align-items-center gap-3">
+                                <h1 className="fs-4 fw-normal text-white">Waset</h1>
                                 <img src={wasetLogo} alt="logo" className="w-25" />
-                                <h1 className="fs-4 fw-bold">Waset</h1>
                             </div>
                             <div className="mb-4">
-                                <h2 className="display-5 fw-bold lh-sm">
+                                <h2 className="display-6 fw-normal lh-sm text-white">
                                     Welcome back to our platform
                                 </h2>
                                 <div className="d-flex align-items-center gap-4 animate-bounce-subtle mt-4">
@@ -126,7 +125,7 @@ function Login() {
                                             <span className="fs-4">🚀</span>
                                         </div>
                                         <div>
-                                            <h3 className="fw-semibold">Expatriate Services</h3>
+                                            <h3 className="fw-normal text-white">Expatriate Services</h3>
                                             <p className="opacity-75">Making your life easier away from home</p>
                                         </div>
                                     </div>
@@ -136,7 +135,7 @@ function Login() {
                                             <span className="fs-4">🛡️</span>
                                         </div>
                                         <div>
-                                            <h3 className="fw-semibold">Secure by Design</h3>
+                                            <h3 className="fw-normal text-white">Secure by Design</h3>
                                             <p className="opacity-75">Your data is always protected</p>
                                         </div>
                                     </div>
@@ -187,29 +186,31 @@ function Login() {
                             <div className="divider">Or continue with</div>
 
                             <form onSubmit={save}>
-                                <div>
-                                    <label className="form-label">Email Address</label>
+                                <div className="form-floating">
                                     <input
                                         type="email"
                                         name="email"
-                                        placeholder="Enter your email"
+                                        id="email"
+                                        placeholder=" "
                                         className="form-input"
                                         onChange={handleInputChange}
                                         value={user.email}
                                         required
                                     />
+                                    <label htmlFor="email" className="form-label">Email Address</label>
                                 </div>
-                                <div>
-                                    <label className="form-label">Password</label>
+                                <div className="form-floating">
                                     <input
                                         type="password"
                                         name="password"
-                                        placeholder="Enter your password"
+                                        id="password"
+                                        placeholder=" "
                                         className="form-input"
                                         onChange={handleInputChange}
                                         value={user.password}
                                         required
                                     />
+                                    <label htmlFor="password" className="form-label">Password</label>
                                 </div>
                                 <div className="remember-me">
                                     <label className="checkbox-label">
@@ -220,7 +221,11 @@ function Login() {
                                         />
                                         Remember me
                                     </label>
-                                    <a href="#" className="forgot-password">
+                                    <a 
+                                        onClick={() => nav('/ForgotPassword')}
+                                        className="forgot-password"
+                                        style={{ cursor: 'pointer' }}
+                                    >
                                         Forgot password?
                                     </a>
                                 </div>
