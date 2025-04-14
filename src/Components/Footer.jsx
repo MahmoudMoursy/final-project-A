@@ -1,8 +1,9 @@
-// استيراد الصورة فقط
+
 import wasetLogo from '../assets/waset.png';
 
 const Footer = () => {
   return (
+    
     <div
       className="container-fluid  text-light mt-5"
       style={{ overflow: "hidden", backgroundColor: "#091e3d", direction: "rtl" }}
