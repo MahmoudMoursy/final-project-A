@@ -19,6 +19,42 @@ import { setCurrentUser } from '../Redux/CurrentUser';
 import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
+// SwiperJS imports for vendor carousel
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-coverflow';
+import './VendorCarousel.css';
+import { Pagination, EffectCoverflow, Autoplay } from 'swiper/modules';
+
+// Vendor data for the carousel
+const vendors = [
+  {
+    img: "https://marasim.bsite.net//81855265-a80c-4d47-9258-fd09b3271c23/ProfilePicture/638378048056128663.jpg",
+    title: "Meko Safwat Photography",
+    desc: "Meko Safwat Photogra..."
+  },
+  {
+    img: "https://marasim.bsite.net//68c87e83-0ee0-4f45-8028-56a90aa13c14/ProfilePicture/638378046640415174.webp",
+    title: "قاعة السرايا",
+    desc: "ارقي القاعات الاسلام..."
+  },
+  {
+    img: "https://marasim.bsite.net//fb05ba5e-84af-48b8-9c84-e4164d875873/ProfilePicture/638378047550450315.jpg",
+    title: "جراند صالون",
+    desc: "جراند صالون للرجال..."
+  },
+  {
+    img: "https://marasim.bsite.net//5332ba1f-4376-4726-ba86-713a96039c4f/ProfilePicture/638378037904313295.jpg",
+    title: "قاعة صن رايز اسوان",
+    desc: "SunRise widding hall"
+  },
+  {
+    img: "https://marasim.bsite.net//968499e6-b2e2-42ba-9c0c-4995066eba23/ProfilePicture/638378059560209246.jpg",
+    title: "Makeup by Donia Mamdouh",
+    desc: "All my brides are so..."
+  }
+];
 
 function Home() {
   const nav = useNavigate()
@@ -142,6 +178,51 @@ function Home() {
           </div>
         </section>
 
+        <div className="py-5 container">
+          <h2 className="text-primary ms-3 mb-2 h-100" style={{textAlign: "right"}}>مقدمو الخدمة الأكثر طلباً</h2>
+          <img src="/assets/svg/underline.png" alt="" style={{width: "23rem"}} />
+          <Swiper
+            modules={[EffectCoverflow, Pagination, Autoplay]}
+            effect="coverflow"
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={3}
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 200,
+              modifier: 2.5,
+              slideShadows: false,
+            }}
+            pagination={{ clickable: true }}
+            className="custom-swiper"
+            dir="rtl"
+            style={{padding: "40px 0"}}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1200: { slidesPerView: 3 }
+            }}
+          >
+            {vendors.map((vendor, idx) => (
+              <SwiperSlide key={idx}>
+                <div className="slide-content-wrapper">
+                  <img src={vendor.img} alt={vendor.title} className="slide-img" />
+                  <div className="slide-content text-white text-center">
+                    <h2>{vendor.title}</h2>
+                    <p>{vendor.desc}</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
         <section className="py-5 rounded map-section" data-aos="fade-up">
           <h2 className="text-center mb-4 map-title">Explore Aswan</h2>
           <div id="map" style={{ height: '400px', borderRadius: '10px', marginBottom: '2rem' }}></div>
@@ -165,6 +246,7 @@ function Home() {
             <button type="submit" className="btn btn-primary submit-btn">Send</button>
           </form>
         </section>
+
       </div>
 
       <Footer />
