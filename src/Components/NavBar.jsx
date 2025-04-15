@@ -11,21 +11,17 @@ function NavBar() {
   const location = useLocation();
 
   useEffect(() => {
-    // تحقق مما إذا كانت الصفحة الحالية هي الصفحة الرئيسية
     const isHomePage = location.pathname === '/Home' || location.pathname === '/home';
     
-    // إذا لم تكن الصفحة الرئيسية، اجعل شريط التنقل دائمًا بلون ثابت
     if (!isHomePage) {
       setIsScrolled(true);
       return;
     }
     
-    // Make sure menu is closed when changing pages
     setIsMenuOpen(false);
     document.body.classList.remove('menu-open');
     
     const handleScroll = () => {
-      // تغيير الحالة عندما يتجاوز التمرير 100 بكسل (فقط في الصفحة الرئيسية)
       if (window.scrollY > 100) {
         setIsScrolled(true);
       } else {
@@ -33,19 +29,15 @@ function NavBar() {
       }
     };
 
-    // إضافة مستمع الحدث للتمرير فقط في الصفحة الرئيسية
     window.addEventListener('scroll', handleScroll);
     
-    // تنفيذ فحص أولي للتمرير
     handleScroll();
 
-    // إزالة مستمع الحدث عند تفكيك المكون
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [location.pathname]);
   
-  // Clean up the body class when component unmounts
   useEffect(() => {
     return () => {
       document.body.classList.remove('menu-open');

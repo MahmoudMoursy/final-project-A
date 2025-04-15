@@ -7,6 +7,7 @@ import './Services.css';
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
 import { NavLink } from 'react-router-dom';
+import AddServiceForm from './AddServiceForm';
 
 import esmo1 from '../assets/service_imgs/مطاعم/اسمه ايه/esmo1.jpeg';
 import esmo2 from '../assets/service_imgs/مطاعم/اسمه ايه/esmo2.jpeg';
@@ -95,6 +96,7 @@ const Services = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [mainImage, setMainImage] = useState('');
+  const [showAddServiceModal, setShowAddServiceModal] = useState(false);
 
   const responsive = {
     superLargeDesktop: {
@@ -431,7 +433,7 @@ const Services = () => {
         additionalImages: [
           wardny2,
           'https://images.unsplash.com/photo-1578916171728-46686eac8d58',
-          'https://images.unsplash.com/photo-1542838132-92c53300491e',
+          'https://images.unsplash.com/photo-1542838132-92c874018d66e',
           'https://images.unsplash.com/photo-1534723452862-4c874018d66d'
         ]
       },
@@ -492,6 +494,12 @@ const Services = () => {
       <NavBar />
       <div className="services-container" dir="rtl">
         <section className="service-section mb-5">
+          <button 
+            className="btn btn-primary" 
+            onClick={() => setShowAddServiceModal(true)}
+          >
+            إضافة خدمة جديدة
+          </button>
           <h2 className="section-title"><NavLink to="/RestaurantsPage" style={{ textDecoration: 'none', color: 'inherit' }}>المطاعم والكافيهات</NavLink></h2>
           <Carousel
             responsive={responsive}
@@ -511,7 +519,7 @@ const Services = () => {
         </section>
 
         <section className="service-section mb-5">
-          <h2 className="section-title">الصيدليات</h2>
+          <h2 className="section-title"><NavLink to="/PharmaciesPage" style={{ textDecoration: 'none', color: 'inherit' }}>الصيدليات</NavLink></h2>
           <Carousel
             responsive={responsive}
             infinite={true}
@@ -530,7 +538,7 @@ const Services = () => {
         </section>
 
         <section className="service-section mb-5">
-          <h2 className="section-title">الأطباء</h2>
+          <h2 className="section-title"><NavLink to="/DoctorsPage" style={{ textDecoration: 'none', color: 'inherit' }}>الأطباء</NavLink></h2>
           <Carousel
             responsive={responsive}
             infinite={true}
@@ -550,7 +558,7 @@ const Services = () => {
 
 
         <section className="service-section mb-5">
-          <h2 className="section-title">السوبر ماركت</h2>
+          <h2 className="section-title"><NavLink to="/SupermarketsPage" style={{ textDecoration: 'none', color: 'inherit' }}>السوبر ماركت</NavLink></h2>
           <Carousel
             responsive={responsive}
             infinite={true}
@@ -664,6 +672,36 @@ const Services = () => {
           <div
             className="modal-backdrop show"
             onClick={() => setShowModal(false)}
+          ></div>
+        )}
+
+        {/* Add Service Modal */}
+        {showAddServiceModal && (
+          <div className="modal show d-block" tabIndex="-1">
+            <div className="modal-dialog modal-lg">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" style={{ marginRight: "50px" }}>إضافة خدمة جديدة</h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    style={{ marginLeft: "20px" }}
+                    onClick={() => setShowAddServiceModal(false)}
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <AddServiceForm />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Add Service Modal Backdrop */}
+        {showAddServiceModal && (
+          <div
+            className="modal-backdrop show"
+            onClick={() => setShowAddServiceModal(false)}
           ></div>
         )}
 
