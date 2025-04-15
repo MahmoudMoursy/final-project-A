@@ -5,13 +5,20 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
 import db from "../firebaseconfig";
 import { addDoc, collection, getDocs, doc, updateDoc, Timestamp } from "firebase/firestore";
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from '../Redux/CurrentUser';
 
 const Community = () => {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+      const dispatch = useDispatch();
+      dispatch(setCurrentUser(user));
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
@@ -60,11 +67,11 @@ const Community = () => {
     if (newPostText.trim() === "") return;
 
     const newPost = {
-      user: "مستخدم جديد",
+      user: user.username,
       text: newPostText,
       image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
       timestamp: Timestamp.now(),
-      likeCount: 0, 
+      likeCount: 0,
       isLiked: false,
     };
 
@@ -80,8 +87,8 @@ const Community = () => {
   return (
     <>
       <NavBar />
-      <Box sx={{ marginTop: "80px", paddingTop: "20px", padding: "20px", direction: "rtl", width: "100vw" }}>
-        <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: "rtl", marginRight: 3 }}>
+      <Box sx={{ marginTop: "80px", padding: "20px", direction: "rtl", width: "100%", backgroundColor: "#f0f2f5" }}>
+        <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: "right", marginRight: 3 }}>
           مجتمع <span style={{
             backgroundColor: "#091e3d", padding: "8px 15px",
             color: "#fff", borderRadius: "110px 4000px",
@@ -93,25 +100,30 @@ const Community = () => {
 
         <Button
           variant="contained"
-          color="success"
           onClick={handleOpen}
           sx={{
-            backgroundColor: "#091e3d",
+            backgroundColor: "#0A3265FF",
             fontSize: "14px",
             fontWeight: "bold",
             display: "flex",
             alignItems: "center",
             gap: "5px",
             padding: "10px 20px",
-            marginBottom  : "20px",
+            marginBottom: "20px",
             marginRight: 3,
+            borderRadius: "25px"
           }}
         >
           <AddIcon /> موضوع جديد
         </Button>
 
         <Dialog open={open} onClose={handleClose} fullWidth>
-          <DialogTitle>إنشاء منشور</DialogTitle>
+          <DialogTitle sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            إنشاء منشور
+            <Button onClick={handleClose}>
+              <CloseIcon />
+            </Button>
+          </DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -126,37 +138,67 @@ const Community = () => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} sx={{ color: "red" }}>إلغاء</Button>
-            <Button onClick={handleAddPost} color="primary" variant="contained">نشر</Button>
+            <Button onClick={handleAddPost} variant="contained" sx={{ backgroundColor: "#1877f2" }}>
+              نشر
+            </Button>
           </DialogActions>
         </Dialog>
 
         {posts.map((post) => (
-          <Card key={post.id} sx={{ mb: 2, borderRadius: 2, boxShadow: 1, margin: 2 }}>
-            <CardContent sx={{ display: "flex", flexDirection: "column", p: 2 }}>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
-                <Avatar src={post.image} sx={{ width: 60, height: 60 }} />
+          <Card
+            key={post.id}
+            sx={{
+              mb: 3,
+              mx: "auto",
+              maxWidth: 900,
+              borderRadius: 4,
+              boxShadow: 3,
+              backgroundColor: "#fff",
+            }}
+          >
+            <CardContent>
+              <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                <Avatar src={post.image} sx={{ width: 56, height: 56, mr: 2 }} />
                 <Box>
-                  <Typography variant="body1" sx={{ fontWeight: "bold" }}>{post.user}</Typography>
+                  <Typography variant="subtitle1" fontWeight="bold">{post.user}</Typography>
                   <Typography variant="caption" sx={{ color: "gray" }}>
-                    {post.timestamp ? new Date(post.timestamp).toLocaleString("ar-EG") : "توقيت غير متاح"}
+                    {new Date(post.timestamp).toLocaleString("ar-EG")}
                   </Typography>
                 </Box>
               </Box>
 
-              <Typography variant="body2" sx={{ color: "gray", mb: 2 }}>{post.text}</Typography>
+              <Typography variant="body1" sx={{ mb: 2 }}>{post.text}</Typography>
 
               <Box sx={{ display: "flex", gap: 2 }}>
                 <Button
                   variant="contained"
                   startIcon={<ThumbUpAltIcon />}
-                  sx={{ backgroundColor: post.isLiked ? "#0E55C0FF" : "white", color: post.isLiked ? "white" : "black" }}
+                  sx={{
+                    backgroundColor: post.isLiked ? "#1877f2" : "#e4e6eb",
+                    color: post.isLiked ? "#fff" : "#050505",
+                    borderRadius: "20px",
+                    textTransform: "none",
+                    flexGrow: 1,
+                    gap: "8px",
+                  }}
                   onClick={() => handleLike(post.id, post.likeCount, post.isLiked)}
                 >
                   أعجبني ({post.likeCount})
                 </Button>
 
-                <Button variant="outlined" onClick={() => navigate(`/post/${post.id}`, { state: { post } })}>
+                <Button
+                  variant="outlined"
+                  startIcon={<ChatBubbleOutlineIcon />}
+                  sx={{
+                    borderColor: "#ccc",
+                    borderRadius: "20px",
+                    textTransform: "none",
+                    flexGrow: 1,
+                    gap: "8px",
+
+                  }}
+                  onClick={() => navigate(`/post/${post.id}`, { state: { post } })}
+                >
                   تعليق
                 </Button>
               </Box>
