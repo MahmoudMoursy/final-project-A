@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../authstorre';
 import wasetLogo from '../assets/waset.png';
@@ -6,7 +6,7 @@ import icon from '../../public/favicon.svg';
 import { LogIn, UserPlus, ArrowRight, Building2, Github } from 'lucide-react';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useDispatch } from 'react-redux';
-import { setCurrentUser } from '../Redux/CurrentUser';
+import { deleteCurrentUser, setCurrentUser } from '../Redux/CurrentUser';
 import { collection, getDocs } from 'firebase/firestore';
 import db from '../firebaseconfig';
 import './loginStyle.css';
@@ -15,6 +15,10 @@ import './loginStyle.css';
 
 
 function Login() {
+    useEffect(() => {
+        localStorage.clear();
+        dispatch(deleteCurrentUser());
+    }, []);
     const nav = useNavigate();
     const AuthStore = useAuth();
     const [user, setUser] = useState({ email: "", password: "" });
