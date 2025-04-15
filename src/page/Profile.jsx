@@ -8,7 +8,8 @@ import { collection, query, where, getDocs, deleteDoc,updateDoc, doc } from "fir
 import { useDispatch } from 'react-redux';
 import { Table } from 'lucide-react';
 import { Button } from 'react-bootstrap';
-
+import { useNavigate } from 'react-router-dom';
+import { deleteCurrentUser } from '.././Redux/CurrentUser';
 const Profile = () => {
   const userData = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -86,7 +87,13 @@ const Profile = () => {
   };
         
   if (!userData) return <p>abdala..</p>;
-
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    localStorage.clear(); // مسح جميع البيانات من localStorage
+    dispatch(deleteCurrentUser()); // تفريغ الـ store
+    nav('/');
+  };
   return (
     <>
       <NavBar />
@@ -260,7 +267,8 @@ const Profile = () => {
               </div>
             </div>
           </div>
-        
+          <button className="btn btn-danger" onClick={handleLogout}>تسجيل الخروج</button>
+
           </div>
       <Footer />
     </>

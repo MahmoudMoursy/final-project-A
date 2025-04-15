@@ -32,7 +32,7 @@ function Login() {
         try {
             const useree =  await AuthStore.login(user);
             // dispatch(setCurrentUser(useree.uid));
-            // localStorage.setItem("currentUser", JSON.stringify(useree.uid));
+            localStorage.setItem("currentUser", JSON.stringify(useree.uid));
             fetchUsers(useree.uid);
             
         } catch (err) {
@@ -50,8 +50,8 @@ function Login() {
           querySnapshot.forEach((doc) => {
             if(doc.id==useree){
                 flag = true;     
-                dispatch(setCurrentUser(doc.data()));
                 localStorage.setItem("currentUser", JSON.stringify(doc.data()));
+                dispatch(setCurrentUser(doc.data()));
                 console.log("wait");
                 console.log(doc);
                 setLoading(false);

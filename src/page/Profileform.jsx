@@ -27,6 +27,7 @@ function Profileform() {
             UserId: useId,
         };
         await setDoc(userRef, userData);
+        nav('/login');
     }
 
     return (
