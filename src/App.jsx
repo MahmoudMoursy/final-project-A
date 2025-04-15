@@ -48,7 +48,8 @@ function App() {
     if (currentUser) {
       dispatch(setCurrentUser(JSON.parse(currentUser)));
     }
-  }, []);
+    
+  }, [dispatch]);
 
 
 
