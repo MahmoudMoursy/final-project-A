@@ -4,6 +4,7 @@ import Haeder from '../Components/Haeder';
 import aswulogo2 from '../assets/aswulogo2.png';
 import ColoredLogo from '../assets/ColoredLogo.svg';
 import user from '../assets/user.jpg';
+import contactImg from '../assets/contact.svg';
 import CardSlider from '../Components/CardSlider';
 import Footer from '../Components/Footer';
 import AOS from 'aos';
@@ -75,28 +76,6 @@ function Home() {
       nav("/Profileform")
     }
     
-
-
-
-    const map = L.map('map').setView([24.0889, 32.8998], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    const locations = [
-      // { name: 'Aswan High Dam', coords: [23.9702, 32.8800], desc: 'Historic dam on the Nile River' },
-      // { name: 'Philae Temple', coords: [24.0134, 32.8832], desc: 'Ancient Egyptian temple complex' },
-      // { name: 'Elephantine Island', coords: [24.08q47, 32.8850], desc: 'Archaeological site and museum' },
-      // { name: 'Nubian Museum', coords: [24.0741, 32.8877], desc: 'Museum showcasing Nubian culture' }
-    ];
-
-    locations.forEach(loc => {
-      L.marker(loc.coords)
-        .bindPopup(`<b>${loc.name}</b><br>${loc.desc}`)
-        .addTo(map);
-    });
-
-    return () => map.remove();
   }, []);
 //  const cUser = useSelector(state => state.currentUser.value) 
 //  console.log(cUser);  
@@ -223,32 +202,25 @@ function Home() {
           </Swiper>
         </div>
 
-        <section className="py-5 rounded map-section" data-aos="fade-up">
-          <h2 className="text-center mb-4 map-title">Explore Aswan</h2>
-          <div id="map" style={{ height: '400px', borderRadius: '10px', marginBottom: '2rem' }}></div>
-        </section>
-
-        <section id="contact" className="py-5" data-aos="fade-up" style={{ backgroundColor: "#6F6F6F1F" }}>
-          <h2 className="text-center mb-4 text-black contact-title">Contact Us</h2>
-          <form className="contact-form">
-            <div className="mb-3 form-group">
-              <label htmlFor="name" className="form-label text-black">Name</label>
-              <input type="text" className="form-control custom-input" id="name" placeholder="Your Name" />
+        {/* Contact Section with Image */}
+        <div className="container" dir="rtl">
+          <div className="row align-items-center mt-5" style={{ marginBottom: '2rem' }}>
+            <div className="col-md-6 mb-4">
+              <h1 className="text-end text-primary">تحتاج إلى مساعدة</h1>
+              <h4 className="text-muted mt-3 text-end">تواصل مع فريق العمل في حالة وجود أي استفسار</h4>
+              <div className="text-end mt-5">
+                <button className="btn btn-outline-primary pt-3 pb-3 ps-5 pe-5 contact-btn">
+                  تواصل معنا
+                </button>
+              </div>
             </div>
-            <div className="mb-3 form-group">
-              <label htmlFor="email" className="form-label text-black">Email</label>
-              <input type="email" className="form-control custom-input" id="email" placeholder="Your Email" />
+            <div className="col-md-6 d-flex justify-content-center">
+              <img src={contactImg} alt="Contact Us" className="img-fluid" style={{ maxWidth: '400px', height: 'auto' }} />
             </div>
-            <div className="mb-3 form-group">
-              <label htmlFor="message" className="form-label text-black">Message</label>
-              <textarea className="form-control custom-input" id="message" rows="4" placeholder="Your Message"></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary submit-btn">Send</button>
-          </form>
-        </section>
+          </div>
+        </div>
 
       </div>
-
       <Footer />
     </div>
   );
