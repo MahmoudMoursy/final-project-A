@@ -6,7 +6,7 @@ const Footer = () => {
     
     <div
       className="container-fluid  text-light "
-      style={{ overflow: "hidden", backgroundColor: "#091e3d", direction: "rtl" }}
+      style={{ overflow: "hidden", backgroundColor: "#24262B", direction: "rtl" }}
     >
       <div className="container">
         <div className="row gx-5">

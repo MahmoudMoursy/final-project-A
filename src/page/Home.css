@@ -1,3 +1,8 @@
+:root {
+    --main-color: #33CCCC;
+}
+
+
 /* تحسين الألوان العامة */
 .home-page {
     background-color: #ffffff;
@@ -136,7 +141,7 @@
     font-size: 2.5rem;
     background: linear-gradient(45deg, #2193b0, #6dd5ed);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: #2193b0;
+    -webkit-text-fill-color: #33CCCC;
     transition: transform 0.3s ease;
   }
   
@@ -272,3 +277,5 @@
       opacity: 1;
     }
   }
+
+  
