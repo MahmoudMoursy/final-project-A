@@ -4,6 +4,7 @@ import Haeder from '../Components/Haeder';
 import aswulogo2 from '../assets/aswulogo2.png';
 import ColoredLogo from '../assets/ColoredLogo.svg';
 import user from '../assets/user.jpg';
+import contactImg from '../assets/contact.svg';
 import CardSlider from '../Components/CardSlider';
 import Footer from '../Components/Footer';
 import AOS from 'aos';
@@ -19,6 +20,42 @@ import { setCurrentUser } from '../Redux/CurrentUser';
 import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
+// SwiperJS imports for vendor carousel
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-coverflow';
+import './VendorCarousel.css';
+import { Pagination, EffectCoverflow, Autoplay } from 'swiper/modules';
+
+// Vendor data for the carousel
+const vendors = [
+  {
+    img: "https://marasim.bsite.net//81855265-a80c-4d47-9258-fd09b3271c23/ProfilePicture/638378048056128663.jpg",
+    title: "Meko Safwat Photography",
+    desc: "Meko Safwat Photogra..."
+  },
+  {
+    img: "https://marasim.bsite.net//68c87e83-0ee0-4f45-8028-56a90aa13c14/ProfilePicture/638378046640415174.webp",
+    title: "قاعة السرايا",
+    desc: "ارقي القاعات الاسلام..."
+  },
+  {
+    img: "https://marasim.bsite.net//fb05ba5e-84af-48b8-9c84-e4164d875873/ProfilePicture/638378047550450315.jpg",
+    title: "جراند صالون",
+    desc: "جراند صالون للرجال..."
+  },
+  {
+    img: "https://marasim.bsite.net//5332ba1f-4376-4726-ba86-713a96039c4f/ProfilePicture/638378037904313295.jpg",
+    title: "قاعة صن رايز اسوان",
+    desc: "SunRise widding hall"
+  },
+  {
+    img: "https://marasim.bsite.net//968499e6-b2e2-42ba-9c0c-4995066eba23/ProfilePicture/638378059560209246.jpg",
+    title: "Makeup by Donia Mamdouh",
+    desc: "All my brides are so..."
+  }
+];
 
 function Home() {
   const nav = useNavigate()
@@ -39,28 +76,6 @@ function Home() {
       nav("/Profileform")
     }
     
-
-
-
-    const map = L.map('map').setView([24.0889, 32.8998], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    const locations = [
-      // { name: 'Aswan High Dam', coords: [23.9702, 32.8800], desc: 'Historic dam on the Nile River' },
-      // { name: 'Philae Temple', coords: [24.0134, 32.8832], desc: 'Ancient Egyptian temple complex' },
-      // { name: 'Elephantine Island', coords: [24.08q47, 32.8850], desc: 'Archaeological site and museum' },
-      // { name: 'Nubian Museum', coords: [24.0741, 32.8877], desc: 'Museum showcasing Nubian culture' }
-    ];
-
-    locations.forEach(loc => {
-      L.marker(loc.coords)
-        .bindPopup(`<b>${loc.name}</b><br>${loc.desc}`)
-        .addTo(map);
-    });
-
-    return () => map.remove();
   }, []);
 //  const cUser = useSelector(state => state.currentUser.value) 
 //  console.log(cUser);  
@@ -142,31 +157,70 @@ function Home() {
           </div>
         </section>
 
-        <section className="py-5 rounded map-section" data-aos="fade-up">
-          <h2 className="text-center mb-4 map-title">Explore Aswan</h2>
-          <div id="map" style={{ height: '400px', borderRadius: '10px', marginBottom: '2rem' }}></div>
-        </section>
+        <div className="py-5 container">
+          <h2 className="text-primary ms-3 mb-2 h-100" style={{textAlign: "right"}}>مقدمو الخدمة الأكثر طلباً</h2>
+          <img src="/assets/svg/underline.png" alt="" style={{width: "23rem"}} />
+          <Swiper
+            modules={[EffectCoverflow, Pagination, Autoplay]}
+            effect="coverflow"
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={3}
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 200,
+              modifier: 2.5,
+              slideShadows: false,
+            }}
+            pagination={{ clickable: true }}
+            className="custom-swiper"
+            dir="rtl"
+            style={{padding: "40px 0"}}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1200: { slidesPerView: 3 }
+            }}
+          >
+            {vendors.map((vendor, idx) => (
+              <SwiperSlide key={idx}>
+                <div className="slide-content-wrapper">
+                  <img src={vendor.img} alt={vendor.title} className="slide-img" />
+                  <div className="slide-content text-white text-center">
+                    <h2>{vendor.title}</h2>
+                    <p>{vendor.desc}</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
 
-        <section id="contact" className="py-5" data-aos="fade-up" style={{ backgroundColor: "#6F6F6F1F" }}>
-          <h2 className="text-center mb-4 text-black contact-title">Contact Us</h2>
-          <form className="contact-form">
-            <div className="mb-3 form-group">
-              <label htmlFor="name" className="form-label text-black">Name</label>
-              <input type="text" className="form-control custom-input" id="name" placeholder="Your Name" />
+        {/* Contact Section with Image */}
+        <div className="container" dir="rtl">
+          <div className="row align-items-center mt-5" style={{ marginBottom: '2rem' }}>
+            <div className="col-md-6 mb-4">
+              <h1 className="text-end text-primary">تحتاج إلى مساعدة</h1>
+              <h4 className="text-muted mt-3 text-end">تواصل مع فريق العمل في حالة وجود أي استفسار</h4>
+              <div className="text-end mt-5">
+                <button className="btn btn-outline-primary pt-3 pb-3 ps-5 pe-5 contact-btn">
+                  تواصل معنا
+                </button>
+              </div>
             </div>
-            <div className="mb-3 form-group">
-              <label htmlFor="email" className="form-label text-black">Email</label>
-              <input type="email" className="form-control custom-input" id="email" placeholder="Your Email" />
+            <div className="col-md-6 d-flex justify-content-center">
+              <img src={contactImg} alt="Contact Us" className="img-fluid" style={{ maxWidth: '400px', height: 'auto' }} />
             </div>
-            <div className="mb-3 form-group">
-              <label htmlFor="message" className="form-label text-black">Message</label>
-              <textarea className="form-control custom-input" id="message" rows="4" placeholder="Your Message"></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary submit-btn">Send</button>
-          </form>
-        </section>
+          </div>
+        </div>
+
       </div>
-
       <Footer />
     </div>
   );
