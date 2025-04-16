@@ -49,21 +49,6 @@
   margin-bottom: 0.5rem;
 }
 
-.primary-btn {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: 1.1rem;
-}
-
-.primary-btn:hover {
-  background: #0056b3;
-}
 
 .display-2 {
   font-size: 3.5rem;

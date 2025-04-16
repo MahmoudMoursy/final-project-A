@@ -1,5 +1,6 @@
 :root {
     --main-color: #33CCCC;
+    /* --primary-color: #24262B; */
 }
 
 
@@ -47,16 +48,6 @@
   .service-description {
     font-size: 1.2rem;
     color: #e0e0e0;
-  }
-  
-  .custom-btn {
-    background-color: #2575fc;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .custom-btn:hover {
-    background-color: #16408b;
   }
   
   .partners-section {
@@ -126,15 +117,6 @@
     padding: 10px;
   }
   
-  .submit-btn {
-    background-color: #2575fc;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .submit-btn:hover {
-    background-color: #1b3a6d;
-  }
   
   /* تحسينات إضافية */
   .section-title h1 {
@@ -158,7 +140,7 @@
     transform: translateY(-5px);
   }
   
-  .animated-btn {
+  /* .animated-btn {
     background: linear-gradient(45deg, #2193b0, #6dd5ed);
     border: none;
     transition: all 0.3s ease;
@@ -169,7 +151,7 @@
   
   .animated-btn:hover {
     transform: translateY(-3px);
-  }
+  } */
   
   .partner-logo {
     transition: all 0.5s ease;
@@ -226,18 +208,6 @@
     background-color: white;
   }
   
-  .submit-btn {
-    background: linear-gradient(45deg, #2193b0, #6dd5ed);
-    border: none;
-    transition: all 0.3s ease;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
-  
-  .submit-btn:hover {
-    transform: translateY(-2px);
-  }
-  
   /* Add smooth scroll behavior */
   html {
     scroll-behavior: smooth;
@@ -278,4 +248,35 @@
     }
   }
 
+  .primary-btn {
+    background: #33CCCC;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+  }
   
+  .primary-btn:hover {
+    background-color: #2193b0;
+  }
+
+  .custom-btn {
+    background: #33CCCC;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+    padding: 20px 25px;
+  }
+  
+  .custom-btn:hover {
+    background-color: #2193b0;
+  }

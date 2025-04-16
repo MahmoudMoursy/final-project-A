@@ -32,7 +32,7 @@ function Haeder() {
             <div className="log d-flex align-items-center">
               <span className="text-white"> هل لديك حساب بالفعل ؟ <a href="/login" className="text-primary text-decoration-none">سجل دخولك</a></span>
             </div>
-            <button onClick={() => window.location.href = '/register'} className="primary-btn" tabIndex="0">احجز خدمتك دلوقتي</button>
+            <button onClick={() => window.location.href = '/register'} className="custom-btn" tabIndex="0">احجز خدمتك دلوقتي</button>
           </div>
           <a onClick={scrollToNextSection} style={{ cursor: 'pointer' }}>
             <svg className="arrows">

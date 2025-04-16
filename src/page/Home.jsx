@@ -241,7 +241,7 @@ function Home() {
         <div className="container" dir="rtl">
           <div className="row align-items-center mt-5" style={{ marginBottom: '2rem' }}>
             <div className="col-md-6 mb-4">
-              <h1 className="text-end text-primary ">تحتاج إلى مساعدة</h1>
+              <h1 className="text-end text-primary custom-btn">تحتاج إلى مساعدة</h1>
               <h4 className="text-muted mt-3 text-end">تواصل مع فريق العمل في حالة وجود أي استفسار</h4>
               <div className="text-end mt-5">
                 <button className="btn btn-outline-primary pt-3 pb-3 ps-5 pe-5 contact-btn">
