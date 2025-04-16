@@ -15,17 +15,21 @@ import './loginStyle.css';
 
 
 function Login() {
-    useEffect(() => {
-        localStorage.clear();
-        dispatch(deleteCurrentUser());
-    }, []);
     const nav = useNavigate();
     const AuthStore = useAuth();
     const [user, setUser] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    
     const dispatch = useDispatch();
     let flag = false;
+    
+    useEffect(() => {
+        localStorage.removeItem("currentUser");
+        dispatch(deleteCurrentUser());
+        console.log("1");
+        
+    }, []);
     
     async function save(event) {
         event.preventDefault();
@@ -34,9 +38,11 @@ function Login() {
 
         try {
             const useree =  await AuthStore.login(user);
-            // dispatch(setCurrentUser(useree.uid));
-            // localStorage.setItem("currentUser", JSON.stringify(useree.uid));
+            localStorage.setItem("currentUser", JSON.stringify(useree.uid));
+            dispatch(setCurrentUser(useree.uid));
             fetchUsers(useree.uid);
+            console.log("2");
+            
         } catch (err) {
             setError("Invalid email or password. Please try again.");
             setLoading(false);
@@ -47,12 +53,13 @@ function Login() {
         try {
           const querySnapshot = await getDocs(collection(db, "user"));
           querySnapshot.forEach((doc) => {
-            if(doc.id==useree){
-                flag = true;     
+              console.log(doc.id);
+              console.log(useree);
+              if(doc.id==useree){
+                flag = true;  
                 localStorage.setItem("currentUser", JSON.stringify(doc.data()));
                 dispatch(setCurrentUser(doc.data()));
-                console.log("wait");
-                console.log(doc);
+                nav('/home');
                 setLoading(false);
             }
           });
@@ -60,10 +67,7 @@ function Login() {
         } catch (error) {
           console.error("Error fetching users: ", error);
         }
-        if(flag){
-            nav('/home');
-        }
-        else{
+        if(!flag){
             nav('/Profileform');
         }
     };
@@ -91,6 +95,7 @@ function Login() {
         } catch (error) {
             setError("Google login failed. Please try again.");
         }
+        
     }
 
     return (

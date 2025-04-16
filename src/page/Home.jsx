@@ -65,7 +65,7 @@ function Home() {
   const nav = useNavigate()
   const user= JSON.parse(localStorage.getItem("currentUser"));
   const dispatch = useDispatch()
-  dispatch(setCurrentUser(user));
+  // dispatch(setCurrentUser(user));
   
   
   useEffect(() => {
