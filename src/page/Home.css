@@ -1,6 +1,6 @@
 /* تحسين الألوان العامة */
 .home-page {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
   }
   
   /* الحاوية الرئيسية بعرض 80% */
@@ -136,7 +136,7 @@
     font-size: 2.5rem;
     background: linear-gradient(45deg, #2193b0, #6dd5ed);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #2193b0;
     transition: transform 0.3s ease;
   }
   
@@ -244,9 +244,9 @@
   }
   
   /* Add gradient background to sections */
-  .bg-light {
+  /* .bg-light {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
-  }
+  } */
   
   /* Stars animation */
   .stars {

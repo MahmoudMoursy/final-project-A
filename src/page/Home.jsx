@@ -31,6 +31,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 import './VendorCarousel.css';
 import { Pagination, EffectCoverflow, Autoplay } from 'swiper/modules';
+import underline2 from '../assets/underline2.png';
 
 // Vendor data for the carousel
 const vendors = [
@@ -91,44 +92,48 @@ function Home() {
       <NavBar />
       <Haeder />
       
-      {/* Main Content Container - 80% width */}
       <div className="main-content-wrapper">
-        <div className="main-content-container" id="products" data-aos="fade-up">
-          <div className="py-5">
+      {/* Main Content Container - 80% width */}
+        {/* <div className="main-content-container" id="products" data-aos="fade-up"> */}
+          {/* <div className="py-5">
             <div className="section-title text-center position-relative pb-3 mb-4 mx-auto" style={{ maxWidth: '600px' }}>
-              <h1 className="mb-0 main-title">Our Main Services</h1>
+            <h1 className="mb-0 main-title">Our Main Services</h1>
             </div>
-          </div>
-          <CardSlider />
-        </div>
+            </div> */}
+          {/* <CardSlider /> */}
+        {/* </div> */}
 
         {/* What to do section */}
         <div id="sec1" className="sec-1 container d-flex justify-content-center flex-column">
-          <h2 className="text-primary text-center fs-1 mt-5">ما الذي علي فعله ؟</h2>
+          <div className="pt-5 mt-5">
+            <div className="section-title text-center mb-1">
+              <h1 className="main-title">ما الذي علي فعله ؟</h1>
+            </div>
+          </div>
           <div className="mx-auto">
-            <img src={aswulogo2} alt="" style={{ width: '30rem' }} />
+            <img src={underline2} alt="" style={{ width: '30rem' }} />
           </div>
           <div className="info d-flex gap-5 justify-content-center py-5 mt-3 flex-wrap">
-            <a className="ic1 info-bundle d-flex flex-column align-items-center" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <img src={userGif} alt="التسجيل" className="info-icon" style={{ width: '120px', height: '120px' }} />
-              <p className="info-text fs-5 pt-4 text-center">قم بالتسجيل بالموقع</p>
+            <a className=" info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={userGif} alt="التسجيل" className="info-icon" style={{ width: '250px', height: '250px' }} />
+              <p className="info-text fs-5 pt-4 text-center service-title">قم بالتسجيل بالموقع</p>
             </a>
-            <a className="ic2 info-bundle d-flex flex-column align-items-center" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <img src={chooseGif} alt="اختيار مقدم الخدمة" className="info-icon" style={{ width: '120px', height: '120px' }} />
-              <p className="info-text fs-5 pt-4 text-center">اختر من مقدمي الخدمة من يناسبك</p>
+            <a className=" info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={chooseGif} alt="اختيار مقدم الخدمة" className="info-icon" style={{ width: '250px', height: '250px' }} />
+              <p className="info-text fs-5 pt-4 text-center service-title">اختر من مقدمي الخدمة من يناسبك</p>
             </a>
-            <a className="ic3 info-bundle d-flex flex-column align-items-center" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <img src={servGif} alt="اختيار الخدمة" className="info-icon" style={{ width: '120px', height: '120px' }} />
-              <p className="info-text fs-5 pt-4 text-center">اختر الخدمة المناسبة</p>
+            <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={servGif} alt="اختيار الخدمة" className="info-icon" style={{ width: '250px', height: '250px' }} />
+              <p className="info-text fs-5 pt-4 text-center service-title">اختر الخدمة المناسبة</p>
             </a>
-            <a className="ic4 info-bundle d-flex flex-column align-items-center" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <img src={payGif} alt="الدفع" className="info-icon" style={{ width: '120px', height: '120px' }} />
-              <p className="info-text fs-5 pt-4 text-center">ادفع عربوناً</p>
+            <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={payGif} alt="الدفع" className="info-icon" style={{ width: '250px', height: '250px' }} />
+              <p className="info-text fs-5 pt-4 text-center service-title">ادفع عربوناً</p>
             </a>
           </div>
         </div>
 
-        <section className="py-5 bg-light rounded text-center service-section" data-aos="fade-up">
+        <section className="py-5 rounded text-center service-section" data-aos="fade-up">
           <h2 className="fw-bold mb-3 service-title">خدمة توفير السكن</h2>
           <p className="mb-4 text-muted fw-bold fs-2 service-description">
             نوفر لك السكن الطلابي المثالي بالقرب من جامعتك، مع بيئة مريحة وآمنة تساعدك على التركيز في دراستك.
