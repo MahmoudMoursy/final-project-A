@@ -2,12 +2,18 @@ import React from 'react'
 import db from '../firebaseconfig'
 import { setDoc, doc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 function Profileform() {
+
     const nav = useNavigate();
+    
     const useId = JSON.parse(localStorage.getItem("currentUser"));
+    const usrrr =useSelector((state) => state.currentUser.value);
+    console.log(usrrr);
+    
     console.log(useId.UserId)
-    const userRef = doc(db, "user", useId.UserId);
+    const userRef = doc(db, "user", useId);
     async function save() {
         const userData = {
             username: document.getElementById("name").value,
@@ -18,10 +24,12 @@ function Profileform() {
             bio: document.getElementById("bio").value,
             university: document.getElementById("university").value,
             status: document.querySelector('input[name="GFG"]:checked')?.value || "",
-            UserId: useId.UserId,
+            UserId: useId,
         };
         await setDoc(userRef, userData);
-        nav('/');
+        localStorage.setItem("currentUser", JSON.stringify(userData));
+        
+        nav('/home');
     }
 
     return (<>
