@@ -19,6 +19,10 @@ import { useSelector,useDispatch } from 'react-redux';
 import { setCurrentUser } from '../Redux/CurrentUser';
 import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import userGif from '../assets/user.gif';
+import chooseGif from '../assets/choose.gif';
+import servGif from '../assets/serv.gif';
+import payGif from '../assets/pay.gif';
 
 // SwiperJS imports for vendor carousel
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -96,6 +100,32 @@ function Home() {
             </div>
           </div>
           <CardSlider />
+        </div>
+
+        {/* What to do section */}
+        <div id="sec1" className="sec-1 container d-flex justify-content-center flex-column">
+          <h2 className="text-primary text-center fs-1 mt-5">ما الذي علي فعله ؟</h2>
+          <div className="mx-auto">
+            <img src={aswulogo2} alt="" style={{ width: '30rem' }} />
+          </div>
+          <div className="info d-flex gap-5 justify-content-center py-5 mt-3 flex-wrap">
+            <a className="ic1 info-bundle d-flex flex-column align-items-center" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={userGif} alt="التسجيل" className="info-icon" style={{ width: '120px', height: '120px' }} />
+              <p className="info-text fs-5 pt-4 text-center">قم بالتسجيل بالموقع</p>
+            </a>
+            <a className="ic2 info-bundle d-flex flex-column align-items-center" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={chooseGif} alt="اختيار مقدم الخدمة" className="info-icon" style={{ width: '120px', height: '120px' }} />
+              <p className="info-text fs-5 pt-4 text-center">اختر من مقدمي الخدمة من يناسبك</p>
+            </a>
+            <a className="ic3 info-bundle d-flex flex-column align-items-center" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={servGif} alt="اختيار الخدمة" className="info-icon" style={{ width: '120px', height: '120px' }} />
+              <p className="info-text fs-5 pt-4 text-center">اختر الخدمة المناسبة</p>
+            </a>
+            <a className="ic4 info-bundle d-flex flex-column align-items-center" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={payGif} alt="الدفع" className="info-icon" style={{ width: '120px', height: '120px' }} />
+              <p className="info-text fs-5 pt-4 text-center">ادفع عربوناً</p>
+            </a>
+          </div>
         </div>
 
         <section className="py-5 bg-light rounded text-center service-section" data-aos="fade-up">
