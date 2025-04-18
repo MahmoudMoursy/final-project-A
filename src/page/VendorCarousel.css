@@ -31,11 +31,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.7);
+  filter: brightness(0.85);
   transition: filter 0.3s;
 }
 .slide-content-wrapper:hover .slide-img {
-  filter: brightness(0.85);
+  filter: brightness(1.2);
 }
 .slide-content {
   position: absolute;
