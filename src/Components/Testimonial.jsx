@@ -107,7 +107,9 @@ const Testimonial = () => {
       <div className="testimonial-container">
         <div className="testimonial-header">
           <h2>What Our Users Say</h2>
+          {/*  */}
           <div className="blue-underline"></div>
+          {/*  */}
           <p>
             Discover how our product has helped professionals across various industries 
             transform their workflow and achieve their goals.
