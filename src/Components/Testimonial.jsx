@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import './TestimonialStyle.css';
+import underline2 from '.././assets/underline2.png';
 
 // Testimonial Card Component
 const TestimonialCard = ({ name, role, content, rating, image, isActive }) => {
@@ -35,33 +36,33 @@ const TestimonialCard = ({ name, role, content, rating, image, isActive }) => {
 const testimonials = [
   {
     id: 1,
-    name: 'Sarah Johnson',
-    role: 'Marketing Director',
-    content: 'This product completely transformed our workflow. The intuitive interface made it easy for our entire team to adapt, and we\'ve seen a 40% increase in productivity since implementation.',
+    name: 'سارة جونسون',
+    role: 'مديرة التسويق',
+    content: 'لقد غير هذا المنتج طريقة عملنا بشكل كامل. الواجهة البديهية جعلت من السهل على فريقنا بأكمله التكيف، وقد شهدنا زيادة بنسبة 40٪ في الإنتاجية منذ التنفيذ.',
     rating: 5,
     image: 'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=150'
   },
   {
     id: 2,
-    name: 'Michael Chen',
-    role: 'Software Engineer',
-    content: 'As a developer, I appreciate the attention to detail and robust feature set. The API documentation is clear, and integration was seamless. This is now an essential part of our tech stack.',
+    name: 'محمد شين',
+    role: 'مهندس برمجيات',
+    content: 'كمطور، أقدر الاهتمام بالتفاصيل ومجموعة الميزات القوية. وثائق واجهة برمجة التطبيقات واضحة، وكان التكامل سلسًا. هذا الآن جزء أساسي من مجموعة التقنيات لدينا.',
     rating: 4,
     image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=150'
   },
   {
     id: 3,
-    name: 'Aisha Patel',
-    role: 'UX Designer',
-    content: 'The design system is truly exceptional. It\'s rare to find a product that balances aesthetics and functionality so well. Our design team has been able to create consistent experiences across all our platforms.',
+    name: 'عائشة باتيل',
+    role: 'مصممة تجربة المستخدم',
+    content: 'نظام التصميم رائع حقًا. من النادر العثور على منتج يوازن بين الجماليات والوظائف بشكل جيد. تمكن فريق التصميم لدينا من إنشاء تجارب متسقة عبر جميع منصاتنا.',
     rating: 5,
     image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150'
   },
   {
     id: 4,
-    name: 'David Wilson',
-    role: 'Project Manager',
-    content: 'This solution has streamlined our project management process considerably. The dashboard gives us real-time insights that help us make informed decisions quickly.',
+    name: 'داوود ويلسون',
+    role: 'مدير مشاريع',
+    content: 'لقد عمل هذا الحل على تبسيط عملية إدارة المشروع لدينا بشكل كبير. توفر لوحة المعلومات رؤى في الوقت الفعلي تساعدنا على اتخاذ قرارات مستنيرة بسرعة.',
     rating: 4,
     image: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=150'
   }
@@ -106,14 +107,16 @@ const Testimonial = () => {
     <section className="testimonial-section">
       <div className="testimonial-container">
         <div className="testimonial-header">
-          <h2>What Our Users Say</h2>
+          <h2 className="sections-title">ماذا يقول مستخدمونا</h2>
           {/*  */}
-          <div className="blue-underline"></div>
+          <div className="mx-auto mb-5">
+            <img src={underline2} alt="" style={{ width: '30rem' }} />
+          </div>
           {/*  */}
-          <p>
-            Discover how our product has helped professionals across various industries 
-            transform their workflow and achieve their goals.
-          </p>
+          {/* <p>
+            اكتشف كيف ساعد منتجنا المحترفين في مختلف الصناعات 
+            على تحويل سير عملهم وتحقيق أهدافهم.
+          </p> */}
         </div>
         
         <div className="testimonial-slider">

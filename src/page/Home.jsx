@@ -150,8 +150,10 @@ function Home() {
 
         
 <div className="py-5 container">
-          <h2 className="sections-title ms-3 mb-4" style={{textAlign: "right"}}>مقدمو الخدمة الأكثر طلباً</h2>
-          <img src={underline} alt="" className="d-block ms-auto" style={{width: "23rem"}} />
+          <h2 className="sections-title ms-3 mb-2 text-center">مقدمو الخدمة الأكثر طلباً</h2>
+          <div className="mx-auto text-center">
+            <img src={underline2} alt="" style={{ width: '30rem' }} />
+          </div>
           <Swiper
             modules={[EffectCoverflow, Pagination, Autoplay]}
             effect="coverflow"
