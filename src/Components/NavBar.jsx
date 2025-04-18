@@ -17,7 +17,6 @@ function NavBar() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
   dispatch(setCurrentUser(user));
 
-  // Handle scroll for navbar
   useEffect(() => {
     const isHomePage = location.pathname === '/Home' || location.pathname === '/home';
     if (!isHomePage) {

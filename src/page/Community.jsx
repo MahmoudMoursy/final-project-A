@@ -88,34 +88,52 @@ const Community = () => {
     <>
       <NavBar />
       <Box sx={{ marginTop: "80px", padding: "20px", direction: "rtl", width: "100%", backgroundColor: "#f0f2f5" }}>
-        <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ textAlign: "right", marginRight: 3 }}>
-          مجتمع <span style={{
-            backgroundColor: "#091e3d", padding: "8px 15px",
-            color: "#fff", borderRadius: "110px 4000px",
-            fontWeight: "bold", display: "inline-block"
-          }}>
-            وسيط
-          </span>
-        </Typography>
+        <Box
+  sx={{
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 2,
+    marginRight: 3,
+    flexWrap: 'wrap', // Optional: makes it responsive
+  }}
+>
+  <Typography
+    variant="h4"
+    fontWeight="bold"
+    sx={{ textAlign: "right" }}
+  >
+    مجتمع{" "}
+    <span style={{
+      backgroundColor: "#091e3d",
+      padding: "8px 15px",
+      color: "#fff",
+      borderRadius: "110px 4000px",
+      fontWeight: "bold",
+      display: "inline-block"
+    }}>
+      وسيط
+    </span>
+  </Typography>
 
-        <Button
-          variant="contained"
-          onClick={handleOpen}
-          sx={{
-            backgroundColor: "#0A3265FF",
-            fontSize: "14px",
-            fontWeight: "bold",
-            display: "flex",
-            alignItems: "center",
-            gap: "5px",
-            padding: "10px 20px",
-            marginBottom: "20px",
-            marginRight: 3,
-            borderRadius: "25px"
-          }}
-        >
-          <AddIcon /> موضوع جديد
-        </Button>
+  <Button
+    variant="contained"
+    onClick={handleOpen}
+    sx={{
+      backgroundColor: "#0A3265FF",
+      fontSize: "14px",
+      fontWeight: "bold",
+      display: "flex",
+      alignItems: "center",
+      gap: "5px",
+      padding: "10px 20px",
+      borderRadius: "25px",
+      mt: { xs: 2, sm: 0 }, // Add margin-top on small screens
+    }}
+  >
+    <AddIcon /> موضوع جديد
+  </Button>
+</Box>
 
         <Dialog open={open} onClose={handleClose} fullWidth>
           <DialogTitle sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
