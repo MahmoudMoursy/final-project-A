@@ -296,3 +296,21 @@
   .custom-btn:hover {
     background-color: rgba(152, 83, 255, 0.8);
   }
+
+  .btn-outline-primary {
+    background-color: transparent;
+    color: rgba(152, 83, 255) !important;
+    border: 1px solid rgba(152, 83, 255) !important;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+    
+  }
+
+  .btn-outline-primary:hover {
+    background-color: rgba(152, 83, 255, 0.8) !important;
+    color: white !important;
+  }

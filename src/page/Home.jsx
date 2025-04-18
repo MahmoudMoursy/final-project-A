@@ -225,7 +225,7 @@ function Home() {
           </div>
         </section> */}
 
-        <section className="py-5 rounded text-center testimonials-section" data-aos="fade-up">
+        {/* <section className="py-5 rounded text-center testimonials-section" data-aos="fade-up">
           <h2 className="fw-bold mb-3 testimonials-title">أراء المستخدمين</h2>
           <div className="testimonial-carousel">
             {[1, 2, 3].map((index) => (
@@ -241,6 +241,9 @@ function Home() {
               </div>
             ))}
           </div>
+        </section> */}
+        <section className='testimonials-section'>
+
         </section>
 
 
@@ -248,10 +251,10 @@ function Home() {
         <div className="container" dir="rtl">
           <div className="row align-items-center mt-5" style={{ marginBottom: '2rem' }}>
             <div className="col-md-6 mb-4">
-              <h1 className="text-end text-primary custom-btn">تحتاج إلى مساعدة</h1>
+              <h1 className="text-end sections-title mb-4">تحتاج إلى مساعدة</h1>
               <h4 className="text-muted mt-3 text-end">تواصل مع فريق العمل في حالة وجود أي استفسار</h4>
               <div className="text-end mt-5">
-                <button className="btn btn-outline-primary pt-3 pb-3 ps-5 pe-5 contact-btn">
+                <button className="btn btn-outline-primary pt-3 pb-3 ps-5 pe-5">
                   تواصل معنا
                 </button>
               </div>
