@@ -35,6 +35,7 @@ import underline3 from '../assets/underline3.png';
 import underline2 from '../assets/underline2.png';
 import underline from '../assets/underline.png';
 import underline4 from '../assets/underline4.png';
+import VendorsCarousel from './VendorsCarousel';
 
 import Testimonial from '../Components/Testimonial';
 
@@ -147,6 +148,7 @@ function Home() {
           </p>
           <a href="#contact" className="btn btn-primary py-md-3 px-md-5 ms-3 custom-btn">ابحث</a>
         </section> */}
+        <VendorsCarousel />
 
         
 <div className="py-5 container">
