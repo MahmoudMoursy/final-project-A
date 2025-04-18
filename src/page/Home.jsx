@@ -36,6 +36,7 @@ import underline2 from '../assets/underline2.png';
 import underline from '../assets/underline.png';
 import underline4 from '../assets/underline4.png';
 
+import Testimonial from '../Components/Testimonial';
 
 // Vendor data for the carousel
 const vendors = [
@@ -242,8 +243,8 @@ function Home() {
             ))}
           </div>
         </section> */}
-        <section className='testimonials-section'>
-
+        <section className='testimonials-section' data-aos="fade-up">
+          <Testimonial />
         </section>
 
 
