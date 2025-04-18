@@ -30,9 +30,9 @@ function Haeder() {
           <p className="text-white header-desc mb-4">من بيتك وبضغطة زرار</p>
           <div className="d-flex justify-content-end gap-3 mt-5">
             <div className="log d-flex align-items-center">
-              <span className="text-white"> هل لديك حساب بالفعل ؟ <a href="/login" className="text-primary text-decoration-none">سجل دخولك</a></span>
+              <span className="text-white "> هل لديك حساب بالفعل ؟ <a href="/login" className="text-decoration-none custom-color">سجل دخولك</a></span>
             </div>
-            <button onClick={() => window.location.href = '/register'} className="primary-btn" tabIndex="0">احجز خدمتك دلوقتي</button>
+            <button onClick={() => window.location.href = '/register'} className="custom-btn" tabIndex="0">احجز خدمتك دلوقتي</button>
           </div>
           <a onClick={scrollToNextSection} style={{ cursor: 'pointer' }}>
             <svg className="arrows">

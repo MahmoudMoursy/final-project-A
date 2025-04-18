@@ -1,3 +1,10 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
 @keyframes fade-in {
     from {
       opacity: 0;
@@ -67,7 +74,10 @@
   
   /* Custom background gradient */
   .bg-gradient-custom {
-    background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+    background: linear-gradient(135deg, #1a1a2e 0%, #6610f2 100%);
+  }
+  .bg-gradient-custom-dark {
+    background: #1a1a2e;  /* Dark blue/navy background */
   }
   
   /* Custom styles for the circles */
@@ -91,13 +101,13 @@
     right: -10rem;
   }
   
-  /* Hover effects */
+
   .hover-translate:hover {
     transform: translateX(0.5rem);
     transition: transform 0.3s ease;
   }
   
-  /* Custom transitions */
+
   .custom-transition {
     transition: all 0.5s ease-in-out;
   }
@@ -106,7 +116,7 @@
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 
-  /* Tab Switcher Styles */
+
   .tab-container {
     display: flex;
     margin-bottom: 1.5rem;
@@ -131,8 +141,7 @@
   .tab-item-inactive {
     color: #6c757d;
   }
-  
-  /* Button hover effects */
+
   .btn-hover-effect {
     transition: transform 0.3s ease;
   }
@@ -145,7 +154,7 @@
     transform: scale(0.98);
   }
 
-  /* New styles to match the reference design */
+ 
   .auth-card {
     border-radius: 1rem;
     overflow: hidden;
@@ -156,14 +165,16 @@
   .auth-form-container {
     background-color: white;
     border-radius: 0 1rem 1rem 0;
-    padding: 2rem;
+    padding: 1.5rem;
+    max-height: 100vh;
+    overflow-y: hidden;
   }
 
   .auth-welcome-text {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: #333;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     text-align: center;
   }
 
@@ -214,16 +225,17 @@
   .form-label {
     font-weight: 500;
     color: #4a5568;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     display: block;
   }
 
   .form-input {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 0.75rem 0.25rem;
     border-radius: 0.375rem;
     border: 1px solid #e2e8f0;
-    margin-bottom: 1rem;
+    height: 3rem;
+    margin-bottom: 0.5rem;
     transition: border-color 0.2s ease;
   }
 
@@ -235,7 +247,7 @@
 
   .auth-submit-btn {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.625rem;
     background-color: #4e6af8;
     color: white;
     border: none;
@@ -245,7 +257,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     transition: all 0.2s ease;
   }
 
@@ -255,7 +267,7 @@
 
   .auth-footer {
     text-align: center;
-    margin-top: 1.5rem;
+    margin-top: 0.75rem;
     color: #718096;
     font-size: 0.875rem;
   }
@@ -293,4 +305,55 @@
 
   .forgot-password:hover {
     text-decoration: underline;
+  }
+
+  /* Floating label styles */
+  .form-floating {
+    position: relative;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-floating input {
+    width: 100%;
+    height: 3rem;
+    padding: 1rem 0.75rem 0.5rem;
+    border-radius: 0.375rem;
+    border: 1px solid #e2e8f0;
+    transition: border-color 0.2s ease;
+  }
+
+  .form-floating input:focus {
+    outline: none;
+    border-color: #4e6af8;
+    box-shadow: 0 0 0 3px rgba(78, 106, 248, 0.1);
+  }
+
+  .form-floating label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 1rem 0.75rem;
+    pointer-events: none;
+    border: 1px solid transparent;
+    transform-origin: 0 0;
+    transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+    color: #6c757d;
+  }
+
+  .form-floating input:focus ~ label,
+  .form-floating input:not(:placeholder-shown) ~ label {
+    opacity: .65;
+    transform: scale(.85) translateY(-0.5rem) translateX(0.15rem);
+    color: #4e6af8;
+  }
+
+  .form-floating input:focus ~ label {
+    color: #4e6af8;
+  }
+
+  /* Hide placeholder when input is focused or has content */
+  .form-floating input:focus::placeholder,
+  .form-floating input:not(:placeholder-shown)::placeholder {
+    opacity: 0;
   }

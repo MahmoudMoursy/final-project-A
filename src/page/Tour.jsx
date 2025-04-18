@@ -25,6 +25,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const places = [
   {
@@ -171,7 +173,57 @@ const places = [
     ],
     category: "طبيعة وأنشطة خارجية",
   },
+  {
+    id: 10,
+    title: "ركوب الفلوكة في النيل",
+    shortDescription: "تجربة هادئة لمشاهدة غروب الشمس والمعابد من وسط النيل.",
+    fullDescription:  "استمتع برحلة مميزة على متن الفلوكة في نهر النيل، حيث يمكنك مشاهدة المعابد القديمة والمناظر الطبيعية الخلابة وقت الغروب، في أجواء هادئة تأخذك بعيدًا عن صخب الحياة.",
+    price: "100 EGP",
+    rating: 5,
+    reviews: 500,
+    phone: "010-2233-4455",
+    images: [
+      "https://img.freepik.com/premium-photo/sailboat-is-traveling-down-river_662214-415717.jpg?ga=GA1.1.1877792813.1744932180&semt=ais_hybrid&w=740",
+      "https://img.freepik.com/premium-photo/flag-aswan_219958-1148.jpg?ga=GA1.1.1877792813.1744932180&semt=ais_hybrid&w=740",
+      "https://img.freepik.com/premium-photo/sailboats-nile_78895-359.jpg?ga=GA1.1.1877792813.1744932180&semt=ais_hybrid&w=740",
+    ],
+    category:"جولات",
+  },
+  {
+    id: 11,
+    title:"بحيرة ناصر",
+    shortDescripti:" أكبر بحيرة صناعية في العالم، توفر رحلات بحرية وصيد الأسماك",
+    fullDescription:"حيرة ناصر هي أكبر بحيرة صناعية في العالم، تمتد على مسافة واسعة في جنوب مصر، وتعد واحدة من أبرز الوجهات السياحية. توفر البحيرة العديد من الأنشطة المثيرة مثل الرحلات البحرية الممتعة، وصيد الأسماك في مياهها العميقة، مما يجعلها وجهة مثالية لعشاق الطبيعة والأنشطة المائية. استمتع بمشاهدة المناظر الطبيعية الخلابة التي تحيط بالبحيرة، واكتشف جمالها الفريد.",
+    price: "150 EGP",
+    rating: 5,
+    reviews: 500,
+    phone: "010-2233-4455",
+    images: [
+      "https://img.freepik.com/free-photo/beautiful-shot-tufa-towers-mono-lake-tufa-state-natural-reserve-california_181624-19080.jpg?ga=GA1.1.1877792813.1744932180&semt=ais_hybrid&w=740",
+      "https://img.freepik.com/premium-photo/scenic-view-lake-against-sky_1048944-10346495.jpg?ga=GA1.1.1877792813.1744932180&semt=ais_hybrid&w=740",
+      "https://img.freepik.com/free-photo/beautiful-view-nikouria-with-wooden-dock-mountains-amorgos-island_181624-18214.jpg?ga=GA1.1.1877792813.1744932180&semt=ais_hybrid&w=740",
+    ],
+    category: "طبيعة وأنشطة خارجية",
+  },
+  {
+    id: 12,
+    title:"غرب سهيل",
+    shortDescripti:"جزيرة نوبية رائعة في أسوان، تتميز بمناظرها الطبيعية الخلابة وثقافتها النوبية التقليدية.",
+    fullDescription:"غرب سهيل هو أحد المعالم السياحية الشهيرة في أسوان، يقع على ضفاف نهر النيل. الجزيرة النوبية تتمتع بمناظر طبيعية ساحرة، مع بيوت نوبية تقليدية تبرز الثقافة المحلية. يمكن للزوار الاستمتاع بالتجول في أرجائها، واكتشاف التراث النوبي الأصلي من خلال العادات والمأكولات والحرف اليدوية المميزة.",
+    price: "250 EGP",
+    rating: 5,
+    reviews: 500,
+    phone: "010-2233-4455",
+    images: [
+      "https://th.bing.com/th/id/OIP.NITYEyxhx6T44j5rRO5ghQHaE8?rs=1&pid=ImgDetMain",
+      "https://th.bing.com/th/id/OIP.BkOGi2Y9TDQmVNH92BX27AHaHa?pid=ImgDet&w=474&h=474&rs=1",
+      "https://th.bing.com/th/id/OIP.RGjtHiM3fVF5_2bm4Lw8ggHaHa?pid=ImgDet&w=474&h=474&rs=1",
+    ],
+    category: "طبيعة وأنشطة خارجية",
+  },
 ];
+
+
 
 const categories = ["جولات", "طبيعة وأنشطة خارجية", "متاحف وفنون وثقافة"];
 
@@ -202,7 +254,6 @@ const Tour = () => {
     autoplay: true,
   };
 
-  // Filter places based on selected categories and search query (title only)
   const filteredPlaces = places.filter((place) => {
     const matchesCategory =
       selectedCategories.length === 0 || selectedCategories.includes(place.category);
@@ -210,14 +261,29 @@ const Tour = () => {
     return matchesCategory && matchesSearch;
   });
 
+  // Initialize AOS (Animate on Scroll)
+  React.useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+  }, []);
+
   return (
-    <>
+    <Box sx={{
+      background: "linear-gradient(135deg, #1a1a2e 0%, #1D186263 100%)",
+    }}>
       <NavBar />
-      <Container maxWidth="lg" sx={{ mt: 8, pt: 4, direction: "rtl", display: "flex", gap: 3 }}>
+      <Container maxWidth="lg" sx={{ pt: 12, pb: 12, direction: "rtl", display: "flex", gap: 4 }}>
+
         {/* Sidebar for Filters */}
-        <Paper sx={{ p: 3, width: 300, borderRadius: 3, boxShadow: 3 }}>
-          <Typography variant="h6" fontWeight="bold" gutterBottom>
-            التصنيف حسب:
+        <Paper sx={{
+          p: 3,
+          width: 260,
+          height: "fit-content",
+          borderRadius: 4,
+          backgroundColor: "#ffffff",
+          boxShadow: "0 4px 16px rgba(0,0,0,0.1)"
+        }}>
+          <Typography variant="h6" fontWeight="bold" sx={{ mb: 2, color: "#0d1b2a" }}>
+            تصفية النتائج
           </Typography>
           <FormGroup>
             {categories.map((category) => (
@@ -227,9 +293,11 @@ const Tour = () => {
                   <Checkbox
                     checked={selectedCategories.includes(category)}
                     onChange={() => handleFilterChange(category)}
+                    sx={{ color: "#0d1b2a" }}
                   />
                 }
                 label={category}
+                sx={{ mb: 1 }}
               />
             ))}
           </FormGroup>
@@ -238,98 +306,135 @@ const Tour = () => {
         {/* Main Content */}
         <Box sx={{ flex: 1 }}>
           {/* Search Bar */}
-          <TextField
-            fullWidth
-            variant="outlined"
-            placeholder="ابحث عن وجهة..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-            sx={{ mb: 3, borderRadius: 3, boxShadow: 3 }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-              style: { borderRadius: 12 },
-            }}
-          />
+          <Box sx={{
+            mb: 4,
+            borderRadius: 3,
+            backgroundColor: "#ffffff",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+            px: 2,
+            py: 1
+          }}>
+            <TextField
+              fullWidth
+              variant="standard"
+              placeholder="ابحث عن وجهة سياحية..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+              InputProps={{
+                disableUnderline: true,
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon sx={{ color: "#0d1b2a" }} />
+                  </InputAdornment>
+                ),
+                style: { fontSize: "1rem" }
+              }}
+            />
+          </Box>
 
           {/* Places Grid */}
-          {filteredPlaces.length > 0 ? (
-            <Grid container spacing={3}>
-              {filteredPlaces.map((place) => (
-                <Grid item xs={12} key={place.id}>
-                  <Card sx={{ display: "flex", borderRadius: 3, boxShadow: 3, p: 2 }}>
-                    <CardMedia
-                      component="img"
-                      sx={{ width: 200, borderRadius: 2 }}
-                      image={place.images[0]}
-                      alt={place.title}
-                    />
-                    <CardContent sx={{ flex: 1 }}>
-                      <Typography variant="h6" fontWeight="bold">
-                        {place.title}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary" sx={{ mt: 1, mb: 2 }}>
-                        {place.shortDescription}
-                      </Typography>
-                      <Box display="flex" alignItems="center" gap={1}>
-                        <Chip
-                          label={place.price}
-                          color="primary"
-                          sx={{ fontSize: "14px", fontWeight: "bold", backgroundColor: "#091e3d" }}
-                        />
-                        <Box display="flex" alignItems="center">
-                          <StarIcon sx={{ color: "#FFD700" }} />
-                          <Typography variant="body2" fontWeight="bold" sx={{ ml: 0.5 }}>
-                            {place.rating} ({place.reviews} تقييم)
-                          </Typography>
-                        </Box>
+          <Grid container spacing={4}>
+            {filteredPlaces.map((place) => (
+              <Grid item xs={12} md={6} key={place.id} data-aos="fade-up">
+                <Card sx={{
+                  borderRadius: 4,
+                  overflow: "hidden",
+                  boxShadow: "0 6px 18px rgba(0,0,0,0.1)",
+                  transition: "transform 0.3s ease",
+                  '&:hover': { transform: "translateY(-5px)" }
+                }}>
+                  <CardMedia
+                    component="img"
+                    height="220"
+                    image={place.images[0]}
+                    alt={place.title}
+                    sx={{ objectFit: "cover" }}
+                  />
+                  <CardContent sx={{ px: 3, py: 2 }}>
+                    <Typography variant="h6" fontWeight="bold" sx={{ color: "#0d1b2a" }}>
+                      {place.title}
+                    </Typography>
+                    <Typography variant="body2" sx={{ mt: 1, color: "#555" }}>
+                      {place.shortDescription}
+                    </Typography>
+                    <Box sx={{ mt: 2, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <Chip
+                        label={place.price}
+                        sx={{
+                          backgroundColor: "#0d1b2a",
+                          color: "#fff",
+                          fontWeight: "bold"
+                        }}
+                      />
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <StarIcon sx={{ color: "#FFD700", mr: 0.5 }} />
+                        <Typography variant="body2" fontWeight="bold">
+                          {place.rating} ({place.reviews} تقييم)
+                        </Typography>
                       </Box>
-                      <Button variant="contained" sx={{ mt: 2, backgroundColor: "#091e3d" }} onClick={() => handleOpenDetails(place)}>
-                        عرض التفاصيل
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          ) : (
-            <Typography variant="h6" textAlign="center" sx={{ mt: 4 }}>
-              لا توجد نتائج مطابقة لبحثك.
+                    </Box>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleOpenDetails(place)}
+                      sx={{
+                        mt: 2,
+                        backgroundColor: "#0d1b2a",
+                        borderRadius: 3,
+                        px: 4,
+                        '&:hover': {
+                          backgroundColor: "#142c47"
+                        }
+                      }}
+                    >
+                      عرض التفاصيل
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+
+          {/* No Results Message */}
+          {filteredPlaces.length === 0 && (
+            <Typography textAlign="center" variant="h6" sx={{ mt: 4, color: "#999" }}>
+              لم يتم العثور على نتائج.
             </Typography>
           )}
         </Box>
       </Container>
 
-      {/* Dialog for Place Details */}
+      {/* Place Details Dialog */}
       {selectedPlace && (
         <Dialog open={selectedPlace} onClose={handleCloseDetails} fullWidth>
-          <DialogContent sx={{ textAlign: "center" }}>
+          <DialogContent sx={{ textAlign: "center", px: 4 }}>
             <Slider {...settings}>
               {selectedPlace.images.map((img, index) => (
                 <Box
                   key={index}
                   component="img"
                   src={img}
-                  sx={{ width: "100%", height: 200, objectFit: "cover" }}
+                  sx={{
+                    width: "100%",
+                    height: 400,
+                    objectFit: "cover",
+                    borderRadius: 3
+                  }}
                 />
               ))}
             </Slider>
-            <Typography variant="h6" fontWeight="bold" sx={{ mt: 2 }}>
+            <Typography variant="h5" fontWeight="bold" sx={{ mt: 3, color: "#091e3d" }}>
               {selectedPlace.title}
             </Typography>
-            <Typography variant="body2" sx={{ mt: 1 }}>
+            <Typography variant="body1" sx={{ mt: 2 }}>
               {selectedPlace.fullDescription}
             </Typography>
-            <Typography variant="h6" color="primary" sx={{ mt: 1 }}>
+            <Typography variant="h6" color="primary" sx={{ mt: 2 }}>
               {selectedPlace.price}
             </Typography>
             <Typography variant="h6" color="text.secondary" sx={{ mt: 1 }}>
               📞 {selectedPlace.phone}
             </Typography>
-            <Button variant="contained" sx={{ mt: 2 }} onClick={handleCloseDetails}>
+            <Button variant="contained" sx={{ mt: 3, borderRadius: 3 }} onClick={handleCloseDetails}>
               إغلاق
             </Button>
           </DialogContent>
@@ -337,8 +442,9 @@ const Tour = () => {
       )}
 
       <Footer />
-    </>
+    </Box>
   );
 };
 
 export default Tour;
+

@@ -4,14 +4,20 @@ import "./profile.css";
 import React, { useEffect, useState } from "react";
 import db, { auth } from "../firebaseconfig";
 import { useAuth } from "../authstorre";
-import { collection, query, where, getDocs, deleteDoc,updateDoc, doc } from "firebase/firestore";
+import { collection, query, where, getDocs, deleteDoc, updateDoc, doc } from "firebase/firestore";
 import { useDispatch } from 'react-redux';
 import { Table } from 'lucide-react';
 import { Button } from 'react-bootstrap';
-
+import { useNavigate } from 'react-router-dom';
+import { deleteCurrentUser } from '.././Redux/CurrentUser';
 const Profile = () => {
+  const [isActive, setIsActive] = useState(false);
+  const [isFirstActive, setIsFirstActive] = useState(false);
+  const [isSecondActive, setIsSecondActive] = useState(false);
+  const handleToggle = () => {
+    setIsActive(!isActive);
+  };
   const userData = JSON.parse(localStorage.getItem("currentUser"));
-
   const [editingField, setEditingField] = useState(null);
   const [fieldValues, setFieldValues] = useState({
     email: userData.email || "",
@@ -31,18 +37,18 @@ const Profile = () => {
       if (!querySnapshot.empty) {
         const userDocRef = doc(db, "user", querySnapshot.docs[0].id);
         await updateDoc(userDocRef, { [field]: fieldValues[field] });
-        userData[field] = fieldValues[field]; // تحديث الـ local userData
-        localStorage.setItem("currentUser", JSON.stringify(userData)); // تحديث الـ localStorage
+        userData[field] = fieldValues[field];
+        localStorage.setItem("currentUser", JSON.stringify(userData));
         setEditingField(null);
       }
     } catch (error) {
       console.error("Error updating field:", error);
     }
-  };  
+  };
   const [posts, editPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  if(userData.status=="publisher"){
+  if (userData.status == "publisher") {
     const fetchPosts = async () => {
       setLoading(true);
       try {
@@ -52,63 +58,99 @@ const Profile = () => {
         );
         const querySnapshot = await getDocs(q);
         const Posts = [];
-    
+
         querySnapshot.forEach((doc) => {
           Posts.push({ id: doc.id, ...doc.data() });
         });
-    
+
         editPosts(Posts);
         console.log(Posts);
-    
+
       } catch (error) {
         console.error("Error fetching posts: ", error);
       }
       setLoading(false);
     };
     useEffect(() => {
-           fetchPosts();
+      fetchPosts();
     }, []);
 
   }
   const deletePost = async (id) => {
     if (confirm('Are you sure you want to save this thing into the database?')) {
-        try {
-            await deleteDoc(doc(db, "housing", id));
-            editPosts(posts.filter(post => post.id !== id));
-            console.log("Post deleted successfully!");    
-          } catch (error) {
-            console.error("Error deleting user: ", error);
-          }
-      } else {
-        console.log('Thing was not saved to the database.');
+      try {
+        await deleteDoc(doc(db, "housing", id));
+        editPosts(posts.filter(post => post.id !== id));
+        console.log("Post deleted successfully!");
+      } catch (error) {
+        console.error("Error deleting user: ", error);
       }
-  
-  };
-        
-  if (!userData) return <p>abdala..</p>;
+    } else {
+      console.log('Thing was not saved to the database.');
+    }
 
+  };
+
+  if (!userData) return <p>abdala..</p>;
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    localStorage.clear(); // مسح جميع البيانات من localStorage
+    dispatch(deleteCurrentUser()); // تفريغ الـ store
+    nav('/');
+  };
   return (
     <>
+      <style>
+        {
+          `
+        .toggle-container {
+  width: 60px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 50px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle {
+  width: 25px;
+  height: 25px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  transition: left 0.3s ease;
+}
+
+.toggle.active {
+  left: 30px; 
+  background-color: #4CAF50;
+}`
+        }
+      </style>
       <NavBar />
       <div className="profileContainer">
         <div className="profileCard" style={{ marginTop: "7vh" }}>
           <div className="profileHeader">
-            <div className="avatar">س</div>
+            {/* <div className="avatar">{userData.username || "اسم المستخدم غير متوفر"}</div> */}
             <h2 className="userName">{userData.username || "اسم المستخدم غير متوفر"}</h2>
             <p className="userId">الجامعة: <span>{userData.university || "الجامعة غير متوفرة"}</span></p>
-            
+
           </div>
 
           <div className="infoSection">
             <h3 className="sectionTitle">المعلومات الشخصية</h3>
-            { ["email", "phonenumber", "city", "address", "status"].map((fieldKey) => (
+            {["email", "phonenumber", "city", "address", "status"].map((fieldKey) => (
               <div className="infoItem" key={fieldKey}>
                 <span className="infoLabel">
                   {fieldKey === "email" ? "البريد الإلكتروني:" :
-                  fieldKey === "phonenumber" ? "رقم الجوال:" :
-                  fieldKey === "city" ? "المدينة:" :
-                  fieldKey === "address" ? "العنوان:" :
-                  "الحالة:"}
+                    fieldKey === "phonenumber" ? "رقم الجوال:" :
+                      fieldKey === "city" ? "المدينة:" :
+                        fieldKey === "address" ? "العنوان:" :
+                          "الحالة:"}
                 </span>
                 {editingField === fieldKey ? (
                   <>
@@ -143,7 +185,7 @@ const Profile = () => {
                   </>
                 )}
               </div>
-            )) }
+            ))}
           </div>
 
           <div className="infoSection">
@@ -194,74 +236,80 @@ const Profile = () => {
             </div>
           )}
         </div>
-      
 
 
 
 
-          <div className="infoSection">
-            <h3 className="sectionTitle">المعاملات الأخيرة</h3>
-            <div className="transaction">
-              <span className="transactionDate">2024/03/15:</span>
-              تحويل مالي - 1000 جنيه
-            </div>
-            <div className="transaction">
-              <span className="transactionDate">2024/03/10:</span>
-              شحن طرد - 5 كجم
-            </div>
-            <div className="transaction">
-              <span className="transactionDate">2024/03/05:</span>
-              توثيق مستندات
-            </div>
+
+        <div className="infoSection">
+          <h3 className="sectionTitle">المعاملات الأخيرة</h3>
+          <div className="transaction">
+            <span className="transactionDate">2024/03/15:</span>
+            تحويل مالي - 1000 جنيه
           </div>
+          <div className="transaction">
+            <span className="transactionDate">2024/03/10:</span>
+            شحن طرد - 5 كجم
+          </div>
+          <div className="transaction">
+            <span className="transactionDate">2024/03/05:</span>
+            توثيق مستندات
+          </div>
+        </div>
 
-          <div className="infoSection">
-            <h3 className="sectionTitle">الإشعارات</h3>
-            <div className="notificationsList">
-              <div className="notification">
-                <div className="notificationIcon">🔔</div>
-                <div className="notificationContent">
-                  <div className="notificationTitle">تم تأكيد الدفع</div>
-                  <div className="notificationText">
-                    تم تأكيد دفع مبلغ 1000 جنيه لخدمة تأجير شقة
-                  </div>
-                  <div className="notificationDate">منذ ساعتين</div>
+        <div className="infoSection">
+          <h3 className="sectionTitle">الإشعارات</h3>
+          <div className="notificationsList">
+            <div className="notification">
+              <div className="notificationIcon">🔔</div>
+              <div className="notificationContent">
+                <div className="notificationTitle">تم تأكيد الدفع</div>
+                <div className="notificationText">
+                  تم تأكيد دفع مبلغ 1000 جنيه لخدمة تأجير شقة
                 </div>
+                <div className="notificationDate">منذ ساعتين</div>
               </div>
-              <div className="notification">
-                <div className="notificationIcon">📦</div>
-                <div className="notificationContent">
-                  <div className="notificationTitle">تحديث حالة الخدمة</div>
-                  <div className="notificationText">الخدمة قيد التنفيذ</div>
-                  <div className="notificationDate">منذ 5 ساعات</div>
-                </div>
+            </div>
+            <div className="notification">
+              <div className="notificationIcon">📦</div>
+              <div className="notificationContent">
+                <div className="notificationTitle">تحديث حالة الخدمة</div>
+                <div className="notificationText">الخدمة قيد التنفيذ</div>
+                <div className="notificationDate">منذ 5 ساعات</div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="infoSection">
-            <h3 className="sectionTitle">إعدادات الحساب</h3>
-            <div className="settingsList">
-              <div className="settingItem">
-                <span className="settingLabel">تفعيل اشعارات الموقع</span>
-                <span className="settingStatus">مفعل</span>
-              </div>
-              <div className="settingItem">
-                <span className="settingLabel">إشعارات البريد الإلكتروني</span>
-                <span className="settingStatus">مفعل</span>
-              </div>
-              <div className="settingItem">
-                <span className="settingLabel">إشعارات الجوال</span>
-                <span className="settingStatus">مفعل</span>
-              </div>
-              <div className="settingItem">
-                <span className="settingLabel">اللغة المفضلة</span>
-                <span className="settingValue">العربية</span>
+        <div className="infoSection">
+          <h3 className="sectionTitle">إعدادات الحساب</h3>
+          <div className="settingsList">
+            <div className="settingItem">
+              <span className="settingLabel">تفعيل اشعارات الموقع</span>
+              <div className="toggle-container" onClick={handleToggle}>
+                <div className={`toggle ${isActive ? 'active' : ''}`}></div>
               </div>
             </div>
+            <div className="settingItem">
+              <span className="settingLabel">إشعارات البريد الإلكتروني</span>
+              <div className="toggle-container" onClick={() => setIsFirstActive(!isFirstActive)}>
+        <div className={`toggle ${isFirstActive ? 'active' : ''}`}></div>
+      </div>
+            </div>
+            <div className="settingItem">
+              <span className="settingLabel">إشعارات الجوال</span>
+              <div className="toggle-container" onClick={() => setIsSecondActive(!isSecondActive)}>
+                <div className={`toggle ${isSecondActive ? 'active' : ''}`}></div>
+              </div>
+            </div>
+            <div className="settingItem">
+              <span className="settingLabel">اللغة المفضلة</span>
+              <span className="settingValue">العربية</span>
+            </div>
           </div>
-        
-          </div>
+        </div>
+
+      </div>
       <Footer />
     </>
   );
@@ -269,5 +317,4 @@ const Profile = () => {
 
 export default Profile;
 
-      
- 
+

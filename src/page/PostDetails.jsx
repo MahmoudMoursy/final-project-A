@@ -1,120 +1,255 @@
-import React, { useState } from "react";
-import { Container, Typography, Avatar, Box, Card, CardContent, Grid, Button, TextField } from "@mui/material";
-import { useLocation } from "react-router-dom";
-import NavBar from "../Components/NavBar";
-import Footer from "../Components/Footer";
-
+import React, { useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import {
+    doc,
+    collection,
+    query,
+    orderBy,
+    onSnapshot,
+    addDoc,
+    serverTimestamp
+} from "firebase/firestore";
+import db from "../firebaseconfig";
+import NavBar from '../Components/NavBar';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from '../Redux/CurrentUser';
 const PostDetails = () => {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    const dispatch = useDispatch();
+    dispatch(setCurrentUser(user));
+
+    const { id: postId } = useParams();
     const location = useLocation();
-    const { post } = location.state || {};
+    const passedPost = location.state?.post || null;
 
-    // حالة لحفظ التعليقات
-    const [comments, setComments] = useState([
-        { id: 1, user: "عاصم عوض", text: "أنا مطور ويب متخصص في تطوير المواقع", avatar: "https://via.placeholder.com/50" },
-        { id: 2, user: "أحمد صالح", text: "يمكنني تنفيذ الخدمة بشكل احترافي", avatar: "https://via.placeholder.com/50" },
-    ]);
-
-    // حالة لحفظ التعليق الجديد
+    const [postData, setPostData] = useState(passedPost);
+    const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
 
-    // دالة لإضافة تعليق جديد
-    const handleAddComment = () => {
-        if (newComment.trim() === "") return; // عدم إضافة تعليق فارغ
+    useEffect(() => {
+        if (!postId) {
+            console.error("⚠️ Post ID is missing or invalid:", postId);
+            return;
+        }
 
-        const newCommentObj = {
-            id: comments.length + 1,
-            user: "مستخدم جديد", // يمكن جلبه من `Auth`
-            text: newComment,
-            avatar: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
-        };
+        const postRef = doc(db, "posts", postId);
+        const unsubscribePost = onSnapshot(postRef, (docSnap) => {
+            if (docSnap.exists()) {
+                setPostData(docSnap.data());
+            } else {
+                console.error("⚠️ المنشور غير موجود!");
+            }
+        });
 
-        setComments([...comments, newCommentObj]); // تحديث التعليقات
-        setNewComment(""); // مسح الحقل بعد الإضافة
+        return () => unsubscribePost();
+    }, [postId]);
+
+    useEffect(() => {
+        if (!postId) return;
+
+        const commentsRef = collection(db, "posts", postId, "comments");
+        const q = query(commentsRef, orderBy("timestamp", "desc"));
+
+        const unsubscribeComments = onSnapshot(q, (snapshot) => {
+            const commentsList = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setComments(commentsList);
+        });
+
+        return () => unsubscribeComments();
+    }, [postId]);
+
+    const handleAddComment = async () => {
+        if (!newComment.trim()) return;
+
+        try {
+            const commentsRef = collection(db, "posts", postId, "comments");
+            await addDoc(commentsRef, {
+                user: user.username,
+                text: newComment,
+                avatar:
+                    "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
+                timestamp: serverTimestamp()
+            });
+
+            setNewComment("");
+        } catch (error) {
+            console.error("⚠️ خطأ في إضافة التعليق:", error);
+        }
     };
 
-    if (!post) {
-        return <Typography variant="h5" style={{ textAlign: "center", marginTop: "20px" }}>المنشور غير موجود</Typography>;
+    if (!postData) {
+        return <p className="not-found">🚫 المنشور غير متاح</p>;
     }
 
     return (
         <>
+            <style>{
+                `.container {
+  direction: rtl;
+  text-align: right;
+  margin: 6% auto;
+  max-width: 820px;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Cairo", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.timestamp {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.content-box {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  background-color: #f9f9fb;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 35px;
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+.comments-section {
+  margin-top: 40px;
+}
+
+.comments-title {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 15px;
+  background-color: #f1f3f6;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+.comment-text {
+  flex: 1;
+}
+
+.comment-text strong {
+  color: #1a237e;
+  font-size: 0.95rem;
+}
+
+.comment-text p {
+  margin: 5px 0 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.not-found {
+  text-align: center;
+  margin-top: 100px;
+  font-size: 1.2rem;
+  color: #c0392b;
+}
+
+       `}
+
+
+            </style>
             <NavBar />
-            <Container maxWidth="xl" style={{ marginTop: "50px", padding: "20px", direction: "rtl" }}>
-                <Grid container spacing={3}>
-                    {/* قسم المحتوى الرئيسي */}
-                    <Grid item xs={12} md={9}>
-                        <Card sx={{ borderRadius: 3, boxShadow: 3, p: 3 }}>
-                            <CardContent>
-                                <Typography variant="h5" fontWeight="bold">
-                                    {post.text}
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: "gray", mt: 2 }}>
-                                    {new Date(post.timestamp).toLocaleString("ar-EG")}
-                                </Typography>
-                                <Box sx={{ mt: 3, bgcolor: "#f9f9f9", p: 2, borderRadius: 2 }}>
-                                    <Typography variant="body1">{post.details}</Typography>
-                                </Box>
-                            </CardContent>
-                        </Card>
+            <div className="container">
+                <h2 className="title">{postData.text}</h2>
+                <p className="timestamp">
+                    {new Date(postData.timestamp).toLocaleString("en-US")}
+                </p>
+                <div className="content-box">{postData.details}</div>
 
-                        {/* قسم التعليقات */}
-                        <Card sx={{ borderRadius: 3, boxShadow: 3, p: 3, mt: 3 }}>
-                            <Typography variant="h6" fontWeight="bold">
-                                التعليقات ({comments.length})
-                            </Typography>
+                <div className="comments-section">
+                    <h3 className="comments-title">💬 التعليقات ({comments.length})</h3>
 
-                            {/* عرض التعليقات */}
-                            {comments.map((comment) => (
-                                <Box key={comment.id} sx={{ mt: 2, display: "flex", alignItems: "center" }}>
-                                    <Avatar src={comment.avatar} />
-                                    <Box sx={{ ml: 2 }}>
-                                        <Typography variant="subtitle1" fontWeight="bold">{comment.user}</Typography>
-                                        <Typography variant="body2" color="gray">{comment.text}</Typography>
-                                    </Box>
-                                </Box>
-                            ))}
+                    <ul>
+                        {comments.map((item) => (
+                            <li key={item.id} className="comment">
+                                <img src={item.avatar} alt="avatar" className="avatar" />
+                                <div className="comment-text">
+                                    <strong>{item.user}</strong>
+                                    <p>{item.text}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
 
-                            {/* إدخال تعليق جديد */}
-                            <Box sx={{ mt: 3 }}>
-                                <TextField
-                                    fullWidth
-                                    variant="outlined"
-                                    label="أضف تعليقًا"
-                                    value={newComment}
-                                    onChange={(e) => setNewComment(e.target.value)}
-                                />
-                                <Button
-                                    variant="contained"
-                                    sx={{ mt: 2, bgcolor: "#091e3d", "&:hover": { bgcolor: "#071730" } }}
-                                    onClick={handleAddComment}
-                                >
-                                    إضافة تعليق
-                                </Button>
-                            </Box>
-                        </Card>
-                    </Grid>
-
-                   
-                    <Grid item xs={12} md={3}>
-                        <Card sx={{ borderRadius: 3, boxShadow: 3, p: 3 }}>
-                            <Typography variant="h6" fontWeight="bold">عن الموضوع</Typography>
-                            <Typography variant="body2" sx={{ mt: 1, color: "gray" }}>تاريخ النشر: منذ 22 ساعة و 5 دقائق</Typography>
-
-                            <Box sx={{ mt: 3 }}>
-                                <Typography variant="h6" fontWeight="bold">ناشر الموضوع</Typography>
-                                <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-                                    <Avatar src={post.image} />
-                                    <Box sx={{ ml: 2 }}>
-                                        <Typography variant="subtitle1" fontWeight="bold">{post.user}</Typography>
-                                        <Typography variant="body2" color="gray">مستخدم جديد</Typography>
-                                    </Box>
-                                </Box>
-                            </Box>
-                        </Card>
-                    </Grid>
-                </Grid>
-            </Container>
-            <Footer />
+                    <input
+                        className="input"
+                        placeholder="💬 أضف تعليقًا"
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                    />
+                    <button className="button" onClick={handleAddComment}>
+                        ➕ إضافة تعليق
+                    </button>
+                </div>
+            </div>
         </>
     );
 };

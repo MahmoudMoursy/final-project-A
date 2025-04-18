@@ -15,5 +15,5 @@ export const CurrentUserSlice = createSlice({
   },
 });
 
-export const { setCurrentUser } = CurrentUserSlice.actions;
+export const { setCurrentUser,deleteCurrentUser } = CurrentUserSlice.actions;
 export default CurrentUserSlice.reducer;

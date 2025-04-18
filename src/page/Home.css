@@ -1,6 +1,16 @@
+:root {
+    --main-color: rgba(152, 83, 255);
+    /* --primary-color: #24262B; */
+}
+
+.custom-color {
+  color: rgb(195, 154, 255);
+  }
+
+
 /* تحسين الألوان العامة */
 .home-page {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
   }
   
   /* الحاوية الرئيسية بعرض 80% */
@@ -28,11 +38,11 @@
     padding: 30px;
   }
   
-  .main-title {
+  /* .main-title {
     font-size: 6rem;
     color: #2c3e50;
     font-weight: lighter;
-  }
+  } */
   
   .service-title {
     font-size: 2rem;
@@ -42,16 +52,6 @@
   .service-description {
     font-size: 1.2rem;
     color: #e0e0e0;
-  }
-  
-  .custom-btn {
-    background-color: #2575fc;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .custom-btn:hover {
-    background-color: #16408b;
   }
   
   .partners-section {
@@ -121,28 +121,30 @@
     padding: 10px;
   }
   
-  .submit-btn {
-    background-color: #2575fc;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .submit-btn:hover {
-    background-color: #1b3a6d;
-  }
   
   /* تحسينات إضافية */
   .section-title h1 {
     font-size: 2.5rem;
-    background: linear-gradient(45deg, #2193b0, #6dd5ed);
+    /* background: linear-gradient(45deg, #2193b0, #6dd5ed); */
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: rgba(152, 83, 255);
     transition: transform 0.3s ease;
   }
   
   .section-title h1:hover {
     transform: scale(1.05);
   }
+  .sections-title {
+    font-size: 2rem;
+    /* background: linear-gradient(45deg, #2193b0, #6dd5ed); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(152, 83, 255);
+    transition: transform 0.3s ease;
+  }
+  
+  /* .sections-title:hover {
+    transform: scale(1.05);
+  } */
   
   .hover-effect {
     transition: all 0.3s ease;
@@ -153,7 +155,7 @@
     transform: translateY(-5px);
   }
   
-  .animated-btn {
+  /* .animated-btn {
     background: linear-gradient(45deg, #2193b0, #6dd5ed);
     border: none;
     transition: all 0.3s ease;
@@ -164,7 +166,7 @@
   
   .animated-btn:hover {
     transform: translateY(-3px);
-  }
+  } */
   
   .partner-logo {
     transition: all 0.5s ease;
@@ -217,20 +219,7 @@
   }
   
   .custom-input:focus {
-    border-color: #2193b0;
-    background-color: white;
-  }
-  
-  .submit-btn {
-    background: linear-gradient(45deg, #2193b0, #6dd5ed);
-    border: none;
-    transition: all 0.3s ease;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
-  
-  .submit-btn:hover {
-    transform: translateY(-2px);
+    background-color: rgba(152, 83, 255);
   }
   
   /* Add smooth scroll behavior */
@@ -244,9 +233,9 @@
   }
   
   /* Add gradient background to sections */
-  .bg-light {
+  /* .bg-light {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
-  }
+  } */
   
   /* Stars animation */
   .stars {
@@ -271,4 +260,57 @@
       transform: translateY(0);
       opacity: 1;
     }
+  }
+
+  .primary-btn {
+    background-color: rgba(152, 83, 255);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+  }
+  
+  .primary-btn:hover {
+    background-color: rgba(152, 83, 255);
+  }
+
+  .custom-btn {
+    background-color: rgba(144, 75, 255, 0.6);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+    padding: 20px 25px;
+    
+    
+  }
+  
+  .custom-btn:hover {
+    background-color: rgba(152, 83, 255, 0.8);
+  }
+
+  .btn-outline-primary {
+    background-color: transparent;
+    color: rgba(152, 83, 255) !important;
+    border: 1px solid rgba(152, 83, 255) !important;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+    
+  }
+
+  .btn-outline-primary:hover {
+    background-color: rgba(152, 83, 255, 0.8) !important;
+    color: white !important;
   }

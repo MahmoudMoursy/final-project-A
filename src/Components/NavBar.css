@@ -43,9 +43,9 @@
       border-radius: 5px;
     }
     
-    .nav-link:hover, .nav-link:active {
+    /* .nav-link:hover, .nav-link:active {
       background-color: rgba(52, 152, 219, 0.2) !important;
-    }
+    } */
   }
   
   /* شريط التنقل الشفاف (في الأعلى) */
@@ -56,7 +56,7 @@
   
   /* شريط التنقل بعد التمرير */
   .navbar.scrolled {
-    background-color: #091e3d !important;
+    background-color: #24262B !important;
   }
   
   .navbar-brand {
@@ -84,7 +84,7 @@
   }
   
   .nav-link:hover {
-    color: #3498db !important;
+    color: rgba(152, 83, 255) !important;
     background-color: transparent !important;
     text-decoration: none !important;
   }
@@ -92,7 +92,7 @@
   /* إزالة المربع الأزرق عند تحديد الرابط النشط */
   .nav-link.active {
     background-color: transparent !important;
-    color: #3498db !important;
+    color: rgba(152, 83, 255) !important;
     text-decoration: none !important;
   }
   
@@ -115,7 +115,7 @@
   }
   
   .dropdown-item:hover {
-    background-color: #2980b9 !important;
+    background-color: rgba(152, 83, 255) !important;
     color: #ecf0f1 !important;
   }
   
@@ -165,4 +165,55 @@
       font-size: 1.3rem !important;
       padding: 0.7rem 1rem !important;
     }
+  }
+
+  .profile-dropdown {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    min-width: 220px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    transition: all 0.3s ease;
+    font-family: 'Cairo', sans-serif;
+  }
+  
+  .profile-dropdown .dropdown-header {
+    font-size: 16px;
+    padding: 10px 0;
+    color: #333;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .profile-dropdown .btn-close {
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+            }
+  
+  .profile-dropdown .dropdown-item {
+    padding: 10px 20px;
+    text-align: right;
+    font-size: 15px;
+    color: #444;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease;
+  }
+  
+  .profile-dropdown .dropdown-item i {
+    margin-left: 8px;
+  }
+  
+  .profile-dropdown .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #1a73e8;
+  }
+  
+  .profile-dropdown .text-danger:hover {
+    background-color: #fdecea;
+    color: #c82333 !important;
   }

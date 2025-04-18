@@ -5,9 +5,9 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '../authstorre';
 import wasetLogo from '../assets/waset.png';
+import icon from '../../public/favicon.svg';
 import { LogIn, UserPlus, ArrowRight, Building2, Github } from 'lucide-react';
 import './loginStyle.css';
-import Nav from 'react-bootstrap/Nav';
 
 
 function Signup() {
@@ -52,7 +52,7 @@ function Signup() {
     }
 
     return (
-        <div className="min-vh-100 bg-gradient-custom d-flex align-items-center justify-content-center p-4">
+        <div className="min-vh-100 bg-gradient-custom-dark d-flex align-items-center justify-content-center p-4">
             <div className="card auth-card" style={{ maxWidth: '72rem' }}>
                 <div className="row g-0">
                     {/* Content Side */}
@@ -65,21 +65,21 @@ function Signup() {
                         
                         <div className="h-100 d-flex flex-column justify-content-center gap-4 animate-fade-in position-relative" style={{ zIndex: 10 }}>
                             <div className="d-flex align-items-center gap-3">
+                                <h1 className="fs-4 fw-normal text-white">Waset</h1>
                                 <img src={wasetLogo} alt="logo" className="w-25" />
-                                <h1 className="fs-4 fw-bold">Waset</h1>
                             </div>
                             <div className="mb-4">
-                                <h2 className="display-5 fw-bold lh-sm">
+                                <h2 className="display-5 fw-normal lh-sm text-white">
                                     Join our community today
                                 </h2>
                                 <div className="d-flex align-items-center gap-4 animate-bounce-subtle mt-4">
                                     <img
-                                        src={wasetLogo}
+                                        src={icon}
                                         alt="Waset Logo"
                                         className="rounded-circle object-fit-cover"
-                                        style={{ width: '5rem', height: '5rem', border: '4px solid rgba(255, 255, 255, 0.3)' }}
+                                        style={{ width: '3rem', height: '3rem', border: '4px solid rgba(255, 255, 255, 0.3)' }}
                                     />
-                                    <p className="fs-5 opacity-75">
+                                    <p className="fs-5 ">
                                         Create an account and discover the possibilities!
                                     </p>
                                 </div>
@@ -90,7 +90,7 @@ function Signup() {
                                             <span className="fs-4">🚀</span>
                                         </div>
                                         <div>
-                                            <h3 className="fw-semibold">Expatriate Services</h3>
+                                            <h3 className="fw-normal text-white">Expatriate Services</h3>
                                             <p className="opacity-75">Making your life easier away from home</p>
                                         </div>
                                     </div>
@@ -100,7 +100,7 @@ function Signup() {
                                             <span className="fs-4">🛡️</span>
                                         </div>
                                         <div>
-                                            <h3 className="fw-semibold">Secure by Design</h3>
+                                            <h3 className="fw-normal text-white">Secure by Design</h3>
                                             <p className="opacity-75">Your data is always protected</p>
                                         </div>
                                     </div>
@@ -148,48 +148,52 @@ function Signup() {
                             <div className="divider">Or continue with</div>
 
                             <form onSubmit={handleSubmit(save)}>
-                                <div>
-                                    <label className="form-label">Full Name</label>
+                                <div className="form-floating">
                                     <input
                                         {...register('name')}
                                         type="text"
-                                        placeholder="Enter your full name"
+                                        id="name"
+                                        placeholder=" "
                                         className="form-input"
                                         required
                                     />
+                                    <label htmlFor="name" className="form-label">Full Name</label>
                                     {errors.name && <small className="text-danger">{errors.name.message}</small>}
                                 </div>
-                                <div>
-                                    <label className="form-label">Email Address</label>
+                                <div className="form-floating">
                                     <input
                                         {...register('email')}
                                         type="email"
-                                        placeholder="Enter your email"
+                                        id="email"
+                                        placeholder=" "
                                         className="form-input"
                                         required
                                     />
+                                    <label htmlFor="email" className="form-label">Email Address</label>
                                     {errors.email && <small className="text-danger">{errors.email.message}</small>}
                                 </div>
-                                <div>
-                                    <label className="form-label">Password</label>
+                                <div className="form-floating">
                                     <input
                                         {...register('pass')}
                                         type="password"
-                                        placeholder="Enter your password"
+                                        id="pass"
+                                        placeholder=" "
                                         className="form-input"
                                         required
                                     />
+                                    <label htmlFor="pass" className="form-label">Password</label>
                                     {errors.pass && <small className="text-danger">{errors.pass.message}</small>}
                                 </div>
-                                <div>
-                                    <label className="form-label">Confirm Password</label>
+                                <div className="form-floating">
                                     <input
                                         {...register('confirmpass')}
                                         type="password"
-                                        placeholder="Confirm your password"
+                                        id="confirmpass"
+                                        placeholder=" "
                                         className="form-input"
                                         required
                                     />
+                                    <label htmlFor="confirmpass" className="form-label">Confirm Password</label>
                                     {errors.confirmpass && <small className="text-danger">{errors.confirmpass.message}</small>}
                                 </div>
                                 
