@@ -1,21 +1,22 @@
 import React from "react";
-import { Container, Grid, Typography, Box, Paper, Avatar } from "@mui/material";
+import { Container, Grid, Typography, Box, Paper, Avatar, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
+
 
 const ZilliqaStory = () => {
   return (
     <Container maxWidth="xl" style={{ textAlign: "center", marginTop: "50px", position: "relative", padding: 0, direction: "rtl" }}>
       <Typography variant="h3" fontWeight="bold" gutterBottom>
         مرحبًا بكم في <span style={{
-            backgroundColor: "#091e3d",
-            padding: "8px 15px",
-            color: "#fff",
-            borderRadius: "1200px 7000px ",
-            fontWeight: "bold",
-            display: "inline-block"
-          }}>في وسيط </span>
+          backgroundColor: "#091e3d",
+          padding: "8px 15px",
+          color: "#fff",
+          borderRadius: "1200px 7000px ",
+          fontWeight: "bold",
+          display: "inline-block"
+        }}>في وسيط </span>
       </Typography>
       <Box
         sx={{
@@ -75,163 +76,261 @@ const ZilliqaStory = () => {
   );
 };
 
-const ScalingFaster = () => {
-  return (
-    <Paper elevation={0} style={{ padding: "50px", margin: "20px 40px 100px 40px", direction: "rtl", boxShadow: "none" }}>
-      <Grid container spacing={3} alignItems="center">
-        <Grid item xs={12} md={6}>
-          <img 
-            src="https://img.freepik.com/premium-photo/close-up-view-colorful-faluca-traditional-boat-sailing-river-sorrounded-by-vegetation_1048944-11883581.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_authors_boost" 
-            alt="رؤيتنا" 
-            style={{ width: "100%", borderRadius: "10px" }} 
-          />
-        </Grid>
-        <Grid item xs={12} md={6} textAlign="center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Typography variant="h4" gutterBottom>
-              رؤيتنا
-            </Typography>
-            <Typography variant="body1">
-              نحن منصة متكاملة تهدف إلى تسهيل حياة المغتربين من خلال تقديم خدمات متنوعة تلبي احتياجاتهم اليومية، سواء في السكن، التوظيف، الخدمات القانونية، أو الدعم الاجتماعي. نؤمن بأن التكنولوجيا يمكنها أن تجعل الحياة أسهل وأكثر كفاءة، ونسعى جاهدين لتقديم أفضل الحلول التي تعزز تجربة المغتربين في أسوان.
-            </Typography>
-          </motion.div>
-        </Grid>
-      </Grid>
-    </Paper>
-  );
-};
 
-const HowItBegan = () => {
-  return (
-    <Paper elevation={0} style={{ padding: "50px", margin: "30px 40px", direction: "rtl", boxShadow: "none" }}>
-      <Grid container spacing={3} alignItems="center">
-        <Grid item xs={12} md={6} textAlign="center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Typography variant="h4" gutterBottom>
-              مهمتنا
-            </Typography>
-            <Typography variant="h6">
-              نعمل على بناء مجتمع داعم للمغتربين عبر تقديم حلول مبتكرة تجعل انتقالهم واستقرارهم في بلد جديد تجربة سلسة وآمنة. نهدف إلى توفير بيئة داعمة تساعد المغتربين على التكيف بسرعة مع الحياة الجديدة، مع تقديم الدعم اللازم في جميع الجوانب الحياتية.
-            </Typography>
-          </motion.div>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <img 
-            src="https://img.freepik.com/premium-photo/sailboats-by-entrance-botanical-garden-aswan-egypt_219958-1139.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_authors_boost" 
-            alt="مهمتنا" 
-            style={{ width: "100%", borderRadius: "10px" }} 
-          />
-        </Grid>
-      </Grid>
-    </Paper>
-  );
-};
+const VisionMissionSection = () => {
+  const theme = useTheme();
+  const sections = [
+    {
+      title: "رؤيتنا",
+      content:
+        "نحن منصة متكاملة تهدف إلى تسهيل حياة المغتربين من خلال تقديم خدمات متنوعة تلبي احتياجاتهم اليومية، سواء في السكن، التوظيف، الخدمات القانونية، أو الدعم الاجتماعي. نؤمن بأن التكنولوجيا يمكنها أن تجعل الحياة أسهل وأكثر كفاءة، ونسعى جاهدين لتقديم أفضل الحلول التي تعزز تجربة المغتربين في أسوان.",
+      image:
+        "https://img.freepik.com/premium-photo/close-up-view-colorful-faluca-traditional-boat-sailing-river-sorrounded-by-vegetation_1048944-11883581.jpg",
+      bgColor: "#f8f9fa",
+    },
+    {
+      title: "مهمتنا",
+      content:
+        "نعمل على بناء مجتمع داعم للمغتربين عبر تقديم حلول مبتكرة تجعل انتقالهم واستقرارهم في بلد جديد تجربة سلسة وآمنة. نهدف إلى توفير بيئة داعمة تساعد المغتربين على التكيف بسرعة مع الحياة الجديدة، مع تقديم الدعم اللازم في جميع الجوانب الحياتية.",
+      image:
+        "https://img.freepik.com/premium-photo/sailboats-by-entrance-botanical-garden-aswan-egypt_219958-1139.jpg",
+      bgColor: "#ffffff",
+      reverse: true,
+    },
+    {
+      title: "قيمنا",
+      content:
+        "الشفافية، المصداقية، والابتكار هي الركائز الأساسية التي نرتكز عليها لضمان تقديم أفضل الخدمات لعملائنا. نؤمن بأن النزاهة والشفافية هي أساس الثقة بيننا وبين عملائنا، ونحرص على أن تكون جميع خدماتنا مبتكرة ومواكبة لأحدث التطورات التكنولوجية.",
+      image:
+        "https://img.freepik.com/premium-photo/nile-traditional-african-village-near-aswan-egypt_400112-2293.jpg",
+      bgColor: "#f8f9fa",
+    },
+  ];
 
-const HowItBega = () => {
   return (
-    <Paper elevation={0} style={{ padding: "50px", margin: "30px 40px", direction: "rtl", boxShadow: "none" }}>
-      <Grid container spacing={3} alignItems="center">
-        <Grid item xs={12} md={6}>
-          <img 
-            src="https://img.freepik.com/premium-photo/nile-traditional-african-village-near-aswan-egypt_400112-2293.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_authors_boost" 
-            alt="قيمنا" 
-            style={{ width: "100%", borderRadius: "10px" }} 
-          />
-        </Grid>
-        <Grid item xs={12} md={6} textAlign="center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Typography variant="h4" gutterBottom>
-              قيمنا
-            </Typography>
-            <Typography variant="h6">
-              الشفافية، المصداقية، والابتكار هي الركائز الأساسية التي نرتكز عليها لضمان تقديم أفضل الخدمات لعملائنا. نؤمن بأن النزاهة والشفافية هي أساس الثقة بيننا وبين عملائنا، ونحرص على أن تكون جميع خدماتنا مبتكرة ومواكبة لأحدث التطورات التكنولوجية.
-            </Typography>
-          </motion.div>
-        </Grid>
-      </Grid>
-    </Paper>
+    <Box sx={{ py: 8 }}>
+      {sections.map((section, index) => (
+        <Box
+          key={index}
+          sx={{
+            backgroundColor: section.bgColor,
+            py: 8,
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <Container maxWidth="lg">
+            <Grid
+              container
+              spacing={6}
+              direction={section.reverse ? "row-reverse" : "row"}
+              alignItems="center"
+            >
+              <Grid item xs={12} md={6}>
+                <motion.div
+                  initial={{ opacity: 0, x: section.reverse ? 50 : -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                >
+                  <Box
+                    sx={{
+                      borderRadius: "12px",
+                      overflow: "hidden",
+                      boxShadow: "0 15px 30px rgba(0,0,0,0.12)",
+                      height: "100%",
+                    }}
+                  >
+                    <img
+                      src={section.image}
+                      alt={section.title}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        minHeight: "350px",
+                      }}
+                    />
+                  </Box>
+                </motion.div>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  <Box sx={{ textAlign: "right", direction: "rtl" }}>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        mb: 3,
+                        color: theme.palette.primary.dark,
+                        fontWeight: "bold",
+                        position: "relative",
+                        display: "inline-block",
+                        "&:after": {
+                          content: '""',
+                          position: "absolute",
+                          bottom: -8,
+                          right: 0,
+                          width: "60%",
+                          height: "4px",
+                          backgroundColor: theme.palette.secondary.main,
+                          borderRadius: "2px",
+                        },
+                      }}
+                    >
+                      {section.title}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontSize: "1.1rem",
+                        lineHeight: 2,
+                        color: theme.palette.text.secondary,
+                      }}
+                    >
+                      {section.content}
+                    </Typography>
+                  </Box>
+                </motion.div>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+      ))}
+    </Box>
   );
 };
 
 const TeamSection = () => {
+  const theme = useTheme();
+  const teamMembers = [
+    { name: "مريم أسامه", role: "مطوره واجهات أمامية", image: "https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg" },
+    { name: "ساره عادل", role: "مطوره واجهات أمامية", image: "https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg" },
+    { name: "ساره حمدي", role: "مطوره واجهات أمامية", image: "https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg" },
+    { name: "محمود مرسي", role: "مطور واجهات أمامية", image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg" },
+    { name: "عبدالله احمد", role: "مطور واجهات أمامية", image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg" },
+    { name: "مصطفي جابر", role: "مطور واجهات أمامية", image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg" },
+  ];
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+    <Box
+      sx={{
+        py: 8,
+        backgroundColor: theme.palette.primary.dark,
+        backgroundImage: "linear-gradient(135deg, #091e3d 0%, #1a3a6a 100%)",
+        color: "#fff",
+      }}
     >
-      <Paper elevation={0} style={{ padding: '50px', margin: '30px 40px 40px 40px', direction: "rtl", textAlign: "center", boxShadow: "none" }}>
-        <Typography variant="h4" style={{    backgroundColor: "#091e3d",
-            padding: "8px 15px",
-            color: "#fff",
-            borderRadius: "100px 70px 100px 70px ", textAlign: "center", }} gutterBottom>
-          فريقنا
-        </Typography>
-        <Box display="flex" justifyContent="space-around" flexWrap="wrap">
-          <Box textAlign="center" m={2}>
-            <Avatar alt="Team Member 1" src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid" sx={{ width: 100, height: 100 }} />
-            <Typography variant="h6">مريم أسامه</Typography>
-            <Typography variant="body2">مطوره واجهات أمامية</Typography>
-          </Box>
-          <Box textAlign="center" m={2}>
-            <Avatar alt="Team Member 2" src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid" sx={{ width: 100, height: 100 }} />
-            <Typography variant="h6">ساره عادل</Typography>
-            <Typography variant="body2">مطوره واجهات أمامية</Typography>
-          </Box>
-          <Box textAlign="center" m={2}>
-            <Avatar alt="Team Member 3" src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid" sx={{ width: 100, height: 100 }} />
-            <Typography variant="h6">ساره حمدي</Typography>
-            <Typography variant="body2">مطوره واجهات أمامية</Typography>
-          </Box>
-        </Box>
-        <Box display="flex" justifyContent="space-around" flexWrap="wrap">
-          <Box textAlign="center" m={2}>
-            <Avatar alt="Team Member 3" src="https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid" sx={{ width: 100, height: 100 }} />
-            <Typography variant="h6">محمود مرسي
-            </Typography>
-            <Typography variant="body2">مطور واجهات أمامية</Typography>
-          </Box>
-          <Box textAlign="center" m={2}>
-            <Avatar alt="Team Member 3" src="https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid" sx={{ width: 100, height: 100 }} />
-            <Typography variant="h6">عبدالله احمد</Typography>
-            <Typography variant="body2">مطور واجهات أمامية</Typography>
-          </Box>
-          <Box textAlign="center" m={2}>
-            <Avatar alt="Team Member 3" src="https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg?ga=GA1.1.1496392416.1737637764&semt=ais_hybrid" sx={{ width: 100, height: 100 }} />
-            <Typography variant="h6">مصطفي جابر</Typography>
-            <Typography variant="body2">مطور واجهات أمامية</Typography>
-          </Box>
-        </Box>
-      </Paper>
-    </motion.div>
+      <Container maxWidth="lg">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Typography
+            variant="h3"
+            sx={{
+              textAlign: "center",
+              mb: 6,
+              fontWeight: "bold",
+              position: "relative",
+              color: "common.white", // أو استخدام الثيم
+              "&:after": {
+                content: '""',
+                position: "absolute",
+                bottom: -12,
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "100px",
+                height: "4px",
+                backgroundColor: theme.palette.secondary.main,
+                borderRadius: "2px",
+              },
+            }}
+          >
+            فريقنا
+          </Typography>
+
+          <Grid container spacing={4} justifyContent="center">
+            {teamMembers.map((member, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <motion.div
+                  whileHover={{ y: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Paper
+                    elevation={6}
+                    sx={{
+                      p: 3,
+                      borderRadius: "12px",
+                      textAlign: "center",
+                      direction: "rtl",
+                      backgroundColor: "rgba(255,255,255,0.1)",
+                      backdropFilter: "blur(8px)",
+                      height: "100%",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        transform: "translateY(-5px)",
+                        boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
+                      },
+                    }}
+                  >
+                    <Avatar
+                      alt={member.name}
+                      src={member.image}
+                      sx={{
+                        width: 120,
+                        height: 120,
+                        mx: "auto",
+                        mb: 3,
+                        border: `3px solid ${theme.palette.secondary.main}`,
+                      }}
+                    />
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: "bold",
+                        mb: 1,
+                        color: "#fff",
+                      }}
+                    >
+                      {member.name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: theme.palette.secondary.light,
+                      }}
+                    >
+                      {member.role}
+                    </Typography>
+                  </Paper>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
+        </motion.div>
+      </Container>
+    </Box>
   );
 };
 
 const AboutUs = () => {
   return (
-    <div style={{ direction: "ltr" }}>
+    <Box sx={{ direction: "ltr" }}>
       <NavBar />
-      <Container maxWidth={false} style={{ padding: 0, marginTop: "80px", paddingTop: "20px" }}>
+      <Box sx={{ pt: { xs: "56px", sm: "64px" } }}>
         <ZilliqaStory />
-        <ScalingFaster />
-        <HowItBegan />
-        <HowItBega />
+        <VisionMissionSection />
         <TeamSection />
         <Footer />
-      </Container>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
