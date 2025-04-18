@@ -7,17 +7,40 @@ import Footer from "../Components/Footer";
 
 const ZilliqaStory = () => {
   return (
-    <Container maxWidth="xl" style={{ textAlign: "center", marginTop: "50px", position: "relative", padding: 0, direction: "rtl" }}>
-      <Typography variant="h3" fontWeight="bold" gutterBottom>
-        مرحبًا بكم في <span style={{
+    <Container
+      maxWidth="xl"
+      style={{
+        textAlign: "center",
+        marginTop: "50px",
+        padding: 0,
+        direction: "rtl",
+        overflow: "hidden",
+      }}
+    >
+      <Typography
+        variant="h3"
+        fontWeight="bold"
+        gutterBottom
+        sx={{
+          animation: "fadeInDown 1s ease-out",
           backgroundColor: "#091e3d",
-          padding: "8px 15px",
           color: "#fff",
-          borderRadius: "1200px 7000px ",
+          padding: "10px 20px",
+          borderRadius: "15px",
           fontWeight: "bold",
-          display: "inline-block"
-        }}>في وسيط </span>
+          display: "inline-block",
+        }}
+      >
+        مرحبًا بكم في{" "}
+        <span
+          style={{
+           
+          }}
+        >
+          وسيط
+        </span>
       </Typography>
+  
       <Box
         sx={{
           position: "relative",
@@ -25,8 +48,7 @@ const ZilliqaStory = () => {
           height: "100vh",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center-end",
-          overflow: "hidden",
+          justifyContent: "center",
         }}
       >
         <img
@@ -34,47 +56,68 @@ const ZilliqaStory = () => {
           alt="Team Illustration"
           style={{
             width: "100%",
-            height: "auto",
+            height: "100%",
             objectFit: "cover",
             position: "absolute",
             top: 0,
             left: 0,
             zIndex: 1,
+            filter: "brightness(70%)",
           }}
         />
-
+  
         <Box
           sx={{
-            position: "absolute",
-            top: "6%",
-            left: "5%",
+            position: "relative",
             zIndex: 2,
-            backgroundColor: "rgba(255, 255, 255, 0.7)",
-            padding: "15px",
-            borderRadius: "10px",
+            background: "rgba(255, 255, 255, 0.85)",
+            padding: { xs: "20px", md: "40px" },
+            borderRadius: "16px",
+            width: { xs: "90%", md: "60%" },
+            textAlign: "right",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+            animation: "fadeInUp 1.5s ease",
+            transition: "transform 0.4s",
+            fontWeight: "bold",
+            "&:hover": {
+              transform: "scale(1.02)",
+            },
           }}
         >
-          <Typography variant="h3" fontWeight="bold" style={{ padding: 0, direction: "rtl" }} gutterBottom>
+          <Typography variant="h3" fontWeight="bold" gutterBottom>
             من نحن؟
           </Typography>
-
-          <Typography variant="body1" color="text.secondary" paragraph>
-            نحن فريق متخصص في تطوير الواجهات الأمامية (Front_end Track) باستخدام أحدث التقنيات والممارسات الحديثة.
+  
+          <Typography variant="body1" color="black" paragraph>
+            نحن منصه وسيط نسعى إلى تقديم تجربة رقمية متكاملة تدعم المغتربين في كل تفاصيل حياتهم بأسوان. نؤمن بأهمية توفير حلول تقنية تُسهم في تسهيل الحياة اليومية وتعزيز الترابط المجتمعي بين الأفراد في الغربة.
           </Typography>
-          <Typography variant="body1" color="text.secondary" paragraph>
-            نعمل على تقديم حلول مبتكرة لتسهيل حياة المغتربين عبر منصتنا المتكاملة.
+  
+          <Typography variant="body1" color="black" paragraph>
+            نقدم خدمات متنوعة تشمل السكن، معرفه الاماكن السياحيه، والدعم الاجتماعي. كما نحرص على توفير معلومات محدثة وموثوقة تساعد المغتربين على اتخاذ قراراتهم بثقة، سواء في مجالات العمل، التعليم، أو حتى الأنشطة الاجتماعية.
           </Typography>
-          <Typography variant="body1" color="text.secondary" paragraph>
-            والتي تهدف إلى توفير خدمات متنوعة تشمل السكن، التوظيف، الدعم القانوني، والخدمات الاجتماعية، لضمان تجربة سلسة وآمنة في بلدنا "أسوان".
-          </Typography>
-          <Typography variant="body1" color="text.secondary" paragraph>
-            نحن في نهدف إلى تقديم حلول مبتكرة في أسوان من خلال التكنولوجيا المتقدمة من وسيط.
+  
+          <Typography variant="body1" color="black" paragraph>
+            رؤيتنا هي بناء مجتمع رقمي تفاعلي يُشعر كل مغترب بأنه في وطنه، ويمنحه الأدوات اللازمة للاندماج والنجاح في بيئته الجديدة. نحن هنا لنرافقك في رحلتك، ونسهّل عليك الوصول إلى كل ما تحتاجه، بخطوات بسيطة وتجربة استخدام سلسة.
           </Typography>
         </Box>
       </Box>
+  
+      <style>
+        {`
+          @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+  
+          @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `}
+      </style>
     </Container>
   );
-};
+};  
 
 
 const VisionMissionSection = () => {
@@ -82,16 +125,14 @@ const VisionMissionSection = () => {
   const sections = [
     {
       title: "رؤيتنا",
-      content:
-        "نحن منصة متكاملة تهدف إلى تسهيل حياة المغتربين من خلال تقديم خدمات متنوعة تلبي احتياجاتهم اليومية، سواء في السكن، التوظيف، الخدمات القانونية، أو الدعم الاجتماعي. نؤمن بأن التكنولوجيا يمكنها أن تجعل الحياة أسهل وأكثر كفاءة، ونسعى جاهدين لتقديم أفضل الحلول التي تعزز تجربة المغتربين في أسوان.",
+      content: " نطمح إلى أن نكون الجسر الذي يربط المغترب بالحياة المستقرة، من خلال بناء منصة ذكية تقدم حلولًا حقيقية تلبي احتياجاته اليومية. نحن نؤمن بأن الاستقرار يبدأ من الشعور بالأمان والانتماء، ولهذا نركز على تقديم خدمات تدعم كل جانب من جوانب حياة المغترب، سواء على المستوى المهني، الاجتماعي، أو النفسي هدفنا ليس فقط تيسير الوصول إلى الخدمات، بل أيضًا خلق مجتمع متكامل يشعر فيه المغترب بأنه ليس وحيدًا، بل محاط بدعم حقيقي وشبكة من الموارد التي تمكّنه من بناء مستقبل أفضل.",
       image:
         "https://img.freepik.com/premium-photo/close-up-view-colorful-faluca-traditional-boat-sailing-river-sorrounded-by-vegetation_1048944-11883581.jpg",
       bgColor: "#f8f9fa",
     },
     {
       title: "مهمتنا",
-      content:
-        "نعمل على بناء مجتمع داعم للمغتربين عبر تقديم حلول مبتكرة تجعل انتقالهم واستقرارهم في بلد جديد تجربة سلسة وآمنة. نهدف إلى توفير بيئة داعمة تساعد المغتربين على التكيف بسرعة مع الحياة الجديدة، مع تقديم الدعم اللازم في جميع الجوانب الحياتية.",
+      content: "نعمل على تسهيل حياة المغتربين وتمكينهم من الاندماج في مجتمع أسوان بسلاسة، مع توفير بيئة داعمة تساعدهم على النجاح والتأقلم. نسعى إلى بناء حلول رقمية تُراعي احتياجاتهم الفعلية، وتمنحهم الوصول إلى المعلومات والخدمات بطريقة بسيطة وآمنة.  من خلال منصتنا، نهدف إلى تقليص الفجوة بين المغترب والمجتمع المحلي، وتقديم أدوات ذكية تُسهم في تعزيز التفاعل، بناء العلاقات، وتوفير فرص حقيقية للنمو الشخصي والمهني. مهمتنا تنبع من إيماننا بأن كل مغترب يستحق بداية جديدة وفرصة عادلة للنجاح، ونحن هنا لنكون شركاء حقيقيين في رحلته نحو حياة أكثر استقرارًا وطمأنينة.",
       image:
         "https://img.freepik.com/premium-photo/sailboats-by-entrance-botanical-garden-aswan-egypt_219958-1139.jpg",
       bgColor: "#ffffff",
@@ -99,8 +140,7 @@ const VisionMissionSection = () => {
     },
     {
       title: "قيمنا",
-      content:
-        "الشفافية، المصداقية، والابتكار هي الركائز الأساسية التي نرتكز عليها لضمان تقديم أفضل الخدمات لعملائنا. نؤمن بأن النزاهة والشفافية هي أساس الثقة بيننا وبين عملائنا، ونحرص على أن تكون جميع خدماتنا مبتكرة ومواكبة لأحدث التطورات التكنولوجية.",
+      content: "نؤمن بالشفافية، الابتكار، والمصداقية كقيم رئيسية تقود كل قراراتنا وخدماتنا. هذه المبادئ ليست مجرد شعارات، بل هي جزء لا يتجزأ من الطريقة التي نعمل بها ونتفاعل من خلالها مع مجتمعنا. نضع الإنسان في قلب كل ما نقوم به، ونسعى دائمًا لتقديم حلول تُبنى على الثقة والاحترام المتبادل. نؤمن بأن الابتكار هو الطريق نحو التقدم، ولهذا نعمل باستمرار على تطوير منصتنا بما يواكب احتياجات المستخدم المتغيرة. هدفنا هو أن يشعر كل مغترب بأنه مُقدّر، مدعوم، وله صوت مسموع في المنصة التي صُممت خصيصًا من أجله.",
       image:
         "https://img.freepik.com/premium-photo/nile-traditional-african-village-near-aswan-egypt_400112-2293.jpg",
       bgColor: "#f8f9fa",
@@ -108,100 +148,116 @@ const VisionMissionSection = () => {
   ];
 
   return (
-    <Box sx={{ py: 8 }}>
-      {sections.map((section, index) => (
-        <Box
-          key={index}
-          sx={{
-            backgroundColor: section.bgColor,
-            py: 8,
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          <Container maxWidth="lg">
-            <Grid
-              container
-              spacing={6}
-              direction={section.reverse ? "row-reverse" : "row"}
-              alignItems="center"
-            >
-              <Grid item xs={12} md={6}>
-                <motion.div
-                  initial={{ opacity: 0, x: section.reverse ? 50 : -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
+    <Box>
+    {sections.map((section, index) => (
+      <Box
+        key={index}
+        sx={{
+          backgroundColor: section.bgColor || "#fdfdfd",
+          py: { xs: 6, md: 10 },
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <Container maxWidth="lg">
+          <Grid
+            container
+            spacing={8}
+            direction={section.reverse ? "row-reverse" : "row"}
+            alignItems="center"
+          >
+            {/* الصورة */}
+            <Grid item xs={12} md={6}>
+              <motion.div
+                initial={{ opacity: 0, x: section.reverse ? 100 : -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9 }}
+                viewport={{ once: true }}
+              >
+                <Box
+                  sx={{
+                    borderRadius: "20px",
+                    overflow: "hidden",
+                    boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
+                    transform: "scale(1)",
+                    transition: "all 0.4s ease-in-out",
+                    "&:hover": {
+                      transform: "scale(1.03)",
+                      boxShadow: "0 25px 80px rgba(0,0,0,0.25)",
+                    },
+                  }}
                 >
-                  <Box
-                    sx={{
-                      borderRadius: "12px",
-                      overflow: "hidden",
-                      boxShadow: "0 15px 30px rgba(0,0,0,0.12)",
+                  <img
+                    src={section.image}
+                    alt={section.title}
+                    style={{
+                      width: "100%",
                       height: "100%",
+                      objectFit: "cover",
+                      minHeight: "350px",
+                      transition: "transform 0.4s ease-in-out",
+                    }}
+                  />
+                </Box>
+              </motion.div>
+            </Grid>
+  
+            {/* النص */}
+            <Grid item xs={12} md={6}>
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <Box sx={{ textAlign: "right", direction: "rtl" }}>
+                  <Typography
+                    variant="h3"
+                    sx={{
+                      mb: 3,
+                      fontWeight: 700,
+                      color: "#0d1b2a",
+                      position: "relative",
+                      display: "inline-block",
+                      fontSize: { xs: "1.8rem", md: "2.2rem" },
+                      "&:after": {
+                        content: '""',
+                        position: "absolute",
+                        bottom: -6,
+                        right: 0,
+                        width: "70%",
+                        height: "4px",
+                        background: "linear-gradient(90deg, #0088ff, #00c2cb)",
+                        borderRadius: "2px",
+                      },
                     }}
                   >
-                    <img
-                      src={section.image}
-                      alt={section.title}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        minHeight: "350px",
-                      }}
-                    />
-                  </Box>
-                </motion.div>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  viewport={{ once: true }}
-                >
-                  <Box sx={{ textAlign: "right", direction: "rtl" }}>
-                    <Typography
-                      variant="h3"
-                      sx={{
-                        mb: 3,
-                        color: theme.palette.primary.dark,
-                        fontWeight: "bold",
-                        position: "relative",
-                        display: "inline-block",
-                        "&:after": {
-                          content: '""',
-                          position: "absolute",
-                          bottom: -8,
-                          right: 0,
-                          width: "60%",
-                          height: "4px",
-                          backgroundColor: theme.palette.secondary.main,
-                          borderRadius: "2px",
-                        },
-                      }}
-                    >
-                      {section.title}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        fontSize: "1.1rem",
-                        lineHeight: 2,
-                        color: theme.palette.text.secondary,
-                      }}
-                    >
-                      {section.content}
-                    </Typography>
-                  </Box>
-                </motion.div>
-              </Grid>
+                    {section.title}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      fontSize: { xs: "1rem", md: "1.15rem" },
+                      lineHeight: 2.1,
+                      color: "#3c3c3c",
+                      mt: 2,
+                      backgroundColor: "rgba(255,255,255,0.7)",
+                      padding: "16px",
+                      borderRadius: "12px",
+                      boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
+                    }}
+                  >
+                    {section.content}
+                  </Typography>
+                </Box>
+              </motion.div>
             </Grid>
-          </Container>
-        </Box>
-      ))}
-    </Box>
+          </Grid>
+        </Container>
+      </Box>
+    ))}
+  </Box>
+  
   );
 };
 
@@ -239,7 +295,7 @@ const TeamSection = () => {
               mb: 6,
               fontWeight: "bold",
               position: "relative",
-              color: "common.white", // أو استخدام الثيم
+              color: "common.white", 
               "&:after": {
                 content: '""',
                 position: "absolute",
