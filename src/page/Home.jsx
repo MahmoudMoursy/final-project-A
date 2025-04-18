@@ -31,7 +31,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 import './VendorCarousel.css';
 import { Pagination, EffectCoverflow, Autoplay } from 'swiper/modules';
+import underline3 from '../assets/underline3.png';
 import underline2 from '../assets/underline2.png';
+import underline from '../assets/underline.png';
+import underline4 from '../assets/underline4.png';
+
 
 // Vendor data for the carousel
 const vendors = [
@@ -107,7 +111,7 @@ function Home() {
         <div id="sec1" className="sec-1 container d-flex justify-content-center flex-column">
           <div className="pt-5 mt-5">
             <div className="section-title text-center mb-1">
-              <h1 className="main-title">ما الذي علي فعله ؟</h1>
+              <h1 className="">ما الذي علي فعله ؟</h1>
             </div>
           </div>
           <div className="mx-auto">
@@ -133,7 +137,7 @@ function Home() {
           </div>
         </div>
 
-        <section className="py-5 rounded text-center service-section" data-aos="fade-up">
+        {/* <section className="py-5 rounded text-center service-section" data-aos="fade-up">
           <h2 className="fw-bold mb-3 service-title">خدمة توفير السكن</h2>
           <p className="mb-4 text-muted fw-bold fs-2 service-description">
             نوفر لك السكن الطلابي المثالي بالقرب من جامعتك، مع بيئة مريحة وآمنة تساعدك على التركيز في دراستك.
@@ -141,60 +145,12 @@ function Home() {
             استمتع بخدمات متكاملة تشمل الإنترنت، الصيانة، والأمان على مدار الساعة.
           </p>
           <a href="#contact" className="btn btn-primary py-md-3 px-md-5 ms-3 custom-btn">ابحث</a>
-        </section>
+        </section> */}
 
-        <section className="py-5 rounded text-center partners-section" data-aos="fade-up">
-          <h2 className="fw-bold mb-3 partners-title">شركاؤنا</h2>
-          <div className="d-flex justify-content-center gap-5">
-            <img src={ColoredLogo} alt="Colored Logo" className="mx-5 partner-logo" />
-            <img src={aswulogo2} alt="ASWU Logo" className="w-25 mx-5 partner-logo" />
-          </div>
-        </section>
-
-        <section id="faq" className="py-5 faq-section" data-aos="fade-up">
-          <h2 className="text-center mb-4 faq-title">Frequently Asked Questions</h2>
-          <div className="accordion custom-accordion" id="faqAccordion">
-            {[
-              { id: 'faq1', question: 'How can I contact customer support?', answer: 'You can contact us via email or our hotline available 24/7.' },
-              { id: 'faq2', question: 'What services do you provide?', answer: 'We provide student housing, transportation, and location-based assistance.' },
-              { id: 'faq3', question: 'How can I book a service?', answer: 'You can book a service through our website or contact our support team.' },
-              { id: 'faq4', question: 'What payment methods do you accept?', answer: 'We accept credit cards, bank transfers, and mobile payments.' }
-            ].map((item) => (
-              <div className="accordion-item" key={item.id} data-aos="fade-up">
-                <h2 className="accordion-header" id={item.id}>
-                  <button className="accordion-button custom-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#${item.id}-collapse`}>
-                    {item.question}
-                  </button>
-                </h2>
-                <div id={`${item.id}-collapse`} className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                  <div className="accordion-body">{item.answer}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="py-5 rounded text-center testimonials-section" data-aos="fade-up">
-          <h2 className="fw-bold mb-3 testimonials-title">أراء المستخدمين</h2>
-          <div className="testimonial-carousel">
-            {[1, 2, 3].map((index) => (
-              <div className="card testimonial-card d-flex flex-row p-1 mb-3" key={index} data-aos="fade-up">
-                <div className="flex-grow-1 ps-0">
-                  <h4 className="card-title mb-1">I have found everything I want here as I am in my country</h4>
-                  <h5 className="text-muted">John Doe - 3 hours ago</h5>
-                  <div className="stars text-warning mt-2" style={{ fontSize: '2rem' }}>★★★★★</div>
-                </div>
-                <div className="user-info ms-3">
-                  <img src={user} alt="User" className="rounded-circle user-avatar" width="100" height="100" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <div className="py-5 container">
-          <h2 className="text-primary ms-3 mb-2 h-100" style={{textAlign: "right"}}>مقدمو الخدمة الأكثر طلباً</h2>
-          <img src="/assets/svg/underline.png" alt="" style={{width: "23rem"}} />
+        
+<div className="py-5 container">
+          <h2 className="sections-title ms-3 mb-4" style={{textAlign: "right"}}>مقدمو الخدمة الأكثر طلباً</h2>
+          <img src={underline} alt="" className="d-block ms-auto" style={{width: "23rem"}} />
           <Swiper
             modules={[EffectCoverflow, Pagination, Autoplay]}
             effect="coverflow"
@@ -236,6 +192,57 @@ function Home() {
             ))}
           </Swiper>
         </div>
+
+        <section className="py-5 rounded text-center partners-section" data-aos="fade-up">
+          <h2 className="fw-bold mb-2 sections-title">شركاؤنا</h2>
+          <img src={underline3} alt="" className=" ms-auto" style={{width: "12rem"}} />
+          <div className="d-flex justify-content-center gap-5">
+            <img src={ColoredLogo} alt="Colored Logo" className="mx-5 partner-logo mt-2" style={{width: "20rem"}} />
+            <img src={aswulogo2} alt="ASWU Logo" className="mx-5 partner-logo mt-3" style={{width: "22rem"}} />
+          </div>
+        </section>
+{/* 
+        <section id="faq" className="py-5 faq-section" data-aos="fade-up">
+          <h2 className="text-center mb-4 faq-title">Frequently Asked Questions</h2>
+          <div className="accordion custom-accordion" id="faqAccordion">
+            {[
+              { id: 'faq1', question: 'How can I contact customer support?', answer: 'You can contact us via email or our hotline available 24/7.' },
+              { id: 'faq2', question: 'What services do you provide?', answer: 'We provide student housing, transportation, and location-based assistance.' },
+              { id: 'faq3', question: 'How can I book a service?', answer: 'You can book a service through our website or contact our support team.' },
+              { id: 'faq4', question: 'What payment methods do you accept?', answer: 'We accept credit cards, bank transfers, and mobile payments.' }
+            ].map((item) => (
+              <div className="accordion-item" key={item.id} data-aos="fade-up">
+                <h2 className="accordion-header" id={item.id}>
+                  <button className="accordion-button custom-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#${item.id}-collapse`}>
+                    {item.question}
+                  </button>
+                </h2>
+                <div id={`${item.id}-collapse`} className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div className="accordion-body">{item.answer}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section> */}
+
+        <section className="py-5 rounded text-center testimonials-section" data-aos="fade-up">
+          <h2 className="fw-bold mb-3 testimonials-title">أراء المستخدمين</h2>
+          <div className="testimonial-carousel">
+            {[1, 2, 3].map((index) => (
+              <div className="card testimonial-card d-flex flex-row p-1 mb-3" key={index} data-aos="fade-up">
+                <div className="flex-grow-1 ps-0">
+                  <h4 className="card-title mb-1">I have found everything I want here as I am in my country</h4>
+                  <h5 className="text-muted">John Doe - 3 hours ago</h5>
+                  <div className="stars text-warning mt-2" style={{ fontSize: '2rem' }}>★★★★★</div>
+                </div>
+                <div className="user-info ms-3">
+                  <img src={user} alt="User" className="rounded-circle user-avatar" width="100" height="100" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
 
         {/* Contact Section with Image */}
         <div className="container" dir="rtl">
