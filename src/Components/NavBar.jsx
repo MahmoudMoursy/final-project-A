@@ -90,7 +90,7 @@ function NavBar() {
                 style={{ borderRadius: '50%', width: '30px', height: '30px' }}>
                 {user.username[0]}
               </span>
-              <strong className="d-none d-xl-block text-white"> Welcom {user.username}</strong>
+              <strong className="d-none d-xl-block text-white"> {user.username}</strong>
             </div>
 
             {showDropdown && (
