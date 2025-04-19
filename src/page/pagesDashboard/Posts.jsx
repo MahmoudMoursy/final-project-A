@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import SideBar from '../../Components/sideBar';
 import { Button, Table, Spinner, Alert, Modal } from 'react-bootstrap';
-import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
 import db from '../../firebaseconfig';
 import { useSelector } from 'react-redux';
-import { FiTrash2, FiEdit, FiEye } from 'react-icons/fi';
-
+import { FiTrash2, FiEdit, FiEye, FiAlignRight, FiArrowRight, FiCornerRightUp, FiCheck ,FiToggleRight } from 'react-icons/fi';
 const Posts = () => {
+    const [showModal, setShowModal] = useState(false);
+    const [selectedImages, setSelectedImages] = useState([]);
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [postToDelete, setPostToDelete] = useState(null);
     const UserDashboard = useSelector((state) => state.UserDashboard.value);
-
+    const handleShowImages = (images) => {
+        setSelectedImages(images);
+        setShowModal(true);
+      };
     const fetchPosts = async () => {
         setLoading(true);
         setError(null);
@@ -36,6 +40,19 @@ const Posts = () => {
         setPostToDelete(post);
         setShowDeleteModal(true);
     };
+    const confirmAccept = async (post) => {
+        console.log(post.id);
+        
+        try {
+          const postRef = doc(db, 'housing', post.id); // تأكد إن post.id هو الـ Document ID
+          await updateDoc(postRef, {
+            status: 'accepted', // غيّر المفتاح والقيمة حسب اللي عايز تعدله
+          });
+          alert('Post accepted!');
+        } catch (error) {
+          alert('Error updating post:', error);
+        }
+      };
 
     const handleDelete = async () => {
         try {
@@ -81,11 +98,13 @@ const Posts = () => {
                                     <th>#</th>
                                     <th>Property</th>
                                     <th>Location</th>
+                                    <th>Images</th>
                                     <th>Details</th>
                                     <th>Rooms</th>
                                     <th>Bathrooms</th>
                                     <th>Contact</th>
                                     <th>Price</th>
+                                    <th>Status</th>
                                     {UserDashboard?.status === "admin" && <th>Actions</th>}
                                 </tr>
                             </thead>
@@ -103,6 +122,37 @@ const Posts = () => {
                                                 </div>
                                             </td>
                                             <td>{post.address || 'N/A'}</td>
+                                            <td>
+                                            <i
+                  className="fas fa-folder-open"
+                  style={{ fontSize: '20px', cursor: 'pointer', color: '#007bff' }}
+                  onClick={() => handleShowImages(post.Images)}
+                ></i>
+      </td>
+
+      {/* Modal */}
+       <Modal show={showModal} onHide={() => setShowModal(false)} size="lg" centered>
+        <Modal.Header closeButton>
+          <Modal.Title>صور الإعلان</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="d-flex flex-wrap gap-2">
+            {selectedImages.map((img, idx) => (
+              <img
+                key={idx}
+                src={img}
+                alt={`image-${idx}`}
+                style={{ width: '150px', height: '100px', objectFit: 'cover', borderRadius: '5px' }}
+              />
+            ))}
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            إغلاق
+          </Button>
+        </Modal.Footer>
+      </Modal>
                                             <td>{post.description?.substring(0, 30)}{post.description?.length > 30 ? '...' : ''}</td>
                                             <td>{post.numbed || 'N/A'}</td>
                                             <td>{post.numteu || 'N/A'}</td>
@@ -115,15 +165,18 @@ const Posts = () => {
                                             <td className="price-cell">
                                                 {post.price ? `$${post.price}` : 'N/A'}
                                             </td>
+                                            <td className="statue">
+                                                {post.status || 'N/A'}
+                                            </td>
                                             {UserDashboard?.status === "admin" && (
                                                 <td className="actions-cell">
-                                                    <Button variant="outline-primary" size="sm" className="action-btn">
-                                                        <FiEye />
-                                                    </Button>
-                                                    <Button variant="outline-success" size="sm" className="action-btn">
-                                                        <FiEdit />
-                                                    </Button>
-                                                    <Button 
+                                                    
+                                                   {post.status=="pending" && <Button variant="outline-success" title="Accept" size="sm" className="action-btn"
+                                                     onClick={() => confirmAccept(post)}
+                                                    >
+                                                        <FiCheck />
+                                                    </Button>}
+                                                    <Button title="Delete"
                                                         variant="outline-danger" 
                                                         size="sm" 
                                                         className="action-btn"

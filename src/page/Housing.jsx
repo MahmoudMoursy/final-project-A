@@ -34,7 +34,7 @@ function Housing() {
   };
 
   const [housingData, setHousingData] = useState({
-    address: "", description: "", numbed: "", numteu: "", phone: "", whats: "", price: "",Id:user.UserId,username:user.username
+    address: "", description: "", numbed: "", numteu: "", phone: "", whats: "", price: "",status:"pending",Id:user.UserId,username:user.username
   });
   const [housingList, setHousingList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -92,7 +92,6 @@ function Housing() {
         checkIn: "",
         checkOut: "",
         guests: 1,
-        status: "pending",
         createdAt: null
       });
     } catch (error) {
@@ -141,7 +140,7 @@ function Housing() {
         Id: user.UserId,
         username: user.username
       });
-      alert("تمت إضافة السكن بنجاح!");
+      alert("طلبك قيد المراجعة");
   
       // إعادة تعيين البيانات
       setHousingData({
@@ -153,6 +152,7 @@ function Housing() {
         whats: "",
         price: "",
         Images: [],
+        status:"pending",
         Id: user.UserId,
         username: user.username
       });
@@ -364,8 +364,10 @@ function Housing() {
                 اضف سكن
               </button>)}
             </div>
+            
             <div className="row g-4">
               {filteredHousingList.map((house, index) => (
+               (house.status==='accepted' && (
                 <div key={house.id} className="col-md-6">
                   <div className="card h-100 shadow-sm hover-shadow">
                     <div id={`cardCarousel-${index}`} className="carousel slide" data-bs-ride="carousel">
@@ -373,11 +375,11 @@ function Housing() {
                         
                         {house.Images.map((image, index) => (
                           <div
+                          style={{ height: "300px", width: "100%" }}
                             key={index}
                             className={`carousel-item ${index === 0 ? 'active' : ''}`}
                           > 
                             <img
-                              style={{ height: "300px", width: "200px" }}
                               src={image}
                               className="d-block w-100 h-100 rounded-start"
                               alt={`Slide ${index}`}
@@ -437,7 +439,7 @@ function Housing() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>))
               ))}
             </div>
           </div>
@@ -518,11 +520,11 @@ function Housing() {
                 aria-label="إغلاق"
               />
             </div>
-            <div className="modal-body">
+            <div className="modal-body" >
+             
               {/* <form onSubmit={handleSubmit}> */}
              
              {/* asdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss */}
-             
               <div className="mb-3">
                   <label className="form-label">الصور</label>
                   <input type="file" name="files" multiple onChange={handleFilesChange} 
