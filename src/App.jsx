@@ -26,7 +26,7 @@ import PharmaciesPage from './page/PharmaciesPage';
 import DoctorsPage from './page/DoctorsPage';
 import SupermarketsPage from './page/SupermarketsPage';
 import ForgotPassword from './page/ForgotPassword';
-
+import Test from './page/Test';
 
 
 
@@ -80,6 +80,7 @@ function App() {
         <Route path="/DoctorsPage" element={<DoctorsPage />} />
         <Route path="/SupermarketsPage" element={<SupermarketsPage />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
+        <Route path="/Test" element={<Test />} />
       </Routes>
     </LoadingProvider>
 
