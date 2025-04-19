@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import db from '../firebaseconfig'
 import { setDoc, doc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import {UploadPhoto} from '../UploadPhoto'
+
+
 
 function Profileform() {
+    const [imageFile, setImageFile] = useState('');
+    function upload(e){
+        setImageFile(e.target.files[0])
+    }
+
 
     const nav = useNavigate();
     
@@ -14,7 +22,9 @@ function Profileform() {
     
     console.log(useId.UserId)
     const userRef = doc(db, "user", useId);
+
     async function save() {
+        const url = await UploadPhoto(imageFile);
         const userData = {
             username: document.getElementById("name").value,
             address: document.getElementById("address").value,
@@ -25,6 +35,7 @@ function Profileform() {
             university: document.getElementById("university").value,
             status: document.querySelector('input[name="GFG"]:checked')?.value || "",
             UserId: useId,
+            PhotoUrl:url,
         };
         await setDoc(userRef, userData);
         localStorage.setItem("currentUser", JSON.stringify(userData));
@@ -94,7 +105,10 @@ function Profileform() {
                         </div>
                     </div>
                     <textarea className="form-control mb-3" id="bio" placeholder="Your bio..." rows="3"></textarea>
-
+                    <div className="row mb-3">
+                       <label className=" col-form-label">Upload your photo</label>
+                       <input type="file" onChange={upload}/>
+                    </div>
                     <div className="mb-3 text-black">
                         <label className="me-3">You are:</label>
                         <input type="radio" name="GFG" value="publisher" /> Publisher

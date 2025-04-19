@@ -88,7 +88,7 @@ function NavBar() {
             <div className="profile-trigger d-flex align-items-center cursor-pointer" onClick={() => setShowDropdown(prev => !prev)}>
               <span className="border border-success text-black-50 bg-white mx-2 d-flex justify-content-center align-items-center"
                 style={{ borderRadius: '50%', width: '30px', height: '30px' }}>
-                {user.username[0]}
+                <img src={user.PhotoUrl} alt="" style={{width:'100%',borderRadius: '50%'}}/>
               </span>
               <strong className="d-none d-xl-block text-white"> {user.username}</strong>
             </div>
