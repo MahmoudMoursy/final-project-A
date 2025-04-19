@@ -102,7 +102,7 @@ function NavBar() {
                 <hr className="dropdown-divider" />
                 <Link to="/Profile" className="dropdown-item">
                   <i className="fa-solid fa-user ms-2"></i>
-                  الملف الشخصي
+                  الملف الشخصى
                 </Link>
                 <button className="dropdown-item text-danger" onClick={handleLogout}>
                   <i className="fa-solid fa-right-from-bracket ms-2"></i>
