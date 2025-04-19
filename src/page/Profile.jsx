@@ -95,7 +95,7 @@ const Profile = () => {
     <>
       <NavBar />
       <div className="profile-page" dir="rtl">
-        <motion.div 
+        <motion.div
           className="profile-hero"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -104,7 +104,7 @@ const Profile = () => {
         >
           <div className="hero-overlay"></div>
           <div className="hero-content">
-            <motion.div 
+            <motion.div
               className="avatar-circle"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -112,11 +112,11 @@ const Profile = () => {
             >
               {userData.username?.charAt(0).toUpperCase() || "U"}
             </motion.div>
-            <motion.h1 
+            <motion.h1
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="user-name" 
+              className="user-name"
             >
               {userData.username || "اسم المستخدم غير متوفر"}
             </motion.h1>
@@ -140,12 +140,12 @@ const Profile = () => {
                   <div className="info-header">
                     <span className="info-label">
                       {fieldKey === "email" ? "البريد الإلكتروني" :
-                       fieldKey === "phonenumber" ? "رقم الجوال" :
-                       fieldKey === "city" ? "المدينة" :
-                       fieldKey === "address" ? "العنوان" : "الحالة"}
+                        fieldKey === "phonenumber" ? "رقم الجوال" :
+                          fieldKey === "city" ? "المدينة" :
+                            fieldKey === "address" ? "العنوان" : "الحالة"}
                     </span>
                     {editingField !== fieldKey && (
-                      <button 
+                      <button
                         className="edit-btn"
                         onClick={() => setEditingField(fieldKey)}
                       >
@@ -153,7 +153,7 @@ const Profile = () => {
                       </button>
                     )}
                   </div>
-                  
+
                   {editingField === fieldKey ? (
                     <div className="edit-field">
                       {fieldKey === "status" ? (
@@ -163,7 +163,7 @@ const Profile = () => {
                           className="form-select"
                         >
                           <option value="publisher">ناشر</option>
-                          <option value="veiwer">مشاهد</option>
+                          <option value="viewer">مشاهد</option>
                         </select>
                       ) : (
                         <input
@@ -174,13 +174,13 @@ const Profile = () => {
                         />
                       )}
                       <div className="edit-actions">
-                        <button 
+                        <button
                           className="save-btn"
                           onClick={() => handleSave(fieldKey)}
                         >
                           حفظ
                         </button>
-                        <button 
+                        <button
                           className="cancel-btn"
                           onClick={() => setEditingField(null)}
                         >
@@ -237,7 +237,7 @@ const Profile = () => {
                             <td>{post.numteu}</td>
                             <td>{post.price} ر.س</td>
                             <td>
-                              <button 
+                              <button
                                 className="action-btn delete-btn"
                                 onClick={() => deletePost(post.id)}
                               >
@@ -312,7 +312,7 @@ const Profile = () => {
 
           {/* Logout Button */}
           <motion.div className="logout-container">
-            <button 
+            <button
               className="logout-btn"
               onClick={handleLogout}
             >
@@ -322,25 +322,25 @@ const Profile = () => {
         </div>
       </div>
       <Footer />
-      
+
       <style jsx>{`
         :root {
-          --primary-color: #243A70; /* اللون الرئيسي */
-          --secondary-color: #0A3B71; /* لون ثانوي أزرق داكن */
-          --accent-color: #0A3B71; /* اللون الذهبي */
-          --light-color: #F0F4F8; /* لون فاتح للخلفيات */
-          --text-color: #333; /* اللون الأساسي للنص */
-          --text-light: #555; /* لون نص اقل قوة */
+          --primary-color: #243A70;
+          --secondary-color: #0A3B71;
+          --accent-color: #0A3B71;
+          --light-color: #F0F4F8;
+          --text-color: #333;
+          --text-light: #555;
         }
 
         .profile-page {
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
           color: var(--text-color);
-          background-color: #F0F4F8; /* لون الخلفية العام */
+          background-color: #F0F4F8;
           min-height: calc(100vh - 80px);
           padding-top: 80px;
           position: relative;
-          direction: rtl; /* إضافة اتجاه الصفحة إلى RTL */
+          direction: rtl;
         }
         
         .profile-hero {
@@ -407,14 +407,16 @@ const Profile = () => {
           position: relative;
         }
 
+       
         .user-name {
-          color: white; /* لون اسم المستخدم */
-        }
-        
+  color: white; /* لون النص */
+  font-size: 2rem; /* حجم النص المعدل */
+  font-weight: bold; /* اجعل النص غامقاً */
+}
         .info-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-          gap: 20px;
+          grid-template-columns: 1fr; /* تغيير إلى عمود واحد */
+          gap: 20px; /* المسافة بين الكاردات */
         }
         
         .info-card {
@@ -621,7 +623,7 @@ const Profile = () => {
           max-width: 200px;
           margin: 0 auto;
           padding: 12px;
-          background: var(--primary-color); /* اللون الجديد */
+          background: var(--primary-color);
           color: white;
           border: none;
           border-radius: 25px;
@@ -632,7 +634,7 @@ const Profile = () => {
         
         .logout-btn:hover {
           transform: translateY(-2px);
-          background: var(--secondary-color); /* لون أغمق عند التحويم */
+          background: var(--secondary-color);
         }
         
         .loading-spinner {
@@ -645,7 +647,7 @@ const Profile = () => {
         
         @media (max-width: 768px) {
           .info-grid, .settings-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* عمود واحد على الشاشات الصغيرة */
           }
           
           .profile-hero {

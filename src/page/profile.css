@@ -248,6 +248,11 @@ body{
     .infoGrid {
       grid-template-columns: 1fr;
     }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr; /* تغيير إلى عمود واحد */
+      gap: 20px; /* المسافة بين الكاردات */
+    }
     
     .paymentMethod {
       flex-direction: column;
