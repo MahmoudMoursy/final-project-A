@@ -1,7 +1,11 @@
 :root {
-    --main-color: #33CCCC;
+    --main-color: rgba(152, 83, 255);
     /* --primary-color: #24262B; */
 }
+
+.custom-color {
+  color: rgb(195, 154, 255);
+  }
 
 
 /* تحسين الألوان العامة */
@@ -34,11 +38,11 @@
     padding: 30px;
   }
   
-  .main-title {
+  /* .main-title {
     font-size: 6rem;
     color: #2c3e50;
     font-weight: lighter;
-  }
+  } */
   
   .service-title {
     font-size: 2rem;
@@ -121,15 +125,26 @@
   /* تحسينات إضافية */
   .section-title h1 {
     font-size: 2.5rem;
-    background: linear-gradient(45deg, #2193b0, #6dd5ed);
+    /* background: linear-gradient(45deg, #2193b0, #6dd5ed); */
     -webkit-background-clip: text;
-    -webkit-text-fill-color: #33CCCC;
+    -webkit-text-fill-color: rgba(152, 83, 255);
     transition: transform 0.3s ease;
   }
   
   .section-title h1:hover {
     transform: scale(1.05);
   }
+  .sections-title {
+    font-size: 2rem;
+    /* background: linear-gradient(45deg, #2193b0, #6dd5ed); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(152, 83, 255);
+    transition: transform 0.3s ease;
+  }
+  
+  /* .sections-title:hover {
+    transform: scale(1.05);
+  } */
   
   .hover-effect {
     transition: all 0.3s ease;
@@ -204,8 +219,7 @@
   }
   
   .custom-input:focus {
-    border-color: #2193b0;
-    background-color: white;
+    background-color: rgba(152, 83, 255);
   }
   
   /* Add smooth scroll behavior */
@@ -249,7 +263,7 @@
   }
 
   .primary-btn {
-    background: #33CCCC;
+    background-color: rgba(152, 83, 255);
     color: white;
     border: none;
     padding: 12px 25px;
@@ -261,11 +275,11 @@
   }
   
   .primary-btn:hover {
-    background-color: #2193b0;
+    background-color: rgba(152, 83, 255);
   }
 
   .custom-btn {
-    background: #33CCCC;
+    background-color: rgba(144, 75, 255, 0.6);
     color: white;
     border: none;
     padding: 12px 25px;
@@ -275,8 +289,28 @@
     transition: background-color 0.3s;
     font-size: 1.1rem;
     padding: 20px 25px;
+    
+    
   }
   
   .custom-btn:hover {
-    background-color: #2193b0;
+    background-color: rgba(152, 83, 255, 0.8);
+  }
+
+  .btn-outline-primary {
+    background-color: transparent;
+    color: rgba(152, 83, 255) !important;
+    border: 1px solid rgba(152, 83, 255) !important;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+    
+  }
+
+  .btn-outline-primary:hover {
+    background-color: rgba(152, 83, 255, 0.8) !important;
+    color: white !important;
   }

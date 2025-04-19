@@ -11,6 +11,7 @@ import db from "../firebaseconfig";
 import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
 
 function Housing() {
+  const userData = JSON.parse(localStorage.getItem("currentUser"));
   const user = JSON.parse(localStorage.getItem("currentUser"));
   
   const [housingData, setHousingData] = useState({
@@ -80,15 +81,12 @@ function Housing() {
     }
   };
 
-  // Filter housing list based on search and filters
   const filteredHousingList = housingList.filter(house => {
-    // Search term filtering
     const matchesSearch = searchTerm ?
       house.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
       house.description.toLowerCase().includes(searchTerm.toLowerCase())
       : true;
 
-    // Active filters
     const matchesFilters = Object.entries(activeFilters).every(([key, value]) => {
       if (!value) return true;
       switch (key) {
@@ -282,9 +280,9 @@ function Housing() {
 
           <div className="col-md-9 order-md-2">
             <div style={{ justifyContent: "space-around", display: "flex", marginBottom: 20 }}>
-              <button type="button" className="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#addHousingModal">
+            {userData?.status === "publisher" &&(<button type="button" className="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#addHousingModal">
                 اضف سكن
-              </button>
+              </button>)}
             </div>
             <div className="row g-4">
               {filteredHousingList.map((house, index) => (

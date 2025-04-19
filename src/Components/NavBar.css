@@ -43,9 +43,9 @@
       border-radius: 5px;
     }
     
-    .nav-link:hover, .nav-link:active {
+    /* .nav-link:hover, .nav-link:active {
       background-color: rgba(52, 152, 219, 0.2) !important;
-    }
+    } */
   }
   
   /* شريط التنقل الشفاف (في الأعلى) */
@@ -84,7 +84,7 @@
   }
   
   .nav-link:hover {
-    color: #3498db !important;
+    color: rgba(152, 83, 255) !important;
     background-color: transparent !important;
     text-decoration: none !important;
   }
@@ -92,7 +92,7 @@
   /* إزالة المربع الأزرق عند تحديد الرابط النشط */
   .nav-link.active {
     background-color: transparent !important;
-    color: #3498db !important;
+    color: rgba(152, 83, 255) !important;
     text-decoration: none !important;
   }
   
@@ -115,7 +115,7 @@
   }
   
   .dropdown-item:hover {
-    background-color: #2980b9 !important;
+    background-color: rgba(152, 83, 255) !important;
     color: #ecf0f1 !important;
   }
   
