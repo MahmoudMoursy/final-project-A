@@ -110,7 +110,7 @@ const Profile = () => {
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
-              {userData.username?.charAt(0).toUpperCase() || "U"}
+              <img src={userData.PhotoUrl} style={{width:"90%",borderRadius: '100%'} } alt="" />
             </motion.div>
             <motion.h1
               initial={{ y: 20, opacity: 0 }}
