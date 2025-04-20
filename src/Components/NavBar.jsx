@@ -46,7 +46,6 @@ function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("currentUser"));
   dispatch(setCurrentUser(user));
 
   useEffect(() => {
