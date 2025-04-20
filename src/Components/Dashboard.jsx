@@ -1,106 +1,167 @@
-import React, { useState } from 'react'
-import SideBar from './sideBar'
-import './Dashboard.css' // You'll need to create this CSS file
-import { Login } from '@mui/icons-material';
-import SigninDashboard from './SigninDashboard';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import SideBar from './sideBar';
+import './Dashboard.css';
+import { motion } from 'framer-motion';
+import { FiSearch, FiBell, FiTrendingUp, FiUsers, FiFileText } from 'react-icons/fi';
 import { collection, getDocs } from 'firebase/firestore';
 import db from '../firebaseconfig';
 import { Link } from 'react-router-dom';
 
 function Dashboard() {
-  const [numOfAdmi, setNumOfAdm ] = useState(0);
-  const [numOfUsers, setNumOfUsers ] = useState(0);
-  const [posts, setPosts ] = useState(0);
-  const dataUser =JSON.parse(localStorage.getItem("userDashboard"));   
-  console.log(dataUser);
+  const [numOfAdmi, setNumOfAdm] = useState(0);
+  const [numOfUsers, setNumOfUsers] = useState(0);
+  const [posts, setPosts] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const dataUser = JSON.parse(localStorage.getItem("userDashboard"));
   
-      const fetchAdmin = async () => {
-          try {
-            const querySnapshot = await getDocs(collection(db, "AdminManagment"));
-            setNumOfAdm(querySnapshot.docs.length);
-          } catch (error) {
-            console.error("Error fetching admins: ", error);
-          }
-        };
-      const fetchUsers = async () => {
-          try {
-            const querySnapshot = await getDocs(collection(db, "user"));
-            setNumOfUsers(querySnapshot.docs.length);
-          } catch (error) {
-            console.error("Error fetching users: ", error);
-          }
-        };
-      const fetchPosts = async () => {
-          try {
-            const querySnapshot = await getDocs(collection(db, "housing"));
-            setPosts(querySnapshot.docs.length);
-          } catch (error) {
-            console.error("Error fetching posts: ", error);
-          }
-        };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [adminSnapshot, userSnapshot, postsSnapshot] = await Promise.all([
+          getDocs(collection(db, "AdminManagment")),
+          getDocs(collection(db, "user")),
+          getDocs(collection(db, "housing"))
+        ]);
+        
+        setNumOfAdm(adminSnapshot.docs.length);
+        setNumOfUsers(userSnapshot.docs.length);
+        setPosts(postsSnapshot.docs.length);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+        setLoading(false);
+      }
+    };
 
-        fetchAdmin();
-        fetchUsers();
-        fetchPosts();
+    fetchData();
+  }, []);
+
+  return (
+    <div className="dashboard-app-container">
+      <SideBar />
       
-
-    return (
-     <div className="dashboard-container">
-     <SideBar/>
-     <main className="dashboard-main">
-       <header className="dashboard-header">
-         <h1>Dashboard</h1>
-         <div className="header-actions">
-           <input type="search" placeholder="Search..." className="search-input" />
-           <button className="notification-btn">🔔</button>
-           <div className="user-profile">
-             <img src="/default-avatar.png" alt="User" className="avatar" />
-           </div>
-         </div>
-       </header>
-       
-       <div className="dashboard-content">
-         <div className="stats-grid">
-         <Link to="/AdminManagment" style={{ textDecoration: 'none' }}>
-            <div className="stat-card">
-              <h3>Total Users</h3>
-              <p className="stat-number">{numOfAdmi+numOfUsers}</p>
-              <p className="stat-number">{numOfAdmi} of admin & supervisor</p>
+      <main className="dashboard-main-content">
+        <header className="dashboard-navbar">
+          <h1>Dashboard Overview</h1>
+          <div className="navbar-actions">
+            <div className="search-wrapper">
+              <FiSearch className="search-icon" />
+              <input 
+                type="search" 
+                placeholder="Search analytics..." 
+                className="search-input" 
+              />
             </div>
-           </Link>
-           <div className="stat-card">
-             <h3>Revenue</h3>
-             <p className="stat-number">$0</p>
-           </div>
-          <Link to="/Posts" style={{ textDecoration: 'none' }}>
-           <div className="stat-card" style={{width: '100%', height: '100%',}}>
-             <h3>Posts</h3>
-             <p className="stat-number">{posts}</p>
-           </div>
-          </Link>
-           
-         </div>
+            <button className="notification-button">
+              <FiBell />
+              <span className="notification-indicator"></span>
+            </button>
+            <div className="user-profile">
+              <img 
+                src={dataUser?.photoURL || "/default-avatar.png"} 
+                alt="User" 
+                className="profile-avatar" 
+              />
+              <span className="profile-name">{dataUser?.displayName || "Admin"}</span>
+            </div>
+          </div>
+        </header>
+        
+        <div className="dashboard-content-wrapper">
+          <div className="metrics-grid">
+            <Link to="/AdminManagment" className="metric-card users-card">
+              <div className="metric-icon">
+                <FiUsers />
+              </div>
+              <div className="metric-info">
+                <h3>Total Users</h3>
+                {loading ? (
+                  <div className="metric-loader"></div>
+                ) : (
+                  <>
+                    <p className="metric-value">{numOfAdmi + numOfUsers}</p>
+                    <p className="metric-description">
+                      <span className="admin-count">{numOfAdmi}</span> administrators
+                    </p>
+                  </>
+                )}
+              </div>
+            </Link>
+            
+            <div className="metric-card revenue-card">
+              <div className="metric-icon">
+                <FiTrendingUp />
+              </div>
+              <div className="metric-info">
+                <h3>Revenue</h3>
+                <p className="metric-value">$0</p>
+                <p className="metric-description">Current balance</p>
+              </div>
+            </div>
+            
+            <Link to="/Posts" className="metric-card posts-card">
+              <div className="metric-icon">
+                <FiFileText />
+              </div>
+              <div className="metric-info">
+                <h3>Posts</h3>
+                {loading ? (
+                  <div className="metric-loader"></div>
+                ) : (
+                  <p className="metric-value">{posts}</p>
+                )}
+              </div>
+            </Link>
+          </div>
 
-         <div className="dashboard-widgets">
-           <section className="widget recent-activity">
-             <h2>Recent Activity</h2>
-             {/* Add your activity content here */}
-           </section>
-           
-           <section className="widget performance">
-             <h2>Performance</h2>
-             {/* Add your performance metrics here */}
-           </section>
-         </div>
-       </div>
-     </main>
-   </div>
-      
-   
-    
-  )
-
+          <div className="analytics-section">
+            <div className="activity-panel">
+              <div className="panel-header">
+                <h2>Recent Activity</h2>
+                <button className="view-all-button">View All</button>
+              </div>
+              <div className="activity-list">
+                {[1, 2, 3].map((item) => (
+                  <div key={item} className="activity-item">
+                    <div className="activity-avatar">A</div>
+                    <div className="activity-details">
+                      <p>Admin updated user settings</p>
+                      <span className="activity-time">2 hours ago</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="performance-panel">
+              <div className="panel-header">
+                <h2>Performance Metrics</h2>
+              </div>
+              <div className="performance-grid">
+                <div className="performance-metric">
+                  <div className="metric-value">87%</div>
+                  <div className="metric-label">System Uptime</div>
+                </div>
+                <div className="performance-metric">
+                  <div className="metric-value">1.2s</div>
+                  <div className="metric-label">Avg. Response</div>
+                </div>
+                <div className="performance-metric">
+                  <div className="metric-value">24</div>
+                  <div className="metric-label">Active Sessions</div>
+                </div>
+                <div className="performance-metric">
+                  <div className="metric-value">95%</div>
+                  <div className="metric-label">Satisfaction</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
 }
 
-export default Dashboard
+export default Dashboard;

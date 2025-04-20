@@ -1,0 +1,61 @@
+.contact-page {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.contact-page .card {
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-page .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.contact-page .form-control {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+}
+
+.contact-page .form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  border-color: #86b7fe;
+}
+
+.contact-page .btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  transition: background-color 0.3s ease;
+}
+
+.contact-page .btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+.contact-page .rounded-circle {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-page .leaflet-container {
+  border-radius: 10px;
+}
+
+/* Fix for Leaflet controls in RTL layout */
+.leaflet-control-container .leaflet-top,
+.leaflet-control-container .leaflet-bottom {
+  transform: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-page .col-md-6 {
+    margin-bottom: 30px;
+  }
+}

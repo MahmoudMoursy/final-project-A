@@ -26,6 +26,8 @@ import PharmaciesPage from './page/PharmaciesPage';
 import DoctorsPage from './page/DoctorsPage';
 import SupermarketsPage from './page/SupermarketsPage';
 import ForgotPassword from './page/ForgotPassword';
+import Test from './page/Test';
+import ContactUs from './page/ContactUs';
 
 
 
@@ -71,6 +73,7 @@ function App() {
         <Route path='/Community' element={<Community />} />
         <Route path='/Profileform' element={<Profileform />} />
         <Route path="/post/:id" element={<PostDetails />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} isAuthenticated={userDashboard} />} />
         <Route path="/AdminManagment" element={<PrivateRoute element={<AdminManagment />} isAuthenticated={userDashboard} />} />
         <Route path="/Posts" element={<PrivateRoute element={<Posts />} isAuthenticated={userDashboard} />} />
@@ -80,6 +83,7 @@ function App() {
         <Route path="/DoctorsPage" element={<DoctorsPage />} />
         <Route path="/SupermarketsPage" element={<SupermarketsPage />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
+        <Route path="/Test" element={<Test />} />
       </Routes>
     </LoadingProvider>
 

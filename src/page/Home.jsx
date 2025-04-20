@@ -4,7 +4,7 @@ import Haeder from '../Components/Haeder';
 import aswulogo2 from '../assets/aswulogo2.png';
 import ColoredLogo from '../assets/ColoredLogo.svg';
 import user from '../assets/user.jpg';
-import contactImg from '../assets/contact.svg';
+import contactImg from '../assets/contact.png';
 import CardSlider from '../Components/CardSlider';
 import Footer from '../Components/Footer';
 import AOS from 'aos';
@@ -15,14 +15,14 @@ import L from 'leaflet';
 // import { useStore } from '../store';
 import { useStore } from 'zustand';
 //abdalla 
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser } from '../Redux/CurrentUser';
 import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import userGif from '../assets/user.gif';
-import chooseGif from '../assets/choose.gif';
-import servGif from '../assets/serv.gif';
-import payGif from '../assets/pay.gif';
+import userGif from '../assets/user.png';
+import chooseGif from '../assets/choose.png';
+import servGif from '../assets/serv.png';
+import payGif from '../assets/pay.png';
 
 // SwiperJS imports for vendor carousel
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -35,6 +35,7 @@ import underline3 from '../assets/underline3.png';
 import underline2 from '../assets/underline2.png';
 import underline from '../assets/underline.png';
 import underline4 from '../assets/underline4.png';
+import VendorsCarousel from './VendorsCarousel';
 
 import Testimonial from '../Components/Testimonial';
 
@@ -69,26 +70,26 @@ const vendors = [
 
 function Home() {
   const nav = useNavigate()
-  const user= JSON.parse(localStorage.getItem("currentUser"));
+  const user = JSON.parse(localStorage.getItem("currentUser"));
   const dispatch = useDispatch()
   // dispatch(setCurrentUser(user));
-  
-  
+
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true
     });
     // const { count, inc } = useStore()
-    
-      //abdalla 
-    if(!user){
+
+    //abdalla 
+    if (!user) {
       nav("/Profileform")
     }
-    
+
   }, []);
-//  const cUser = useSelector(state => state.currentUser.value) 
-//  console.log(cUser);  
+  //  const cUser = useSelector(state => state.currentUser.value) 
+  //  console.log(cUser);  
 
 
 
@@ -96,16 +97,16 @@ function Home() {
     <div className="home-page">
       <NavBar />
       <Haeder />
-      
+
       <div className="main-content-wrapper">
-      {/* Main Content Container - 80% width */}
+        {/* Main Content Container - 80% width */}
         {/* <div className="main-content-container" id="products" data-aos="fade-up"> */}
-          {/* <div className="py-5">
+        {/* <div className="py-5">
             <div className="section-title text-center position-relative pb-3 mb-4 mx-auto" style={{ maxWidth: '600px' }}>
             <h1 className="mb-0 main-title">Our Main Services</h1>
             </div>
             </div> */}
-          {/* <CardSlider /> */}
+        {/* <CardSlider /> */}
         {/* </div> */}
 
         {/* What to do section */}
@@ -119,21 +120,21 @@ function Home() {
             <img src={underline2} alt="" style={{ width: '30rem' }} />
           </div>
           <div className="info d-flex gap-5 justify-content-center py-5 mt-3 flex-wrap">
-            <a className=" info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <img src={userGif} alt="التسجيل" className="info-icon" style={{ width: '250px', height: '250px' }} />
-              <p className="info-text fs-5 pt-4 text-center service-title">قم بالتسجيل بالموقع</p>
+            <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={payGif} alt="الدفع" className="info-icon" style={{ width: '250px', height: '250px' }} />
+              <p className="info-text fs-5 pt-4 text-center service-title">ادفع عربوناً</p>
+            </a>
+            <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={servGif} alt="اختيار الخدمة" className="info-icon" style={{ width: '250px', height: '250px' }} />
+              <p className="info-text fs-5 pt-4 text-center service-title">اختر الخدمة المناسبة</p>
             </a>
             <a className=" info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
               <img src={chooseGif} alt="اختيار مقدم الخدمة" className="info-icon" style={{ width: '250px', height: '250px' }} />
               <p className="info-text fs-5 pt-4 text-center service-title">اختر من مقدمي الخدمة من يناسبك</p>
             </a>
-            <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <img src={servGif} alt="اختيار الخدمة" className="info-icon" style={{ width: '250px', height: '250px'}} />
-              <p className="info-text fs-5 pt-4 text-center service-title">اختر الخدمة المناسبة</p>
-            </a>
-            <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <img src={payGif} alt="الدفع" className="info-icon" style={{ width: '250px', height: '250px' }} />
-              <p className="info-text fs-5 pt-4 text-center service-title">ادفع عربوناً</p>
+            <a className=" info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={userGif} alt="التسجيل" className="info-icon" style={{ width: '250px', height: '250px' }} />
+              <p className="info-text fs-5 pt-4 text-center service-title">قم بالتسجيل بالموقع</p>
             </a>
           </div>
         </div>
@@ -147,9 +148,10 @@ function Home() {
           </p>
           <a href="#contact" className="btn btn-primary py-md-3 px-md-5 ms-3 custom-btn">ابحث</a>
         </section> */}
+        <VendorsCarousel />
 
-        
-<div className="py-5 container">
+
+        <div className="py-5 container">
           <h2 className="sections-title ms-3 mb-2 text-center">مقدمو الخدمة الأكثر طلباً</h2>
           <div className="mx-auto text-center">
             <img src={underline2} alt="" style={{ width: '30rem' }} />
@@ -175,7 +177,7 @@ function Home() {
             pagination={{ clickable: true }}
             className="custom-swiper"
             dir="rtl"
-            style={{padding: "40px 0"}}
+            style={{ padding: "40px 0" }}
             breakpoints={{
               0: { slidesPerView: 1 },
               768: { slidesPerView: 2 },
@@ -198,13 +200,13 @@ function Home() {
 
         <section className="py-5 rounded text-center partners-section" data-aos="fade-up">
           <h2 className="fw-bold mb-2 sections-title">شركاؤنا</h2>
-          <img src={underline3} alt="" className=" ms-auto" style={{width: "12rem"}} />
+          <img src={underline3} alt="" className=" ms-auto" style={{ width: "12rem" }} />
           <div className="d-flex justify-content-center gap-5">
-            <img src={ColoredLogo} alt="Colored Logo" className="mx-5 partner-logo mt-2" style={{width: "20rem"}} />
-            <img src={aswulogo2} alt="ASWU Logo" className="mx-5 partner-logo mt-3" style={{width: "22rem"}} />
+            <img src={ColoredLogo} alt="Colored Logo" className="mx-5 partner-logo mt-2" style={{ width: "20rem" }} />
+            <img src={aswulogo2} alt="ASWU Logo" className="mx-5 partner-logo mt-3" style={{ width: "22rem" }} />
           </div>
         </section>
-{/* 
+        {/* 
         <section id="faq" className="py-5 faq-section" data-aos="fade-up">
           <h2 className="text-center mb-4 faq-title">Frequently Asked Questions</h2>
           <div className="accordion custom-accordion" id="faqAccordion">
@@ -257,7 +259,10 @@ function Home() {
               <h1 className="text-end sections-title mb-4">تحتاج إلى مساعدة</h1>
               <h4 className="text-muted mt-3 text-end">تواصل مع فريق العمل في حالة وجود أي استفسار</h4>
               <div className="text-end mt-5">
-                <button className="btn btn-outline-primary pt-3 pb-3 ps-5 pe-5">
+                <button
+                  className="btn btn-outline-primary pt-3 pb-3 ps-5 pe-5"
+                  onClick={() => nav('/contact')}
+                >
                   تواصل معنا
                 </button>
               </div>
