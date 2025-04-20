@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SideBar from '../../Components/sideBar';
 import { Button, Table, Spinner, Alert, Modal } from 'react-bootstrap';
-import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
+import { arrayUnion, collection, deleteDoc, doc, getDocs, updateDoc,Timestamp  } from 'firebase/firestore';
 import db from '../../firebaseconfig';
 import { useSelector } from 'react-redux';
 import { FiTrash2, FiEdit, FiEye, FiAlignRight, FiArrowRight, FiCornerRightUp, FiCheck ,FiToggleRight } from 'react-icons/fi';
@@ -42,8 +42,20 @@ const Posts = () => {
     };
     const confirmAccept = async (post) => {
         console.log(post.id);
+        console.log(post.Id);
+        const time = new Date().toLocaleString('ar-EG', {
+            dateStyle: 'short',
+            timeStyle: 'short',
+          })
+          
+        
         
         try {
+            const housingDocRef = doc(db, "user", post.Id);
+            await updateDoc(housingDocRef, {
+              Notifications: arrayUnion(`Your post ${post.description} has been accepted.
+in ${time}`)
+            });
           const postRef = doc(db, 'housing', post.id); // تأكد إن post.id هو الـ Document ID
           await updateDoc(postRef, {
             status: 'accepted', // غيّر المفتاح والقيمة حسب اللي عايز تعدله

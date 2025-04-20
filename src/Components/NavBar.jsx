@@ -4,8 +4,42 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import wasetLogo from '../assets/waset.png';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../Redux/CurrentUser';
+import { doc, getDoc, Timestamp } from 'firebase/firestore';
+import db from '../firebaseconfig';
 
 function NavBar() {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
+  
+  
+  //fetch Notification 
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [Notifications , setNotifications] = useState([]);
+  const fetchUserNotifications = async (userId) => {
+    try {
+      const userDocRef = doc(db, "user", userId);
+      const userSnap = await getDoc(userDocRef);
+  
+      if (userSnap.exists()) {
+        const data = userSnap.data();
+        const usersNoti = data.Notifications || []; // لو فاضية يرجع []
+        console.log("إشعارات المستخدم:", usersNoti);
+        
+        setNotifications(usersNoti); // لو بتستخدم useState
+      }
+    } catch (error) {
+      console.error("خطأ في جلب إشعارات المستخدم:", error);
+    }
+  };
+  useEffect(() => {
+    if (user?.UserId) {
+      fetchUserNotifications(user.UserId);
+    }
+  }, [user?.UserId]);
+  
+
+
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -14,7 +48,6 @@ function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("currentUser"));
   dispatch(setCurrentUser(user));
 
   useEffect(() => {
@@ -40,6 +73,7 @@ function NavBar() {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setShowDropdown(false);
+        setShowNotifications(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -83,7 +117,28 @@ function NavBar() {
               <span className="navbar-toggler-icon"></span>
             </button>
 
-            <i className="fa-regular fa-bell text-white fs-3 mx-4"></i>
+            <i
+                className="fa-regular fa-bell text-white fs-3 mx-4"
+                style={{ cursor: 'pointer' }}
+                onClick={() => setShowNotifications(!showNotifications)}
+              ></i>
+            {showNotifications && (
+                  <div className="notification-dropdown shadow bg-white p-2 rounded position-absolute" style={{ top: '40px', left: 0, minWidth: '250px', zIndex: 1000 }}>
+                    <h6 className="mb-2 border-bottom pb-1 text-dark">الإشعارات</h6>
+                    {Notifications.length > 0 ? (
+                      Notifications.slice().reverse().map((notif, index) => (
+                        <div key={index} className="text-black-50 mb-1">
+                          <i className="fa-solid fa-circle-dot text-success me-2"></i>
+                          {notif}
+                        </div>
+                      ))
+                      
+                    ) : (
+                      <p className="text-muted text-center mb-0">لا توجد إشعارات جديدة</p>
+                    )}
+                  </div>
+                )}
+
 
             <div className="profile-trigger d-flex align-items-center cursor-pointer" onClick={() => setShowDropdown(prev => !prev)}>
               <span className="border border-success text-black-50 bg-white mx-2 d-flex justify-content-center align-items-center"

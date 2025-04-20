@@ -35,6 +35,7 @@ function Profileform() {
             university: document.getElementById("university").value,
             status: document.querySelector('input[name="GFG"]:checked')?.value || "",
             UserId: useId,
+            Notifications: [],
             PhotoUrl:url,
         };
         await setDoc(userRef, userData);
