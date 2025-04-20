@@ -117,6 +117,10 @@
   .dropdown-item:hover {
     background-color: rgba(152, 83, 255) !important;
     color: #ecf0f1 !important;
+    border-radius: 5px;
+  }
+  .logout {
+    color: #ff0000!important;
   }
   
   .close {
@@ -174,6 +178,7 @@
     min-width: 220px;
     background-color: #ffffff;
     border-radius: 12px;
+    padding: 5px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     z-index: 999;
     transition: all 0.3s ease;
