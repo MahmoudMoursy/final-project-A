@@ -8,12 +8,14 @@ import AA from '../assets/housing/AA.webp'
 import Footer from '../Components/Footer'
 import { useState, useEffect } from "react";
 import db from "../firebaseconfig";
-import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, setDoc, Timestamp } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom'
 
 function Housing() {
   const userData = JSON.parse(localStorage.getItem("currentUser"));
   const user = JSON.parse(localStorage.getItem("currentUser"));
-  
+  const nav = useNavigate();
+  const [PostUserId,setPostUserId] = useState('');
   const [housingData, setHousingData] = useState({
     address: "", description: "", numbed: "", numteu: "", phone: "", whats: "", price: "",Id:user.UserId,username:user.username
   });
@@ -85,8 +87,7 @@ function Housing() {
     const matchesSearch = searchTerm ?
       house.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
       house.description.toLowerCase().includes(searchTerm.toLowerCase())
-      : true;
-
+      : true;    
     const matchesFilters = Object.entries(activeFilters).every(([key, value]) => {
       if (!value) return true;
       switch (key) {
@@ -138,8 +139,25 @@ function Housing() {
     };
 
     fetchHousing();
+
   }, []);
 
+  function message(PostUserId){
+    
+    const messageId = userData.UserId+'-'+ PostUserId;    
+    const userRef = doc(db, "messages", messageId);
+    save();
+    async function save() {
+        const userData = {
+            username:"as",
+            address: "AS",
+        };
+        await setDoc(userRef, userData);
+        localStorage.setItem("mid", JSON.stringify(messageId));
+         nav('/Message');
+    }
+  }
+  
   return (
     <>
       <NavBar />
@@ -287,6 +305,7 @@ function Housing() {
             <div className="row g-4">
               {filteredHousingList.map((house, index) => (
                 <div key={house.id} className="col-md-6">
+                  
                   <div className="card h-100 shadow-sm hover-shadow">
                     <div id={`cardCarousel-${index}`} className="carousel slide" data-bs-ride="carousel">
                       <div className="carousel-inner">
@@ -338,6 +357,9 @@ function Housing() {
                           </a>
                           <a href={`https://wa.me/${house.whats}`} className="btn btn-outline-success">
                             <i className="fa-brands fa-whatsapp"></i> واتساب
+                          </a>
+                          <a onClick={()=>message(house.Id)} className="btn btn-outline-dark">
+                            مراسلة
                           </a>
                         </div>
                         <button
