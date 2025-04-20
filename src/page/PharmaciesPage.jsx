@@ -24,9 +24,9 @@ const PharmaciesPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [mainImage, setMainImage] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const pharmacies = [
-
     {
       id: 1,
       title: 'صيدلية عابدين',
@@ -37,11 +37,7 @@ const PharmaciesPage = () => {
       whatsapp: '19036',
       facebook: 'https://www.facebook.com/AbdinPharmaciesOfficial?locale=ar_AR',
       address: ' الكورنيش اسوان',
-      additionalImages: [
-        abdin2,
-        abdin3,
-        abdin4
-      ]
+      additionalImages: [abdin2, abdin3, abdin4],
     },
     {
       id: 2,
@@ -53,9 +49,7 @@ const PharmaciesPage = () => {
       whatsapp: '01050767676',
       facebook: 'https://www.facebook.com/profile.php?id=100082585836170&locale=ar_AR',
       address: 'شارع عباس فريد',
-      additionalImages: [
-        saber1
-      ]
+      additionalImages: [saber1],
     },
     {
       id: 3,
@@ -67,9 +61,7 @@ const PharmaciesPage = () => {
       whatsapp: '01281255552',
       facebook: 'https://www.facebook.com/dr.ebtesam.pharmcy?locale=ar_AR',
       address: 'السيل برج الحج',
-      additionalImages: [
-        ibtsam1
-      ]
+      additionalImages: [ibtsam1],
     },
     {
       id: 4,
@@ -81,9 +73,7 @@ const PharmaciesPage = () => {
       whatsapp: '01151428645',
       facebook: 'https://www.facebook.com/profile.php?id=100051283927225&locale=ar_AR',
       address: 'طريق الكرور، حي الزهور، امام فرع البنك الاهلي الجديد',
-      additionalImages: [
-        qlel
-      ]
+      additionalImages: [qlel],
     },
     {
       id: 5,
@@ -95,47 +85,50 @@ const PharmaciesPage = () => {
       whatsapp: '01151428645',
       facebook: 'https://www.facebook.com/profile.php?id=100051283927225&locale=ar_AR',
       address: 'طريق الكرور، حي الزهور، امام فرع البنك الاهلي الجديد',
-      additionalImages: [
-        ezaby2,
-        ezaby3,
-        ezaby4,
-      ]
+      additionalImages: [ezaby2, ezaby3, ezaby4],
     },
-    ];
-      
-       const renderStars = (rating) => {
-          return [...Array(5)].map((_, index) => (
-            <FaStar
-              key={index}
-              className={index < Math.floor(rating) ? 'star-filled' : 'star-empty'}
-            />
-          ));
-        };
-         
+  ];
+
+  const filteredPharmacies = pharmacies.filter((pharmacy) =>
+    pharmacy.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    pharmacy.address.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const renderStars = (rating) => {
+    return [...Array(5)].map((_, index) => (
+      <FaStar key={index} className={index < Math.floor(rating) ? 'star-filled' : 'star-empty'} />
+    ));
+  };
 
   return (
     <div className="section-page-container" dir="rtl">
-      <div className="section-header ">
-        <h1 className="section-main-title " >الصيدليات</h1>
+      <div className="section-header">
+        <h1 className="section-main-title">الصيدليات</h1>
+      </div>
+
+      <div className="search-container my-4 d-flex justify-content-center">
+        <input
+          type="text"
+          placeholder="ابحث عن صيدلية أو عنوان..."
+          className="form-control w-75 p-3 rounded-pill shadow-sm text-end"
+          style={{ maxWidth: '600px', fontSize: '1.1rem', border: '1px solid #ddd' }}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
 
       <div className="cards-grid">
-        {pharmacies.map(item => (
+        {filteredPharmacies.map((item) => (
           <div key={item.id} className="card service-card">
             <img src={item.image} className="card-img-top" alt={item.title} />
             <div className="card-body">
               <h5 className="card-title">{item.title}</h5>
               <p className="card-text">{item.description}</p>
               <div className="rating mb-2">
-                {[...Array(5)].map((_, index) => (
-                  <FaStar
-                    key={index}
-                    className={index < Math.floor(item.rating) ? 'star-filled' : 'star-empty'}
-                  />
-                ))}
+                {renderStars(item.rating)}
                 <span className="rating-number">{item.rating}</span>
               </div>
-              <button 
+              <button
                 className="btn btn-primary"
                 onClick={() => {
                   setSelectedItem(item);
@@ -150,102 +143,85 @@ const PharmaciesPage = () => {
         ))}
       </div>
 
-     {showModal && selectedItem && (
-             <div className="modal show d-block" tabIndex="-1">
-               <div className="modal-dialog modal-lg">
-                 <div className="modal-content">
-                   <div className="modal-header">
-                     <h5 className="modal-title"  style={{marginRight:"50px"}}>{selectedItem.title}</h5>
-                     <button 
-                       type="button" 
-                       className="btn-close" 
-                       style={{marginLeft:"20px"}}
-                       onClick={() => setShowModal(false)}
-                     ></button>
-                   </div>
-                   <div className="modal-body">
-                     <div className="row">
-                       <div className="col-md-6">
-                         <div className="main-image-container">
-                           <img 
-                             src={mainImage} 
-                             alt={selectedItem.title} 
-                             className="main-image"
-                           />
-                         </div>
-                         <div className="thumbnail-container">
-                           {selectedItem.additionalImages.map((img, index) => (
-                             <img 
-                               key={index}
-                               src={img} 
-                               alt={`${selectedItem.title} ${index + 1}`}
-                               className="thumbnail-image"
-                               onClick={() => setMainImage(img)}
-                             />
-                           ))}
-                         </div>
-                       </div>
-                       
-                       <div className="col-md-6">
-                         <div className="place-details">
-                           <h4>{selectedItem.title}</h4>
-                           <p className="description">{selectedItem.description}</p>
-                           
-                           <div className="rating mb-3">
-                             <div className="stars">
-                               {renderStars(selectedItem.rating)}
-                             </div>
-                             <span className="rating-number">
-                               {selectedItem.rating} / 5
-                             </span>
-                           </div>
-     
-                           <div className="contact-info">
-                             <div className="contact-item">
-                               <FaPhone className="icon" />
-                               <span>{selectedItem.phone}</span>
-                             </div>
-                             <div className="contact-item">
-                               <FaWhatsapp className="icon" />
-                               <a 
-                                 href={`https://wa.me/${selectedItem.whatsapp}`}
-                                 target="_blank"
-                                 rel="noopener noreferrer"
-                               >
-                                 واتساب
-                               </a>
-                             </div>
-                             <div className="contact-item">
-                               <FaFacebook className="icon" />
-                               <a 
-                                 href={selectedItem.facebook}
-                                 target="_blank"
-                                 rel="noopener noreferrer"
-                               >
-                                 فيسبوك
-                               </a>
-                             </div>
-                             <div className="contact-item">
-                               <FaMapMarkerAlt className="icon" />
-                               <span>{selectedItem.address}</span>
-                             </div>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           )}
-            {showModal && (
-        <div 
-          className="modal-backdrop show" 
-          onClick={() => setShowModal(false)}
-        ></div>
+      {showModal && selectedItem && (
+        <div className="modal show d-block" tabIndex="-1">
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" style={{ marginRight: '50px' }}>
+                  {selectedItem.title}
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  style={{ marginLeft: '20px' }}
+                  onClick={() => setShowModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="main-image-container">
+                      <img src={mainImage} alt={selectedItem.title} className="main-image" />
+                    </div>
+                    <div className="thumbnail-container">
+                      {selectedItem.additionalImages.map((img, index) => (
+                        <img
+                          key={index}
+                          src={img}
+                          alt={`${selectedItem.title} ${index + 1}`}
+                          className="thumbnail-image"
+                          onClick={() => setMainImage(img)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="col-md-6">
+                    <div className="place-details">
+                      <h4>{selectedItem.title}</h4>
+                      <p className="description">{selectedItem.description}</p>
+
+                      <div className="rating mb-3">
+                        <div className="stars">{renderStars(selectedItem.rating)}</div>
+                        <span className="rating-number">{selectedItem.rating} / 5</span>
+                      </div>
+
+                      <div className="contact-info">
+                        <div className="contact-item">
+                          <FaPhone className="icon" />
+                          <span>{selectedItem.phone}</span>
+                        </div>
+                        <div className="contact-item">
+                          <FaWhatsapp className="icon" />
+                          <a href={`https://wa.me/${selectedItem.whatsapp}`} target="_blank" rel="noopener noreferrer">
+                            واتساب
+                          </a>
+                        </div>
+                        <div className="contact-item">
+                          <FaFacebook className="icon" />
+                          <a href={selectedItem.facebook} target="_blank" rel="noopener noreferrer">
+                            فيسبوك
+                          </a>
+                        </div>
+                        <div className="contact-item">
+                          <FaMapMarkerAlt className="icon" />
+                          <span>{selectedItem.address}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
+
+      {showModal && <div className="modal-backdrop show" onClick={() => setShowModal(false)}></div>}
     </div>
   );
 };
+
 
 export default PharmaciesPage ;

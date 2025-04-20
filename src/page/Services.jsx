@@ -8,6 +8,8 @@ import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
 import { NavLink } from 'react-router-dom';
 import AddServiceForm from './AddServiceForm';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 import esmo1 from '../assets/service_imgs/مطاعم/اسمه ايه/esmo1.jpeg';
 import esmo2 from '../assets/service_imgs/مطاعم/اسمه ايه/esmo2.jpeg';
@@ -516,6 +518,24 @@ const Services = () => {
           >
             {services.restaurants.map(item => renderServiceCard(item))}
           </Carousel>
+          <div className="d-flex justify-content-end">
+  <NavLink
+    to="/RestaurantsPage"
+    className="btn custom-gradient-button d-inline-flex align-items-center gap-2 px-5 py-3 shadow-lg text-decoration-none"
+    style={{
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 0,
+      borderBottomLeftRadius: '35px',
+      borderBottomRightRadius: '35px'
+    }}
+  >
+    <i className="fas fa-plus fa-lg"></i>
+    <span className="fw-semibold">اعرف اكثر</span>
+  </NavLink>
+</div>
+
+
+
         </section>
 
         <section className="service-section mb-5">
@@ -535,7 +555,24 @@ const Services = () => {
           >
             {services.pharmacies.map(item => renderServiceCard(item))}
           </Carousel>
-          <button>aaa</button>
+          <div className="d-flex justify-content-end">
+  <NavLink
+    to="/PharmaciesPage"
+    className="btn custom-gradient-button d-inline-flex align-items-center gap-2 px-5 py-3 shadow-lg text-decoration-none"
+    style={{
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 0,
+      borderBottomLeftRadius: '35px',
+      borderBottomRightRadius: '35px'
+    }}
+  >
+    <i className="fas fa-plus fa-lg"></i>
+    <span className="fw-semibold">اعرف اكثر</span>
+  </NavLink>
+</div>
+
+
+
         </section>
 
         <section className="service-section mb-5">
@@ -555,6 +592,25 @@ const Services = () => {
           >
             {services.doctors.map(item => renderServiceCard(item))}
           </Carousel>
+          
+          <div className="d-flex justify-content-end">
+  <NavLink
+    to="/DoctorsPage"
+    className="btn custom-gradient-button d-inline-flex align-items-center gap-2 px-5 py-3 shadow-lg text-decoration-none"
+    style={{
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 0,
+      borderBottomLeftRadius: '35px',
+      borderBottomRightRadius: '35px'
+    }}
+  >
+    <i className="fas fa-plus fa-lg"></i>
+    <span className="fw-semibold">اعرف اكثر</span>
+  </NavLink>
+</div>
+
+
+
         </section>
 
 
@@ -576,6 +632,24 @@ const Services = () => {
           >
             {services.supermarkets.map(item => renderServiceCard(item))}
           </Carousel>
+          <div className="d-flex justify-content-end">
+  <NavLink
+    to="/SupermarketsPage"
+    className="btn custom-gradient-button d-inline-flex align-items-center gap-2 px-5 py-3 shadow-lg text-decoration-none"
+    style={{
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 0,
+      borderBottomLeftRadius: '35px',
+      borderBottomRightRadius: '35px'
+    }}
+  >
+    <i className="fas fa-plus fa-lg"></i>
+    <span className="fw-semibold">اعرف اكثر</span>
+  </NavLink>
+</div>
+
+
+
         </section>
 
         {/* Modal */}
