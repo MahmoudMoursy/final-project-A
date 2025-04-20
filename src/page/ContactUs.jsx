@@ -4,7 +4,7 @@ import Footer from '../Components/Footer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './ContactUs.css';
-import contactImg from '../assets/contact.svg';
+// import contactImg from '../assets/contact.svg';
 
 function ContactUs() {
   const formRef = useRef(null);
@@ -28,11 +28,11 @@ function ContactUs() {
   return (
     <div className="contact-page">
       <NavBar />
-      
+
       <div className="container py-5 mt-5" dir="rtl">
         <div className="row mb-5">
           <div className="col-12 text-center" data-aos="fade-up">
-            <h1 className="fw-bold mb-4">تواصل معنا</h1>
+            <h1 className="fw-bold mb-4 mt-4">تواصل معنا</h1>
             <p className="lead mb-5">نحن هنا للإجابة على استفساراتك ومساعدتك في كل ما تحتاجه</p>
           </div>
         </div>
@@ -118,13 +118,13 @@ function ContactUs() {
 
             {/* Map */}
             <div className="card shadow-sm border-0" style={{ height: '300px', overflow: 'hidden' }}>
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.7677952844594!2d32.89729467538857!3d24.088900277770146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x143664d18a8453f9%3A0x3f8c50a2c5b4eeab!2sAswan%20University!5e0!3m2!1sen!2seg!4v1714147447914!5m2!1sen!2seg" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen="" 
-                loading="lazy" 
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.7677952844594!2d32.89729467538857!3d24.088900277770146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x143664d18a8453f9%3A0x3f8c50a2c5b4eeab!2sAswan%20University!5e0!3m2!1sen!2seg!4v1714147447914!5m2!1sen!2seg"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Aswan University Map"
               ></iframe>
@@ -133,11 +133,11 @@ function ContactUs() {
         </div>
 
         {/* Contact Image */}
-        <div className="row mt-5 justify-content-center" data-aos="fade-up">
+        {/* <div className="row mt-5 justify-content-center" data-aos="fade-up">
           <div className="col-md-6 text-center">
             <img src={contactImg} alt="Contact Us" className="img-fluid" style={{ maxWidth: '300px' }} />
           </div>
-        </div>
+        </div> */}
       </div>
 
       <Footer />
