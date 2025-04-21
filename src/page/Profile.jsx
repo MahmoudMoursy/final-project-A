@@ -27,8 +27,8 @@ const Profile = () => {
     status: userData?.status || ""
   });
   useEffect(() => {
-    setImage(userData.image || "https://via.placeholder.com/100");
-  }, [userData.image]);
+    setImage(userData.PhotoUrl || "https://via.placeholder.com/100");
+  }, [userData.PhotoUrl]);
 
   const handleInputChange = (field, value) => {
     setFieldValues({ ...fieldValues, [field]: value });
@@ -138,7 +138,7 @@ const Profile = () => {
                             await updateDoc(userDocRef, { image: imageDataUrl });
 
                             setImage(imageDataUrl);
-                            userData.image = imageDataUrl;
+                            userData.PhotoUrl = imageDataUrl;
                             localStorage.setItem("currentUser", JSON.stringify(userData));
                           }
                         } catch (err) {
