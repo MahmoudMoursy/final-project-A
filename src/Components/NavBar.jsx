@@ -9,7 +9,7 @@ import db from '../firebaseconfig';
 
 function NavBar() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
-
+  const nav = useNavigate();
 
 
   //fetch Notification 
@@ -121,6 +121,11 @@ function NavBar() {
               style={{ cursor: 'pointer' }}
               onClick={() => setShowNotifications(!showNotifications)}
             ></i>
+              <i
+                  className="fa-regular fa-envelope text-white fs-3 mx-4"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => nav('/YourMessage')}
+                ></i>
             {showNotifications && (
               <div className="notification-dropdown shadow bg-white p-2 rounded position-absolute" style={{ top: '40px', left: 0, minWidth: '250px', zIndex: 1000 }}>
                 <h6 className="mb-2 border-bottom pb-1 text-dark">الإشعارات</h6>
