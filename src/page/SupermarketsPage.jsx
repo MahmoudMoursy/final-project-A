@@ -143,7 +143,7 @@ const SupermarketsPage = () => {
       <div className="search-container my-4 d-flex justify-content-center">
         <input
           type="text"
-          placeholder="ابحث عن صيدلية أو عنوان..."
+          placeholder="ابحث عن سوبرماركت أو عنوان..."
           className="form-control w-75 p-3 rounded-pill shadow-sm text-end"
           style={{ maxWidth: '600px', fontSize: '1.1rem', border: '1px solid #ddd' }}
           value={searchTerm}

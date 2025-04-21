@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, getDoc, updateDoc, arrayUnion, onSnapshot } from 'firebase/firestore';
 import db from "../firebaseconfig";
-import NavBar from '../Components/NavBar';
+import NavBar from "../Components/NavBar";
+
 
 const Chats = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
