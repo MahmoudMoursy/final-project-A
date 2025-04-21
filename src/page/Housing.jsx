@@ -10,6 +10,9 @@ import { useState, useEffect } from "react";
 import db from "../firebaseconfig";
 import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
 import { UploadPhotos } from '../UploadPhotos'
+import { addDoc, collection, doc, getDocs, setDoc, Timestamp } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom'
+
 function Housing() {
   const userData = JSON.parse(localStorage.getItem("currentUser"));
   const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -33,6 +36,8 @@ function Housing() {
     });
   };
 
+  const nav = useNavigate();
+  const [PostUserId,setPostUserId] = useState('');
   const [housingData, setHousingData] = useState({
     address: "", description: "", numbed: "", numteu: "", phone: "", whats: "", price: "", status: "pending", Id: user.UserId, username: user.username
   });
@@ -92,6 +97,7 @@ function Housing() {
         checkIn: "",
         checkOut: "",
         guests: 1,
+        status: "pending",
         createdAt: null
       });
     } catch (error) {
@@ -104,8 +110,7 @@ function Housing() {
     const matchesSearch = searchTerm ?
       house.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
       house.description.toLowerCase().includes(searchTerm.toLowerCase())
-      : true;
-
+      : true;    
     const matchesFilters = Object.entries(activeFilters).every(([key, value]) => {
       if (!value) return true;
       switch (key) {
@@ -156,10 +161,8 @@ function Housing() {
         Id: user.UserId,
         username: user.username
       });
-      setImages([]);
     } catch (error) {
       console.error("خطأ أثناء الحفظ: ", error);
-      alert("حدث خطأ أثناء الحفظ");
     }
   };
 
@@ -171,57 +174,27 @@ function Housing() {
     };
 
     fetchHousing();
+
   }, []);
 
+  function message(PostUserId){
+    
+    const messageId = userData.UserId+'-'+ PostUserId;    
+    const userRef = doc(db, "messages", messageId);
+    save();
+    async function save() {
+        const userData = {
+            username:"as",
+            address: "AS",
+        };
+        await setDoc(userRef, userData);
+        localStorage.setItem("mid", JSON.stringify(messageId));
+         nav('/Message');
+    }
+  }
+  
   return (
-    <> <style>{`
-      .image-preview-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 15px;
-      }
-      .image-wrapper {
-        position: relative;
-        width: 100px;
-        height: 100px;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      }
-      .image-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .remove-btn {
-        position: absolute;
-        top: 1px;
-        right: 1px;
-        background: red;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        font-size: 12px;
-        cursor: pointer;
-      }
-      .save-btn {
-        margin-bottom: 20px;
-        padding: 10px 20px;
-        background-color: #2E366A;
-        color: white;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-      }
-      .saved-title {
-        font-weight: bold;
-        margin-top: 30px;
-        margin-bottom: 10px;
-      }
-    `}</style>
+    <>
       <NavBar />
       <div className="search-container bg-white shadow-sm py-4 mt-5 pt-5" dir="rtl">
         <div className="container">

@@ -100,7 +100,7 @@ const Profile = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          style={{ backgroundColor: '#243A70' }}
+          style={{ backgroundColor: '#243A70' }} // تم تغيير لون الخلفية ليكون مشابهًا للون الشريط
         >
           <div className="hero-overlay"></div>
           <div className="hero-content">
@@ -110,9 +110,7 @@ const Profile = () => {
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
-              <span style={{ color: 'white', fontSize: '36px' }}>
-                {userData.username ? userData.username.charAt(0).toUpperCase() : "؟"}
-              </span>
+              {userData.username?.charAt(0).toUpperCase() || "U"}
             </motion.div>
             <motion.h1
               initial={{ y: 20, opacity: 0 }}
@@ -344,7 +342,7 @@ const Profile = () => {
           position: relative;
           direction: rtl;
         }
-
+        
         .profile-hero {
           position: relative;
           height: 300px;
@@ -355,7 +353,7 @@ const Profile = () => {
           text-align: center;
           overflow: hidden;
         }
-
+        
         .hero-overlay {
           position: absolute;
           top: 0;
@@ -364,19 +362,19 @@ const Profile = () => {
           height: 100%;
           background: rgba(0, 0, 0, 0.3);
         }
-
+        
         .hero-content {
           position: relative;
           z-index: 2;
           padding: 20px;
         }
-
+        
         .avatar-circle {
           width: 100px;
           height: 100px;
           border-radius: 50%;
-          background-color: #243A70;  /* اللون الكحلي */
-          color: white; /* تغيير لون النص ليكون واضحاً */
+          background-color: white;
+          color: var(--primary-color);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -385,13 +383,13 @@ const Profile = () => {
           margin: 0 auto 15px;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-
+        
         .profile-container {
           max-width: 1200px;
           margin: 0 auto;
           padding: 20px;
         }
-
+        
         .profile-section {
           background: white;
           border-radius: 10px;
@@ -409,38 +407,38 @@ const Profile = () => {
           position: relative;
         }
 
+       
         .user-name {
-          color: white; /* لون النص */
-          font-size: 2rem; /* حجم النص المعدل */
-          font-weight: bold; /* اجعل النص غامقاً */
-        }
-
+  color: white; /* لون النص */
+  font-size: 2rem; /* حجم النص المعدل */
+  font-weight: bold; /* اجعل النص غامقاً */
+}
         .info-grid {
           display: grid;
           grid-template-columns: 1fr; /* تغيير إلى عمود واحد */
           gap: 20px; /* المسافة بين الكاردات */
         }
-
+        
         .info-card {
           background: #f9fafc;
           border-radius: 8px;
           padding: 20px;
           border-left: 3px solid var(--accent-color);
         }
-
+        
         .info-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
           margin-bottom: 10px;
         }
-
+        
         .info-label {
           font-weight: 600;
           color: var(--primary-color);
           font-size: 14px;
         }
-
+        
         .edit-btn {
           background: none;
           border: none;
@@ -452,20 +450,20 @@ const Profile = () => {
           height: 30px;
           transition: all 0.2s;
         }
-
+        
         .edit-btn:hover {
           background: rgba(255, 215, 0, 0.1);
         }
-
+        
         .info-value {
           margin: 0;
           color: var(--text-light);
         }
-
+        
         .edit-field {
           margin-top: 10px;
         }
-
+        
         .form-input, .form-select {
           width: 100%;
           padding: 8px 12px;
@@ -474,12 +472,12 @@ const Profile = () => {
           margin-bottom: 10px;
           font-family: inherit;
         }
-
+        
         .edit-actions {
           display: flex;
           gap: 10px;
         }
-
+        
         .save-btn, .cancel-btn {
           padding: 6px 12px;
           border: none;
@@ -488,12 +486,12 @@ const Profile = () => {
           font-size: 14px;
           transition: all 0.2s;
         }
-
+        
         .save-btn {
           background: var(--accent-color);
           color: white;
         }
-
+        
         .cancel-btn {
           background: #f0f0f0;
           color: var(--text-light);
@@ -504,13 +502,13 @@ const Profile = () => {
           padding: 20px;
           border-radius: 8px;
         }
-
+        
         .settings-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
           gap: 20px;
         }
-
+        
         .setting-card {
           display: flex;
           align-items: center;
@@ -518,7 +516,7 @@ const Profile = () => {
           background: #f9fafc;
           border-radius: 8px;
         }
-
+        
         .setting-icon {
           margin-right: 15px;
           color: var(--accent-color);
@@ -530,11 +528,11 @@ const Profile = () => {
           align-items: center;
           justify-content: center;
         }
-
+        
         .setting-content {
           flex: 1;
         }
-
+        
         .setting-content h3 {
           margin: 0 0 5px;
           font-size: 15px;
@@ -550,7 +548,7 @@ const Profile = () => {
           cursor: pointer;
           transition: background-color 0.3s;
         }
-
+        
         .toggle {
           width: 20px;
           height: 20px;
@@ -561,35 +559,35 @@ const Profile = () => {
           left: 2px;
           transition: all 0.3s ease;
         }
-
+        
         .toggle.active {
           left: 28px;
           background-color: var(--accent-color);
         }
-
+        
         .styled-table {
           width: 100%;
           border-collapse: collapse;
           margin: 25px 0;
           font-size: 14px;
         }
-
+        
         .styled-table thead tr {
           background-color: var(--primary-color);
           color: white;
           text-align: right;
         }
-
+        
         .styled-table th,
         .styled-table td {
           padding: 12px 15px;
           text-align: right;
         }
-
+        
         .styled-table tbody tr:nth-of-type(even) {
           background-color: #f9f9f9;
         }
-
+        
         .action-btn {
           border: none;
           background: none;
@@ -597,28 +595,28 @@ const Profile = () => {
           padding: 5px;
           border-radius: 4px;
         }
-
+        
         .delete-btn {
           color: #dc3545;
         }
-
+        
         .delete-btn:hover {
           background: rgba(220, 53, 69, 0.1);
         }
-
+        
         .truncate {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
           max-width: 150px;
         }
-
+        
         .empty-state {
           text-align: center;
           padding: 40px;
           color: var(--text-light);
         }
-
+        
         .logout-btn {
           display: block;
           width: 100%;
@@ -633,12 +631,12 @@ const Profile = () => {
           cursor: pointer;
           transition: all 0.3s;
         }
-
+        
         .logout-btn:hover {
           transform: translateY(-2px);
           background: var(--secondary-color);
         }
-
+        
         .loading-spinner {
           display: flex;
           justify-content: center;
@@ -646,16 +644,16 @@ const Profile = () => {
           height: 100px;
           color: var(--primary-color);
         }
-
+        
         @media (max-width: 768px) {
           .info-grid, .settings-grid {
             grid-template-columns: 1fr; /* عمود واحد على الشاشات الصغيرة */
           }
-
+          
           .profile-hero {
             height: 250px;
           }
-
+          
           .avatar-circle {
             width: 80px;
             height: 80px;

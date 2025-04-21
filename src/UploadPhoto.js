@@ -14,7 +14,3 @@ export const UploadPhoto = async (file) => {
 
   return res.data.secure_url; // رابط الصورة النهائي
 };
-
-
-
-

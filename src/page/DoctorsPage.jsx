@@ -7,6 +7,7 @@ const DoctorsPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [mainImage, setMainImage] = useState('');
+   const [searchTerm, setSearchTerm] = useState('');
 
   const doctors = [
     {
@@ -127,6 +128,17 @@ const DoctorsPage = () => {
     <div className="section-page-container" dir="rtl">
       <div className="section-header ">
         <h1 className="section-main-title " >الأطباء</h1>
+      </div>
+      
+      <div className="search-container my-4 d-flex justify-content-center">
+        <input
+          type="text"
+          placeholder="ابحث عن صيدلية أو عنوان..."
+          className="form-control w-75 p-3 rounded-pill shadow-sm text-end"
+          style={{ maxWidth: '600px', fontSize: '1.1rem', border: '1px solid #ddd' }}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
 
       <div className="cards-grid">
