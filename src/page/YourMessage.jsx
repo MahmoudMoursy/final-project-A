@@ -11,26 +11,31 @@ const Chats = () => {
   const [messages, setMessages] = useState([]);
   const [isOriginalSender, setIsOriginalSender] = useState(true);
   const [input, setInput] = useState("");
+  const [selectedUser, setSelectedUser] = useState("");
 
   const fetchChats = async () => {
     const messagesRef = collection(db, "messages");
     const snapshot = await getDocs(messagesRef);
-    const userConversations = snapshot.docs.filter((doc) =>
-      doc.id.includes(currentUser.UserId)
-    );
+    const userConversations = snapshot.docs.filter((doc) => {
+      const data = doc.data();
+      const hasMessages =
+        (data.sender && data.sender.length > 0) ||
+        (data.receiver && data.receiver.length > 0);
+      return doc.id.includes(currentUser.UserId) && hasMessages;
+    });
 
     setConversations(userConversations);
 
     const fetchedUsernames = {};
     for (const docSnap of userConversations) {
-      const otherId = docSnap.id.replace(currentUser.UserId + "-", "").replace("-" + currentUser.UserId, "");
+      const otherId = docSnap.id
+        .replace(currentUser.UserId + "-", "")
+        .replace("-" + currentUser.UserId, "");
       if (!fetchedUsernames[otherId]) {
         const userDoc = await getDoc(doc(db, "user", otherId));
-        if (userDoc.exists()) {
-          fetchedUsernames[otherId] = userDoc.data().username;
-        } else {
-          fetchedUsernames[otherId] = otherId;
-        }
+        fetchedUsernames[otherId] = userDoc.exists()
+          ? userDoc.data().username
+          : otherId;
       }
     }
     setUsernames(fetchedUsernames);
@@ -40,24 +45,19 @@ const Chats = () => {
     if (!input.trim() || !selectedChatId) return;
 
     const messageDocRef = doc(db, "messages", selectedChatId);
-    try {
-      const fieldToUpdate = isOriginalSender ? "sender" : "receiver";
+    const fieldToUpdate = isOriginalSender ? "sender" : "receiver";
 
-      await updateDoc(messageDocRef, {
-        [fieldToUpdate]: arrayUnion({
-          text: input,
-          timestamp: new Date().toISOString(),
-          senderId: currentUser.UserId
-        })
-      });
+    await updateDoc(messageDocRef, {
+      [fieldToUpdate]: arrayUnion({
+        text: input,
+        timestamp: new Date().toISOString(),
+        senderId: currentUser.UserId,
+      }),
+    });
 
-      setInput("");
-    } catch (error) {
-      console.error("فشل في إرسال الرسالة:", error);
-    }
+    setInput("");
   };
 
-  // 🔄 تحديث تلقائي للرسائل
   useEffect(() => {
     let unsubscribe;
 
@@ -69,10 +69,12 @@ const Chats = () => {
           const data = docSnap.data();
           const allMessages = [
             ...(data.sender || []),
-            ...(data.receiver || [])
+            ...(data.receiver || []),
           ];
 
-          allMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+          allMessages.sort(
+            (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+          );
 
           const [firstId] = selectedChatId.split("-");
           const userIsSender = firstId === currentUser.UserId;
@@ -88,94 +90,167 @@ const Chats = () => {
   }, [selectedChatId]);
 
   useEffect(() => {
-    if (currentUser.UserId) fetchChats();
+    if (currentUser?.UserId) fetchChats();
   }, []);
+
+  const styles = {
+    root: {
+      backgroundColor: "#e1f5fe",
+      color: "#0d47a1",
+      fontFamily: "Segoe UI, sans-serif",
+    },
+    chatSidebar: {
+      backgroundColor: "#bbdefb",
+      borderRight: "1px solid #90caf9",
+    },
+    chatHeader: {
+      backgroundColor: "#e1f5fe",
+    },
+    chatArea: {
+      backgroundColor: "#ffffff",
+    },
+    inputField: {
+      backgroundColor: "#f0f8ff",
+      borderColor: "#90caf9",
+      color: "#0d47a1",
+    },
+    button: {
+      backgroundColor: "#42a5f5",
+      color: "#fff",
+    },
+    bubbleMy: {
+      backgroundColor: "#42a5f5",
+      color: "#fff",
+      alignSelf: "flex-end",
+    },
+    bubbleOther: {
+      backgroundColor: "#bbdefb",
+      color: "#0d47a1",
+      alignSelf: "flex-start",
+    },
+    bubbleCommon: {
+      maxWidth: "75%",
+      padding: "12px 16px",
+      borderRadius: "1rem",
+      marginBottom: "12px",
+      boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+    },
+    smallText: {
+      color: "#90caf9",
+    },
+    placeholder: {
+      color: "#1e3a8a",
+    },
+  };
 
   return (
     <>
-      <div style={{ display: 'flex', gap: '2rem' }}>
-        {/* قائمة المحادثات */}
-        <div style={{ width: '30%' }}>
-          <h3>محادثاتك</h3>
+      <style>{`
+        ::placeholder {
+          color: #1e3a8a !important;
+          opacity: 1;
+        }
+      `}</style>
+
+      <div className="container-fluid vh-100 d-flex text-dark p-0" style={styles.root}>
+        <div className="col-12 col-md-4 overflow-auto" style={styles.chatSidebar}>
+          <div className="p-3 border-bottom border-info d-flex align-items-center justify-content-between">
+            <h5 className="mb-0">محادثاتك</h5>
+            <i className="bi bi-chat-dots-fill fs-4 text-primary"></i>
+          </div>
           {conversations.map((conv) => {
-            const otherId = conv.id.replace(currentUser.UserId + "-", "").replace("-" + currentUser.UserId, "");
+            const otherId = conv.id
+              .replace(currentUser.UserId + "-", "")
+              .replace("-" + currentUser.UserId, "");
             const otherUsername = usernames[otherId];
 
             return (
               <div
                 key={conv.id}
-                onClick={() => setSelectedChatId(conv.id)}
-                style={{
-                  padding: "10px",
-                  border: "1px solid #ddd",
-                  margin: "5px 0",
-                  cursor: "pointer"
-                }}
+                className={`d-flex align-items-center gap-3 p-3 chat-item ${
+                  selectedChatId === conv.id ? "bg-primary bg-opacity-10" : ""
+                }`}
+                style={{ cursor: "pointer", transition: "0.2s" }}
               >
-                محادثة مع: {otherUsername}
+                <div
+                  className="flex-grow-1 d-flex align-items-center"
+                  onClick={() => {
+                    setSelectedChatId(conv.id);
+                    setSelectedUser(otherUsername);
+                  }}
+                >
+                  <div className="rounded-circle bg-primary" style={{ width: 40, height: 40 }}>
+                    <i
+                      className="bi bi-person-fill text-white d-flex justify-content-center align-items-center"
+                      style={{ fontSize: 20, height: "100%" }}
+                    ></i>
+                  </div>
+                  <div className="ms-2">
+                    <div className="fw-bold">{otherUsername}</div>
+                    <small className="text-muted">انقر لفتح المحادثة</small>
+                  </div>
+                </div>
               </div>
             );
           })}
         </div>
 
-        {/* الرسائل */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <div className="col-12 col-md-8 d-flex flex-column">
           {selectedChatId ? (
             <>
-              <h3>الرسائل</h3>
-              <div style={{ flex: 1, overflowY: "auto", maxHeight: "400px", marginBottom: "15px" }}>
+              <div className="p-3 border-bottom border-info d-flex align-items-center gap-2" style={styles.chatHeader}>
+                <i className="bi bi-person-circle fs-4 text-primary"></i>
+                <h6 className="mb-0">{selectedUser}</h6>
+              </div>
+
+              <div className="flex-grow-1 overflow-auto p-4 d-flex flex-column" style={styles.chatArea}>
                 {messages.map((msg, idx) => {
                   const isMyMessage = msg.senderId === currentUser.UserId;
+                  const time = new Date(msg.timestamp).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  });
 
-                  // لو المستخدم مش هو اللي بدأ المحادثة، نعكس الألوان
-                  const backgroundColor = isOriginalSender
-                    ? (isMyMessage ? '#c2f0c2' : '#eee')
-                    : (isMyMessage ? '#eee' : '#c2f0c2');
-
-                  const time = msg.timestamp
-                    ? new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                    : '';
+                  const bubbleStyle = {
+                    ...(isMyMessage ? styles.bubbleMy : styles.bubbleOther),
+                    ...styles.bubbleCommon,
+                  };
 
                   return (
-                    <div
-                      key={idx}
-                      style={{
-                        backgroundColor,
-                        textAlign: isMyMessage ? 'right' : 'left',
-                        margin: "10px 0",
-                        padding: "8px 12px",
-                        borderRadius: "10px",
-                        maxWidth: "70%",
-                        marginLeft: isMyMessage ? "auto" : "0",
-                        marginRight: isMyMessage ? "0" : "auto"
-                      }}
-                    >
+                    <div key={idx} style={bubbleStyle}>
                       <div>{msg.text}</div>
-                      <div style={{ fontSize: "12px", color: "#888", marginTop: "5px" }}>{time}</div>
+                      <div className="text-end small mt-2">{time}</div>
                     </div>
                   );
                 })}
               </div>
 
-              {/* صندوق إرسال الرسالة */}
-              <div style={{ display: "flex", gap: "10px" }}>
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="اكتب رسالتك..."
-                  style={{ flex: 1, padding: "10px" }}
-                />
-                <button onClick={sendMessage}>إرسال</button>
+              <div className="p-3 border-top border-info" style={styles.chatHeader}>
+                <div className="input-group shadow-sm">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="اكتب رسالتك..."
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    style={styles.inputField}
+                  />
+                  <button className="btn" style={styles.button} onClick={sendMessage}>
+                    إرسال
+                  </button>
+                </div>
               </div>
             </>
           ) : (
-            <p>اختر محادثة لعرض الرسائل</p>
+            <div className="d-flex align-items-center justify-content-center h-100">
+              <h5 style={{ color: "#90caf9" }}>اختر محادثة لعرض الرسائل</h5>
+            </div>
           )}
         </div>
       </div>
     </>
   );
 };
+
 
 export default Chats;
