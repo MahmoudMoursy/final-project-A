@@ -15,6 +15,7 @@ const Profile = () => {
   const [isActive, setIsActive] = useState(false);
   const [isFirstActive, setIsFirstActive] = useState(false);
   const [isSecondActive, setIsSecondActive] = useState(false);
+  const [image, setImage] = useState("https://via.placeholder.com/100");
 
   const userData = JSON.parse(localStorage.getItem("currentUser"));
   const [editingField, setEditingField] = useState(null);
@@ -25,6 +26,9 @@ const Profile = () => {
     address: userData.address || "",
     status: userData?.status || ""
   });
+  useEffect(() => {
+    setImage(userData.image || "https://via.placeholder.com/100");
+  }, [userData.image]);
 
   const handleInputChange = (field, value) => {
     setFieldValues({ ...fieldValues, [field]: value });
@@ -100,17 +104,52 @@ const Profile = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          style={{ backgroundColor: '#243A70' }} // تم تغيير لون الخلفية ليكون مشابهًا للون الشريط
+          style={{ backgroundColor: '#243A70' }}
         >
           <div className="hero-overlay"></div>
           <div className="hero-content">
             <motion.div
-              className="avatar-circle"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+
             >
-              {userData.username?.charAt(0).toUpperCase() || "U"}
+              <div className="avatar-container">
+                <img
+                  src={image}
+                  alt="User Avatar"
+                  className="avatar-circle"
+                />
+                <label htmlFor="upload-photo" className="upload-icon">+</label>
+                <input
+                  type="file"
+                  id="upload-photo"
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  onChange={async (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = async () => {
+                        const imageDataUrl = reader.result;
+
+                        try {
+                          const q = query(collection(db, "user"), where("UserId", "==", userData.UserId));
+                          const querySnapshot = await getDocs(q);
+                          if (!querySnapshot.empty) {
+                            const userDocRef = doc(db, "user", querySnapshot.docs[0].id);
+                            await updateDoc(userDocRef, { image: imageDataUrl });
+
+                            setImage(imageDataUrl);
+                            userData.image = imageDataUrl;
+                            localStorage.setItem("currentUser", JSON.stringify(userData));
+                          }
+                        } catch (err) {
+                          console.error("Error updating image:", err);
+                        }
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+              </div>
             </motion.div>
             <motion.h1
               initial={{ y: 20, opacity: 0 }}
@@ -353,7 +392,35 @@ const Profile = () => {
           text-align: center;
           overflow: hidden;
         }
-        
+        .avatar-container {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+}
+
+.upload-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #007bff;
+  color: white;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
         .hero-overlay {
           position: absolute;
           top: 0;
