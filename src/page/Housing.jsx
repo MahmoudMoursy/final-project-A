@@ -9,16 +9,13 @@ import Footer from '../Components/Footer'
 import { useState, useEffect } from "react";
 import db from "../firebaseconfig";
 import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
-import { UploadPhotos } from '../UploadPhotos'
-import { addDoc, collection, doc, getDocs, setDoc, Timestamp } from "firebase/firestore";
-import { useNavigate } from 'react-router-dom'
-
+import {UploadPhotos} from '../UploadPhotos' 
 function Housing() {
   const userData = JSON.parse(localStorage.getItem("currentUser"));
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const [images, setImages] = useState([]);
-
-
+ 
+ 
   const handleFilesChange = (e) => {
     const files = Array.from(e.target.files);
     const newImages = files.map((file) => ({
@@ -36,10 +33,8 @@ function Housing() {
     });
   };
 
-  const nav = useNavigate();
-  const [PostUserId,setPostUserId] = useState('');
   const [housingData, setHousingData] = useState({
-    address: "", description: "", numbed: "", numteu: "", phone: "", whats: "", price: "", status: "pending", Id: user.UserId, username: user.username
+    address: "", description: "", numbed: "", numteu: "", phone: "", whats: "", price: "",status:"pending",Id:user.UserId,username:user.username
   });
   const [housingList, setHousingList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -51,7 +46,7 @@ function Housing() {
   });
 
   const [bookingData, setBookingData] = useState({
-    userId: "",
+    userId: "", 
     houseId: "",
     checkIn: "",
     checkOut: "",
@@ -81,7 +76,7 @@ function Housing() {
   };
 
   const handleBookingSubmit = async (e) => {
-
+    
     e.preventDefault();
     try {
       const bookingWithTimestamp = {
@@ -97,7 +92,6 @@ function Housing() {
         checkIn: "",
         checkOut: "",
         guests: 1,
-        status: "pending",
         createdAt: null
       });
     } catch (error) {
@@ -110,7 +104,8 @@ function Housing() {
     const matchesSearch = searchTerm ?
       house.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
       house.description.toLowerCase().includes(searchTerm.toLowerCase())
-      : true;    
+      : true;
+
     const matchesFilters = Object.entries(activeFilters).every(([key, value]) => {
       if (!value) return true;
       switch (key) {
@@ -135,9 +130,9 @@ function Housing() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const uploadedUrls = await UploadPhotos(images); // رفع الصور
-
+  
     try {
       await addDoc(collection(db, "housing"), {
         ...housingData,
@@ -146,7 +141,7 @@ function Housing() {
         username: user.username
       });
       alert("طلبك قيد المراجعة");
-
+  
       // إعادة تعيين البيانات
       setHousingData({
         address: "",
@@ -157,12 +152,14 @@ function Housing() {
         whats: "",
         price: "",
         Images: [],
-        status: "pending",
+        status:"pending",
         Id: user.UserId,
         username: user.username
       });
+      setImages([]);
     } catch (error) {
       console.error("خطأ أثناء الحفظ: ", error);
+      alert("حدث خطأ أثناء الحفظ");
     }
   };
 
@@ -174,27 +171,57 @@ function Housing() {
     };
 
     fetchHousing();
-
   }, []);
 
-  function message(PostUserId){
-    
-    const messageId = userData.UserId+'-'+ PostUserId;    
-    const userRef = doc(db, "messages", messageId);
-    save();
-    async function save() {
-        const userData = {
-            username:"as",
-            address: "AS",
-        };
-        await setDoc(userRef, userData);
-        localStorage.setItem("mid", JSON.stringify(messageId));
-         nav('/Message');
-    }
-  }
-  
   return (
-    <>
+    <> <style>{`
+      .image-preview-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      .image-wrapper {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      }
+      .image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .remove-btn {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        background: red;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .save-btn {
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        background-color: #2E366A;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .saved-title {
+        font-weight: bold;
+        margin-top: 30px;
+        margin-bottom: 10px;
+      }
+    `}</style>
       <NavBar />
       <div className="search-container bg-white shadow-sm py-4 mt-5 pt-5" dir="rtl">
         <div className="container">
@@ -333,86 +360,86 @@ function Housing() {
 
           <div className="col-md-9 order-md-2">
             <div style={{ justifyContent: "space-around", display: "flex", marginBottom: 20 }}>
-              {userData?.status === "publisher" && (<button type="button" className="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#addHousingModal">
+            {userData?.status === "publisher" &&(<button type="button" className="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#addHousingModal">
                 اضف سكن
               </button>)}
             </div>
-
+            
             <div className="row g-4">
               {filteredHousingList.map((house, index) => (
-                (house.status === 'accepted' && (
-                  <div key={house.id} className="col-md-6">
-                    <div className="card h-100 shadow-sm hover-shadow">
-                      <div id={`cardCarousel-${index}`} className="carousel slide" data-bs-ride="carousel">
-                        <div className="carousel-inner">
+               (house.status==='accepted' && (
+                <div key={house.id} className="col-md-6">
+                  <div className="card h-100 shadow-sm hover-shadow">
+                    <div id={`cardCarousel-${index}`} className="carousel slide" data-bs-ride="carousel">
+                    <div className="carousel-inner">
+                        
+                        {house.Images.map((image, index) => (
+                          <div
+                          style={{ height: "300px", width: "100%" }}
+                            key={index}
+                            className={`carousel-item ${index === 0 ? 'active' : ''}`}
+                          > 
+                            <img
+                              src={image}
+                              className="d-block w-100 h-100 rounded-start"
+                              alt={`Slide ${index}`}
+                            />
+                          </div>
+                        ))}
+                      </div>
 
-                          {house.Images.map((image, index) => (
-                            <div
-                              style={{ height: "300px", width: "100%" }}
-                              key={index}
-                              className={`carousel-item ${index === 0 ? 'active' : ''}`}
-                            >
-                              <img
-                                src={image}
-                                className="d-block w-100 h-100 rounded-start"
-                                alt={`Slide ${index}`}
-                              />
-                            </div>
-                          ))}
+                      <button
+                        className="carousel-control-prev"
+                        type="button"
+                        data-bs-target={`#cardCarousel-${index}`}
+                        data-bs-slide="prev"
+                      >
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
+                      </button>
+                      <button
+                        className="carousel-control-next"
+                        type="button"
+                        data-bs-target={`#cardCarousel-${index}`}
+                        data-bs-slide="next"
+                      >
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
+                      </button>
+                    </div>
+                    <div className="card-body text-end">
+                      <div className="d-flex justify-content-between align-items-start mb-2">
+                        <span className="badge bg-primary">{house.address}</span>
+                        <h5 className="card-title mb-0">{house.price} ج.م/شهر</h5>
+                      </div>
+                      <p className="card-text">{house.description}</p>
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div className="contact-buttons">
+                          <a href={`tel:${house.phone}`} className="btn btn-outline-primary me-2">
+                            <i className="fa-solid fa-phone-volume"></i> مكالمه
+                          </a>
+                          <a href={`https://wa.me/${house.whats}`} className="btn btn-outline-success">
+                            <i className="fa-brands fa-whatsapp"></i> واتساب
+                          </a>
                         </div>
-
                         <button
-                          className="carousel-control-prev"
-                          type="button"
-                          data-bs-target={`#cardCarousel-${index}`}
-                          data-bs-slide="prev"
+                          className="btn btn-warning"
+                          onClick={() => {
+                            setBookingData({ ...bookingData, houseId: house.id });
+                          }}
+                          data-bs-toggle="modal"
+                          data-bs-target="#bookingModal"
                         >
-                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span className="visually-hidden">Previous</span>
-                        </button>
-                        <button
-                          className="carousel-control-next"
-                          type="button"
-                          data-bs-target={`#cardCarousel-${index}`}
-                          data-bs-slide="next"
-                        >
-                          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span className="visually-hidden">Next</span>
+                          احجز الآن <i className="fas fa-bookmark"></i>
                         </button>
                       </div>
-                      <div className="card-body text-end">
-                        <div className="d-flex justify-content-between align-items-start mb-2">
-                          <span className="badge bg-primary">{house.address}</span>
-                          <h5 className="card-title mb-0">{house.price} ج.م/شهر</h5>
-                        </div>
-                        <p className="card-text">{house.description}</p>
-                        <div className="d-flex justify-content-between align-items-center">
-                          <div className="contact-buttons">
-                            <a href={`tel:${house.phone}`} className="btn btn-outline-primary me-2">
-                              <i className="fa-solid fa-phone-volume"></i> مكالمه
-                            </a>
-                            <a href={`https://wa.me/${house.whats}`} className="btn btn-outline-success">
-                              <i className="fa-brands fa-whatsapp"></i> واتساب
-                            </a>
-                          </div>
-                          <button
-                            className="btn btn-warning"
-                            onClick={() => {
-                              setBookingData({ ...bookingData, houseId: house.id });
-                            }}
-                            data-bs-toggle="modal"
-                            data-bs-target="#bookingModal"
-                          >
-                            احجز الآن <i className="fas fa-bookmark"></i>
-                          </button>
-                        </div>
-                        <div className="features mt-3">
-                          <span className="ms-3"><i className="fas fa-bed"></i> {house.numbed}</span>
-                          <span><i className="fas fa-bath"></i> {house.numteu}</span>
-                        </div>
+                      <div className="features mt-3">
+                        <span className="ms-3"><i className="fas fa-bed"></i> {house.numbed}</span>
+                        <span><i className="fas fa-bath"></i> {house.numteu}</span>
                       </div>
                     </div>
-                  </div>))
+                  </div>
+                </div>))
               ))}
             </div>
           </div>
@@ -494,119 +521,119 @@ function Housing() {
               />
             </div>
             <div className="modal-body" >
-
+             
               {/* <form onSubmit={handleSubmit}> */}
-
-              {/* asdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss */}
+             
+             {/* asdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss */}
               <div className="mb-3">
-                <label className="form-label">الصور</label>
-                <input type="file" name="files" multiple onChange={handleFilesChange}
+                  <label className="form-label">الصور</label>
+                  <input type="file" name="files" multiple onChange={handleFilesChange} 
                   value={housingData.Images}
-                />
-              </div>
-              {images.length > 0 && (
-                <>
-                  <div className="image-preview-container">
-                    {images.map((img, index) => (
-                      <div key={index} className="image-wrapper">
-                        <img src={img.preview} alt={`preview-${index}`} />
-                        <button type="button" className="remove-btn" onClick={() => removeImage(index)}>x</button>
-                      </div>
-                    ))}
+                  />
                   </div>
-
-                </>
-              )}
-
-              <div className="mb-3">
-                <label className="form-label">السعر</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="price"
-                  value={housingData.price}
-                  onChange={handleChange}
-                  required
-                />
+                  {images.length > 0 && (
+        <>
+          <div className="image-preview-container">
+            {images.map((img, index) => (
+              <div key={index} className="image-wrapper">
+                <img src={img.preview} alt={`preview-${index}`} />
+                <button type="button" className="remove-btn" onClick={() => removeImage(index)}>x</button>
               </div>
-              <div className="mb-3">
-                <label className="form-label">العنوان</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="address"
-                  value={housingData.address}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">الوصف</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="description"
-                  value={housingData.description}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">عدد السراير</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="numbed"
-                  value={housingData.numbed}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">عدد الحمامات</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="numteu"
-                  value={housingData.numteu}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">رقم الواتس</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="whats"
-                  value={housingData.whats}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">رقم الهاتف</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="phone"
-                  value={housingData.phone}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary w-25"
-                  data-bs-dismiss="modal"
-                >
-                  إغلاق
-                </button>
-                <button onClick={handleSubmit} className="btn btn-primary w-50">
-                  حفظ التغييرات
-                </button>
-              </div>
+            ))}
+          </div>
+          
+        </>
+      )}
+                
+                <div className="mb-3">
+                  <label className="form-label">السعر</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="price"
+                    value={housingData.price}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">العنوان</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="address"
+                    value={housingData.address}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">الوصف</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="description"
+                    value={housingData.description}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">عدد السراير</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="numbed"
+                    value={housingData.numbed}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">عدد الحمامات</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="numteu"
+                    value={housingData.numteu}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">رقم الواتس</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="whats"
+                    value={housingData.whats}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">رقم الهاتف</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="phone"
+                    value={housingData.phone}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary w-25"
+                    data-bs-dismiss="modal"
+                  >
+                    إغلاق
+                  </button>
+                  <button onClick={handleSubmit} className="btn btn-primary w-50">
+                    حفظ التغييرات
+                  </button>
+                </div>
               {/* </form> */}
             </div>
           </div>

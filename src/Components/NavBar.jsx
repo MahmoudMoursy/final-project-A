@@ -4,6 +4,8 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import wasetLogo from '../assets/waset.png';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../Redux/CurrentUser';
+import { doc, getDoc, Timestamp } from 'firebase/firestore';
+import db from '../firebaseconfig';
 
 function NavBar() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -20,10 +22,10 @@ function NavBar() {
 
       if (userSnap.exists()) {
         const data = userSnap.data();
-        const usersNoti = data.Notifications || []; 
+        const usersNoti = data.Notifications || []; // لو فاضية يرجع []
         console.log("إشعارات المستخدم:", usersNoti);
 
-        setNotifications(usersNoti);
+        setNotifications(usersNoti); // لو بتستخدم useState
       }
     } catch (error) {
       console.error("خطأ في جلب إشعارات المستخدم:", error);
@@ -71,6 +73,7 @@ function NavBar() {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setShowDropdown(false);
+        setShowNotifications(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
