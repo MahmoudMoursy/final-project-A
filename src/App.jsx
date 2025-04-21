@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import Home from './page/Home'
 import Signup from './page/Signup'
 import Login from './page/Login'
-import Donation from './page/Donation';
 import Profile from './page/Profile';
 import AboutUs from './page/AboutUs';
 import Community from './page/Community';
@@ -26,8 +25,10 @@ import PharmaciesPage from './page/PharmaciesPage';
 import DoctorsPage from './page/DoctorsPage';
 import SupermarketsPage from './page/SupermarketsPage';
 import ForgotPassword from './page/ForgotPassword';
-import Test from './page/Test';
+import ContactUs from './page/ContactUs';
+
 import Message from './page/message'
+
 
 
 
@@ -63,7 +64,6 @@ function App() {
         <Route path='/' element={<Login />} />
         <Route path='/Signup' index element={<Signup />} />
         <Route path='/home' element={<Home />} />
-        <Route path="/Donation" element={<Donation />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path='/AboutUs' element={<AboutUs />} />
         <Route path='/Services' element={<Services />} />
@@ -72,6 +72,7 @@ function App() {
         <Route path='/Community' element={<Community />} />
         <Route path='/Profileform' element={<Profileform />} />
         <Route path="/post/:id" element={<PostDetails />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} isAuthenticated={userDashboard} />} />
         <Route path="/AdminManagment" element={<PrivateRoute element={<AdminManagment />} isAuthenticated={userDashboard} />} />
         <Route path="/Posts" element={<PrivateRoute element={<Posts />} isAuthenticated={userDashboard} />} />
@@ -82,7 +83,6 @@ function App() {
         <Route path="/SupermarketsPage" element={<SupermarketsPage />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/Message" element={<Message />} />
-        <Route path="/Test" element={<Test />} />
       </Routes>
     </LoadingProvider>
 

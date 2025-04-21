@@ -4,28 +4,26 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import wasetLogo from '../assets/waset.png';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../Redux/CurrentUser';
-import { doc, getDoc, Timestamp } from 'firebase/firestore';
-import db from '../firebaseconfig';
 
 function NavBar() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
 
-  
-  
+
+
   //fetch Notification 
   const [showNotifications, setShowNotifications] = useState(false);
-  const [Notifications , setNotifications] = useState([]);
+  const [Notifications, setNotifications] = useState([]);
   const fetchUserNotifications = async (userId) => {
     try {
       const userDocRef = doc(db, "user", userId);
       const userSnap = await getDoc(userDocRef);
-  
+
       if (userSnap.exists()) {
         const data = userSnap.data();
-        const usersNoti = data.Notifications || []; // لو فاضية يرجع []
+        const usersNoti = data.Notifications || []; 
         console.log("إشعارات المستخدم:", usersNoti);
-        
-        setNotifications(usersNoti); // لو بتستخدم useState
+
+        setNotifications(usersNoti);
       }
     } catch (error) {
       console.error("خطأ في جلب إشعارات المستخدم:", error);
@@ -36,7 +34,7 @@ function NavBar() {
       fetchUserNotifications(user.UserId);
     }
   }, [user?.UserId]);
-  
+
 
 
 
@@ -73,7 +71,6 @@ function NavBar() {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setShowDropdown(false);
-        setShowNotifications(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -108,7 +105,6 @@ function NavBar() {
               <li className="nav-item"><NavLink className="nav-link" to="/housing">السكن</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/AboutUs">من نحن</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/Community">المجتمع</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link" to="/Donation">التبرعات</NavLink></li>
             </ul>
           </div>
 
@@ -118,38 +114,38 @@ function NavBar() {
             </button>
 
             <i
-                className="fa-regular fa-bell text-white fs-3 mx-4"
-                style={{ cursor: 'pointer' }}
-                onClick={() => setShowNotifications(!showNotifications)}
-              ></i>
+              className="fa-regular fa-bell text-white fs-3 mx-4"
+              style={{ cursor: 'pointer' }}
+              onClick={() => setShowNotifications(!showNotifications)}
+            ></i>
             {showNotifications && (
-                  <div className="notification-dropdown shadow bg-white p-2 rounded position-absolute" style={{ top: '40px', left: 0, minWidth: '250px', zIndex: 1000 }}>
-                    <h6 className="mb-2 border-bottom pb-1 text-dark">الإشعارات</h6>
-                    {Notifications.length > 0 ? (
-                      Notifications.slice().reverse().map((notif, index) => (
-                        <div key={index} className="text-black-50 mb-1">
-                          <i className="fa-solid fa-circle-dot text-success me-2"></i>
-                          {notif}
-                        </div>
-                      ))
-                      
-                    ) : (
-                      <p className="text-muted text-center mb-0">لا توجد إشعارات جديدة</p>
-                    )}
-                  </div>
+              <div className="notification-dropdown shadow bg-white p-2 rounded position-absolute" style={{ top: '40px', left: 0, minWidth: '250px', zIndex: 1000 }}>
+                <h6 className="mb-2 border-bottom pb-1 text-dark">الإشعارات</h6>
+                {Notifications.length > 0 ? (
+                  Notifications.slice().reverse().map((notif, index) => (
+                    <div key={index} className="text-black-50 mb-1">
+                      <i className="fa-solid fa-circle-dot text-success me-2"></i>
+                      {notif}
+                    </div>
+                  ))
+
+                ) : (
+                  <p className="text-muted text-center mb-0">لا توجد إشعارات جديدة</p>
                 )}
+              </div>
+            )}
 
 
             <div className="profile-trigger d-flex align-items-center cursor-pointer" onClick={() => setShowDropdown(prev => !prev)}>
               <span className="border border-success text-black-50 bg-white mx-2 d-flex justify-content-center align-items-center"
                 style={{ borderRadius: '50%', width: '30px', height: '30px' }}>
-                <img src={user.PhotoUrl} alt="" style={{width:'100%',borderRadius: '50%'}}/>
+                <img src={user.PhotoUrl} alt="" style={{ width: '100%', borderRadius: '50%' }} />
               </span>
               <strong className="d-none d-xl-block text-white"> {user.username}</strong>
             </div>
 
             {showDropdown && (
-              <div className="profile-dropdown shadow">
+              <div className="profile-dropdown shadow ">
                 <div className="dropdown-header d-flex justify-content-between align-items-center px-3">
                   <span className="fw-bold">{user.username}</span>
                   <button className="btn-close" onClick={() => setShowDropdown(false)} aria-label="Close"></button>
@@ -159,7 +155,7 @@ function NavBar() {
                   <i className="fa-solid fa-user ms-2"></i>
                   الملف الشخصى
                 </Link>
-                <button className="dropdown-item text-danger" onClick={handleLogout}>
+                <button className="dropdown-item logout" onClick={handleLogout}>
                   <i className="fa-solid fa-right-from-bracket ms-2"></i>
                   تسجيل الخروج
                 </button>
