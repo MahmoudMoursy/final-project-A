@@ -1,93 +1,92 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import {
-    doc,
-    collection,
-    query,
-    orderBy,
-    onSnapshot,
-    addDoc,
-    serverTimestamp
+  doc,
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  addDoc,
+  serverTimestamp
 } from "firebase/firestore";
 import db from "../firebaseconfig";
 import NavBar from '../Components/NavBar';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../Redux/CurrentUser';
 const PostDetails = () => {
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-    const dispatch = useDispatch();
-    dispatch(setCurrentUser(user));
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const dispatch = useDispatch();
+  dispatch(setCurrentUser(user));
 
-    const { id: postId } = useParams();
-    const location = useLocation();
-    const passedPost = location.state?.post || null;
+  const { id: postId } = useParams();
+  const location = useLocation();
+  const passedPost = location.state?.post || null;
 
-    const [postData, setPostData] = useState(passedPost);
-    const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState("");
+  const [postData, setPostData] = useState(passedPost);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
 
-    useEffect(() => {
-        if (!postId) {
-            console.error("⚠️ Post ID is missing or invalid:", postId);
-            return;
-        }
-
-        const postRef = doc(db, "posts", postId);
-        const unsubscribePost = onSnapshot(postRef, (docSnap) => {
-            if (docSnap.exists()) {
-                setPostData(docSnap.data());
-            } else {
-                console.error("⚠️ المنشور غير موجود!");
-            }
-        });
-
-        return () => unsubscribePost();
-    }, [postId]);
-
-    useEffect(() => {
-        if (!postId) return;
-
-        const commentsRef = collection(db, "posts", postId, "comments");
-        const q = query(commentsRef, orderBy("timestamp", "desc"));
-
-        const unsubscribeComments = onSnapshot(q, (snapshot) => {
-            const commentsList = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-            setComments(commentsList);
-        });
-
-        return () => unsubscribeComments();
-    }, [postId]);
-
-    const handleAddComment = async () => {
-        if (!newComment.trim()) return;
-
-        try {
-            const commentsRef = collection(db, "posts", postId, "comments");
-            await addDoc(commentsRef, {
-                user: user.username,
-                text: newComment,
-                avatar:
-                    "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
-                timestamp: serverTimestamp()
-            });
-
-            setNewComment("");
-        } catch (error) {
-            console.error("⚠️ خطأ في إضافة التعليق:", error);
-        }
-    };
-
-    if (!postData) {
-        return <p className="not-found">🚫 المنشور غير متاح</p>;
+  useEffect(() => {
+    if (!postId) {
+      console.error("⚠️ Post ID is missing or invalid:", postId);
+      return;
     }
 
-    return (
-        <>
-            <style>{
-                `.container {
+    const postRef = doc(db, "posts", postId);
+    const unsubscribePost = onSnapshot(postRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setPostData(docSnap.data());
+      } else {
+        console.error("⚠️ المنشور غير موجود!");
+      }
+    });
+
+    return () => unsubscribePost();
+  }, [postId]);
+
+  useEffect(() => {
+    if (!postId) return;
+
+    const commentsRef = collection(db, "posts", postId, "comments");
+    const q = query(commentsRef, orderBy("timestamp", "desc"));
+
+    const unsubscribeComments = onSnapshot(q, (snapshot) => {
+      const commentsList = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setComments(commentsList);
+    });
+
+    return () => unsubscribeComments();
+  }, [postId]);
+
+  const handleAddComment = async () => {
+    if (!newComment.trim()) return;
+
+    try {
+      const commentsRef = collection(db, "posts", postId, "comments");
+      await addDoc(commentsRef, {
+        user: user.username,
+        text: newComment,
+        image: user.image,
+        timestamp: serverTimestamp()
+      });
+
+      setNewComment("");
+    } catch (error) {
+      console.error("⚠️ خطأ في إضافة التعليق:", error);
+    }
+  };
+
+  if (!postData) {
+    return <p className="not-found">🚫 المنشور غير متاح</p>;
+  }
+
+  return (
+    <>
+      <style>{
+        `.container {
   direction: rtl;
   text-align: right;
   margin: 6% auto;
@@ -215,43 +214,43 @@ ul {
        `}
 
 
-            </style>
-            <NavBar />
-            <div className="container">
-                <h2 className="title">{postData.text}</h2>
-                <p className="timestamp">
-                    {new Date(postData.timestamp).toLocaleString("en-US")}
-                </p>
-                <div className="content-box">{postData.details}</div>
+      </style>
+      <NavBar />
+      <div className="container">
+        <h2 className="title">{postData.text}</h2>
+        <p className="timestamp">
+          {new Date(postData.timestamp).toLocaleString("en-US")}
+        </p>
+        <div className="content-box">{postData.details}</div>
 
-                <div className="comments-section">
-                    <h3 className="comments-title">💬 التعليقات ({comments.length})</h3>
+        <div className="comments-section">
+          <h3 className="comments-title">💬 التعليقات ({comments.length})</h3>
 
-                    <ul>
-                        {comments.map((item) => (
-                            <li key={item.id} className="comment">
-                                <img src={item.avatar} alt="avatar" className="avatar" />
-                                <div className="comment-text">
-                                    <strong>{item.user}</strong>
-                                    <p>{item.text}</p>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-
-                    <input
-                        className="input"
-                        placeholder="💬 أضف تعليقًا"
-                        value={newComment}
-                        onChange={(e) => setNewComment(e.target.value)}
-                    />
-                    <button className="button" onClick={handleAddComment}>
-                        ➕ إضافة تعليق
-                    </button>
+          <ul>
+            {comments.map((item) => (
+              <li key={item.id} className="comment">
+                <img src={item.image} alt="avatar" className="avatar" />
+                <div className="comment-text">
+                  <strong>{item.user}</strong>
+                  <p>{item.text}</p>
                 </div>
-            </div>
-        </>
-    );
+              </li>
+            ))}
+          </ul>
+
+          <input
+            className="input"
+            placeholder="💬 أضف تعليقًا"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+          />
+          <button className="button" onClick={handleAddComment}>
+            ➕ إضافة تعليق
+          </button>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default PostDetails;

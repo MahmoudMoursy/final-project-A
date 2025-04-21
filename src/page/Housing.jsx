@@ -223,63 +223,58 @@ function Housing() {
       }
     `}</style>
       <NavBar />
-      <div className="search-container bg-white shadow-sm py-4 mt-5 pt-5" dir="rtl">
-        <div className="container">
-          <div className="row g-3 align-items-center justify-content-end">
+      <div className="search-container bg-white shadow-lg p-5 mt-5 rounded" dir="rtl">
+    <div className="container-fluid">
+        <div className="row g-4 align-items-center justify-content-end">
             <div className="col-md-4">
-              <div className="d-flex gap-2">
-                <input
-                  type="text"
-                  className="form-control form-control-lg text-end"
-                  placeholder="ابحث عن موقع..."
-                  value={searchTerm}
-                  onChange={handleSearch}
-                />
-                <button className="btn btn-primary search-button">
-                  بحث <i className="fas fa-search"></i>
-                </button>
-              </div>
+                <div className="input-group">
+                    <input 
+                        type="text" 
+                        className="form-control form-control-lg text-end rounded-pill" 
+                        placeholder="ابحث عن موقع..."
+                        value={searchTerm} 
+                        onChange={handleSearch} 
+                    />
+                    <button className="btn btn-primary rounded-pill px-4 mt-3 mx-3">
+                        بحث <i className="fas fa-search"></i>
+                    </button>
+                </div>
             </div>
+            
             <div className="col-md-2">
-              <select
-                className="form-select form-select-lg text-end"
-                value={activeFilters.rooms}
-                onChange={(e) => setActiveFilters({ ...activeFilters, rooms: e.target.value })}
-              >
-                <option value="">عدد الغرف</option>
-                {[1, 2, 3, 4].map(num => (
-                  <option key={num} value={num}>{num}</option>
-                ))}
-              </select>
+                <select className="form-select form-select-lg text-end rounded-pill" value={activeFilters.rooms}
+                    onChange={(e) => setActiveFilters({ ...activeFilters, rooms: e.target.value })}>
+                    <option value="">عدد الغرف</option>
+                    {[1, 2, 3, 4].map(num => (
+                        <option key={num} value={num}>{num}</option>
+                    ))}
+                </select>
             </div>
+            
+            {/* تحديد عدد الأسرة */}
             <div className="col-md-2">
-              <select
-                className="form-select form-select-lg text-end"
-                value={activeFilters.beds}
-                onChange={(e) => setActiveFilters({ ...activeFilters, beds: e.target.value })}
-              >
-                <option value="">عدد السُرُر</option>
-                {[1, 2, 3, 4].map(num => (
-                  <option key={num} value={num}>{num}</option>
-                ))}
-              </select>
+                <select className="form-select form-select-lg text-end rounded-pill" value={activeFilters.beds}
+                    onChange={(e) => setActiveFilters({ ...activeFilters, beds: e.target.value })}>
+                    <option value="">عدد السُرُر</option>
+                    {[1, 2, 3, 4].map(num => (
+                        <option key={num} value={num}>{num}</option>
+                    ))}
+                </select>
             </div>
+
             <div className="col-md-2">
-              <select
-                className="form-select form-select-lg text-end"
-                value={activeFilters.location}
-                onChange={(e) => setActiveFilters({ ...activeFilters, location: e.target.value })}
-              >
-                <option value="">الموقع</option>
-                <option value="صحاري">صحاري</option>
-                <option value="البركه">البركه</option>
-                <option value="العقاد">العقاد</option>
-                <option value="التأمين">التأمين</option>
-              </select>
+                <select className="form-select form-select-lg text-end rounded-pill" value={activeFilters.location}
+                    onChange={(e) => setActiveFilters({ ...activeFilters, location: e.target.value })}>
+                    <option value="">الموقع</option>
+                    <option value="صحاري">صحاري</option>
+                    <option value="البركه">البركه</option>
+                    <option value="العقاد">العقاد</option>
+                    <option value="التأمين">التأمين</option>
+                </select>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
 
       <div className="container my-4" dir="rtl">
         <div className="row">

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import SideBar from '../../Components/sideBar';
 import { Button, Table, Spinner, Alert, Modal } from 'react-bootstrap';
-import { arrayUnion, collection, deleteDoc, doc, getDocs, updateDoc,Timestamp  } from 'firebase/firestore';
+import { arrayUnion, collection, deleteDoc, doc, getDocs, updateDoc, Timestamp } from 'firebase/firestore';
 import db from '../../firebaseconfig';
 import { useSelector } from 'react-redux';
-import { FiTrash2, FiEdit, FiEye, FiAlignRight, FiArrowRight, FiCornerRightUp, FiCheck ,FiToggleRight } from 'react-icons/fi';
+import { FiTrash2, FiEdit, FiEye, FiAlignRight, FiArrowRight, FiCornerRightUp, FiCheck, FiToggleRight } from 'react-icons/fi';
 const Posts = () => {
     const [showModal, setShowModal] = useState(false);
     const [selectedImages, setSelectedImages] = useState([]);
@@ -17,7 +17,7 @@ const Posts = () => {
     const handleShowImages = (images) => {
         setSelectedImages(images);
         setShowModal(true);
-      };
+    };
     const fetchPosts = async () => {
         setLoading(true);
         setError(null);
@@ -46,25 +46,25 @@ const Posts = () => {
         const time = new Date().toLocaleString('ar-EG', {
             dateStyle: 'short',
             timeStyle: 'short',
-          })
-          
-        
-        
+        })
+
+
+
         try {
             const housingDocRef = doc(db, "user", post.Id);
             await updateDoc(housingDocRef, {
-              Notifications: arrayUnion(`Your post ${post.description} has been accepted.
+                Notifications: arrayUnion(`Your post ${post.description} has been accepted.
 in ${time}`)
             });
-          const postRef = doc(db, 'housing', post.id); // تأكد إن post.id هو الـ Document ID
-          await updateDoc(postRef, {
-            status: 'accepted', // غيّر المفتاح والقيمة حسب اللي عايز تعدله
-          });
-          alert('Post accepted!');
+            const postRef = doc(db, 'housing', post.id); // تأكد إن post.id هو الـ Document ID
+            await updateDoc(postRef, {
+                status: 'accepted', // غيّر المفتاح والقيمة حسب اللي عايز تعدله
+            });
+            alert('Post accepted!');
         } catch (error) {
-          alert('Error updating post:', error);
+            alert('Error updating post:', error);
         }
-      };
+    };
 
     const handleDelete = async () => {
         try {
@@ -135,36 +135,36 @@ in ${time}`)
                                             </td>
                                             <td>{post.address || 'N/A'}</td>
                                             <td>
-                                            <i
-                  className="fas fa-folder-open"
-                  style={{ fontSize: '20px', cursor: 'pointer', color: '#007bff' }}
-                  onClick={() => handleShowImages(post.Images)}
-                ></i>
-      </td>
+                                                <i
+                                                    className="fas fa-folder-open"
+                                                    style={{ fontSize: '20px', cursor: 'pointer', color: '#007bff' }}
+                                                    onClick={() => handleShowImages(post.Images)}
+                                                ></i>
+                                            </td>
 
-      {/* Modal */}
-       <Modal show={showModal} onHide={() => setShowModal(false)} size="lg" centered>
-        <Modal.Header closeButton>
-          <Modal.Title>صور الإعلان</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="d-flex flex-wrap gap-2">
-            {selectedImages.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt={`image-${idx}`}
-                style={{ width: '150px', height: '100px', objectFit: 'cover', borderRadius: '5px' }}
-              />
-            ))}
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            إغلاق
-          </Button>
-        </Modal.Footer>
-      </Modal>
+                                            {/* Modal */}
+                                            <Modal show={showModal} onHide={() => setShowModal(false)} size="lg" centered>
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title>صور الإعلان</Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                    <div className="d-flex flex-wrap gap-2">
+                                                        {selectedImages.map((img, idx) => (
+                                                            <img
+                                                                key={idx}
+                                                                src={img}
+                                                                alt={`image-${idx}`}
+                                                                style={{ width: '150px', height: '100px', objectFit: 'cover', borderRadius: '5px' }}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                                                        إغلاق
+                                                    </Button>
+                                                </Modal.Footer>
+                                            </Modal>
                                             <td>{post.description?.substring(0, 30)}{post.description?.length > 30 ? '...' : ''}</td>
                                             <td>{post.numbed || 'N/A'}</td>
                                             <td>{post.numteu || 'N/A'}</td>
@@ -182,15 +182,15 @@ in ${time}`)
                                             </td>
                                             {UserDashboard?.status === "admin" && (
                                                 <td className="actions-cell">
-                                                    
-                                                   {post.status=="pending" && <Button variant="outline-success" title="Accept" size="sm" className="action-btn"
-                                                     onClick={() => confirmAccept(post)}
+
+                                                    {post.status == "pending" && <Button variant="outline-success" title="Accept" size="sm" className="action-btn"
+                                                        onClick={() => confirmAccept(post)}
                                                     >
                                                         <FiCheck />
                                                     </Button>}
                                                     <Button title="Delete"
-                                                        variant="outline-danger" 
-                                                        size="sm" 
+                                                        variant="outline-danger"
+                                                        size="sm"
                                                         className="action-btn"
                                                         onClick={() => confirmDelete(post)}
                                                     >

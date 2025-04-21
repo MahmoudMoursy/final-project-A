@@ -69,7 +69,7 @@ const Community = () => {
     const newPost = {
       user: user.username,
       text: newPostText,
-      image: "https://img.freepik.com/premium-vector/business-man-avatar-vector_1133257-2430.jpg",
+      image: user.image,
       timestamp: Timestamp.now(),
       likeCount: 0,
       isLiked: false,

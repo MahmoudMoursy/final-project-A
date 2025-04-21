@@ -186,20 +186,17 @@ function RestaurantsPage() {
           
           {/* Search and Filter */}
           <div className="row mb-4">
-            <div className="col-md-8">
-              <div className="input-group">
-                <input 
-                  type="text" 
-                  className="form-control" 
-                  placeholder="ابحث عن مطعم..." 
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <button className="btn btn-primary" type="button">
-                  بحث
-                </button>
-              </div>
-            </div>
+            
+      <div className="search-container my-4 d-flex justify-content-center">
+        <input
+          type="text"
+          placeholder="ابحث عن صيدلية أو عنوان..."
+          className="form-control w-75 p-3 rounded-pill shadow-sm text-end"
+          style={{ maxWidth: '600px', fontSize: '1.1rem', border: '1px solid #ddd' }}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
             <div className="col-md-4">
               <select 
                 className="form-select" 
