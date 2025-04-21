@@ -101,9 +101,10 @@ const PharmaciesPage = () => {
   };
 
   return (
-    <div className="section-page-container" dir="rtl">
+ <div style={{  background: "linear-gradient(135deg, #1a1a2e 0%, #1D186263 100%)"}}>
+    <div className="section-page-container" dir="rtl" >
       <div className="section-header">
-        <h1 className="section-main-title">الصيدليات</h1>
+        <h1 className="section-main-title" style={{  color: "white"}}>الصيدليات</h1>
       </div>
 
       <div className="search-container my-4 d-flex justify-content-center">
@@ -220,6 +221,7 @@ const PharmaciesPage = () => {
 
       {showModal && <div className="modal-backdrop show" onClick={() => setShowModal(false)}></div>}
     </div>
+    </div> 
   );
 };
 

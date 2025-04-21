@@ -180,9 +180,9 @@ function RestaurantsPage() {
   return (
     <>
       <NavBar />
-      <div className="container-fluid" style={{ marginTop: "80px", paddingTop: "20px" }}>
+      <div className="container-fluid" style={{  background: "linear-gradient(135deg, #1a1a2e 0%, #1D186263 100%)", marginTop: "80px", paddingTop: "20px" }}>
         <div className="container" dir="rtl">
-          <h1 className="text-center mb-5">المطاعم والكافيهات في أسوان</h1>
+          <h1 className="text-center mb-5" style={{  color: "white"}}>المطاعم والكافيهات في أسوان</h1>
           
           {/* Search and Filter */}
           <div className="row mb-4">

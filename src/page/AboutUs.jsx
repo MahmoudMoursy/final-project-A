@@ -378,7 +378,7 @@ const TeamSection = () => {
 
 const AboutUs = () => {
   return (
-    <Box sx={{ direction: "ltr" }}>
+    <Box sx={{ direction: "ltr" }} style={{  background: "linear-gradient(135deg, #1a1a2e 0%, #1D186263 100%)"}}>
       <NavBar />
       <Box sx={{ pt: { xs: "56px", sm: "64px" } }}>
         <ZilliqaStory />

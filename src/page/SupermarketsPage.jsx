@@ -137,7 +137,7 @@ const SupermarketsPage = () => {
   return (
     <div className="section-page-container" dir="rtl">
       <div className="section-header ">
-        <h1 className="section-main-title " >السوبر ماركت</h1>
+        <h1 className="section-main-title " style={{  color: "white"}} >السوبر ماركت</h1>
       </div>
       
       <div className="search-container my-4 d-flex justify-content-center">
