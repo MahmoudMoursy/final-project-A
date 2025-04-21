@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Card, CardContent, Typography, Avatar, Box, Button, Dialog,
-  DialogTitle, DialogContent, DialogActions, TextField
+  DialogTitle, DialogContent, DialogActions, TextField, Container, Grid
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
@@ -14,6 +14,7 @@ import db from "../firebaseconfig";
 import { addDoc, collection, getDocs, doc, updateDoc, Timestamp } from "firebase/firestore";
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../Redux/CurrentUser';
+import "./Community.css";
 
 const Community = () => {
   const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -87,143 +88,99 @@ const Community = () => {
   return (
     <>
       <NavBar />
-      <Box sx={{ marginTop: "80px", padding: "20px", direction: "rtl", width: "100%", backgroundColor: "#f0f2f5" }}>
-        <Box
-  sx={{
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 2,
-    marginRight: 3,
-    flexWrap: 'wrap', // Optional: makes it responsive
-  }}
->
-  <Typography
-    variant="h4"
-    fontWeight="bold"
-    sx={{ textAlign: "right" }}
-  >
-    مجتمع{" "}
-    <span style={{
-      backgroundColor: "#091e3d",
-      padding: "8px 15px",
-      color: "#fff",
-      borderRadius: "110px 4000px",
-      fontWeight: "bold",
-      display: "inline-block"
-    }}>
-      وسيط
-    </span>
-  </Typography>
+      <div className="community-page-container" dir="rtl">
+        <Container>
+          <div className="community-header">
+            <h1>مجتمع <span className="highlight">وسيط</span></h1>
+            <p>تواصل مع أعضاء المجتمع وشارك أفكارك واستفساراتك</p>
+          </div>
+          
+          <Grid container spacing={3} justifyContent="center">
+            <Grid item xs={12} md={8}>
+              {posts.map((post) => (
+                <Card key={post.id} className="post-card">
+                  <CardContent>
+                    <div className="post-header">
+                      <Avatar src={post.image} className="post-avatar" />
+                      <Box>
+                        <Typography className="post-author">{post.user}</Typography>
+                        <Typography className="post-time">
+                          {new Date(post.timestamp).toLocaleString("ar-EG")}
+                        </Typography>
+                      </Box>
+                    </div>
 
-  <Button
-    variant="contained"
-    onClick={handleOpen}
-    sx={{
-      backgroundColor: "#0A3265FF",
-      fontSize: "14px",
-      fontWeight: "bold",
-      display: "flex",
-      alignItems: "center",
-      gap: "5px",
-      padding: "10px 20px",
-      borderRadius: "25px",
-      mt: { xs: 2, sm: 0 }, // Add margin-top on small screens
-    }}
-  >
-    <AddIcon /> موضوع جديد
-  </Button>
-</Box>
+                    <Typography className="post-content">{post.text}</Typography>
 
-        <Dialog open={open} onClose={handleClose} fullWidth>
-          <DialogTitle sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            إنشاء منشور
-            <Button onClick={handleClose}>
-              <CloseIcon />
-            </Button>
-          </DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              label="ماذا يدور في بالك؟"
-              fullWidth
-              multiline
-              rows={3}
-              variant="outlined"
-              value={newPostText}
-              onChange={(e) => setNewPostText(e.target.value)}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleAddPost} variant="contained" sx={{ backgroundColor: "#1877f2" }}>
-              نشر
-            </Button>
-          </DialogActions>
-        </Dialog>
+                    <div className="post-actions">
+                      <Button
+                        className={`action-button ${post.isLiked ? 'liked' : ''}`}
+                        startIcon={<ThumbUpAltIcon className="action-icon" />}
+                        onClick={() => handleLike(post.id, post.likeCount, post.isLiked)}
+                      >
+                        أعجبني ({post.likeCount})
+                      </Button>
 
-        {posts.map((post) => (
-          <Card
-            key={post.id}
-            sx={{
-              mb: 3,
-              mx: "auto",
-              maxWidth: 900,
-              borderRadius: 4,
-              boxShadow: 3,
-              backgroundColor: "#fff",
-            }}
+                      <Button
+                        className="action-button"
+                        startIcon={<ChatBubbleOutlineIcon className="action-icon" />}
+                        onClick={() => navigate(`/post/${post.id}`, { state: { post } })}
+                      >
+                        تعليق
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </Grid>
+          </Grid>
+          
+          <Button
+            className="add-post-button"
+            onClick={handleOpen}
           >
-            <CardContent>
-              <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                <Avatar src={post.image} sx={{ width: 56, height: 56, mr: 2 }} />
-                <Box>
-                  <Typography variant="subtitle1" fontWeight="bold">{post.user}</Typography>
-                  <Typography variant="caption" sx={{ color: "gray" }}>
-                    {new Date(post.timestamp).toLocaleString("ar-EG")}
-                  </Typography>
-                </Box>
-              </Box>
-
-              <Typography variant="body1" sx={{ mb: 2 }}>{post.text}</Typography>
-
-              <Box sx={{ display: "flex", gap: 2 }}>
-                <Button
-                  variant="contained"
-                  startIcon={<ThumbUpAltIcon />}
-                  sx={{
-                    backgroundColor: post.isLiked ? "#1877f2" : "#e4e6eb",
-                    color: post.isLiked ? "#fff" : "#050505",
-                    borderRadius: "20px",
-                    textTransform: "none",
-                    flexGrow: 1,
-                    gap: "8px",
-                  }}
-                  onClick={() => handleLike(post.id, post.likeCount, post.isLiked)}
-                >
-                  أعجبني ({post.likeCount})
-                </Button>
-
-                <Button
-                  variant="outlined"
-                  startIcon={<ChatBubbleOutlineIcon />}
-                  sx={{
-                    borderColor: "#ccc",
-                    borderRadius: "20px",
-                    textTransform: "none",
-                    flexGrow: 1,
-                    gap: "8px",
-
-                  }}
-                  onClick={() => navigate(`/post/${post.id}`, { state: { post } })}
-                >
-                  تعليق
+            <AddIcon />
+          </Button>
+          
+          <Dialog 
+            open={open} 
+            onClose={handleClose} 
+            fullWidth
+            classes={{ paper: 'post-dialog' }}
+          >
+            <DialogTitle className="dialog-title">
+              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                إنشاء منشور جديد
+                <Button onClick={handleClose} sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                  <CloseIcon />
                 </Button>
               </Box>
-            </CardContent>
-          </Card>
-        ))}
-      </Box>
+            </DialogTitle>
+            <DialogContent className="dialog-content">
+              <TextField
+                autoFocus
+                margin="dense"
+                label="ماذا يدور في بالك؟"
+                fullWidth
+                multiline
+                rows={4}
+                variant="outlined"
+                value={newPostText}
+                onChange={(e) => setNewPostText(e.target.value)}
+                className="post-text-field"
+              />
+            </DialogContent>
+            <DialogActions className="dialog-actions">
+              <Button onClick={handleClose} className="cancel-button">
+                إلغاء
+              </Button>
+              <Button onClick={handleAddPost} className="post-button">
+                نشر
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </Container>
+      </div>
       <Footer />
     </>
   );
