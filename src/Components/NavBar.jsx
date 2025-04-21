@@ -20,10 +20,10 @@ function NavBar() {
 
       if (userSnap.exists()) {
         const data = userSnap.data();
-        const usersNoti = data.Notifications || []; // لو فاضية يرجع []
+        const usersNoti = data.Notifications || []; 
         console.log("إشعارات المستخدم:", usersNoti);
 
-        setNotifications(usersNoti); // لو بتستخدم useState
+        setNotifications(usersNoti);
       }
     } catch (error) {
       console.error("خطأ في جلب إشعارات المستخدم:", error);
@@ -105,7 +105,6 @@ function NavBar() {
               <li className="nav-item"><NavLink className="nav-link" to="/housing">السكن</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/AboutUs">من نحن</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/Community">المجتمع</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link" to="/Donation">التبرعات</NavLink></li>
             </ul>
           </div>
 
