@@ -208,6 +208,7 @@ function Housing() {
 
   }
   return (
+
     <> <style>{`
       .image-preview-container {
         display: flex;
@@ -257,7 +258,8 @@ function Housing() {
       }
     `}</style>
       <NavBar />
-      <div className="search-container bg-white shadow-lg p-5 mt-5 rounded" dir="rtl">
+      <div style={{  background: "linear-gradient(135deg, #1a1a2e 0%, #1D186263 100%)"}}>
+      <div className="search-container bg-white shadow-lg p-5 mt-5 rounded" style={{  background: "linear-gradient(135deg, #1a1a2e 0%, #1D186263 100%)"}} dir="rtl">
     <div className="container-fluid">
         <div className="row g-4 align-items-center justify-content-end">
             <div className="col-md-4">
@@ -275,7 +277,7 @@ function Housing() {
                 </div>
             </div>
             
-            <div className="col-md-2">
+            <div className="col-md-2" >
                 <select className="form-select form-select-lg text-end rounded-pill" value={activeFilters.rooms}
                     onChange={(e) => setActiveFilters({ ...activeFilters, rooms: e.target.value })}>
                     <option value="">عدد الغرف</option>
@@ -310,7 +312,7 @@ function Housing() {
     </div>
 </div>
 
-      <div className="container my-4" dir="rtl">
+      <div className="container my-4" dir="rtl" >
         <div className="row">
           <div className="col-md-3 order-md-1">
             <div className="card shadow-sm">
@@ -387,14 +389,14 @@ function Housing() {
             </div>
           </div>
 
-          <div className="col-md-9 order-md-2">
+          <div className="col-md-9 order-md-2" style={{  background: "linear-gradient(135deg, #1a1a2e 0%, #1D186263 100%)"}}>
             <div style={{ justifyContent: "space-around", display: "flex", marginBottom: 20 }}>
             {userData?.status === "publisher" &&(<button type="button" className="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#addHousingModal">
                 اضف سكن
               </button>)}
             </div>
             
-            <div className="row g-4">
+            <div className="row g-4" style={{  background: "linear-gradient(135deg, #1a1a2e 0%, #1D186263 100%)"}}>
               {filteredHousingList.map((house, index) => (
                (house.status==='accepted' && (
                 <div key={house.id} className="col-md-6">
@@ -677,7 +679,7 @@ function Housing() {
           </div>
         </div>
       </div>
-
+</div>
       <Footer />
     </>
   )

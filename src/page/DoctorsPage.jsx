@@ -125,6 +125,7 @@ const DoctorsPage = () => {
          
 
   return (
+    <div style={{  background: "linear-gradient(135deg, #1a1a2e 0%, #1D186263 100%)"}}>
     <div className="section-page-container" dir="rtl">
       <div className="section-header ">
         <h1 className="section-main-title " >الأطباء</h1>
@@ -266,6 +267,7 @@ const DoctorsPage = () => {
           onClick={() => setShowModal(false)}
         ></div>
       )}
+    </div>
     </div>
   );
 };
