@@ -8,13 +8,14 @@ import AA from '../assets/housing/AA.webp'
 import Footer from '../Components/Footer'
 import { useState, useEffect } from "react";
 import db from "../firebaseconfig";
-import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
-import {UploadPhotos} from '../UploadPhotos' 
+import { addDoc, collection, doc, getDocs, setDoc, Timestamp } from "firebase/firestore";
+import {UploadPhoto} from '../UploadPhoto' 
+import { useNavigate } from 'react-router-dom'
 function Housing() {
   const userData = JSON.parse(localStorage.getItem("currentUser"));
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const [images, setImages] = useState([]);
- 
+  const nav = useNavigate();
  
   const handleFilesChange = (e) => {
     const files = Array.from(e.target.files);
@@ -172,6 +173,21 @@ function Housing() {
 
     fetchHousing();
   }, []);
+
+  function message(PostUserId) {
+        const messageId = userData.UserId+"-"+PostUserId ;
+        localStorage.setItem("messageId", messageId);        
+    const userRef = doc(db, "messages", messageId);
+    save();
+          async function save() {
+              const userData = {
+                  Sender:"a", // currentuser 
+                  receiver: "s",//Post's user 
+              };
+              await setDoc(userRef, userData);
+              nav('/Message');
+          }
+  }
 
   return (
     <> <style>{`
@@ -420,6 +436,9 @@ function Housing() {
                           </a>
                           <a href={`https://wa.me/${house.whats}`} className="btn btn-outline-success">
                             <i className="fa-brands fa-whatsapp"></i> واتساب
+                          </a>
+                          <a onClick={()=>message(house.Id)} className="btn btn-outline-dark">
+                               مراسلة
                           </a>
                         </div>
                         <button
