@@ -1,68 +1,104 @@
-"use client";
+import { useState, useEffect } from "react";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import db from "../firebaseconfig";
 
-import { useState } from "react";
-import { SendHorizonal } from "lucide-react";
+const Message = () => {
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState([]);
+  const messageId = JSON.parse(localStorage.getItem("messageId"));
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-const ChatPage = ({ messages, currentUserId }) => {
-  const [newMessage, setNewMessage] = useState("");
+  const fetchMessages = async () => {
+    if (!messageId) return;
 
-  const handleSend = () => {
-    if (newMessage.trim() === "") return;
+    const messageDocRef = doc(db, "messages", messageId);
+    const messageDoc = await getDoc(messageDocRef);
+    console.log(messageDoc.data());
+    
+    
+    if (messageDoc.exists()) {
+      const data = messageDoc.data();
+      const senderMsgs = data.sender || [];
+      const receiverMsgs = data.receiver || [];
 
-    // send message logic here
-    console.log("Sending:", newMessage);
+      const combined = [...senderMsgs.map(msg => ({ ...msg, type: "sender" })), 
+                        ...receiverMsgs.map(msg => ({ ...msg, type: "receiver" }))];
 
-    setNewMessage("");
+      // ترتيب الرسائل حسب الوقت
+      const sorted = combined.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+      setMessages(sorted);
+    }
+  };
+
+  useEffect(() => {
+    fetchMessages();
+  }, [messageId]);
+
+  const send = async () => {
+
+    
+    // if (!input.trim() || !messageId) return;
+
+    const messageDocRef = doc(db, "messages", messageId);
+    const messageDoc = await getDoc(messageDocRef);
+    console.log(messageDoc.data());
+
+    console.log(messageId);
+    
+    try {
+      await updateDoc(messageDocRef, {
+        sender: arrayUnion({
+          text: input,
+          timestamp: new Date().toISOString(),
+          senderId: currentUser.UserId
+        })
+      });
+      setInput("");
+      fetchMessages(); // تحدّث الرسائل بعد الإرسال
+    } catch (error) {
+      console.error("فشل في إرسال الرسالة:", error);
+    }
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
-      {/* Header */}
-      <div className="p-4 bg-white shadow flex items-center">
-        <h2 className="text-lg font-semibold">Chat</h2>
-      </div>
-
-      {/* Chat messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((msg, idx) => {
-          const isOwnMessage = msg.senderId === currentUserId;
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
+      <div style={{ maxHeight: "400px", overflowY: "auto", marginBottom: "15px" }}>
+        {messages.map((msg, index) => {
+          const isSender = msg.senderId === currentUser.UserId;
           return (
             <div
-              key={idx}
-              className={`flex ${isOwnMessage ? "justify-end" : "justify-start"}`}
+              key={index}
+              style={{
+                backgroundColor: isSender ? "#d4edda" : "#f1f1f1",
+                padding: "10px 15px",
+                borderRadius: "15px",
+                marginBottom: "10px",
+                alignSelf: isSender ? "flex-end" : "flex-start",
+                maxWidth: "75%",
+                textAlign: isSender ? "right" : "left",
+                marginLeft: isSender ? "auto" : "0",
+                marginRight: isSender ? "0" : "auto"
+              }}
             >
-              <div
-                className={`max-w-xs px-4 py-2 rounded-2xl shadow text-sm ${
-                  isOwnMessage
-                    ? "bg-blue-500 text-white rounded-br-none"
-                    : "bg-white text-gray-800 rounded-bl-none"
-                }`}
-              >
-                {msg.text}
-              </div>
+              {msg.text}
             </div>
           );
         })}
       </div>
 
-      {/* Message input */}
-      <div className="p-4 bg-white border-t flex items-center gap-2">
+      <div style={{ display: "flex", gap: "10px" }}>
         <input
           type="text"
-          placeholder="Type a message..."
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          className="flex-1 border rounded-full px-4 py-2 outline-none text-sm"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="اكتب رسالتك..."
+          style={{ flex: 1, padding: "10px" }}
         />
-        <button
-          onClick={handleSend}
-          className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full"
-        >
-          <SendHorizonal size={20} />
-        </button>
+        <button onClick={send}>إرسال</button>
       </div>
     </div>
   );
 };
 
-export default ChatPage;
+export default Message;

@@ -8,13 +8,14 @@ import AA from '../assets/housing/AA.webp'
 import Footer from '../Components/Footer'
 import { useState, useEffect } from "react";
 import db from "../firebaseconfig";
-import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, setDoc, Timestamp } from "firebase/firestore";
 import {UploadPhotos} from '../UploadPhotos' 
+import { useNavigate } from 'react-router-dom'
 function Housing() {
   const userData = JSON.parse(localStorage.getItem("currentUser"));
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const [images, setImages] = useState([]);
- 
+  const nav = useNavigate();
  
   const handleFilesChange = (e) => {
     const files = Array.from(e.target.files);
@@ -173,6 +174,39 @@ function Housing() {
     fetchHousing();
   }, []);
 
+
+  function message(PostUserId){
+    
+    const messageId = userData.UserId+'-'+ PostUserId;    //first sender - second receiver
+    const userRef = doc(db, "messages", messageId);
+    save();
+    // async function save() {
+    //     const userData = {
+    //         sender:[], // currentUser
+    //         receiver: [], // receiverUser
+    //     };
+    //     await setDoc(userRef, userData);
+    //     localStorage.setItem("messageId", JSON.stringify(messageId));
+    //      nav('/Message');
+    // }
+    async function save() {
+      const docSnap = await getDoc(userRef);
+  
+      if (!docSnap.exists()) {
+        const userData = {
+          sender: [],      // رسائل المرسل
+          receiver: []     // رسائل المستلم
+        };
+        await setDoc(userRef, userData);
+      }
+  
+    localStorage.setItem("messageId", JSON.stringify(messageId));
+      nav('/YourMessage');
+    }
+
+
+
+  }
   return (
     <> <style>{`
       .image-preview-container {
@@ -412,6 +446,12 @@ function Housing() {
                         <span className="badge bg-primary">{house.address}</span>
                         <h5 className="card-title mb-0">{house.price} ج.م/شهر</h5>
                       </div>
+
+                      <div className="d-flex justify-content-between align-items-start mb-2">
+                       <p>الناشر : {house.username}</p>
+                      </div>
+
+
                       <p className="card-text">{house.description}</p>
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="contact-buttons">
@@ -420,6 +460,9 @@ function Housing() {
                           </a>
                           <a href={`https://wa.me/${house.whats}`} className="btn btn-outline-success">
                             <i className="fa-brands fa-whatsapp"></i> واتساب
+                          </a>
+                          <a onClick={()=>message(house.Id)} className="btn btn-outline-dark">
+                            مراسلة
                           </a>
                         </div>
                         <button

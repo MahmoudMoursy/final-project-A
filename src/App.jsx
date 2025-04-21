@@ -28,6 +28,7 @@ import ForgotPassword from './page/ForgotPassword';
 import ContactUs from './page/ContactUs';
 
 import Message from './page/message'
+import YourMessage from './page/YourMessage'
 
 
 
@@ -83,6 +84,7 @@ function App() {
         <Route path="/SupermarketsPage" element={<SupermarketsPage />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/Message" element={<Message />} />
+        <Route path="/YourMessage" element={<YourMessage />} />
       </Routes>
     </LoadingProvider>
 
