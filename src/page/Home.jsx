@@ -151,7 +151,7 @@ function Home() {
         <VendorsCarousel />
 
 
-        <div className="py-5 container">
+        {/* <div className="py-5 container">
           <h2 className="sections-title ms-3 mb-2 text-center">مقدمو الخدمة الأكثر طلباً</h2>
           <div className="mx-auto text-center">
             <img src={underline2} alt="" style={{ width: '30rem' }} />
@@ -196,14 +196,18 @@ function Home() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </div> */}
 
         <section className="py-5 rounded text-center partners-section" data-aos="fade-up">
           <h2 className="fw-bold mb-2 sections-title">شركاؤنا</h2>
           <img src={underline3} alt="" className=" ms-auto" style={{ width: "12rem" }} />
           <div className="d-flex justify-content-center gap-5">
-            <img src={ColoredLogo} alt="Colored Logo" className="mx-5 partner-logo mt-2" style={{ width: "20rem" }} />
-            <img src={aswulogo2} alt="ASWU Logo" className="mx-5 partner-logo mt-3" style={{ width: "22rem" }} />
+            <a href="https://iti.gov.eg" target="_blank" rel="noopener noreferrer">
+              <img src={ColoredLogo} alt="Colored Logo" className="mx-5 partner-logo mt-2" style={{ width: "20rem" }} />
+            </a>
+            <a href="https://aswu.edu.eg/" target="_blank" rel="noopener noreferrer">
+              <img src={aswulogo2} alt="ASWU Logo" className="mx-5 partner-logo mt-3" style={{ width: "22rem" }} />
+            </a>
           </div>
         </section>
         {/* 

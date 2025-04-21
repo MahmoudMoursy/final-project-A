@@ -1,22 +1,28 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ArrowLeft, ArrowRight, Pause, Play } from 'lucide-react';
 import './VendorsCarousel.css';
+import underline2 from '../assets/underline2.png';
 
-const BusinessCard = ({ 
+const BusinessCard = ({
   title,
   subtitle,
   bgColor,
+  bgImg,
   textColor,
   accentColor,
   logoType = 'text',
   image
 }) => {
   return (
-    <div 
+    <div
       className="business-card"
-      style={{ 
-        backgroundColor: bgColor,
+      style={{
+        backgroundColor: bgImg ? 'transparent' : bgColor,
+        backgroundImage: bgImg ? `url(${bgImg})` : 'none',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         color: textColor,
+        position: 'relative',
       }}
     >
       {image && (
@@ -24,7 +30,7 @@ const BusinessCard = ({
           <img src={image} alt={title} />
         </div>
       )}
-      
+
       <div className="business-card-content">
         {logoType === 'text' ? (
           <h2 style={{ color: accentColor }}>
@@ -35,7 +41,7 @@ const BusinessCard = ({
             <span>✦</span>
           </div>
         )}
-        
+
         <p>{subtitle}</p>
       </div>
     </div>
@@ -45,48 +51,52 @@ const BusinessCard = ({
 const VendorsCarousel = () => {
   const [isAutoRotate, setIsAutoRotate] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStartX, setDragStartX] = useState(0);
+  const [dragDistance, setDragDistance] = useState(0);
   const intervalRef = useRef(null);
-  
+  const carouselTrackRef = useRef(null);
+
   const slides = [
-    <BusinessCard 
-      key="1" 
-      title="Sunrise" 
-      subtitle="WEDDINGS & EVENTS" 
-      bgColor="#000000" 
-      textColor="#ffffff" 
-      accentColor="#D4AF37" 
+    <BusinessCard
+      key="1"
+      title="Sunrise"
+      subtitle="WEDDINGS & EVENTS"
+      bgImg="https://marasim.bsite.net//81855265-a80c-4d47-9258-fd09b3271c23/ProfilePicture/638378048056128663.jpg"
+      textColor="#ffffff"
+      accentColor="#D4AF37"
     />,
-    <BusinessCard 
-      key="2" 
-      title="Elegance" 
-      subtitle="FASHION BOUTIQUE" 
-      bgColor="#2C3E50" 
-      textColor="#ECF0F1" 
-      accentColor="#E74C3C" 
+    <BusinessCard
+      key="2"
+      title="Elegance"
+      subtitle="FASHION BOUTIQUE"
+      bgImg="https://marasim.bsite.net//68c87e83-0ee0-4f45-8028-56a90aa13c14/ProfilePicture/638378046640415174.webp"
+      textColor="#ECF0F1"
+      accentColor="#E74C3C"
     />,
-    <BusinessCard 
-      key="3" 
-      title="Lumina" 
-      subtitle="PHOTOGRAPHY STUDIO" 
-      bgColor="#3D5A80" 
-      textColor="#E0FBFC" 
-      accentColor="#EE6C4D" 
+    <BusinessCard
+      key="3"
+      title="Lumina"
+      subtitle="PHOTOGRAPHY STUDIO"
+      bgImg="https://marasim.bsite.net//fb05ba5e-84af-48b8-9c84-e4164d875873/ProfilePicture/638378047550450315.jpg"
+      textColor="#E0FBFC"
+      accentColor="#EE6C4D"
     />,
-    <BusinessCard 
-      key="4" 
-      title="Azure" 
-      subtitle="WELLNESS SPA" 
-      bgColor="#1A535C" 
-      textColor="#F7FFF7" 
-      accentColor="#FFE66D" 
+    <BusinessCard
+      key="4"
+      title="Azure"
+      subtitle="WELLNESS SPA"
+      bgImg="https://marasim.bsite.net//5332ba1f-4376-4726-ba86-713a96039c4f/ProfilePicture/638378037904313295.jpg"
+      textColor="#F7FFF7"
+      accentColor="#FFE66D"
     />,
-    <BusinessCard 
-      key="5" 
-      title="Velvet" 
-      subtitle="LUXURY INTERIORS" 
-      bgColor="#3C1642" 
-      textColor="#F2F3AE" 
-      accentColor="#DB5461" 
+    <BusinessCard
+      key="5"
+      title="Velvet"
+      subtitle="LUXURY INTERIORS"
+      bgImg="https://marasim.bsite.net//968499e6-b2e2-42ba-9c0c-4995066eba23/ProfilePicture/638378059560209246.jpg"
+      textColor="#F2F3AE"
+      accentColor="#DB5461"
     />,
   ];
 
@@ -104,9 +114,9 @@ const VendorsCarousel = () => {
 
   const startAutoRotation = useCallback(() => {
     if (!isAutoRotate) return;
-    
+
     clearInterval(intervalRef.current);
-    
+
     intervalRef.current = setInterval(() => {
       handleNextSlide();
     }, 4000);
@@ -133,6 +143,7 @@ const VendorsCarousel = () => {
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.targetTouches[0].clientX;
+    pauseAutoRotation();
   };
 
   const handleTouchMove = (e) => {
@@ -141,14 +152,61 @@ const VendorsCarousel = () => {
 
   const handleTouchEnd = () => {
     if (!touchStartX.current || !touchEndX.current) return;
-    
+
     const distance = touchStartX.current - touchEndX.current;
     if (Math.abs(distance) > 50) {
       distance > 0 ? handleNextSlide() : handlePrevSlide();
     }
-    
+
     touchStartX.current = null;
     touchEndX.current = null;
+    startAutoRotation();
+  };
+
+  // Mouse drag handlers
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setDragStartX(e.clientX);
+    setDragDistance(0);
+    pauseAutoRotation();
+
+    // Change cursor style
+    if (carouselTrackRef.current) {
+      carouselTrackRef.current.style.cursor = 'grabbing';
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+
+    const currentX = e.clientX;
+    const distance = dragStartX - currentX;
+    setDragDistance(distance);
+
+    // Optional: Add visual feedback during dragging
+    // This could be a slight rotation or movement of the carousel
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+
+    if (Math.abs(dragDistance) > 50) {
+      dragDistance > 0 ? handleNextSlide() : handlePrevSlide();
+    }
+
+    setIsDragging(false);
+    startAutoRotation();
+
+    // Reset cursor style
+    if (carouselTrackRef.current) {
+      carouselTrackRef.current.style.cursor = 'grab';
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      handleMouseUp();
+    }
   };
 
   const touchStartX = useRef(null);
@@ -168,7 +226,7 @@ const VendorsCarousel = () => {
     const translateZ = radius * Math.cos(theta) - radius;
     const opacity = Math.cos(theta) * 0.5 + 0.5;
     const scale = Math.cos(theta) * 0.3 + 0.7;
-    
+
     return {
       transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotationY}deg) scale(${scale})`,
       opacity: opacity,
@@ -178,21 +236,29 @@ const VendorsCarousel = () => {
 
   return (
     <div className="vendors-carousel-container">
-      <h1>كاروسيل تيست</h1>
-      
+      <h2 className="sections-title ms-3 mb-2 text-center">مقدمو الخدمة الأكثر طلباً</h2>
+      <div className="mx-auto text-center">
+        <img src={underline2} alt="" style={{ width: '30rem' }} />
+      </div>
+
       <div className="carousel-wrapper">
-        <div 
+        <div
+          ref={carouselTrackRef}
           className="carousel-track"
           onMouseEnter={pauseAutoRotation}
-          onMouseLeave={startAutoRotation}
+          onMouseLeave={handleMouseLeave}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
         >
           {slides.map((slide, index) => {
             const position = calculatePosition(index);
             return (
-              <div 
+              <div
                 key={index}
                 className="carousel-slide"
                 style={getTransformStyles(position)}
@@ -202,15 +268,15 @@ const VendorsCarousel = () => {
             );
           })}
         </div>
-        
+
         <button className="carousel-nav prev" onClick={handlePrevSlide}>
           <ArrowLeft size={24} />
         </button>
-        
+
         <button className="carousel-nav next" onClick={handleNextSlide}>
           <ArrowRight size={24} />
         </button>
-        
+
         <div className="carousel-dots">
           {slides.map((_, index) => (
             <button
@@ -221,10 +287,10 @@ const VendorsCarousel = () => {
           ))}
         </div>
       </div>
-      
-      
-      <p className="carousel-description">
-        This 3D carousel features smooth transitions, keyboard navigation, 
+
+
+      <p className="carousel-description text-white">
+        This 3D carousel features smooth transitions, keyboard navigation,
         auto-rotation, and responsive design.
       </p>
     </div>

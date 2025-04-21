@@ -8,14 +8,15 @@ const TestimonialCard = ({ name, role, content, rating, image, isActive }) => {
   return (
     <div className={`testimonial-card ${isActive ? 'active' : 'inactive'}`}>
       <div className="testimonial-content">
-        <div className="testimonial-profile">
-          <img 
-            src={image} 
-            alt={`${name}'s profile`} 
+        <div className="testimonial-profile" dir='rtl'>
+          <img
+            src={image}
+            alt={`${name}'s profile`}
             className="testimonial-avatar"
+            style={{ width: '100px', height: '100px', objectFit: 'cover' }} // Increased size from default
           />
-          <div className="testimonial-info">
-            <h3>{name}</h3>
+          <div className="testimonial-info px-3">
+            <h3 >{name}</h3>
             <p>{role}</p>
             <div className="testimonial-rating">
               {[...Array(5)].map((_, i) => (
@@ -72,33 +73,33 @@ const testimonials = [
 const Testimonial = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  
+
   const goToNext = useCallback(() => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
   }, []);
-  
+
   const goToPrev = useCallback(() => {
-    setActiveIndex((prevIndex) => 
+    setActiveIndex((prevIndex) =>
       prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
     );
   }, []);
-  
+
   // Auto-rotate testimonials
   useEffect(() => {
     if (!isAutoPlaying) return;
-    
+
     const interval = setInterval(() => {
       goToNext();
     }, 5000);
-    
+
     return () => clearInterval(interval);
   }, [goToNext, isAutoPlaying]);
-  
+
   // Pause auto-play when user interacts with controls
   const handleManualNavigation = (callback) => {
     setIsAutoPlaying(false);
     callback();
-    
+
     // Resume auto-play after 10 seconds of inactivity
     setTimeout(() => setIsAutoPlaying(true), 10000);
   };
@@ -118,7 +119,7 @@ const Testimonial = () => {
             على تحويل سير عملهم وتحقيق أهدافهم.
           </p> */}
         </div>
-        
+
         <div className="testimonial-slider">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard
@@ -131,24 +132,24 @@ const Testimonial = () => {
               isActive={index === activeIndex}
             />
           ))}
-          
+
           {/* Navigation controls */}
-          <button 
+          <button
             onClick={() => handleManualNavigation(goToPrev)}
             className="nav-button prev"
             aria-label="Previous testimonial"
           >
             <ChevronLeft size={24} />
           </button>
-          
-          <button 
+
+          <button
             onClick={() => handleManualNavigation(goToNext)}
             className="nav-button next"
             aria-label="Next testimonial"
           >
             <ChevronRight size={24} />
           </button>
-          
+
           {/* Indicator dots */}
           <div className="testimonial-indicators">
             {testimonials.map((_, index) => (

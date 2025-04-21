@@ -12,7 +12,7 @@
       top: 100%;
       right: 0;
       left: 0;
-      background-color: #091e3d;
+      background-color: #24262B; /* Changed from #091e3d to #24262B to match navbar scrolled color */
       padding: 1rem;
       z-index: 999;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
