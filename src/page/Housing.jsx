@@ -525,7 +525,7 @@ function Housing() {
                               <FaComments className="me-1" /> مراسلة
                             </a>
                           </div>
-                          
+                          {user.status=="viewer" && 
                           <button
                             className="btn btn-warning w-100 mt-3"
                             onClick={() => {
@@ -535,7 +535,7 @@ function Housing() {
                             data-bs-target="#bookingModal"
                           >
                             احجز الآن <FaBookmark className="me-1" />
-                          </button>
+                          </button>}
                         </div>
                       </div>
                     </div>
