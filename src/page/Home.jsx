@@ -122,7 +122,7 @@ function Home() {
           <div className="info d-flex gap-5 justify-content-center py-5 mt-3 flex-wrap">
             <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
               <img src={payGif} alt="الدفع" className="info-icon" style={{ width: '250px', height: '250px' }} />
-              <p className="info-text fs-5 pt-4 text-center service-title">ادفع عربوناً</p>
+              <p className="info-text fs-5 pt-4 text-center service-title">احجز</p>
             </a>
             <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
               <img src={servGif} alt="اختيار الخدمة" className="info-icon" style={{ width: '250px', height: '250px' }} />

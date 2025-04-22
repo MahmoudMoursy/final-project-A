@@ -108,7 +108,7 @@ function NavBar() {
               <li className="nav-item"><NavLink className="nav-link" to="/housing">السكن</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/AboutUs">من نحن</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/Community">المجتمع</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link" to="/ChatAi"> محادث</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link" to="/ChatAi">تواصل معنا</NavLink></li>
             </ul>
           </div>
 
