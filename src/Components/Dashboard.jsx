@@ -45,21 +45,18 @@ function Dashboard() {
         <header className="dashboard-navbar">
           <h1>Dashboard Overview</h1>
           <div className="navbar-actions">
-            <div className="search-wrapper">
+            {/* <div className="search-wrapper">
               <FiSearch className="search-icon" />
               <input 
                 type="search" 
                 placeholder="Search analytics..." 
                 className="search-input" 
               />
-            </div>
-            <button className="notification-button">
-              <FiBell />
-              <span className="notification-indicator"></span>
-            </button>
+            </div> */}
+           
             <div className="user-profile">
               <img 
-                src={dataUser?.photoURL || "/default-avatar.png"} 
+                src={dataUser?.image || "/default-avatar.png"} 
                 alt="User" 
                 className="profile-avatar" 
               />
