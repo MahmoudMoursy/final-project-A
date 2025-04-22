@@ -2,6 +2,23 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ArrowLeft, ArrowRight, Pause, Play } from 'lucide-react';
 import './VendorsCarousel.css';
 import underline2 from '../assets/underline2.png';
+import esmo1 from '../assets/service_imgs/مطاعم/اسمه ايه/esmo1.jpeg';
+import doka1 from '../assets/service_imgs/مطاعم/الدوكة/doka1.jpeg';
+import qsr1 from '../assets/service_imgs/مطاعم/قصر الشام/qsr1.jpeg';
+import porto1 from '../assets/service_imgs/مطاعم/بورتو سونو/porto1.jpeg';
+import makany1 from '../assets/service_imgs/مطاعم/مكانى/makany1.jpeg';
+import kiwi1 from '../assets/service_imgs/مطاعم/كيوى/kiwi1.jpeg';
+import havana1 from '../assets/service_imgs/مطاعم/هافانا/havana1.jpeg';
+import abdin1 from '../assets/service_imgs/صيدليات/عابدين/abdin1.jpeg';
+import ibtsam1 from '../assets/service_imgs/صيدليات/ibtsam1.jpeg';
+import qlel from '../assets/service_imgs/صيدليات/qlel.jpeg';
+import saber1 from '../assets/service_imgs/صيدليات/saber1.jpeg';
+import raya1 from '../assets/service_imgs/سوبر ماركت/الراية/raya1.jpeg';
+import carfor1 from '../assets/service_imgs/سوبر ماركت/كارفور/carfor1.jpeg';
+import safa1 from '../assets/service_imgs/سوبر ماركت/الصفا ماركت/safa1.jpeg';
+import wardny1 from '../assets/service_imgs/سوبر ماركت/الوردانى/wardny1.jpeg';
+import kher1 from '../assets/service_imgs/سوبر ماركت/خير زمان/kher1.jpeg';
+
 
 const BusinessCard = ({
   title,
@@ -60,49 +77,41 @@ const VendorsCarousel = () => {
   const slides = [
     <BusinessCard
       key="1"
-      title="Sunrise"
-      subtitle="WEDDINGS & EVENTS"
-      bgImg=""
+      title="حلواني إسمه ايه"
+      subtitle="ESMO Eh Pastries"
+      bgImg={esmo1}
       textColor="#ffffff"
       accentColor="#D4AF37"
     />,
     <BusinessCard
       key="2"
-      title="Elegance"
-      subtitle="FASHION BOUTIQUE"
-      bgImg=""
+      title="كافية الدوكة"
+      subtitle="ElDOKA CAFÉ"
+      bgImg={doka1}
       textColor="#ECF0F1"
       accentColor="#E74C3C"
     />,
     <BusinessCard
       key="3"
-      title="Lumina"
-      subtitle="PHOTOGRAPHY STUDIO"
-      bgImg=""
+      title="قصر الشام"
+      subtitle="Qasr elsham restaurant"
+      bgImg={qsr1}
       textColor="#E0FBFC"
       accentColor="#EE6C4D"
     />,
     <BusinessCard
       key="4"
-      title="Azure"
-      subtitle="WELLNESS SPA"
-      bgImg=""
-      textColor="#F7FFF7"
-      accentColor="#FFE66D"
-    />,
-    <BusinessCard
-      key="5"
-      title="Velvet"
-      subtitle="LUXURY INTERIORS"
-      bgImg=""
+      title="كافية مكانى"
+      subtitle="CAFÉ MAKANY"
+      bgImg={makany1}
       textColor="#F2F3AE"
       accentColor="#DB5461"
     />,
     <BusinessCard
-      key="6"
-      title="Sunrise"
-      subtitle="WEDDINGS & EVENTS"
-      bgImg=""
+      key="5"
+      title="سوبر ماركت الراية"
+      subtitle="SUPER MARKET"
+      bgImg={raya1}
       textColor="#ffffff"
       accentColor="#D4AF37"
     />,
