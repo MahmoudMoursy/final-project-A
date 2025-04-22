@@ -60,7 +60,7 @@ function Dashboard() {
                 alt="User" 
                 className="profile-avatar" 
               />
-              <span className="profile-name">{dataUser?.displayName || "Admin"}</span>
+              <span className="profile-name ">{dataUser?.displayName || "Admin"}</span>
             </div>
           </div>
         </header>
@@ -72,7 +72,7 @@ function Dashboard() {
                 <FiUsers />
               </div>
               <div className="metric-info">
-                <h3>Total Users</h3>
+                <h3 className='text-dark'>Total Users</h3>
                 {loading ? (
                   <div className="metric-loader"></div>
                 ) : (
@@ -91,7 +91,7 @@ function Dashboard() {
                 <FiTrendingUp />
               </div>
               <div className="metric-info">
-                <h3>Revenue</h3>
+                <h3 className='text-dark'>Revenue</h3>
                 <p className="metric-value">$0</p>
                 <p className="metric-description">Current balance</p>
               </div>
@@ -102,7 +102,7 @@ function Dashboard() {
                 <FiFileText />
               </div>
               <div className="metric-info">
-                <h3>Posts</h3>
+                <h3 className='text-dark'>Posts</h3>
                 {loading ? (
                   <div className="metric-loader"></div>
                 ) : (

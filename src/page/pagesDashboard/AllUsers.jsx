@@ -84,7 +84,7 @@ function AllUsers() {
   
   return (
     <div className="container mt-5" style={{ paddingLeft: '15rem' }}>
-      <h2 className="mb-4">Admin & Supervisor</h2>
+      <h2 className="mb-4 text-dark">Admin & Supervisor</h2>
         {console.log(users)}
         {loading && <p>Loading...</p>}  
       <Table striped bordered hover>
@@ -116,7 +116,7 @@ function AllUsers() {
       </Table>
 
 
-      <h2 className="mb-4"> Users</h2>
+      <h2 className="mb-4 text-dark"> Users</h2>
       {loading && <p>Loading...</p>}
       
       {/* جدول المستخدمين */}
