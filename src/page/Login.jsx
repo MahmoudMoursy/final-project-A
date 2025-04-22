@@ -102,7 +102,8 @@ function Login() {
             <div className="card auth-card" style={{ maxWidth: '72rem' }}>
                 <div className="row g-0">
                     {/* Content Side */}
-                    <div className="col-md-6 auth-form-container">
+
+                    <div className="col-md-6 auth-form-container mt-5 mb-5">
                         <div className="mx-auto" style={{ maxWidth: '28rem' }}>
                             {/* Tab switcher styled like the image */}
                             <div className="tab-container" style={{ direction: 'rtl' }}>
@@ -229,9 +230,10 @@ function Login() {
                             <div className="bg-circle bg-circle-1 animate-float"></div>
                             <div className="bg-circle bg-circle-2 animate-float-delayed"></div>
                         </div>
-
+                        
                         <div className="h-100 d-flex flex-column justify-content-center gap-4 animate-fade-in position-relative" style={{ zIndex: 10 }}>
                             <div className="d-flex align-items-center justify-content-center gap-3">
+
                                 <h1 className="fs-1 fw-normal text-white">Waseet</h1>
                                 <img src={wasetLogo} alt="logo" className="w-25" />
                             </div>
@@ -257,8 +259,8 @@ function Login() {
                                             <span className="fs-4">🚀</span>
                                         </div>
                                         <div>
-                                            <h3 className="fw-normal text-white">خدمات المغتربين</h3>
-                                            <p className="opacity-75">نجعل حياتك أسهل بعيداً عن الوطن</p>
+                                            <h3 className="fw-normal text-white">خدمات للمغتربين</h3>
+                                            <p className="opacity-75">نجعل حياتك أسهل بعيداً عن بيتك</p>
                                         </div>
                                     </div>
                                     <div className="d-flex align-items-center gap-4 hover-translate custom-transition" style={{ direction: 'rtl' }}>
@@ -267,7 +269,7 @@ function Login() {
                                             <span className="fs-4">🛡️</span>
                                         </div>
                                         <div>
-                                            <h3 className="fw-normal text-white">آمن بالتصميم</h3>
+                                            <h3 className="fw-normal text-white">تصميم آمن</h3>
                                             <p className="opacity-75">بياناتك محمية دائماً</p>
                                         </div>
                                     </div>
