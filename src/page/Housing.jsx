@@ -75,11 +75,12 @@ function Housing() {
   };
 
   const handleBookingSubmit = async (e) => {
-    
     e.preventDefault();
     try {
       const bookingWithTimestamp = {
         ...bookingData,
+        userId: user.UserId, // Ensure userId is set correctly
+        PostUserId: housingList.find(house => house.id === bookingData.houseId)?.Id, // Use Id from housing as PostUserId
         createdAt: Timestamp.now()
       };
       await addDoc(collection(db, "bookings"), bookingWithTimestamp);
@@ -573,6 +574,15 @@ function Housing() {
                     onChange={(e) => setBookingData({ ...bookingData, checkIn: e.target.value })}
                     required
                   />
+                   <input
+                    type="hidden"
+                    value={bookingData.userId}
+                    onChange={(e) =>
+                      setBookingData({ ...bookingData, userId: user.UserId })
+                    }
+                    required
+                  />
+
                 </div>
                 <div className="mb-3">
                   <label className="form-label">تاريخ المغادرة</label>
