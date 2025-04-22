@@ -31,7 +31,7 @@ function ContactUs() {
 
       <div className="container py-5 mt-5" dir="rtl">
         <div className="row mb-5">
-          <div className="col-12 text-center" data-aos="fade-up">
+          <div className="col-12 text-center text-dark" data-aos="fade-up">
             <h1 className="fw-bold mb-4 mt-4">تواصل معنا</h1>
             <p className="lead mb-5">نحن هنا للإجابة على استفساراتك ومساعدتك في كل ما تحتاجه</p>
           </div>
@@ -77,47 +77,47 @@ function ContactUs() {
             <div className="card shadow-sm border-0 mb-4">
               <div className="card-body p-4">
                 <h3 className="mb-4 fw-bold text-center">معلومات التواصل</h3>
-                <div className="d-flex align-items-center mb-3">
-                  <div className="bg-primary rounded-circle p-2 me-3 text-white">
-                    <i className="fas fa-map-marker-alt"></i>
-                  </div>
-                  <div>
-                    <h5 className="mb-0 fw-bold">العنوان</h5>
-                    <p className="mb-0">جامعة أسوان، صحاري، أسوان، مصر</p>
-                  </div>
-                </div>
-                <div className="d-flex align-items-center mb-3">
-                  <div className="bg-primary rounded-circle p-2 me-3 text-white">
-                    <i className="fas fa-phone"></i>
-                  </div>
-                  <div>
-                    <h5 className="mb-0 fw-bold">الهاتف</h5>
-                    <p className="mb-0">+20 97 3480446</p>
-                  </div>
-                </div>
-                <div className="d-flex align-items-center mb-3">
-                  <div className="bg-primary rounded-circle p-2 me-3 text-white">
-                    <i className="fas fa-envelope"></i>
-                  </div>
-                  <div>
-                    <h5 className="mb-0 fw-bold">البريد الإلكتروني</h5>
-                    <p className="mb-0">info@aswu.edu.eg</p>
-                  </div>
-                </div>
-                <div className="d-flex align-items-center">
-                  <div className="bg-primary rounded-circle p-2 me-3 text-white">
-                    <i className="fas fa-clock"></i>
-                  </div>
-                  <div>
-                    <h5 className="mb-0 fw-bold">ساعات العمل</h5>
-                    <p className="mb-0">الأحد - الخميس: 9:00 صباحاً - 3:00 مساءً</p>
-                  </div>
-                </div>
+                <div className="d-flex align-items-center gap-4 mb-3">
+  <div className="rounded-circle p-2 d-flex justify-content-center align-items-center text-white" style={{ background: 'linear-gradient(135deg, #a259ec 0%, #7c3aed 100%)', minWidth: 44, minHeight: 44 }}>
+    <i className="fas fa-map-marker-alt" style={{ fontSize: 22 }}></i>
+  </div>
+  <div>
+    <h5 className="mb-0 fw-bold">العنوان</h5>
+    <p className="mb-0">جامعة أسوان، صحاري، أسوان، مصر</p>
+  </div>
+</div>
+                <div className="d-flex align-items-center gap-4 mb-3">
+  <div className="rounded-circle p-2 d-flex justify-content-center align-items-center text-white" style={{ background: 'linear-gradient(135deg, #a259ec 0%, #7c3aed 100%)', minWidth: 44, minHeight: 44 }}>
+    <i className="fas fa-phone" style={{ fontSize: 22 }}></i>
+  </div>
+  <div>
+    <h5 className="mb-0 fw-bold">الهاتف</h5>
+    <p className="mb-0">+20 97 3480446</p>
+  </div>
+</div>
+                <div className="d-flex align-items-center gap-4 mb-3">
+  <div className="rounded-circle p-2 d-flex justify-content-center align-items-center text-white" style={{ background: 'linear-gradient(135deg, #a259ec 0%, #7c3aed 100%)', minWidth: 44, minHeight: 44 }}>
+    <i className="fas fa-envelope" style={{ fontSize: 22 }}></i>
+  </div>
+  <div>
+    <h5 className="mb-0 fw-bold">البريد الإلكتروني</h5>
+    <p className="mb-0">info@aswu.edu.eg</p>
+  </div>
+</div>
+                <div className="d-flex align-items-center gap-4">
+  <div className="rounded-circle p-2 d-flex justify-content-center align-items-center text-white" style={{ background: 'linear-gradient(135deg, #a259ec 0%, #7c3aed 100%)', minWidth: 44, minHeight: 44 }}>
+    <i className="fas fa-clock" style={{ fontSize: 22 }}></i>
+  </div>
+  <div>
+    <h5 className="mb-0 fw-bold">ساعات العمل</h5>
+    <p className="mb-0">الأحد - الخميس: 9:00 صباحاً - 3:00 مساءً</p>
+  </div>
+</div>
               </div>
             </div>
 
             {/* Map */}
-            <div className="card shadow-sm border-0" style={{ height: '300px', overflow: 'hidden' }}>
+            <div className="card shadow-sm border-0" style={{ height: '390px', overflow: 'hidden' }}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3631.7677952844594!2d32.89729467538857!3d24.088900277770146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x143664d18a8453f9%3A0x3f8c50a2c5b4eeab!2sAswan%20University!5e0!3m2!1sen!2seg!4v1714147447914!5m2!1sen!2seg"
                 width="100%"
