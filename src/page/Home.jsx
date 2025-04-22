@@ -130,7 +130,7 @@ function Home() {
             </a>
             <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
               <img src={servGif} alt="اختيار الخدمة" className="info-icon" style={{ width: '250px', height: '250px' }} />
-              <p className="info-text fs-5 pt-4 text-center service-title">اختر الخدمة المناسبة</p>
+              <p className="info-text fs-5 pt-4 text1-center service-title">اختر الخدمة المناسبة</p>
             </a>
             <a className=" info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
               <img src={userGif} alt="التسجيل" className="info-icon" style={{ width: '250px', height: '250px' }} />
