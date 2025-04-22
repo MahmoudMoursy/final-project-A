@@ -397,7 +397,7 @@ const Profile = () => {
                   <Bell size={20} />
                 </div>
                 <div className="setting-content">
-                  <h3>إشعارات الموقع</h3>
+                  <h3 className="text-dark">إشعارات الموقع</h3>
                   <div className="toggle-container" onClick={() => setIsActive(!isActive)}>
                     <div className={`toggle ${isActive ? 'active' : ''}`}></div>
                   </div>
@@ -409,7 +409,7 @@ const Profile = () => {
                   <Mail size={20} />
                 </div>
                 <div className="setting-content">
-                  <h3>إشعارات البريد الإلكتروني</h3>
+                  <h3 className="text-dark">إشعارات البريد الإلكتروني</h3>
                   <div className="toggle-container" onClick={() => setIsFirstActive(!isFirstActive)}>
                     <div className={`toggle ${isFirstActive ? 'active' : ''}`}></div>
                   </div>
@@ -421,7 +421,7 @@ const Profile = () => {
                   <Smartphone size={20} />
                 </div>
                 <div className="setting-content">
-                  <h3>إشعارات الجوال</h3>
+                  <h3 className="text-dark">إشعارات الجوال</h3>
                   <div className="toggle-container" onClick={() => setIsSecondActive(!isSecondActive)}>
                     <div className={`toggle ${isSecondActive ? 'active' : ''}`}></div>
                   </div>
@@ -433,7 +433,7 @@ const Profile = () => {
                   <Globe size={20} />
                 </div>
                 <div className="setting-content">
-                  <h3>اللغة المفضلة</h3>
+                  <h3 className="text-dark">اللغة المفضلة</h3>
                   <p className="setting-value">العربية</p>
                 </div>
               </div>
@@ -518,7 +518,7 @@ const Profile = () => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(0, 0, 0, 0.3);
+          background: var(--dark-color);
         }
         
         .hero-content {
