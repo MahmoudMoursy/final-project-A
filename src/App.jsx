@@ -27,6 +27,7 @@ import DoctorsPage from './page/DoctorsPage';
 import SupermarketsPage from './page/SupermarketsPage';
 import ForgotPassword from './page/ForgotPassword';
 import ContactUs from './page/ContactUs';
+import DashSettings from './page/pagesDashboard/DashSettings';
 
 import YourMessage from './page/YourMessage'
 
@@ -85,6 +86,7 @@ function App() {
         <Route path="/SupermarketsPage" element={<SupermarketsPage />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/YourMessage" element={<YourMessage />} />
+        <Route path="/DashSettings" element={<PrivateRoute element={<DashSettings />} isAuthenticated={userDashboard} />} />
       </Routes>
     </LoadingProvider>
 
