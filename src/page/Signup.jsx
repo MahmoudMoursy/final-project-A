@@ -14,7 +14,7 @@ function Signup() {
     const authStore = useAuth();
     const nav = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [signupError, setSignupError] = useState(""); 
+    const [signupError, setSignupError] = useState("");
 
     const schema = z.object({
         name: z.string().min(7, "Name must be more than 7 characters").max(20, 'Name must be less than 15 characters'),
@@ -32,7 +32,7 @@ function Signup() {
 
     async function save(data) {
         setLoading(true);
-        setSignupError(""); 
+        setSignupError("");
 
         try {
             await authStore.signUp({
@@ -62,7 +62,7 @@ function Signup() {
                             <div className="bg-circle bg-circle-1 animate-float"></div>
                             <div className="bg-circle bg-circle-2 animate-float-delayed"></div>
                         </div>
-                        
+
                         <div className="h-100 d-flex flex-column justify-content-center gap-4 animate-fade-in position-relative" style={{ zIndex: 10 }}>
                             <div className="d-flex align-items-center gap-3">
                                 <h1 className="fs-4 fw-normal text-white">Waset</h1>
@@ -85,7 +85,7 @@ function Signup() {
                                 </div>
                                 <div className="d-flex flex-column gap-4 mt-4">
                                     <div className="d-flex align-items-center gap-4 hover-translate custom-transition">
-                                        <div className="rounded-circle d-flex align-items-center justify-content-center animate-pulse" 
+                                        <div className="rounded-circle d-flex align-items-center justify-content-center animate-pulse"
                                             style={{ width: '3rem', height: '3rem', backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
                                             <span className="fs-4">🚀</span>
                                         </div>
@@ -95,7 +95,7 @@ function Signup() {
                                         </div>
                                     </div>
                                     <div className="d-flex align-items-center gap-4 hover-translate custom-transition">
-                                        <div className="rounded-circle d-flex align-items-center justify-content-center animate-pulse" 
+                                        <div className="rounded-circle d-flex align-items-center justify-content-center animate-pulse"
                                             style={{ width: '3rem', height: '3rem', backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
                                             <span className="fs-4">🛡️</span>
                                         </div>
@@ -114,7 +114,7 @@ function Signup() {
                         <div className="mx-auto" style={{ maxWidth: '28rem' }}>
                             {/* Tab switcher styled like the image */}
                             <div className="tab-container">
-                                <div 
+                                <div
                                     className="tab-item tab-item-inactive"
                                     onClick={() => nav('/')}
                                 >
@@ -196,9 +196,9 @@ function Signup() {
                                     <label htmlFor="confirmpass" className="form-label">Confirm Password</label>
                                     {errors.confirmpass && <small className="text-danger">{errors.confirmpass.message}</small>}
                                 </div>
-                                
+
                                 {signupError && <div className="alert alert-danger" role="alert">{signupError}</div>}
-                                
+
                                 <button
                                     type="submit"
                                     className="auth-submit-btn"
@@ -212,7 +212,7 @@ function Signup() {
                             <div className="auth-footer">
                                 <p>
                                     Already have an account?{' '}
-                                    <a 
+                                    <a
                                         className="auth-link"
                                         onClick={() => nav('/')}
                                         style={{ cursor: 'pointer' }}

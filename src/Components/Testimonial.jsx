@@ -16,7 +16,7 @@ const TestimonialCard = ({ name, role, content, rating, image, isActive }) => {
             style={{ width: '100px', height: '100px', objectFit: 'cover' }} // Increased size from default
           />
           <div className="testimonial-info px-3">
-            <h3 >{name}</h3>
+            <h3 className='text-dark' >{name}</h3>
             <p>{role}</p>
             <div className="testimonial-rating">
               {[...Array(5)].map((_, i) => (
@@ -37,7 +37,7 @@ const TestimonialCard = ({ name, role, content, rating, image, isActive }) => {
 const testimonials = [
   {
     id: 1,
-    name: 'سارة جونسون',
+    name: 'سارة عادل',
     role: 'مديرة التسويق',
     content: 'لقد غير هذا المنتج طريقة عملنا بشكل كامل. الواجهة البديهية جعلت من السهل على فريقنا بأكمله التكيف، وقد شهدنا زيادة بنسبة 40٪ في الإنتاجية منذ التنفيذ.',
     rating: 5,
@@ -45,7 +45,7 @@ const testimonials = [
   },
   {
     id: 2,
-    name: 'محمد شين',
+    name: 'مصطفى جابر',
     role: 'مهندس برمجيات',
     content: 'كمطور، أقدر الاهتمام بالتفاصيل ومجموعة الميزات القوية. وثائق واجهة برمجة التطبيقات واضحة، وكان التكامل سلسًا. هذا الآن جزء أساسي من مجموعة التقنيات لدينا.',
     rating: 4,
@@ -53,7 +53,7 @@ const testimonials = [
   },
   {
     id: 3,
-    name: 'عائشة باتيل',
+    name: 'مريم أسامة',
     role: 'مصممة تجربة المستخدم',
     content: 'نظام التصميم رائع حقًا. من النادر العثور على منتج يوازن بين الجماليات والوظائف بشكل جيد. تمكن فريق التصميم لدينا من إنشاء تجارب متسقة عبر جميع منصاتنا.',
     rating: 5,
@@ -61,7 +61,7 @@ const testimonials = [
   },
   {
     id: 4,
-    name: 'داوود ويلسون',
+    name: 'محمود مرسي',
     role: 'مدير مشاريع',
     content: 'لقد عمل هذا الحل على تبسيط عملية إدارة المشروع لدينا بشكل كبير. توفر لوحة المعلومات رؤى في الوقت الفعلي تساعدنا على اتخاذ قرارات مستنيرة بسرعة.',
     rating: 4,

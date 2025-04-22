@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import OpenAI from "openai";
 import "./ChatAi.css";
+import NavBar from "../Components/NavBar";
+import Footer from "../Components/Footer";
 
 
 const openai = new OpenAI({
@@ -76,13 +78,13 @@ function ChatAi() {
       const finalChats = chats.map((chat) =>
         chat.id === activeChatId
           ? {
-              ...chat,
-              messages: [
-                ...chat.messages.filter((m) => !m.loading),
-                userMessage,
-                { text: botReply, sender: "bot" },
-              ],
-            }
+            ...chat,
+            messages: [
+              ...chat.messages.filter((m) => !m.loading),
+              userMessage,
+              { text: botReply, sender: "bot" },
+            ],
+          }
           : chat
       );
 
@@ -120,76 +122,79 @@ function ChatAi() {
   };
 
   return (
-
-    <div className="chat-support-container">
-      <div className="sidebar">
-        <img src="/src\assets\waset.png" alt="وسيط" className="logo" />
-        <h3 className="Hh">المحادثات</h3>
-        <ul className="chat-list">
-          {chats.map((chat) => (
-            <li
-              key={chat.id}
-              className={chat.id === activeChatId ? "active" : ""}
-              onClick={() => setActiveChatId(chat.id)}
-            >
-              <span>{chat.title || "بدون عنوان"}</span>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  deleteChat(chat.id);
-                }}
+    <>
+      <div className="chat-support-container">
+        <NavBar />
+        <div className="sidebar">
+          <img src="/src\assets\waset.png" alt="وسيط" className="logo" />
+          <h3 className="Hh">المحادثات</h3>
+          <ul className="chat-list">
+            {chats.map((chat) => (
+              <li
+                key={chat.id}
+                className={chat.id === activeChatId ? "active" : ""}
+                onClick={() => setActiveChatId(chat.id)}
               >
-                🗑
-              </button>
-            </li>
-          ))}
-        </ul>
-        <button onClick={createNewChat} className="new-chat-btn">➕ محادثة جديدة</button>
+                <span>{chat.title || "بدون عنوان"}</span>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteChat(chat.id);
+                  }}
+                >
+                  🗑
+                </button>
+              </li>
+            ))}
+          </ul>
+          <button onClick={createNewChat} className="new-chat-btn">➕ محادثة جديدة</button>
 
-        <div className="user-card">
-          <p>مريم سعد</p>
-          <p className="email">mariam372001@gmail.com</p>
+          <div className="user-card">
+            <p>مريم سعد</p>
+            <p className="email">mariam372001@gmail.com</p>
+          </div>
         </div>
-      </div>
 
-      <div className="main-content">
-        <div className="chat-title">
-          <h2>{activeChat?.title || "بدون عنوان"}</h2>
-        </div>
-
-        <div className="chat-box">
-          <p className="date">01 فبراير 2025</p>
-
-          <div className="message khamsat">
-            <div className="logo-circle">وسيط</div>
-            <div className="message-content">
-               أهلاً بك في وسيط. أرسل سؤالك او بماذا استطيع ان اساعدك ،سأكون سعيد بمساعدك!!!
-            </div>
+        <div className="main-content">
+          <div className="chat-title">
+            <h2>{activeChat?.title || "بدون عنوان"}</h2>
           </div>
 
-          {activeChat?.messages.map((msg, index) => (
-           <div key={index} className={`message ${msg.sender}`}>
-              {msg.loading && <div className="message-content">⏳ جارٍ التحميل...</div>}
-              {msg.text && <div className="message-content">{msg.text}</div>}
-            </div>
-          ))}
-        </div>
+          <div className="chat-box">
+            <p className="date">01 فبراير 2025</p>
 
-        <div className="input-area">
-          <input
-            type="text"
-            placeholder="اكتب رسالتك هنا..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            disabled={isLoading}
-          />
-          <button onClick={sendMessage} disabled={isLoading}>إرسال</button>
+            <div className="message khamsat">
+              <div className="logo-circle">وسيط</div>
+              <div className="message-content">
+                أهلاً بك في وسيط. أرسل سؤالك او بماذا استطيع ان اساعدك ،سأكون سعيد بمساعدك!!!
+              </div>
+            </div>
+
+            {activeChat?.messages.map((msg, index) => (
+              <div key={index} className={`message ${msg.sender}`}>
+                {msg.loading && <div className="message-content">⏳ جارٍ التحميل...</div>}
+                {msg.text && <div className="message-content">{msg.text}</div>}
+              </div>
+            ))}
+          </div>
+
+          <div className="input-area">
+            <input
+              type="text"
+              placeholder="اكتب رسالتك هنا..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              disabled={isLoading}
+            />
+            <button onClick={sendMessage} disabled={isLoading}>إرسال</button>
+          </div>
         </div>
       </div>
-    </div>
-  
-      );
+      <Footer />
+    </>
+
+  );
 }
 
 export default ChatAi;
