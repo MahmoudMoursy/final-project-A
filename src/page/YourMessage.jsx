@@ -81,6 +81,8 @@ const Chats = () => {
           const userIsSender = firstId === currentUser.UserId;
           setIsOriginalSender(userIsSender);
           setMessages(allMessages);
+        } else {
+          setMessages([]); // Clear messages if the document doesn't exist
         }
       });
     }
