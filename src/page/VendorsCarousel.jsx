@@ -62,7 +62,7 @@ const VendorsCarousel = () => {
       key="1"
       title="Sunrise"
       subtitle="WEDDINGS & EVENTS"
-      bgImg="https://marasim.bsite.net//81855265-a80c-4d47-9258-fd09b3271c23/ProfilePicture/638378048056128663.jpg"
+      bgImg=""
       textColor="#ffffff"
       accentColor="#D4AF37"
     />,
@@ -70,7 +70,7 @@ const VendorsCarousel = () => {
       key="2"
       title="Elegance"
       subtitle="FASHION BOUTIQUE"
-      bgImg="https://marasim.bsite.net//68c87e83-0ee0-4f45-8028-56a90aa13c14/ProfilePicture/638378046640415174.webp"
+      bgImg=""
       textColor="#ECF0F1"
       accentColor="#E74C3C"
     />,
@@ -78,7 +78,7 @@ const VendorsCarousel = () => {
       key="3"
       title="Lumina"
       subtitle="PHOTOGRAPHY STUDIO"
-      bgImg="https://marasim.bsite.net//fb05ba5e-84af-48b8-9c84-e4164d875873/ProfilePicture/638378047550450315.jpg"
+      bgImg=""
       textColor="#E0FBFC"
       accentColor="#EE6C4D"
     />,
@@ -86,7 +86,7 @@ const VendorsCarousel = () => {
       key="4"
       title="Azure"
       subtitle="WELLNESS SPA"
-      bgImg="https://marasim.bsite.net//5332ba1f-4376-4726-ba86-713a96039c4f/ProfilePicture/638378037904313295.jpg"
+      bgImg=""
       textColor="#F7FFF7"
       accentColor="#FFE66D"
     />,
@@ -94,9 +94,17 @@ const VendorsCarousel = () => {
       key="5"
       title="Velvet"
       subtitle="LUXURY INTERIORS"
-      bgImg="https://marasim.bsite.net//968499e6-b2e2-42ba-9c0c-4995066eba23/ProfilePicture/638378059560209246.jpg"
+      bgImg=""
       textColor="#F2F3AE"
       accentColor="#DB5461"
+    />,
+    <BusinessCard
+      key="6"
+      title="Sunrise"
+      subtitle="WEDDINGS & EVENTS"
+      bgImg=""
+      textColor="#ffffff"
+      accentColor="#D4AF37"
     />,
   ];
 
