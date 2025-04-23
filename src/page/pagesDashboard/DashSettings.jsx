@@ -5,8 +5,8 @@ import '../../Components/Sidebar.css';
 function DashSettings() {
   const [theme, setTheme] = useState('light');
   const [notifications, setNotifications] = useState(true);
-  const [displayName, setDisplayName] = useState('John Doe');
-  const [email, setEmail] = useState('john@example.com');
+  const [displayName, setDisplayName] = useState('Abdalla Ahmed');
+  const [email, setEmail] = useState('abdallaahmed22681@gmail.com');
   const [password, setPassword] = useState('');
   const [avatar, setAvatar] = useState(null);
 
@@ -35,13 +35,13 @@ function DashSettings() {
           <div style={{flex: '1 1 320px', background: '#fff', borderRadius: '16px', boxShadow: '0 4px 24px #0001', padding: '2rem', minWidth: 300, maxWidth: 400}}>
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24}}>
               <div style={{position: 'relative'}}>
-                <img src={avatar || 'https://img.freepik.com/free-photo/close-up-portrait-young-bearded-man-white-shirt-jacket-posing-camera-with-broad-smile-isolated-gray_171337-629.jpg?t=st=1745317791~exp=1745321391~hmac=72e7ed0b2f39ae42d65c182f263a7ae452e155ea0b436d908726a6d16ced2800&w=1380'} alt="avatar" style={{width: 100, height: 100, borderRadius: '50%', border: '4px solid #e8f0fe', objectFit: 'cover'}} />
+                <img src={avatar || 'https://res.cloudinary.com/dfievnowq/image/upload/v1745308143/p2hd1c8gdilrpzehwt0t.jpg'} alt="avatar" style={{width: 100, height: 100, borderRadius: '50%', border: '4px solid #e8f0fe', objectFit: 'cover'}} />
                 <label htmlFor="avatar-upload" style={{position: 'absolute', bottom: 0, right: 0, background: '#3498db', color: '#fff', borderRadius: '50%', padding: 8, cursor: 'pointer', fontSize: 18, border: '2px solid #fff'}}>
                   <span role="img" aria-label="edit">✎</span>
                   <input id="avatar-upload" type="file" accept="image/*" style={{display: 'none'}} onChange={handleAvatarChange} />
                 </label>
               </div>
-              <h2 style={{margin: '1rem 0 0.5rem', fontWeight: 600}}>{displayName}</h2>
+              <h2 className='text-dark' style={{margin: '1rem 0 0.5rem', fontWeight: 600}}>{displayName}</h2>
               <p style={{color: '#7b8ca7', fontSize: '0.95rem'}}>{email}</p>
             </div>
             <div className="settings-item" style={{marginBottom: 16}}>

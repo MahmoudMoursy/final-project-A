@@ -6,7 +6,8 @@ import Footer from "../Components/Footer";
 
 
 const openai = new OpenAI({
-  apiKey: "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", // اخفي المفتاح الحقيقي
+
+  apiKey: "", // اخفي المفتاح الحقيقي
   dangerouslyAllowBrowser: true,
 });
 
