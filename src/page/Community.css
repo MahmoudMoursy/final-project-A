@@ -1,0 +1,190 @@
+/* Community.css */
+.community-page-container {
+  background: linear-gradient(135deg, #1a1a2e 0%, #1D186263 100%);
+  min-height: 100vh;
+  padding: 100px 0 50px;
+  color: white;
+}
+
+.community-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.community-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.community-header .highlight {
+  background-color: #091e3d;
+  padding: 8px 15px;
+  color: #fff;
+  border-radius: 110px 4000px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.community-header p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+}
+
+/* Post Card Styling */
+.post-card {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 15px !important;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.post-avatar {
+  margin-right: 15px;
+  background-color: #1a1a2e !important;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.post-author {
+  font-weight: 600;
+  color: white;
+}
+
+.post-time {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+}
+
+.post-content {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.post-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.action-button {
+  color: rgba(255, 255, 255, 0.7) !important;
+  text-transform: none !important;
+  transition: color 0.3s ease;
+}
+
+.action-button:hover {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.action-button.liked {
+  color: #4caf50 !important;
+}
+
+.action-icon {
+  margin-right: 5px;
+}
+
+/* Add Post Button */
+.add-post-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+  color: white !important;
+  border-radius: 50% !important;
+  width: 60px !important;
+  height: 60px !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-post-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4) !important;
+  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%) !important;
+}
+
+/* Post Dialog */
+.post-dialog {
+  background-color: rgba(26, 26, 46, 0.95) !important;
+  border-radius: 15px !important;
+  backdrop-filter: blur(10px);
+}
+
+.dialog-title {
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.dialog-content {
+  padding: 20px !important;
+}
+
+.post-text-field {
+  margin-top: 15px !important;
+  width: 100%;
+}
+
+.post-text-field textarea {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  padding: 15px !important;
+}
+
+.post-text-field label {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dialog-actions {
+  padding: 15px 24px !important;
+}
+
+.cancel-button {
+  color: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.post-button {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+  color: white !important;
+}
+
+.post-button:hover {
+  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%) !important;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .community-page-container {
+    padding: 80px 10px 50px;
+  }
+  
+  .community-header h1 {
+    font-size: 2rem;
+  }
+  
+  .add-post-button {
+    bottom: 20px;
+    right: 20px;
+    width: 50px !important;
+    height: 50px !important;
+  }
+}

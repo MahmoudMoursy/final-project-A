@@ -6,6 +6,7 @@ import Login from './page/Login'
 import Profile from './page/Profile';
 import AboutUs from './page/AboutUs';
 import Community from './page/Community';
+import ChatAi from './page/ChatAi';
 import Services from './page/Services';
 import Housing from './page/Housing';
 import Tour from './page/Tour';
@@ -26,8 +27,9 @@ import DoctorsPage from './page/DoctorsPage';
 import SupermarketsPage from './page/SupermarketsPage';
 import ForgotPassword from './page/ForgotPassword';
 import ContactUs from './page/ContactUs';
+import DashSettings from './page/pagesDashboard/DashSettings';
 
-import Message from './page/message'
+import YourMessage from './page/YourMessage'
 
 
 
@@ -70,6 +72,7 @@ function App() {
         <Route path='/housing' element={<Housing />} />
         <Route path='/tour' element={<Tour />} />
         <Route path='/Community' element={<Community />} />
+        <Route path='/ChatAi' element={<ChatAi />} />
         <Route path='/Profileform' element={<Profileform />} />
         <Route path="/post/:id" element={<PostDetails />} />
         <Route path="/contact" element={<ContactUs />} />
@@ -82,7 +85,8 @@ function App() {
         <Route path="/DoctorsPage" element={<DoctorsPage />} />
         <Route path="/SupermarketsPage" element={<SupermarketsPage />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
-        <Route path="/Message" element={<Message />} />
+        <Route path="/YourMessage" element={<YourMessage />} />
+        <Route path="/DashSettings" element={<PrivateRoute element={<DashSettings />} isAuthenticated={userDashboard} />} />
       </Routes>
     </LoadingProvider>
 

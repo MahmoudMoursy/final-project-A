@@ -9,7 +9,7 @@ import db from '../firebaseconfig';
 
 function NavBar() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
-
+  const nav = useNavigate();
 
 
   //fetch Notification 
@@ -108,6 +108,7 @@ function NavBar() {
               <li className="nav-item"><NavLink className="nav-link" to="/housing">السكن</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/AboutUs">من نحن</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/Community">المجتمع</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link" to="/ChatAi">تواصل معنا</NavLink></li>
             </ul>
           </div>
 
@@ -120,6 +121,11 @@ function NavBar() {
               className="fa-regular fa-bell text-white fs-3 mx-4"
               style={{ cursor: 'pointer' }}
               onClick={() => setShowNotifications(!showNotifications)}
+            ></i>
+            <i
+              className="fa-regular fa-envelope text-white fs-3 mx-4"
+              style={{ cursor: 'pointer' }}
+              onClick={() => nav('/YourMessage')}
             ></i>
             {showNotifications && (
               <div className="notification-dropdown shadow bg-white p-2 rounded position-absolute" style={{ top: '40px', left: 0, minWidth: '250px', zIndex: 1000 }}>
@@ -142,7 +148,7 @@ function NavBar() {
             <div className="profile-trigger d-flex align-items-center cursor-pointer" onClick={() => setShowDropdown(prev => !prev)}>
               <span className="border border-success text-black-50 bg-white mx-2 d-flex justify-content-center align-items-center"
                 style={{ borderRadius: '50%', width: '40px' }}>
-                <img src={user.image} alt="" style={{ width: '100%', height: "40px", borderRadius: '50%' }} />
+                <img src={user.PhotoUrl} alt="" style={{ width: '100%', height: "40px", borderRadius: '50%' }} />
               </span>
               <strong className="d-none d-xl-block text-white"> {user.username}</strong>
             </div>

@@ -122,15 +122,15 @@ function Home() {
           <div className="info d-flex gap-5 justify-content-center py-5 mt-3 flex-wrap">
             <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
               <img src={payGif} alt="الدفع" className="info-icon" style={{ width: '250px', height: '250px' }} />
-              <p className="info-text fs-5 pt-4 text-center service-title">ادفع عربوناً</p>
-            </a>
-            <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <img src={servGif} alt="اختيار الخدمة" className="info-icon" style={{ width: '250px', height: '250px' }} />
-              <p className="info-text fs-5 pt-4 text-center service-title">اختر الخدمة المناسبة</p>
+              <p className="info-text fs-5 pt-4 text-center service-title">احجز</p>
             </a>
             <a className=" info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
               <img src={chooseGif} alt="اختيار مقدم الخدمة" className="info-icon" style={{ width: '250px', height: '250px' }} />
               <p className="info-text fs-5 pt-4 text-center service-title">اختر من مقدمي الخدمة من يناسبك</p>
+            </a>
+            <a className="info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={servGif} alt="اختيار الخدمة" className="info-icon" style={{ width: '250px', height: '250px' }} />
+              <p className="info-text fs-5 pt-4 text1-center service-title">اختر الخدمة المناسبة</p>
             </a>
             <a className=" info-bundle d-flex flex-column align-items-center hover-effect" style={{ textDecoration: 'none', color: 'inherit' }}>
               <img src={userGif} alt="التسجيل" className="info-icon" style={{ width: '250px', height: '250px' }} />
@@ -151,7 +151,7 @@ function Home() {
         <VendorsCarousel />
 
 
-        <div className="py-5 container">
+        {/* <div className="py-5 container">
           <h2 className="sections-title ms-3 mb-2 text-center">مقدمو الخدمة الأكثر طلباً</h2>
           <div className="mx-auto text-center">
             <img src={underline2} alt="" style={{ width: '30rem' }} />
@@ -196,14 +196,18 @@ function Home() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </div> */}
 
         <section className="py-5 rounded text-center partners-section" data-aos="fade-up">
           <h2 className="fw-bold mb-2 sections-title">شركاؤنا</h2>
           <img src={underline3} alt="" className=" ms-auto" style={{ width: "12rem" }} />
           <div className="d-flex justify-content-center gap-5">
-            <img src={ColoredLogo} alt="Colored Logo" className="mx-5 partner-logo mt-2" style={{ width: "20rem" }} />
-            <img src={aswulogo2} alt="ASWU Logo" className="mx-5 partner-logo mt-3" style={{ width: "22rem" }} />
+            <a href="https://iti.gov.eg" target="_blank" rel="noopener noreferrer">
+              <img src={ColoredLogo} alt="Colored Logo" className="mx-5 partner-logo mt-2" style={{ width: "20rem" }} />
+            </a>
+            <a href="https://aswu.edu.eg/" target="_blank" rel="noopener noreferrer">
+              <img src={aswulogo2} alt="ASWU Logo" className="mx-5 partner-logo mt-3" style={{ width: "22rem" }} />
+            </a>
           </div>
         </section>
         {/* 

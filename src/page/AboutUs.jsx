@@ -1,8 +1,9 @@
 import React from "react";
 import { Container, Grid, Typography, Box, Paper, Avatar, useTheme } from "@mui/material";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
+import Bgabout from "../assets/bgabout.png";
 
 
 const ZilliqaStory = () => {
@@ -45,14 +46,14 @@ const ZilliqaStory = () => {
         sx={{
           position: "relative",
           width: "100%",
-          height: "100vh",
+          height: "80vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
         <img
-          src="https://zil-dev.cdn.prismic.io/zil-dev/1b51a1cd-3dce-4619-9f38-6f3e6816e83b_banner-zilliqa-story.svg"
+          src={Bgabout}
           alt="Team Illustration"
           style={{
             width: "100%",
@@ -62,7 +63,7 @@ const ZilliqaStory = () => {
             top: 0,
             left: 0,
             zIndex: 1,
-            filter: "brightness(70%)",
+            filter: "brightness(100%)",
           }}
         />
   
@@ -84,7 +85,7 @@ const ZilliqaStory = () => {
             },
           }}
         >
-          <Typography variant="h3" fontWeight="bold" gutterBottom>
+          <Typography className="text-dark text-center py-3" variant="h3" fontWeight="bold" gutterBottom>
             من نحن؟
           </Typography>
   
@@ -129,6 +130,7 @@ const VisionMissionSection = () => {
       image:
         "https://img.freepik.com/premium-photo/close-up-view-colorful-faluca-traditional-boat-sailing-river-sorrounded-by-vegetation_1048944-11883581.jpg",
       bgColor: "#f8f9fa",
+
     },
     {
       title: "مهمتنا",
@@ -213,6 +215,7 @@ const VisionMissionSection = () => {
                 <Box sx={{ textAlign: "right", direction: "rtl" }}>
                   <Typography
                     variant="h3"
+                    className="text-dark"
                     sx={{
                       mb: 3,
                       fontWeight: 700,
@@ -234,7 +237,7 @@ const VisionMissionSection = () => {
                   >
                     {section.title}
                   </Typography>
-                  <Typography
+                  <Typography 
                     variant="body1"
                     sx={{
                       fontSize: { xs: "1rem", md: "1.15rem" },
@@ -378,7 +381,7 @@ const TeamSection = () => {
 
 const AboutUs = () => {
   return (
-    <Box sx={{ direction: "ltr" }}>
+    <Box sx={{ direction: "ltr" }} style={{  background: "linear-gradient(135deg, #1a1a2e 0%, #1D186263 100%)"}}>
       <NavBar />
       <Box sx={{ pt: { xs: "56px", sm: "64px" } }}>
         <ZilliqaStory />

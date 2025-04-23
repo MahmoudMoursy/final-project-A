@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { FaStar, FaPhone, FaMapMarkerAlt, FaWhatsapp, FaFacebook, FaArrowRight } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaStar, FaPhone, FaMapMarkerAlt, FaWhatsapp, FaFacebook, FaArrowRight, FaSearch, FaShoppingCart } from 'react-icons/fa';
+import NavBar from "../Components/NavBar";
+import Footer from "../Components/Footer";
 import './supermarketspage.css';
-
 
 import raya1 from '../assets/service_imgs/سوبر ماركت/الراية/raya1.jpeg';
 import raya2 from '../assets/service_imgs/سوبر ماركت/الراية/raya2.jpeg';
@@ -29,15 +30,13 @@ import kher2 from '../assets/service_imgs/سوبر ماركت/خير زمان/kh
 import kher3 from '../assets/service_imgs/سوبر ماركت/خير زمان/kher3.jpeg';
 import kher4 from '../assets/service_imgs/سوبر ماركت/خير زمان/kher4.jpeg';
 
-
 const SupermarketsPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [mainImage, setMainImage] = useState('');
-   const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const supermarkets = [
-   
     {
       id: 1,
       title: 'سوبر ماركت الراية',
@@ -48,12 +47,7 @@ const SupermarketsPage = () => {
       whatsapp: '01003116508',
       facebook: 'https://facebook.com/ahrammarket',
       address: 'الكورنيش ',
-      additionalImages: [
-        raya2,
-        raya3,
-        raya4,
-        raya5
-      ]
+      additionalImages: [raya2, raya3, raya4, raya5]
     },
     {
       id: 2,
@@ -65,12 +59,7 @@ const SupermarketsPage = () => {
       whatsapp: '01234567895',
       facebook: 'https://www.facebook.com/profile.php?id=61572669683671',
       address: 'شارع الفنادق، أمام فندق أولد كتراكت.',
-      additionalImages: [
-        carfor2,
-        carfor3,
-        carfor4,
-        carfor5
-      ]
+      additionalImages: [carfor2, carfor3, carfor4, carfor5]
     },
     {
       id: 3,
@@ -82,12 +71,7 @@ const SupermarketsPage = () => {
       whatsapp: '01234567896',
       facebook: 'https://www.facebook.com/profile.php?id=100063958424261',
       address: 'الرضوان',
-      additionalImages: [
-        safa2,
-        safa3,
-        safa4,
-        safa5
-      ]
+      additionalImages: [safa2, safa3, safa4, safa5]
     },
     {
       id: 4,
@@ -116,168 +100,172 @@ const SupermarketsPage = () => {
       whatsapp: '01222970744',
       facebook: 'https://www.facebook.com/profile.php?id=61569073838882',
       address: 'كسر الحجر ، الاشارة ، مطلع الشهر العقارى امام المخبز البلدي',
-      additionalImages: [
-        kher2,
-        kher3,
-        kher4,
-      ]
+      additionalImages: [kher2, kher3, kher4]
     }
-    ];
-      
-       const renderStars = (rating) => {
-          return [...Array(5)].map((_, index) => (
-            <FaStar
-              key={index}
-              className={index < Math.floor(rating) ? 'star-filled' : 'star-empty'}
-            />
-          ));
-        };
-         
+  ];
+
+  const filteredSupermarkets = supermarkets.filter((market) =>
+    market.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    market.address.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const renderStars = (rating) => {
+    return [...Array(5)].map((_, index) => (
+      <FaStar
+        key={index}
+        className={index < Math.floor(rating) ? 'star-filled' : 'star-empty'}
+      />
+    ));
+  };
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <div className="section-page-container" dir="rtl">
-      <div className="section-header ">
-        <h1 className="section-main-title " >السوبر ماركت</h1>
-      </div>
-      
-      <div className="search-container my-4 d-flex justify-content-center">
-        <input
-          type="text"
-          placeholder="ابحث عن صيدلية أو عنوان..."
-          className="form-control w-75 p-3 rounded-pill shadow-sm text-end"
-          style={{ maxWidth: '600px', fontSize: '1.1rem', border: '1px solid #ddd' }}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
+    <>
+      <NavBar />
+      <div className="section-page-container" dir="rtl">
+        <div className="section-header">
+          <h1 className="section-main-title">السوبر ماركت</h1>
+        </div>
 
-      <div className="cards-grid">
-        {supermarkets.map(item => (
-          <div key={item.id} className="card service-card">
-            <img src={item.image} className="card-img-top" alt={item.title} />
-            <div className="card-body">
-              <h5 className="card-title">{item.title}</h5>
-              <p className="card-text">{item.description}</p>
-              <div className="rating mb-2">
-                {[...Array(5)].map((_, index) => (
-                  <FaStar
-                    key={index}
-                    className={index < Math.floor(item.rating) ? 'star-filled' : 'star-empty'}
-                  />
-                ))}
-                <span className="rating-number">{item.rating}</span>
+        <div className="search-container my-4 d-flex justify-content-center">
+          <input
+            type="text"
+            placeholder="ابحث عن سوبرماركت أو عنوان..."
+            className="form-control w-75 p-3 rounded-pill shadow-sm text-end"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
+        <div className="cards-grid">
+          {filteredSupermarkets.length > 0 ? (
+            filteredSupermarkets.map(item => (
+              <div key={item.id} className="card service-card">
+                <div className="position-relative">
+                  <img src={item.image} className="card-img-top" alt={item.title} />
+                  <div className="position-absolute top-0 start-0 m-3">
+                    <span className="badge bg-primary rounded-pill">
+                      <FaShoppingCart className="me-1" /> سوبر ماركت
+                    </span>
+                  </div>
+                </div>
+                <div className="card-body">
+                  <h5 className="card-title">{item.title}</h5>
+                  <p className="card-text">{item.description}</p>
+                  <div className="rating mb-2">
+                    {renderStars(item.rating)}
+                    <span className="rating-number">{item.rating}</span>
+                  </div>
+                  <div className="d-flex align-items-center mb-3">
+                    <FaMapMarkerAlt className="text-muted me-2" />
+                    <small className="text-muted">{item.address}</small>
+                  </div>
+                  <button
+                    className="btn btn-primary w-100"
+                    onClick={() => {
+                      setSelectedItem(item);
+                      setMainImage(item.image);
+                      setShowModal(true);
+                    }}
+                  >
+                    عرض التفاصيل
+                  </button>
+                </div>
               </div>
-              <button 
-                className="btn btn-primary"
-                onClick={() => {
-                  setSelectedItem(item);
-                  setMainImage(item.image);
-                  setShowModal(true);
-                }}
-              >
-                عرض التفاصيل
-              </button>
+            ))
+          ) : (
+            <div className="no-results-container text-center py-5">
+              <div className="no-results-icon mb-3">
+                <FaSearch style={{ fontSize: '3rem', opacity: '0.3' }} />
+              </div>
+              <h3 className="text-white mb-2">لا توجد نتائج مطابقة</h3>
+              <p className="text-white-50">يرجى تغيير معايير البحث</p>
+            </div>
+          )}
+        </div>
+
+        {showModal && selectedItem && (
+          <div className="modal show d-block" tabIndex="-1">
+            <div className="modal-dialog modal-lg">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">{selectedItem.title}</h5>
+                  <button
+                    type="button"
+                    className="btn-close text-white"
+                    onClick={() => setShowModal(false)}
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="main-image-container">
+                        <img src={mainImage} alt={selectedItem.title} className="main-image" />
+                      </div>
+                      <div className="thumbnail-container">
+                        {selectedItem.additionalImages.map((img, index) => (
+                          <img
+                            key={index}
+                            src={img}
+                            alt={`${selectedItem.title} ${index + 1}`}
+                            className="thumbnail-image"
+                            onClick={() => setMainImage(img)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="place-details">
+                        <h4>{selectedItem.title}</h4>
+                        <p className="description">{selectedItem.description}</p>
+                        <div className="rating mb-3">
+                          <div className="stars">
+                            {renderStars(selectedItem.rating)}
+                          </div>
+                          <span className="rating-number">{selectedItem.rating} / 5</span>
+                        </div>
+                        <div className="contact-info">
+                          <div className="contact-item">
+                            <FaPhone className="icon" />
+                            <span>{selectedItem.phone}</span>
+                          </div>
+                          <div className="contact-item">
+                            <FaWhatsapp className="icon" />
+                            <a href={`https://wa.me/${selectedItem.whatsapp}`} target="_blank" rel="noopener noreferrer">
+                              واتساب
+                            </a>
+                          </div>
+                          <div className="contact-item">
+                            <FaFacebook className="icon" />
+                            <a href={selectedItem.facebook} target="_blank" rel="noopener noreferrer">
+                              فيسبوك
+                            </a>
+                          </div>
+                          <div className="contact-item">
+                            <FaMapMarkerAlt className="icon" />
+                            <span>{selectedItem.address}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        ))}
-      </div>
+        )}
 
-     {showModal && selectedItem && (
-             <div className="modal show d-block" tabIndex="-1">
-               <div className="modal-dialog modal-lg">
-                 <div className="modal-content">
-                   <div className="modal-header">
-                     <h5 className="modal-title"  style={{marginRight:"50px"}}>{selectedItem.title}</h5>
-                     <button 
-                       type="button" 
-                       className="btn-close" 
-                       style={{marginLeft:"20px"}}
-                       onClick={() => setShowModal(false)}
-                     ></button>
-                   </div>
-                   <div className="modal-body">
-                     <div className="row">
-                       <div className="col-md-6">
-                         <div className="main-image-container">
-                           <img 
-                             src={mainImage} 
-                             alt={selectedItem.title} 
-                             className="main-image"
-                           />
-                         </div>
-                         <div className="thumbnail-container">
-                           {selectedItem.additionalImages.map((img, index) => (
-                             <img 
-                               key={index}
-                               src={img} 
-                               alt={`${selectedItem.title} ${index + 1}`}
-                               className="thumbnail-image"
-                               onClick={() => setMainImage(img)}
-                             />
-                           ))}
-                         </div>
-                       </div>
-                       
-                       <div className="col-md-6">
-                         <div className="place-details">
-                           <h4>{selectedItem.title}</h4>
-                           <p className="description">{selectedItem.description}</p>
-                           
-                           <div className="rating mb-3">
-                             <div className="stars">
-                               {renderStars(selectedItem.rating)}
-                             </div>
-                             <span className="rating-number">
-                               {selectedItem.rating} / 5
-                             </span>
-                           </div>
-     
-                           <div className="contact-info">
-                             <div className="contact-item">
-                               <FaPhone className="icon" />
-                               <span>{selectedItem.phone}</span>
-                             </div>
-                             <div className="contact-item">
-                               <FaWhatsapp className="icon" />
-                               <a 
-                                 href={`https://wa.me/${selectedItem.whatsapp}`}
-                                 target="_blank"
-                                 rel="noopener noreferrer"
-                               >
-                                 واتساب
-                               </a>
-                             </div>
-                             <div className="contact-item">
-                               <FaFacebook className="icon" />
-                               <a 
-                                 href={selectedItem.facebook}
-                                 target="_blank"
-                                 rel="noopener noreferrer"
-                               >
-                                 فيسبوك
-                               </a>
-                             </div>
-                             <div className="contact-item">
-                               <FaMapMarkerAlt className="icon" />
-                               <span>{selectedItem.address}</span>
-                             </div>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           )}
-            {showModal && (
-        <div 
-          className="modal-backdrop show" 
-          onClick={() => setShowModal(false)}
-        ></div>
-      )}
-    </div>
+        {showModal && (
+          <div className="modal-backdrop show" onClick={() => setShowModal(false)}></div>
+        )}
+      </div>
+      <Footer />
+    </>
   );
 };
 
-export default SupermarketsPage ;
+export default SupermarketsPage;

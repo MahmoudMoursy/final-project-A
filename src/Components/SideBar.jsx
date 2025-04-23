@@ -339,7 +339,7 @@ function SideBar() {
           </li>
           
           <li className="nav-item">
-            <Link to="/settings" className="nav-link">
+            <Link to="/DashSettings" className="nav-link">
               <FiSettings className="nav-icon" />
               <span className="nav-text">Settings</span>
             </Link>

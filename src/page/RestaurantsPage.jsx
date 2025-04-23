@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaStar, FaPhone, FaMapMarkerAlt, FaWhatsapp, FaFacebook } from 'react-icons/fa';
+import { FaStar, FaPhone, FaMapMarkerAlt, FaWhatsapp, FaFacebook, FaSearch, FaFilter } from 'react-icons/fa';
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
+import './RestaurantsPage.css';
 
 // Import restaurant images
 import esmo1 from '../assets/service_imgs/مطاعم/اسمه ايه/esmo1.jpeg';
@@ -177,155 +178,203 @@ function RestaurantsPage() {
     return matchesCategory && matchesSearch;
   });
 
+
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <NavBar />
-      <div className="container-fluid" style={{ marginTop: "80px", paddingTop: "20px" }}>
+      <div className="restaurants-page-container">
         <div className="container" dir="rtl">
-          <h1 className="text-center mb-5">المطاعم والكافيهات في أسوان</h1>
+          <div className="page-header">
+            <h1 className="text-center">المطاعم والكافيهات في أسوان</h1>
+            <p className="text-center text-white-50 mb-5">اكتشف أفضل الأماكن لتناول الطعام والاسترخاء</p>
+          </div>
           
           {/* Search and Filter */}
-          <div className="row mb-4">
+          <div className="search-filter-container">
+            <div className="search-container">
+              <div className="search-input-wrapper">
+                <FaSearch className="search-icon" />
+                <input
+                  type="text"
+                  placeholder="ابحث عن مطعم أو عنوان..."
+                  className="search-input"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+            </div>
             
-      <div className="search-container my-4 d-flex justify-content-center">
-        <input
-          type="text"
-          placeholder="ابحث عن صيدلية أو عنوان..."
-          className="form-control w-75 p-3 rounded-pill shadow-sm text-end"
-          style={{ maxWidth: '600px', fontSize: '1.1rem', border: '1px solid #ddd' }}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-            <div className="col-md-4">
-              <select 
-                className="form-select" 
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              >
-                {categories.map((category, index) => (
-                  <option key={index} value={category}>{category}</option>
-                ))}
-              </select>
+            <div className="filter-container">
+              <div className="filter-wrapper">
+                <FaFilter className="filter-icon" />
+                <select 
+                  className="category-select" 
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                  {categories.map((category, index) => (
+                    <option key={index} value={category}>{category}</option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
           
           {/* Restaurants Grid */}
-          <div className="row">
-            {filteredRestaurants.map((restaurant) => (
-              <div key={restaurant.id} className="col-md-4 mb-4">
-                <div className="card h-100 shadow-sm">
-                  <img 
-                    src={restaurant.mainImage} 
-                    className="card-img-top" 
-                    alt={restaurant.title}
-                    style={{ height: "200px", objectFit: "cover" }}
-                  />
-                  <div className="card-body text-end">
-                    <h5 className="card-title">{restaurant.title}</h5>
-                    <p className="card-text text-muted">{restaurant.category}</p>
-                    <p className="card-text">{restaurant.description.substring(0, 100)}...</p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="stars">
+          <div className="restaurants-grid">
+            {filteredRestaurants.length > 0 ? (
+              filteredRestaurants.map((restaurant) => (
+                <div 
+                  key={restaurant.id} 
+                  className="restaurant-card-wrapper"
+                >
+                  <div className="restaurant-card" onClick={() => handleItemClick(restaurant)}>
+                    <div className="restaurant-image-container">
+                      <img 
+                        src={restaurant.mainImage} 
+                        className="restaurant-image" 
+                        alt={restaurant.title}
+                      />
+                      <div className="restaurant-category">{restaurant.category}</div>
+                    </div>
+                    <div className="restaurant-content">
+                      <h3 className="restaurant-title">{restaurant.title}</h3>
+                      <div className="restaurant-rating">
                         {renderStars(restaurant.rating)}
-                        <span className="ms-2">{restaurant.rating}</span>
+                        <span className="rating-value">{restaurant.rating}</span>
                       </div>
-                      <button 
-                        className="btn btn-primary"
-                        onClick={() => handleItemClick(restaurant)}
-                      >
+                      <p className="restaurant-description">{restaurant.description.substring(0, 100)}...</p>
+                      <div className="restaurant-address">
+                        <FaMapMarkerAlt className="address-icon" />
+                        <span>{restaurant.address}</span>
+                      </div>
+                      <button className="details-button">
                         عرض التفاصيل
                       </button>
                     </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div className="no-results">
+                <h3>لا توجد نتائج مطابقة للبحث</h3>
+                <p>يرجى تغيير معايير البحث أو التصفية</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>
 
       {/* Modal for Restaurant Details */}
       {showModal && selectedItem && (
-        <div
-          className="modal fade show"
-          style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
-        >
-          <div className="modal-dialog modal-lg">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" style={{ marginRight: "50px" }}>{selectedItem.title}</h5>
+        <>
+          <div
+            className="restaurant-modal-overlay"
+            onClick={() => setShowModal(false)}
+          ></div>
+          
+          <div
+            className="restaurant-modal"
+          >
+              <div className="restaurant-modal-content">
                 <button
-                  type="button"
-                  className="btn-close"
-                  style={{ marginLeft: "20px" }}
+                  className="modal-close-button"
                   onClick={() => setShowModal(false)}
-                ></button>
-              </div>
-              <div className="modal-body">
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="main-image-container">
+                >
+                  &times;
+                </button>
+                
+                <div className="restaurant-modal-header">
+                  <h2 className="modal-restaurant-title">{selectedItem.title}</h2>
+                  <div className="modal-restaurant-category">{selectedItem.category}</div>
+                </div>
+                
+                <div className="restaurant-modal-body">
+                  <div className="modal-gallery-section">
+                    <div 
+                      className="modal-main-image-container"
+                      key={mainImage}
+                    >
                       <img
                         src={mainImage}
                         alt={selectedItem.title}
-                        className="main-image"
+                        className="modal-main-image"
                       />
                     </div>
-                    <div className="thumbnail-container">
+                    
+                    <div className="modal-thumbnails">
                       {selectedItem.additionalImages.map((img, index) => (
-                        <img
+                        <div 
                           key={index}
-                          src={img}
-                          alt={`${selectedItem.title} ${index + 1}`}
-                          className="thumbnail-image"
-                          onClick={() => setMainImage(img)}
-                        />
+                          className={`modal-thumbnail-wrapper ${img === mainImage ? 'active' : ''}`}
+                        >
+                          <img
+                            src={img}
+                            alt={`${selectedItem.title} ${index + 1}`}
+                            className="modal-thumbnail"
+                            onClick={() => setMainImage(img)}
+                          />
+                        </div>
                       ))}
                     </div>
                   </div>
-
-                  <div className="col-md-6">
-                    <div className="place-details">
-                      <h4>{selectedItem.title}</h4>
-                      <p className="description">{selectedItem.description}</p>
-
-                      <div className="rating mb-3">
-                        <div className="stars">
-                          {renderStars(selectedItem.rating)}
-                        </div>
-                        <span className="rating-number">
-                          {selectedItem.rating} / 5
-                        </span>
+                  
+                  <div className="modal-details-section">
+                    <div className="modal-restaurant-rating">
+                      <div className="modal-stars">
+                        {renderStars(selectedItem.rating)}
                       </div>
-
-                      <div className="contact-info">
-                        <div className="contact-item">
-                          <FaPhone className="icon" />
+                      <span className="modal-rating-number">
+                        {selectedItem.rating} / 5
+                      </span>
+                    </div>
+                    
+                    <div className="modal-restaurant-description">
+                      <h4>الوصف</h4>
+                      <p>{selectedItem.description}</p>
+                    </div>
+                    
+                    <div className="modal-contact-info">
+                      <h4>معلومات الاتصال</h4>
+                      
+                      <div className="modal-contact-grid">
+                        <div className="modal-contact-item">
+                          <FaPhone className="modal-contact-icon" />
                           <span>{selectedItem.phone}</span>
                         </div>
-                        <div className="contact-item">
-                          <FaWhatsapp className="icon" />
+                        
+                        <div className="modal-contact-item">
+                          <FaWhatsapp className="modal-contact-icon whatsapp-icon" />
                           <a
                             href={`https://wa.me/${selectedItem.whatsapp}`}
                             target="_blank"
                             rel="noopener noreferrer"
+                            className="modal-contact-link"
                           >
-                            واتساب
+                            تواصل عبر واتساب
                           </a>
                         </div>
-                        <div className="contact-item">
-                          <FaFacebook className="icon" />
+                        
+                        <div className="modal-contact-item">
+                          <FaFacebook className="modal-contact-icon facebook-icon" />
                           <a
                             href={selectedItem.facebook}
                             target="_blank"
                             rel="noopener noreferrer"
+                            className="modal-contact-link"
                           >
-                            فيسبوك
+                            صفحة الفيسبوك
                           </a>
                         </div>
-                        <div className="contact-item">
-                          <FaMapMarkerAlt className="icon" />
+                        
+                        <div className="modal-contact-item">
+                          <FaMapMarkerAlt className="modal-contact-icon location-icon" />
                           <span>{selectedItem.address}</span>
                         </div>
                       </div>
@@ -334,16 +383,7 @@ function RestaurantsPage() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* Backdrop */}
-      {showModal && (
-        <div
-          className="modal-backdrop show"
-          onClick={() => setShowModal(false)}
-        ></div>
+        </>
       )}
 
       <Footer />

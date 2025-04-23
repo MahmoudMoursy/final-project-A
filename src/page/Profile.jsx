@@ -27,8 +27,8 @@ const Profile = () => {
     status: userData?.status || ""
   });
   useEffect(() => {
-    setImage(userData.image || "https://via.placeholder.com/100");
-  }, [userData.image]);
+    setImage(userData.PhotoUrl || "https://via.placeholder.com/100");
+  }, [userData.PhotoUrl]);
 
   const handleInputChange = (field, value) => {
     setFieldValues({ ...fieldValues, [field]: value });
@@ -52,6 +52,7 @@ const Profile = () => {
 
   const [posts, editPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -74,6 +75,36 @@ const Profile = () => {
     fetchPosts();
   }, [userData.status]);
 
+  useEffect(() => {
+    const fetchBookings = async () => {
+      if (userData.status === "publisher") {
+        try {
+          const q = query(collection(db, "bookings"), where("PostUserId", "==", userData.UserId));
+          const querySnapshot = await getDocs(q);
+          const fetchedBookings = [];
+
+          for (const docSnap of querySnapshot.docs) {
+            const bookingData = docSnap.data();
+            const userQuery = query(collection(db, "user"), where("UserId", "==", bookingData.userId));
+            const userSnapshot = await getDocs(userQuery);
+
+            let username = "غير معروف";
+            if (!userSnapshot.empty) {
+              username = userSnapshot.docs[0].data().username || "غير معروف";
+            }
+
+            fetchedBookings.push({ id: docSnap.id, ...bookingData, username });
+          }
+
+          setBookings(fetchedBookings);
+        } catch (error) {
+          console.error("Error fetching bookings: ", error);
+        }
+      }
+    };
+    fetchBookings();
+  }, [userData.UserId, userData.status]);
+
   const deletePost = async (id) => {
     if (confirm('Are you sure you want to delete this post?')) {
       try {
@@ -84,7 +115,21 @@ const Profile = () => {
       }
     }
   };
-
+  const handleAcceptBooking = async (bookingId) => {
+    try {
+      const bookingRef = doc(db, "bookings", bookingId);
+      await updateDoc(bookingRef, { status: "accepted" });
+      setBookings((prevBookings) =>
+        prevBookings.map((booking) =>
+          booking.id === bookingId ? { ...booking, status: "accepted" } : booking
+        )
+      );
+      alert("تم قبول الحجز بنجاح!");
+    } catch (error) {
+      console.error("Error updating booking status:", error);
+      alert("حدث خطأ أثناء قبول الحجز");
+    }
+  };
   if (!userData) return <div className="loading-spinner">Loading...</div>;
 
   const nav = useNavigate();
@@ -138,7 +183,7 @@ const Profile = () => {
                             await updateDoc(userDocRef, { image: imageDataUrl });
 
                             setImage(imageDataUrl);
-                            userData.image = imageDataUrl;
+                            userData.PhotoUrl = imageDataUrl;
                             localStorage.setItem("currentUser", JSON.stringify(userData));
                           }
                         } catch (err) {
@@ -297,6 +342,52 @@ const Profile = () => {
             </motion.section>
           )}
 
+          {userData?.status === "publisher" && bookings.length > 0 && (
+            <motion.section className="profile-section">
+              <h2 className="section-title">الحجوزات</h2>
+              <div className="table-container">
+                <div className="table-responsive">
+                  <table className="styled-table">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>اسم المستخدم</th>
+                        <th>تاريخ الوصول</th>
+                        <th>تاريخ المغادرة</th>
+                        <th>عدد الضيوف</th>
+                        <th>الحالة</th>
+                        <th>إجراءات</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {bookings.map((booking, index) => (
+                        <tr key={booking.id}>
+                          <td>{index + 1}</td>
+                          <td>{booking.username}</td>
+                          <td>{booking.checkIn}</td>
+                          <td>{booking.checkOut}</td>
+                          <td>{booking.guests}</td>
+                          <td>{booking.status}</td>
+                          <td>
+                            {booking.status === "pending" && (
+                              <button
+                                className="btn btn-success"
+                                onClick={() => handleAcceptBooking(booking.id)}
+                              >
+                                قبول
+                              </button>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </motion.section>
+          )}
+
           {/* Settings Section */}
           <motion.section className="profile-section">
             <h2 className="section-title">إعدادات الحساب</h2>
@@ -306,7 +397,7 @@ const Profile = () => {
                   <Bell size={20} />
                 </div>
                 <div className="setting-content">
-                  <h3>إشعارات الموقع</h3>
+                  <h3 className="text-dark">إشعارات الموقع</h3>
                   <div className="toggle-container" onClick={() => setIsActive(!isActive)}>
                     <div className={`toggle ${isActive ? 'active' : ''}`}></div>
                   </div>
@@ -318,7 +409,7 @@ const Profile = () => {
                   <Mail size={20} />
                 </div>
                 <div className="setting-content">
-                  <h3>إشعارات البريد الإلكتروني</h3>
+                  <h3 className="text-dark">إشعارات البريد الإلكتروني</h3>
                   <div className="toggle-container" onClick={() => setIsFirstActive(!isFirstActive)}>
                     <div className={`toggle ${isFirstActive ? 'active' : ''}`}></div>
                   </div>
@@ -330,7 +421,7 @@ const Profile = () => {
                   <Smartphone size={20} />
                 </div>
                 <div className="setting-content">
-                  <h3>إشعارات الجوال</h3>
+                  <h3 className="text-dark">إشعارات الجوال</h3>
                   <div className="toggle-container" onClick={() => setIsSecondActive(!isSecondActive)}>
                     <div className={`toggle ${isSecondActive ? 'active' : ''}`}></div>
                   </div>
@@ -342,7 +433,7 @@ const Profile = () => {
                   <Globe size={20} />
                 </div>
                 <div className="setting-content">
-                  <h3>اللغة المفضلة</h3>
+                  <h3 className="text-dark">اللغة المفضلة</h3>
                   <p className="setting-value">العربية</p>
                 </div>
               </div>
@@ -427,7 +518,7 @@ const Profile = () => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(0, 0, 0, 0.3);
+          background: var(--dark-color);
         }
         
         .hero-content {
